@@ -1,0 +1,6 @@
+<div class="navs" [style.flex-direction]="direction">
+    <div *ngFor="let item of lstItems; let i = index;" (click)="activeItem(i)">
+      <img [src] = "!disble ? './assets/images/check_inactive.svg':lstEstados[i]?'./assets/images/check_selected.svg':'./assets/images/check_unselected.svg'" alt="radio">
+      <p >{{item}}</p>
+    </div>
+  </div>

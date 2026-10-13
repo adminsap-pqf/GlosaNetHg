@@ -1,0 +1,94 @@
+<div class="container">
+
+  <div class="head" [ngStyle]="{'padding':'0 20px', 'box-sizing':'border-box'}">
+    <div class="row" [ngStyle]="{'height':'62px','margin-top':'14px', 'align-items':'center', 'box-sizing': 'border-box', 'border-bottom':'2px solid rgb(240,242,244)'}">
+      <div class="column" id="columnTitle">
+        <div [ngStyle]="{'width':'70%', 'height':'50px', 'display':'flex', 'align-items':'center', 'padding':'0px 20px 0 0px', 'box-sizing':'border-box'}">
+          <img src="./assets/images/reportes_medida_icono_nuevo.svg" alt="">
+          <label [ngStyle]="{'margin-left':'10px', 'color':'#3B8EDE', 'font-weight':'500'}">
+            <span [style.font-size]="'21px'">Reportes a la Medida</span>
+          </label>
+        </div>
+      </div>
+      <div class="column" id="column1">
+        <div [ngStyle]="{'flex-direction':'row', 'display':'flex', 'align-items':'center','margin-right':'20px'}">
+          <label [ngStyle]="{'color':'#818192', 'margin-right': '5px'}">Año: </label>
+          <div id="droplist1">
+
+            <gn-drop-list (valueDropList)="dropYear($event)" [items]="itemsDropList" [isSearch]="false" [isCategory]="true" [align]="'left'" [itemSelect]="itemsDropList[indexYear]" [widthContent]="'200px'" [marginLeftContent]="'-75px'"></gn-drop-list>
+          </div>
+        </div>
+        <div [ngStyle]="{'flex-direction':'row','display':'flex', 'align-items':'center','margin-right':'20px'}">
+          <label [ngStyle]="{'color':'#818192', 'margin-right': '5px'}">Periodo: </label>
+          <div id="droplist2">
+            <gn-drop-list (valueDropList)="dropPeriodo($event)" [items]="itemsDropList2" [isSearch]="false" [isCategory]="true" [align]="'left'" [itemSelect]="itemsDropList2[0]" [widthContent]="'200px'" [marginLeftContent]="'-30px'"></gn-drop-list>
+          </div>
+        </div>
+        <div id="boton" [ngStyle]="{'display':'flex', 'justify-content':'flex-end'}">
+          <a class="btnAgregar" (click)="exportar()">
+            <p>EXPORTAR</p>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="body">
+    <p>Reporte 565</p>
+    <div>
+      <div>
+        <p [ngStyle]="{'min-width':'50px', 'max-width':'50px', 'text-align':'center'}">Patente</p>
+        <p [ngStyle]="{'min-width':'60px', 'max-width':'60px', 'text-align':'center'}">Pedimento</p>
+        <p [ngStyle]="{'min-width':'55px', 'max-width':'55px', 'text-align':'center'}">Sección Aduanera</p>
+        <p [ngStyle]="{'min-width':'135px', 'max-width':'135px'}">Guía</p>
+        <p [ngStyle]="{'min-width':'100px', 'max-width':'100px'}">Contenedor</p>
+        <p [ngStyle]="{'min-width':'65px', 'max-width':'65px', 'text-align':'center'}">Clave Documento</p>
+        <p [ngStyle]="{'min-width':'100px', 'max-width':'100px'}">RFC</p>
+        <p [ngStyle]="{'min-width':'150px', 'max-width':'150px'}">Proveedor Mercancía</p>
+        <p [ngStyle]="{'min-width':'100px', 'max-width':'100px', 'text-align':'center'}">País Procedencia</p>
+        <p [ngStyle]="{'min-width':'75px', 'max-width':'75px', 'text-align':'center'}">Valor Dolares</p>
+        <p [ngStyle]="{'min-width':'85px', 'max-width':'85px', 'text-align':'center'}">Tipo de Cambio</p>
+        <p [ngStyle]="{'min-width':'120px', 'max-width':'120px'}">Total</p>
+        <p [ngStyle]="{'min-width':'60px', 'max-width':'60px', 'text-align':'center'}">Peso Bruto Mercancia</p>
+        <p [ngStyle]="{'min-width':'220px', 'max-width':'220px'}">Medio Transporte</p>
+        <p [ngStyle]="{'min-width':'85px', 'max-width':'85px', 'text-align':'center'}">Tipo Pedimento</p>
+        <p [ngStyle]="{'min-width':'100px', 'max-width':'100px', 'text-align':'center'}">Valor Comercial Dolares</p>
+        <p [ngStyle]="{'min-width':'75px', 'max-width':'75px', 'text-align':'center'}">Tasa Contribución</p>
+        <p [ngStyle]="{'min-width':'75px', 'max-width':'75px', 'text-align':'center'}">Clave Contribución</p>
+        <p [ngStyle]="{'min-width':'45px', 'max-width':'45px', 'text-align':'center', 'color':'#37B34A'}">Importe de Pago</p>
+        <p [ngStyle]="{'min-width':'90px', 'max-width':'90px', 'text-align':'center'}">Fecha Pago Real</p>
+      </div>
+      <div>
+        <div *ngFor="let item of lstData; let i = index" class="rowTable">
+          <p [ngStyle]="{'min-width':'50px', 'max-width':'50px', 'justify-content':'center'}">{{item.patente}}</p>
+          <p [ngStyle]="{'min-width':'60px', 'max-width':'60px', 'justify-content':'center', 'color':'#3369B1'}">{{item.pedimento}}</p>
+          <p [ngStyle]="{'min-width':'55px', 'max-width':'55px', 'justify-content':'center'}">{{item.seccionAduanera}}</p>
+          <p [ngStyle]="{'min-width':'135px', 'max-width':'135px', 'color':'#3369B1'}">Número: {{item.numeroGuia}}<br/>Tipo: {{item.tipoGuia}}</p>
+          <p [ngStyle]="{'min-width':'100px', 'max-width':'100px'}">Número: {{item.numContenedor}}<br/>Tipo: {{item.tipoContenedor}}</p>
+          <p [ngStyle]="{'min-width':'65px', 'max-width':'65px', 'justify-content':'center', 'color':'#3369B1'}">{{item.claveDocumento}}</p>
+          <p [ngStyle]="{'min-width':'100px', 'max-width':'100px'}">{{item.rfc}}</p>
+          <p [ngStyle]="{'min-width':'150px', 'max-width':'150px', 'color':'#3369B1'}">{{item.proveedorMercancia}}</p>
+          <p [ngStyle]="{'min-width':'100px', 'max-width':'100px', 'justify-content':'center'}">{{item.paisCompradorVendedor}}</p>
+          <p [ngStyle]="{'min-width':'75px', 'max-width':'75px', 'justify-content':'center', 'color':'#3369B1'}">{{item.valorDolares}}</p>
+          <p [ngStyle]="{'min-width':'85px', 'max-width':'85px', 'justify-content':'center'}">{{item.tipoCambio}}</p>
+          <p [ngStyle]="{'min-width':'120px', 'max-width':'120px', 'color':'#3369B1'}">Feletes: {{item.totalFletes}}<br/>Seguros:  {{item.totalSeguros}}<br/>Embalajes:  {{item.totalEmbalajes}}</p>
+          <p [ngStyle]="{'min-width':'60px', 'max-width':'60px', 'justify-content':'center'}">{{item.pesoBrutoMercancia}}</p>
+          <p [ngStyle]="{'min-width':'220px', 'max-width':'220px', 'color':'#3369B1'}">Salida: {{item.medioTransporteSalida}}<br/>Arribo: {{item.medioTransporteArribo}}<br/>Entrada/Salida: {{item.medioTransporteEntrada_Salida}}</p>
+          <p [ngStyle]="{'min-width':'85px', 'max-width':'85px', 'justify-content':'center'}">{{item.tipoPedimento}}</p>
+          <p [ngStyle]="{'min-width':'100px', 'max-width':'100px', 'justify-content':'center', 'color':'#3369B1'}">{{item.valorComercialDolares}}</p>
+          <p [ngStyle]="{'min-width':'75px', 'max-width':'75px', 'justify-content':'center'}">{{item.tasaContribucion}}</p>
+          <p [ngStyle]="{'min-width':'75px', 'max-width':'75px', 'justify-content':'center', 'color':'#3369B1'}">{{item.claveContribucion}}</p>
+          <p [ngStyle]="{'min-width':'45px', 'max-width':'45px', 'justify-content':'center', 'color':'#37B34A'}">{{item.importePago}}</p>
+          <p [ngStyle]="{'min-width':'90px', 'max-width':'90px', 'justify-content':'center'}">{{item.fechaPagoReal}}</p>
+        </div>
+      </div>
+    </div>
+    <div [ngStyle]="{ 'margin-top': '15px'}">
+      <a class="btnMes" *ngFor="let item of meses; let i = index" (click)="filtroMes(i)" [style.background]="lstColores[i]">
+        <p>{{item}}</p>
+      </a>
+    </div>
+
+
+  </div>

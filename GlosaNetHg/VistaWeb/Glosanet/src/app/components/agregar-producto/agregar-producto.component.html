@@ -1,0 +1,228 @@
+<div class="container" >
+  <div class="title">
+    <div>
+      <div>
+        <!-- <img src="./assets/images/hover_registro.svg" alt=""> -->
+        <div>Agregar Producto
+          <p>
+            <span>Previsión {{nextYear}}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <a (click)="irListadoProducto()">REGRESAR</a>
+  </div>
+
+</div>
+
+<div class="section1" >
+  <label>Catálogo de Productos</label>
+  <div class="options">
+
+    <div class="dropList">
+      <label>Ordenar Por:</label>
+      <div class="drop">
+        <gn-drop-list (valueDropList)="dropListFiltro($event)" [items]="itemsFiltros" [isSearch]="false" [isCategory]="true" [align]="'left'"
+                      [itemSelect]="defaultSelectedFiltros"></gn-drop-list>
+      </div>
+    </div>
+    <a (click)="nuevoProducto()" onclick="document.getElementById('id01').style.display='block'">NUEVO PRODUCTO</a>
+  </div>
+
+  <div class="search">
+    <!-- <label>Catálogo de Productos</label> -->
+    <div class="searchBar">
+      <gn-search-bar [searchValue]="searchTerm" (searchTermChanged)="changeSearchTerm($event)" [placeholder]="placeholder" [reset]="resetSearch"></gn-search-bar>
+    </div>
+
+    <img (click)="isList = false"
+         [src]="isList ? './assets/images/vista_cuadricula_gris.svg' : './assets/images/vista_cuadricula_azul.svg'"
+         alt="control" />
+    <img (click)="isList = true"
+         [src]="isList ? './assets/images/vista_lista_azul.svg' : './assets/images/vista_lista_gris.svg'"
+         alt="control" />
+  </div>
+
+  <div id="scrollLoad" class="body1" *ngIf="false"> <!-- !isList -->
+
+    <virtual-scroller #scroll [items]="buffer" (vsUpdate)="scrollItems = $event" (vsEnd)="fetchMore($event)">
+      <div [ngClass]="'item'" *ngFor='let item of scrollItems; let i = index' (click)="selectItem(item)">
+        <div class="img">
+          <img id="img1" src="./assets/images/icono_gris_tarjeta.svg" alt="">
+          <img id="img2" src="./assets/images/icono_azul_tarjeta.svg" alt="">
+        </div>
+        <div class="bodyItem">
+          <p [ngStyle]="{'font-size':'14px'}"> <span [style.font-weight]="'600'">{{"# "+ item.index}}</span>
+            <label [ngStyle]="{'font-weight':'700'}">{{"· "+item.codigo}}&nbsp;</label> {{item.nombre}}</p>
+          <p [ngStyle]="{'font-size':'13px'}">
+            <label [ngClass]="item.numRegistros == 0 ? 'labelOrange': 'labelGreen'">{{item.numRegistros == 0 ? 'Registros N/D' : 'Registros '+ item.numRegistros}}&nbsp;</label>
+          </p>
+          <p [ngStyle]="{'font-size':'12px'}">
+            <label>Origen:</label>
+            <label>{{item.origen}}</label>
+          </p>
+        </div>
+      </div>
+
+      <!-- <div  class="loader">Loading...</div> -->
+      <div *ngIf="loading"  class="container-loader" [style.height]="buffer.length == 0 ? '100%': null">
+        <div class='loader'>
+          <div class='loading-square'></div>
+          <div class='loading-square'></div>
+          <div class='loading-square'></div>
+          <div class='loading-square'></div>
+        </div>
+      </div>
+    </virtual-scroller>
+
+    <div id="inicio" (click)="scrollTo()">
+      <img src="./assets/images/flecha_blanca.svg" alt="">
+    </div>
+  </div>
+
+  <div #body1 class="body2" *ngIf="false"> <!-- isList -->
+
+    <virtual-scroller #scroll [items]="buffer" (vsUpdate)="scrollItems = $event" (vsEnd)="fetchMore($event)">
+      <div [ngClass]="'item'" *ngFor='let item of scrollItems; let i = index' (click)="selectItem(item)">
+        <div class="img">
+          <img id="img1" src="./assets/images/icono_gris_tarjeta.svg" alt="">
+          <img id="img2" src="./assets/images/icono_azul_tarjeta.svg" alt="">
+        </div>
+        <div class="bodyItem">
+          <div class="part1">
+            <p>
+              <span class="span" [style.font-weight]="'600'">{{"# "+ item.index}}</span>
+              <label>{{"· "+item.codigo}}&nbsp;</label>
+              <label>{{item.nombre}}</label>
+            </p>
+            <p>
+              <label [ngClass]="item.numRegistros == 0 ? 'labelOrange': 'labelGreen'">{{item.numRegistros == 0 ? 'Registros N/D' : 'Registros '+ item.numRegistros}}</label>
+            </p>
+          </div>
+          <div class="part2">
+            <p>
+              <label>{{item.origen}}</label>
+              <label>Origen</label>
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- <div *ngIf="loading" class="loader">Loading...</div> -->
+      <div *ngIf="loading"  class="container-loader" [style.height]="buffer.length == 0 ? '100%': null">
+        <div  class='loader'>
+          <div class='loading-square'></div>
+          <div class='loading-square'></div>
+          <div class='loading-square'></div>
+          <div class='loading-square'></div>
+        </div>
+      </div>
+    </virtual-scroller>
+
+    <div id="inicio" (click)="scrollTo()">
+      <img src="./assets/images/flecha_blanca.svg" alt="">
+    </div>
+
+  </div>
+
+  <div class="foot" *ngIf="false">
+    <label>{{arrayAux.length == 1 ? "# " + (arrayAux.length | acFormatNumber) + " Producto" : "# " + (arrayAux.length | acFormatNumber) + " Productos"}}</label>
+  </div>
+
+  <div class="productsList">
+    <gn-product-list [buffer]="buffer"
+                     [firstItem]="firstItem"
+                     [grandTotal]="grandTotal"
+                     [currentTotal]="currentTotal"
+                     [currentPage]="currentPage"
+                     [loading]="loading"
+                     [isList]="isList"
+                     [getData]="getData"
+                     (emitCurrentPage)="handleCurrentPage($event)"
+                     (emitLoading)="handleLoading($event)"
+                     (emitSelectItem)="selectItem($event)"></gn-product-list>
+  </div>
+
+</div>
+
+<div id="id01" class="w3-modal">
+  <div [ngClass]="'w3-modal-content ' + classAnimation + ' w3-card-4'" [style.height]="'450px'">
+    <div class="modal">
+      <div class="titleModal">
+        <p>
+          <label>{{titleModal}}</label>
+        </p>
+        <img (click)="cerrarProducto()" src="./assets/images/cerrar_azul.svg" alt="" onclick="setTimeout(function(){document.getElementById('id01').style.display='none'}, 198)">
+      </div>
+      <div class="header">
+        <div class="img">
+          <img src="./assets/images/icono_gris_tarjeta.svg" alt="">
+        </div>
+        <div class="label">
+          <label>Nombre de Producto *</label>
+          <input type="text" [ngStyle]="{'font-size':'12px', 'font-weight':'600', 'padding-bottom': '2px'}" [style.border-bottom]="producto.nombre !== '' ? '1px solid #b4c8e2': '1px solid #d9dfe3'"  [(ngModel)]="producto.nombre" [ngModelOptions]="{standalone: true}">
+        </div>
+      </div>
+
+      <div class="body" >
+        <form >
+          <div class="cForm" [ngStyle]="{'width':'135px'}">
+            <label [ngStyle]="{'margin-bottom':'6px', 'width':'170px'}">Tipo de Producto *</label>
+            <div class="droplist" [ngStyle]="{'width':'135px'}">
+              <gn-drop-list (valueDropList)="producto.tipoProducto = $event.tipo" [items]="itemsTipoProducto" [isSearch]="false" [isCategory]="true" [align]="'left'"
+                            [itemSelect]="defaultTipoProducto" [fontSize]="'12px'" [lineaColor]="producto.tipoProducto !== '' ? '1px solid #b4c8e2' : '1px solid #d9dfe3'"></gn-drop-list>
+            </div>
+          </div>
+
+          <div class="cForm" [ngStyle]="{'width':'267px', 'justify-content': 'space-between'}">
+            <label>Presentación / Cantidad y Unidad *</label>
+            <div class="fecha" [ngStyle]="{'width':'267px'}">
+              <input [ngStyle]="{'font-size':'12px', 'padding-bottom': '2px'}" [style.border-bottom]="producto.presentacion !== '' ? '1px solid #b4c8e2': '1px solid #d9dfe3'" type="text" [(ngModel)]="producto.presentacion" [ngModelOptions]="{standalone: true}">
+            </div>
+          </div>
+
+          <div class="cForm" [ngStyle]="{'width':'100%', 'justify-content': 'space-between', 'margin-top':'20px', 'position':'relative'}">
+            <div class="tooltipFrac" [style.opacity]="ttProducto" [style.transition]="'0.5s'" [style.pointer-events]="'none'">
+              <div class="triangulo-tooltip">
+
+              </div>
+              <p>Fracción, Secuencia Fracción, Subdivision Fracción</p>
+            </div>
+            <label [style.width]="'130px'" (mouseenter)="ttProducto = 1" (mouseleave)="ttProducto = 0" (touchstart)="ttProducto = 1" (touchend)="ttProducto = 0">Fracción Arancelaria *</label>
+            <div class="fecha" [ngStyle]="{'width':'100%'}">
+              <input [ngStyle]="{'font-size':'12px', 'padding-bottom': '2px'}" [style.border-bottom]="producto.codigo !== '' ? '1px solid #b4c8e2': '1px solid #d9dfe3'" type="text" [(ngModel)]="producto.codigo" [ngModelOptions]="{standalone: true}">
+            </div>
+          </div>
+
+          <div class="section">
+            <label [ngStyle]="{'width':'125px'}">Total Previsión Anual</label>
+
+            <div class="cForm" [ngStyle]="{'width':'85px', 'justify-content': 'space-between', 'margin-left':'65px'}">
+              <label>Cantidad *</label>
+              <div class="fecha" [ngStyle]="{'width':'85px'}">
+                <input [ngStyle]="{'font-size':'12px', 'padding-bottom': '2px'}" [style.border-bottom]="producto.cantidad !== '' ? '1px solid #b4c8e2': '1px solid #d9dfe3'" type="text" [(ngModel)]="producto.cantidad" [ngModelOptions]="{standalone: true}">
+              </div>
+            </div>
+
+            <div class="cForm" [ngStyle]="{'align-items': 'flex-end', 'width':'135px' , 'margin-left':'40px'}">
+              <label [ngStyle]="{'margin-bottom':'6px', 'width':'135px'}">Unidad *</label>
+              <div class="droplist" [ngStyle]="{'width':'135px'}">
+                <gn-drop-list (valueDropList)="producto.unidad = $event.nombre" [items]="itemsUnidad" [isSearch]="false" [isCategory]="true" [align]="'left'"
+                              [itemSelect]="defaultUnidad" [fontSize]="'12px'" [lineaColor]="producto.unidad !== '' ? '1px solid #b4c8e2' : '1px solid #d9dfe3'"></gn-drop-list>
+              </div>
+            </div>
+          </div>
+
+          <label [ngStyle]="{'position':'absolute', 'bottom':'75px','right': '25px', 'color':'#98A9B4', 'font-size':'10px'}">Campos Obligatorios *</label>
+
+        </form>
+
+      </div>
+
+      <div class="footer">
+        <a class="cancelar" onclick="setTimeout(function(){document.getElementById('id01').style.display='none'}, 198)">CANCELAR</a>
+        <a (click)="agregarProducto()" [ngClass]="producto.nombre !== '' && producto.tipoProducto !== '' && producto.presentacion !== '' && producto.codigo !== '' && producto.cantidad !== '' && producto.cantidad > 0 && producto.unidad !== '' ? 'guardar' : 'guardarInactivo'" onclick="setTimeout(function(){document.getElementById('id01').style.display='none'}, 198)">AGREGAR</a>
+      </div>
+
+    </div>
+  </div>
+</div>

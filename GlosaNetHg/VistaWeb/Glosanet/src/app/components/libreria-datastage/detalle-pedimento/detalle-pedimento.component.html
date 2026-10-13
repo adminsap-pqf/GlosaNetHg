@@ -1,0 +1,78 @@
+<div class="detallePedimentoContainer">
+    <div class="header">
+        <div class="topBar">
+            <p>
+                <label (click)="redirectTo('datastagelibrary')">Librería de Registros ></label>
+                <label (click)="redirectTo('pedimentos/' + idDataStage)">Pedimento ></label>
+                <label>{{'Pedimento ' + pedimento}}</label>
+            </p>
+        </div>
+        <div class="title">
+            <div>
+                <div>
+                    <img src="./assets/images/pedimento.svg" />
+                </div>
+                <div>
+                    <p>{{'Pedimento ' + pedimento}}</p>
+                    <p>{{'Sección Aduanera ' + seccionAduanera +' · Patente ' + patente}}</p>
+                    <p *ngIf="!isGeneral">{{'Del ' + (dataStageStartDate | dateFormatDot) + ' al ' + (dataStageEndDate | dateFormatDot)}}</p>
+                    <p *ngIf="!isGeneral">{{'Valor Total $' + dataStageTotalValue}}</p>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <a (click)="redirectTo( isGeneral ? 'buscarPedimentos' : 'pedimentos/' + idDataStage)">REGRESAR</a>
+                </div>
+                <div>
+                    <p  (mouseenter)="activeTooltip = true"
+                        (mouseleave)="activeTooltip = false">
+                        Ver Comentarios
+                    </p>
+                    <div [style.opacity]="activeTooltip ? '1': '0'">
+                        <p><span>Comentarios</span>{{comments}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="separator"></div>
+        <div class="content">
+
+            <div class="tabs">
+                <gn-filtro-tiempo class="content"
+                                  [lstYears]="optionsTab"
+                                  [activeTab]="activeTab"
+                                  (emitYear)="setActiveTab($event)"></gn-filtro-tiempo>
+            </div>
+
+            <div class="searchBar">
+                <gn-search-bar [placeholder]="placeholder"
+                               [searchValue]="searchTerm"
+                               (searchTermChanged)="handleKeySearch($event)"></gn-search-bar>
+            </div>
+
+            <div class="table">
+                <gn-datastage-table [buffer]="buffer"
+                                    [firstItem]="firstItem"
+                                    [grandTotal]="grandTotal"
+                                    [currentTotal]="currentTotal"
+                                    [currentPage]="currentPage"
+                                    [loading]="loading"
+                                    [getData]="getData"
+                                    [tableHead]="tableHead"
+                                    [maxWidth]="maxWidth"
+                                    [minWidth]="minWidth"
+                                    [settings]="settings"
+                                    [footerTitle]="footerTitle"
+                                    [vucemTokenActive]="vucemTokenActive"
+                                    (emitCurrentPage)="handleCurrentPage($event)"
+                                    (emitLoading)="handleLoading($event)"
+                                    (emitLink)="handleSingleDownload($event)"></gn-datastage-table>
+            </div>
+
+        </div>
+
+    </div>
+</div>

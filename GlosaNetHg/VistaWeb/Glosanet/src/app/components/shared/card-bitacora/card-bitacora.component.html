@@ -1,0 +1,14 @@
+<a href="{{rutaGlosaDocs}}/DataStages/{{idCliente}}/{{rfc}}/{{data.dataStage.folio}}.zip" download>
+  <div>
+    <img src="./assets/images/usuario.svg" alt="">
+    <div>
+      <p>{{data.dataStage.clientes.nombre}}&nbsp;<span>Cargó el</span>&nbsp;<span>{{data.dataStage.folio }}.zip</span></p>
+      <p>{{data.dataStage.fua | dateFormatFull}}</p>
+    </div>
+  </div>
+  <div>
+    <p>Cobertura</p>
+    <p>Del {{data.finicio | dateFormatSlash}} al {{data.ffin | dateFormatSlash}}</p>
+  </div>
+  <a href="{{rutaGlosaDocs}}/{{idCliente}}/{{rfc}}/{{data.dataStage.folio}}.zip" download><img src="./assets/images/Descarga.svg" alt=""></a>
+</a>

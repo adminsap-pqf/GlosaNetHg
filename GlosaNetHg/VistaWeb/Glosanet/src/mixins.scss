@@ -1,0 +1,392 @@
+/* ------------------------------------- */
+
+
+/* ------------Mixin de Flex------------ */
+
+
+/* ------------------------------------- */
+
+@mixin flexRow {
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin flexRowImportant {
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+@mixin flexRowWrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+@mixin flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin absoluteCenter {
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+@mixin alignStart {
+  align-items: flex-start;
+  align-content: flex-start;
+}
+
+
+/* ------------------------------------- */
+
+
+/* -----------Mixin de Fonts------------ */
+
+
+/* ------------------------------------- */
+
+@mixin fontFormat ($fontSize, $fontWeight, $color) {
+  font-size: $fontSize;
+  font-weight: $fontWeight;
+  color: $color;
+}
+
+@mixin fontFormatImportant ($fontSize, $fontWeight, $color) {
+  font-size: $fontSize !important;
+  font-weight: $fontWeight !important;
+  color: $color !important;
+}
+
+@mixin escaledFontFormat ($font-size-map, $fontWeight, $color) {
+  @include font-size-map($font-size-map);
+  @include fontScalingFix;
+  font-weight: $fontWeight;
+  color: $color;
+  transition: all 0.4s;
+}
+
+@mixin multiLineTextTruncate ($lines:2, $lineHeight:1.5em, $height: 3em, $bgcolor: rgba(255, 255, 255, 0), $transColor: rgba(25, 255, 255, 0)) {
+  @supports(-webkit-line-clamp: $lines) {
+      display: block;
+      display: -webkit-box !important;
+      line-height: $lineHeight;
+      -webkit-line-clamp: $lines;
+      -webkit-box-orient: vertical;
+      // -moz-line-clamp: 1;
+      // -moz-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      height: $height;
+  }
+  @supports not (-webkit-line-clamp: $lines) {
+      position: relative;
+      height: $height !important;
+      line-height: $lineHeight;
+      overflow: hidden;
+      width: 100%;
+      &:before {
+          content: "\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0";
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          background: transparent linear-gradient(to right, $transColor, transparent 50%) repeat scroll 0% 0%;
+      }
+  }
+}
+
+@mixin placeholder ($color,  $opacity: 1, $fontWeight: 400, $fontStyle: normal) {
+  &::placeholder {
+      color: $color;
+      opacity: $opacity;
+      font-weight: $fontWeight;
+      font-style: $fontStyle;
+  }
+
+   &::-webkit-input-placeholder {
+      /* WebKit, Blink, Edge */
+      color: $color;
+      opacity: $opacity;
+      font-weight: $fontWeight;
+      font-style: $fontStyle;
+  }
+  &:-moz-placeholder {
+      /* Mozilla Firefox 4 to 18 */
+      color: $color;
+      opacity: $opacity;
+      font-weight: $fontWeight;
+      font-style: $fontStyle;
+  }
+  &::-moz-placeholder {
+      /* Mozilla Firefox 19+ */
+      color: $color;
+      opacity: $opacity;
+      font-weight: $fontWeight;
+      font-style: $fontStyle;
+  }
+  &:-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      color: $color;
+      opacity: $opacity;
+      font-weight: $fontWeight;
+      font-style: $fontStyle;
+  }
+}
+
+
+/* ------------------------------------- */
+
+
+/* ------------Mixin Variados----------- */
+
+
+/* ------------------------------------- */
+
+@mixin noSelect {
+  user-select: none;
+}
+
+@mixin appleBlinkFix {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+@mixin appleTouchFix {
+  -webkit-overflow-scrolling: touch;
+}
+
+@mixin ieFlexColumnFix {
+  -ms-flex: 1 1 auto !important;
+}
+
+@mixin webkitFlexColumnFix {
+  -webkit-flex: 1 1 auto !important;
+}
+
+@mixin mozFlexColumnFix {
+  -moz-flex: 1 1 auto !important;
+}
+
+@mixin fontScalingFix {
+  -webkit-font-smoothing: antialiased;
+}
+
+@mixin safariOnlyStyle {
+  @media screen and (min-color-index: 0) and(-webkit-min-device-pixel-ratio: 0) {
+      @content;
+  }
+}
+
+@mixin chromeOnlyStyle {
+  @media all and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: .001dpcm) {
+      @content;
+  }
+}
+
+@mixin fireFoxOnlyStyle {
+  @-moz-document url-prefix() {
+      @content;
+  }
+}
+
+@mixin clearfix {
+  *zoom: 1;
+  &:before,
+  &:after {
+      content: " ";
+      /* 1 */
+      display: table;
+      /* 2 */
+  }
+  &:after {
+      clear: both
+  }
+}
+
+@mixin noScrollBars {
+  // Solo funciona en navegadores webkit / blink
+  &::-webkit-scrollbar {
+      height: 0px;
+      width: 0px;
+  }
+}
+
+@mixin windowsScrollbars($hideStyle) {
+  @if $hideStyle == "none" {
+      -ms-overflow-style: none;
+  }
+  @if $hideStyle == "autohide" {
+      -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+}
+
+
+/* ------------------------------------- */
+
+
+/* -------Mixin de Media Queries-------- */
+
+
+/* ------------------------------------- */
+
+@mixin responsive_layout ($size) {
+  @if map-has-key($breakpoints, $size) {
+      @media #{inspect(map-get($breakpoints, $size))} {
+          @content;
+      }
+  }
+  @else {
+      @warn "No existe el tamaño `#{$size}`. "+"en la lista de breakpoints, revise el map de `$breakpoints`.";
+  }
+}
+
+
+/* ------------------------------------- */
+
+
+/* -----Manejo de tamaño de fuentes----- */
+
+
+/* ------------------------------------- */
+
+// Convierte puntos a la unidad pedida
+@function convertPts($value, $convertUnit) {
+  $resultValue: 0;
+  @if $convertUnit==px {
+      $resultValue: $value * 1.3333 + 0px;
+  }
+  @else if $convertUnit==ems {
+      $resultValue: $value / 12 + 0em;
+  }
+  @else if $convertUnit==percent {
+      $resultValue: percentage($value / 12);
+  }
+  @return $resultValue;
+}
+
+// convierte pixeles a em
+@function em($pixels, $context: $browser-context) {
+  @if (unitless($pixels)) {
+      $pixels: $pixels * 1px;
+  }
+  @if (unitless($context)) {
+      $context: $context * 1px;
+  }
+  @return $pixels / $context * 1em;
+}
+
+// responsive font size mixin
+@mixin font-size-map($font-size-map) {
+  @each $breakpoint,
+  $font-size in $font-size-map {
+      @if $breakpoint=='base' {
+          font-size: em($font-size);
+      }
+      @else {
+          @include responsive_layout($breakpoint) {
+              font-size: em($font-size);
+          }
+      }
+  }
+}
+
+
+/* ------------------------------------- */
+
+
+/* ------------ Componentes ------------ */
+
+
+/* ------------------------------------- */
+@mixin pfButton ($width, $height, $base_color, $hover_color, $active_color, $border_radius: 5px) {
+  @include noSelect;
+  width: $width;
+  height: $height;
+  background-color: $base_color;
+  transition: all 0.4s;
+  border-radius: $border_radius;
+  cursor: pointer;
+
+  &:hover {
+      background-color: $hover_color;
+  }
+
+  &:active {
+      background-color: $active_color;
+  }
+}
+
+@mixin button($width, $height, $baseColor, $hoverColor: "", $activeColor: "") {
+  @if $hoverColor == "" {
+    $hoverColor: $baseColor
+  }
+  @if $activeColor == "" {
+    $activeColor: $baseColor
+  }
+  width: $width;
+  height: $height;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.4s;
+  background-color: $baseColor;
+  border: 2px solid $baseColor;
+  @include appleBlinkFix;
+  outline: 0;
+  &:hover {
+    background-color: $hoverColor;
+    border: 2px solid $hoverColor;
+  }
+  &:active {
+    background-color: $activeColor;
+    border: 2px solid $activeColor;
+  }
+}
+
+@mixin pfNotificationBadge ($width: 20px, $height: 20px, $color: $pfTiaraGray, $padding: 3px) {
+  @include flexRow;
+  @include absoluteCenter;
+  box-sizing: border-box;
+  width: $width;
+  height: $height;
+  padding: $padding;
+  background-color: $color;
+  border-radius: 25px;
+}
+
+/* ------------------------------------- */
+
+
+/* --- Animaciones y Transisciones  --- */
+
+
+/* ------------------------------------- */
+
+@mixin borderFromCenter ($borderColor: $pfBlue) {
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  position: relative;
+  overflow: hidden;
+
+  &:before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      left: 50%;
+      right: 50%;
+      bottom: 0;
+      background: $borderColor;
+      height: 4px;
+      -webkit-transition-property: left, right;
+      transition-property: left, right;
+      -webkit-transition-duration: 0.3s;
+      transition-duration: 0.3s;
+      -webkit-transition-timing-function: ease-out;
+      transition-timing-function: ease-out;
+  }
+
+  &:hover:before, &:focus:before, &:active:before {
+      left: 0;
+      right: 0;
+  }
+}

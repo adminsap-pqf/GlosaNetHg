@@ -1,0 +1,549 @@
+@import "../../../variables.scss";
+@import "../../../mixins.scss";
+@import "../../../colors.scss";
+
+.container{
+    @include flexColumn;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 25px;
+
+.title{
+    @include flexRow;
+    box-sizing: border-box;
+    width: 100%;
+    height: 90px;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 0.5px solid #98A9B4;
+    & > div{
+        @include flexColumn;
+        width: 250px;
+        box-sizing: border-box;
+        & > p{
+            @include flexRow;
+            width: 100%;
+            box-sizing: border-box;
+            & > img{
+                @include flexColumn;
+                box-sizing: border-box;
+            }
+            & > label{
+                @include flexColumn;
+                box-sizing: border-box;
+                font-size: 20px;
+                color: #3B8EDE;
+                text-align: left;
+                font-weight: 700;
+            }
+        }
+        & > label{
+            @include flexRow;
+            width:100%;
+            box-sizing: border-box;
+            font-size: 13px;
+            color: #818192;
+            text-align: left;
+            margin-top: 3px;
+        }
+    }
+    & > a{
+        @include pfButton(190px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+        @include flexRow;
+        @include absoluteCenter;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: normal;
+        color:$gnBlanco;
+    }
+}
+
+.body1{
+  width: 100%;
+  margin-top: 30px;
+  & > .search{
+    @include flexRow;
+    flex-direction: column;
+    & > div:nth-of-type(1){
+      width: 100%;
+      & > label:nth-of-type(1){
+        box-sizing: border-box;
+        font-size: 20px;
+        color: #3B8EDE;
+        text-align: left;
+        font-weight: 700;
+      }
+    }
+    & > .searchBar{
+      @include flexRow;
+      width: 100%;
+      & > .formF{
+        @include flexRow;
+        width: 100%;
+        align-items: center;
+        align-content: center;
+        justify-content: space-between;
+        & > div:nth-of-type(1){
+          @include flexRow;
+          width: 100%;
+          margin-top: 20px;
+          & > div:nth-of-type(1){
+            width: 100%;
+            & > div:nth-of-type(1){
+              @include flexRow;
+              flex-direction: column !important;
+              & > label:nth-of-type(1){
+                box-sizing: border-box;
+                font-size: 13px;
+                color: #818192;
+                text-align: left;
+              }
+              & > gn-drop-list{
+                height: 28px;
+              }
+            }
+          }
+          & > div:nth-of-type(2){
+            width: 100%;
+            @include flexRow;
+            align-items: center;
+            align-content: center;
+            justify-content: space-between;
+            & > .cForm1{
+                @include flexColumn;
+                box-sizing: border-box;
+                width: 50%;
+                margin: 0 5px;;
+                & > label{
+                    @include flexRow;
+                    font-size: 13px;
+                    color: #98A9B4;
+                }
+                & > input{
+                  box-sizing: border-box;
+                  padding: 5px;
+                  width: 100%;
+                  font-size: 14px;
+                  border-width: 0;
+                  outline: 0;
+                }
+                input[type=number]::-webkit-inner-spin-button,
+                input[type=number]::-webkit-outer-spin-button {
+                   -webkit-appearance: none;
+                   margin: 0;
+                 }
+                 input[type=number] { -moz-appearance:textfield; }
+            }
+            & > .cForm2{
+                @include flexColumn;
+                box-sizing: border-box;
+                margin: 0 5px;
+                & > label{
+                    @include flexRow;
+                    font-size: 13px;
+                    color: #98A9B4;
+                }
+                & > input{
+                  box-sizing: border-box;
+                  padding: 5px;
+                  width: 100%;
+                  height: 30px;
+                  border: 1px solid #3369B1;
+                  font-size: 14px;
+                }
+            }
+            & > .btnGlosa{
+              width: 100px;
+              background: #E2C913;
+              transition: all 0.4s;
+              font-size: 14px;
+              color: #FFFFFF;
+              font-family: "Roboto Cn";
+              font-weight: 500;
+              height: 30px;
+              margin: 0 auto;
+              @include flexRow;
+              @include absoluteCenter;
+              &:HOVER {
+                background-color: rgba(226, 201, 19, 0.75);
+                cursor: pointer;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.body2{
+  @include flexColumn;
+  width: 100%;
+  //min-height: calc(100vh - 390px );
+  border-bottom: 1px dashed #D5DEE2;
+  margin-top: 33px;
+  padding-bottom: 20px;
+  & > label{
+    flex-direction: column;
+    box-sizing: border-box;
+    font-size: 20px;
+    color: #3B8EDE;
+    text-align: left;
+    font-weight: 700;
+    margin-bottom: 31px;
+  }
+}
+.body{
+  @include flexColumn;
+  width: 100%;
+  font-size: 9pt;
+  box-sizing: border-box;
+  padding-top: 15px;
+  margin-bottom: 35px;
+    & > div:nth-of-type(1){
+      overflow-x: scroll;
+      margin: 0px 20px;
+      height: 600px;
+      .table{
+        @include flexColumn;
+        width: 100%;
+        font-size: 9pt;
+        box-sizing: border-box;
+        padding-top: 25px;
+        & > th:nth-of-type(1){
+          color: $gnAzulMedio;
+          font-size: 18px;
+          font-weight: 500;
+          margin: 23px 20px;
+        }
+        & > thead:nth-of-type(1){
+          //@include absoluteCenter;
+          overflow-x: scroll;
+          margin: 0px 20px;
+          & > tr:nth-of-type(1){
+            @include flexRow;
+            border-bottom: 2px dashed $gnInactivo;
+            width: 100%;
+            & > th{
+              @include flexRow;
+              align-items: flex-end;
+              box-sizing: border-box;
+              font-size: 14px;
+              color: $grisLinea;
+
+            }
+          }
+          & > thead:nth-of-type(2){
+            overflow-y: scroll;
+            height: calc(100vh - 380px);
+            width: 100%;
+            & > .rowTable:hover{
+              background-color: $gnAzulFondo;
+              & > th{
+                font-weight: 600;
+              }
+            }
+          }
+        } & > tbody:nth-of-type(1){
+          @include flexColumn;
+          margin: 0px 20px;
+          .rowTable{
+            @include flexRow;
+            height: 57px;
+            border-bottom: 2px dashed $gnInactivo;
+
+            & > td{
+              @include flexRow;
+              align-items: center;
+              box-sizing: border-box;
+              font-size: 10pt;
+              color: $gnGrisRata;
+              & > div{
+                & > img{
+                  width: 20px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .buttons{
+    @include flexRow;
+    & > div:nth-of-type(1){
+      @include flexRow;
+      width: 100%;
+      justify-content: space-around;
+      & > div:nth-of-type(1) {
+        @include flexRow;
+        align-items: center;
+        & .btnGlosa{
+          width: 200px;
+          background: #37B34A;
+          transition: all 0.4s;
+          font-size: 14px;
+          color: #FFFFFF;
+          font-family: "Roboto Cn";
+          font-weight: 500;
+          height: 30px;
+          @include flexRow;
+          @include absoluteCenter;
+          &:HOVER {
+            // background-color: #37B34Abf;
+            background-color: #37B34A;
+            cursor: pointer;
+          }
+        }
+      }
+      & > div:nth-of-type(2) {
+        @include flexRow;
+        justify-content: flex-end;
+        align-items: center;
+        & .btnGlosa{
+          width: 200px;
+          background: #37B34A;
+          transition: all 0.4s;
+          font-size: 14px;
+          color: #FFFFFF;
+          font-family: "Roboto Cn";
+          font-weight: 500;
+          height: 30px;
+          @include flexRow;
+          @include absoluteCenter;
+          &:HOVER {
+            // background-color: #37B34Abf;
+            background-color: #37B34A;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 799px) {
+  .body{
+    overflow-x: scroll !important;
+    min-width: 740px;
+  }
+}
+
+.modal{
+    @include flexColumn;
+    @include absoluteCenter;
+    justify-content: flex-start;
+    padding: 25px;
+    height: 450px;
+    font-size: 9pt;
+    box-sizing: border-box;
+    & > div:nth-of-type(1){
+      @include flexRow;
+      @include absoluteCenter;
+      justify-content: space-between;
+      width: 100%;
+      height: 30px;
+      color: $gnAzulBajo;
+      font-weight: 500;
+      font-size: 21px;
+      align-items: flex-start;
+      box-sizing: border-box;
+      & > p{
+        margin-top: 2px;
+      }
+      & > img{
+        cursor: pointer;
+      }
+    }
+    & > div:nth-of-type(2){
+      width: 100%;
+      height: 60px;
+    }
+    & > .dirFiscal{
+        width: 100%;
+        height: 300px;
+        box-sizing: border-box;
+        & > form{
+            @include flexRowWrap;
+            justify-content: space-between;
+            box-sizing: border-box;
+            height: 275px;
+            & > div{
+                @include flexColumn;
+                @include absoluteCenter;
+                //justify-content: space-around;
+                height: 70px;
+                box-sizing: border-box;
+                & > .titulo{
+                    width: 100%;
+                    color:$grisLinea;
+                    font-size: 1em;
+                    margin-bottom: 5px;
+                }
+                & > input{
+                    width: 100%;
+                    border-right: none;
+                    border-left: none;
+                    border-top: none;
+                    border-bottom: solid 0.75px $gnAzulMedio;
+                    outline: none;
+                    display: inline-block;
+                    font-size: 1.05em;
+                    color:$gnAzulMedio;
+                }
+            }
+      }
+    }
+
+    & > .datosGenerales{
+      width: 100%;
+      height: 300px;
+      box-sizing: border-box;
+      & > form{
+          @include flexRowWrap;
+          justify-content: space-between;
+          box-sizing: border-box;
+          height: 275px;
+          & > div{
+              @include flexColumn;
+              @include absoluteCenter;
+              //justify-content: space-around;
+              height: 70px;
+              box-sizing: border-box;
+              & > .titulo{
+                  width: 100%;
+                  color:$grisLinea;
+                  font-size: 1em;
+                  margin-bottom: 5px;
+              }
+              & > input{
+                  width: 100%;
+                  border-right: none;
+                  border-left: none;
+                  border-top: none;
+                  border-bottom: solid 0.75px $grisLinea;
+                  outline: none;
+                  display: inline-block;
+                  font-size: 1.05em;
+                  color:$gnAzulMedio;
+              }
+          }
+    }
+
+
+
+    }
+    & > div{
+        @include flexRow;
+        @include absoluteCenter;
+        justify-content: space-between;
+        width: 100%;
+        //margin-top: 16px;
+        box-sizing: border-box;
+        & > .btnCancelar{
+          margin-top: 10px;
+          @include pfButton(145px, 30px, $gnAzulMedio, rgba(51,105,177,0.75), $gnAzulMedio, 0px);
+          @include flexRow;
+          @include absoluteCenter;
+          cursor: pointer;
+          font-size: 14px;
+          font-weight: normal;
+          color:$gnBlanco;
+          box-sizing: border-box;
+        }
+
+        & > .btnGuardar{
+          margin-top: 10px;
+          @include pfButton(145px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+          @include flexRow;
+          @include absoluteCenter;
+          cursor: pointer;
+          font-size: 14px;
+          font-weight: normal;
+          color:$gnBlanco;
+          box-sizing: border-box;
+        }
+      }
+  }
+
+  .modalConfirm{
+        @include flexColumn;
+        height: 225px;
+        padding: 20px;
+        $color-primary: $gnAzulBajo ;
+        $color-secondary: $verdeBoton ;
+        $color-darkAccent: $gnDorado ;
+        $color-lightAccent: $gnAzulMedio;
+        $background: #222222;
+        $duration: 1.5s;
+        box-sizing: border-box;
+        & > .salir{
+          @include flexRow;
+          justify-content: flex-end;
+          & > img{
+            cursor: pointer;
+          }
+        }
+        & > .body{
+          @include flexRow;
+          width: 100%;
+          height: 130px;
+          box-sizing: border-box;
+          & > .img{
+            @include flexColumn;
+            width: 100px;
+            box-sizing: border-box;
+            align-items: center;
+            justify-content: center;
+            & > img{
+              width: 63px;
+            }
+          }
+          & > .title{
+            @include flexColumn;
+            width:calc(100% - 100px);
+            box-sizing: border-box;
+            justify-content: center;
+            & > label:nth-of-type(1){
+              font-size: 22px;
+              color: #3369B1;
+              font-weight: 600;
+              & > span{
+                font-size: 21px;
+                color: #3B8EDE;
+                font-weight: 400;
+              }
+            }
+            & > label:nth-of-type(2){
+              font-size: 19px;
+              color: #3B8EDE;
+              margin-top: 10px;
+            }
+          }
+        }
+        & > .boton{
+          @include flexRow;
+          justify-content: space-between;
+          width: 100%;
+          height: 40px;
+          box-sizing: border-box;
+          margin-top: 40px;
+          & > a:nth-of-type(1){
+            @include flexRow;
+            @include absoluteCenter;
+            @include pfButton(145px, 30px, $gnAzulMedio, rgba(51,105,177,0.75), $gnAzulMedio, 0px);
+            cursor: pointer;
+            font-size: 14px;
+            color: #FFFFFF;
+            font-weight: 500;
+          }
+          & > a:nth-of-type(2){
+            @include flexRow;
+            @include absoluteCenter;
+            @include pfButton(145px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+            cursor: pointer;
+            font-size: 14px;
+            color: #FFFFFF;
+            font-weight: 500;
+          }
+        }
+      }

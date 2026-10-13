@@ -1,0 +1,25 @@
+<div>
+  <img src="./assets/images/reporte_personalizado_icono_nuevo.svg" alt="">
+  <div>
+    <p>Catálogo de Reportes Personalizados</p>
+    <p *ngIf="lstReport.length == 1">1 Reporte</p>
+    <p *ngIf="lstReport.length > 1">{{lstReport.length}}&nbsp;Reportes</p>
+  </div>
+  <div class="boton">
+    <a class="btnIrCatalogo" (click)="irNuevoReporte()">
+      <p>NUEVO REPORTE</p>
+    </a>
+  </div>
+</div>
+<div>
+  <div>
+    <div>
+      <p>Ordenar Por:</p>
+      <gn-drop-list class="filtro" (valueDropList)="filtrar($event)" [align]="'left'" [isSearch]="false" [items]="lstFiltro" [itemSelect]="selectFiltro"></gn-drop-list>
+    </div>
+    <gn-search-bar [searchValue]="searchTerm" (searchTermChanged)="changeSearchTerm($event)" [placeholder]="'Buscar'"></gn-search-bar>
+  </div>
+  <div>
+    <gn-grid-card-container [tipo]="false" [lstData]="lstReport" (reload2)="obtenerReportes()"></gn-grid-card-container>
+  </div>
+</div>

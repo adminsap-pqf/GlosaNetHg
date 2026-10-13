@@ -1,0 +1,4 @@
+<img [src]="imagen" alt="Search" [ngClass]="imgClase">
+<form [formGroup]= "searchForm" (ngSubmit)="returnSearchTerm()">
+  <input type="text" formControlName="searchTerm" (keypress)="changeSearchTerm()" [value]="searchValue" [placeholder]= "placeholder" [style.color]="color" >
+</form>

@@ -1,0 +1,298 @@
+<!-- <div class="gn-historialImportaciones fadeIn animated">
+  <div class="Title">
+    <div >
+      <span class="hTitle">Historial de Importaciones</span>
+    </div>
+  </div>
+
+  <div class="dvPrevision" >
+    <div>
+      <div>
+        <span class="spTitle" *ngIf="arrayHistorial.length !== 0"> {{arrayHistorial [0].descripcion}} </span>
+        <div>
+          <span class="spSubTitle" *ngIf="arrayHistorial.length !== 0"  >Permiso vigente: </span>
+          <span class="sub" *ngIf="arrayHistorial.length !== 0"  >#{{arrayHistorial [0].permisoVigente}}</span>
+        </div>
+        <span class="subTitle" *ngIf="arrayHistorial.length !== 0"  >{{arrayHistorial [0].totalImportaciones}} importaciones</span>
+      </div>
+    </div>
+  </div>
+  <div class="importaciones">
+      <span>Importaciones</span>
+  </div>
+
+  <div class="fecha">
+    <div class="contenedor1" ng-app="">
+      <div>
+        <div class="select3">
+         <span [style.margin-right]="'10px'">Permiso:</span>
+            <gn-drop-list (valueDropList)="dropList($event)" [style.margin-left]="'0px'" [items]="itemsDropList"
+            [isSearch]="false" [isCategory]="true" [itemSelect]="combo" [fontSize]="'12px'" [style.width]="'118px'"></gn-drop-list>
+            <a class="btn" *ngIf = 'combo !== undefined && combo.nombre !== ""'>
+              <img _ngcontent-c14="" alt="" src="./assets/images/cerrar_azul.svg" [style.width]="'15px'"  (click)="limpiarCombo()">
+            </a>
+        </div>
+      </div>
+      <div class="select4">
+          <div>
+            <span>No</span>
+          </div>
+          <div>
+          <span>Buscar por Fecha</span>
+            <gn-switch [isActive]="habilitar" [color]="'green'" (valueChanged)="mostrar($event)" [style.width]="'2px'" [style.left]="'28px'" style="position:relative" ></gn-switch>
+          </div>
+          <div>
+            <span [style.margin-left]="'9px'">Si</span>
+          </div>
+      </div>
+  </div>
+      <div class="contenedor2">
+        <div class="select1" [ngStyle]="{'filter': !habilitar ? 'grayscale(100%) contrast(0%)' : ''}">
+          <span>Ordenar desde:</span>
+            <gn-date-picker [style.width]="'100px'" [style.margin-left]="'5px'" [class]="'prueba'" [(date)]="date" dateFormat="YYYYMMDD"
+              [sizeInput]="'14px'" (fecha)="getFechaImpl($event)"  >
+          </gn-date-picker>
+          <div  *ngIf="!habilitar" [style.width]="'100%'"  [style.height]="'100%'"[style.margin-left]="'0px'" style="background: transparent;" >
+          </div>
+        </div>
+      <div class="select2" [ngStyle]="{'filter': !habilitar ? 'grayscale(100%) contrast(0%)' : ''}">
+         <span>Hasta:</span>
+             <gn-date-picker [style.width]="'100px'" [style.margin-left]="'8px'" [class]="'prueba'" [(date)]="date2" dateFormat="YYYYMMDD" [sizeInput]="'14px'"
+                 (fecha)="getFechaFin($event)" >
+             </gn-date-picker>
+             <div  *ngIf="!habilitar" [style.width]="'155px'" [style.height]="'100%'"[style.margin-left]="'0px'" style="background: transparent;" >
+             </div>
+       </div>
+    </div>
+        <div class="contenedor3">
+        <div class="div0">
+        </div>
+          <div>
+            <a class="btn1" (click)="limpiar()">
+              <p >LIMPIAR</p>
+            </a>
+          </div>
+            <div>
+              <a class="btn2"(click)="filtrar()">
+                <p>APLICAR</p>
+              </a>
+            </div>
+        </div>
+    </div>
+
+  <div class="table">
+    <table class="body">
+      <thead>
+        <tr>
+          <th [ngStyle]="{'min-width':'10%', 'max-width':'10%', 'text-align':'center'}">#</th>
+          <th [ngStyle]="{'min-width':'20%', 'max-width':'20%', 'text-align':'center'}">Fecha</th>
+          <th [ngStyle]="{'min-width':'20%', 'max-width':'20%', 'text-align':'center'}">Cantidad</th>
+          <th [ngStyle]="{'min-width':'20%', 'max-width':'20%', 'text-align':'center'}">Permiso</th>
+          <th [ngStyle]="{'min-width':'30%', 'max-width':'30%', 'text-align':'center'}">Observaciones</th>
+        </tr>
+      </thead>
+
+      <tbody>
+          <tr *ngFor="let item of lstHistorial; let i = index" class="rowTable">
+                <td [ngStyle]="{'min-width':'10%', 'max-width':'10%', 'text-align':'center'}">#{{i+1}}</td>
+                <td [ngStyle]="{'min-width':'20%', 'max-width':'20%', 'text-align':'center'}">{{item.fecha}}</td>
+                <td [ngStyle]="{'min-width':'20%', 'max-width':'20%', 'text-align':'center'}">{{item.cantidad +" "+ item.unidad}}</td>
+                <td [ngStyle]="{'min-width':'20%', 'max-width':'20%', 'text-align':'center'}">{{item.numPermiso}}</td>
+                <td [ngStyle]="{'min-width':'20%', 'max-width':'20%'}">Teclado Mecanico iluminado </td>
+          </tr>
+      </tbody>
+
+  </table>
+  </div>
+
+</div> -->
+
+<div class="header">
+  <div class="title">
+    <p>
+      <label (click)="irPermisos()" [ngStyle]="{'cursor':'pointer'}">Previsión {{yearActual}} ></label>
+      <label>{{producto.nombre}} </label>
+    </p>
+  </div>
+  <div class="product">
+    <div class="item-producto">
+      <div class="img">
+        <img id="img1" src="./assets/images/icono_gris_tarjeta.svg" alt="">
+      </div>
+      <div class="text">
+        <p>
+          <label>{{producto.codigo}} · </label>
+          <label>{{producto.nombre}}</label>
+        </p>
+        <p>Folio: {{folio}} · Permiso Vigente: {{'# '+ permisovigente}}</p>
+        <p> </p>
+        <p>Responsable de Gestión: {{usuario.email}}</p>
+        <a [style.color]="idProxPrevision != 0 && !productoExist ? null : '#D5DEE2'" [style.pointer-events]="idProxPrevision != 0 && !productoExist ? 'auto':'none'" (click)="nuevoProducto()" [style.border]="idProxPrevision != 0 && !productoExist ? '1px solid #def1df' : '1px solid #D5DEE2'" onclick="document.getElementById('id01').style.display='block'">AGREGAR A PREVISIÓN {{nextYear}}</a>
+      </div>
+    </div>
+    <div class="boton">
+      <a (click)="irPermisos()">REGRESAR</a>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="triangulo">
+
+  </div>
+  <div class="section">
+
+    <div class="bar-section">
+      <label >Permisos vs Importaciones</label>
+      <div class="bar">
+        <div #containerBar class="containerBar" [style.position]="'relative'">
+          <div class="progressBar" [style.width]="whidtImp + '%'">
+            <div class="contentBar" [style.width]=" '100%'" [style.background-color]="'#3369B1'">
+            </div>
+
+          </div>
+
+          <div class="progressBar"  [style.width]="widthTotalP + '%'" [style.position]="'relative'">
+            <div class="contentBar" [style.width]="barraProducto +'%'" [style.background-color]="'#37B34A'">
+            </div>
+
+            <label id="labelToday" [style.text-align]="whidtImp < 90 && whidtImp > 10 ? barraProducto < 93 && barraProducto > 7 ? 'center' : barraProducto > 93 ? 'right' :'left' : whidtImp >= 90 ? 'right' : barraProducto < 93 && barraProducto > 7 ? 'center' :'left'" [style.left]="barraProducto <= 6 ? 'calc(' +barraProducto + '%)': barraProducto >= 94 ? 'calc(' +barraProducto + '% - 150px)': 'calc(' +barraProducto + '% - 75px)'"
+                   [style.bottom]="widthContainer > 1040 ? '60px': '-60px'" [style.color]="'#37B34A'"> <span [ngStyle]="{'color':'#37B34A' }">{{date | dateFormatSlashFull}}</span> <span [ngStyle]="{'font-size':'12px', 'color':'#818192', 'font-weight':'400', 'margin-top':'3px'}">{{totalPermisosProducto}} {{unidad}}</span>
+            </label>
+            <div id="lineToday" [style.left]=" 'calc('+barraProducto+ '% - 1px)' " [style.border-color]="'#37B34A'">
+            </div>
+          </div>
+
+          <div class="legendBar">
+            <div [style.background-color]="'#37B34A'"></div>
+            <label>Permisos</label>
+            <div [style.background-color]="'#3369B1'"></div>
+            <label>Importaciones en DataStages</label>
+          </div>
+
+          <label id="labelToday" [style.text-align]="whidtImp < 90 && whidtImp > 10 ? 'center' : whidtImp >= 90 ? 'right' : 'left'" [style.left]="whidtImp <= 5 ? 'calc(' +whidtImp + '%)': whidtImp >= 95 ? 'calc(' +whidtImp + '% - 150px)': 'calc(' +whidtImp + '% - 75px)'"
+                 [style.bottom]="widthContainer < 1040 ? '60px': '60px'" [style.color]="'#3369B1'">{{totalImportaciones}} {{unidad}}</label>
+          <div id="lineToday" [style.left]=" 'calc('+whidtImp+ '% - 1px)' " [style.border-color]="'#3369B1'">
+
+          </div>
+
+          <p [ngStyle]="{'position':'absolute', 'font-size':'14px', 'bottom': '-25px', 'right': '0', 'background-color': 'white'}"> <label [ngStyle]="{'color':'#818192', 'font-weight':'600'}">{{totalPermisosProducto}} {{unidad}} de </label> <label [ngStyle]="{'color':'#37B34A', 'font-weight':'600'}">{{totalProducto}} {{unidad}}</label> </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="separacion" >
+
+    </div>
+
+    <div class="historial">
+      <label >Permisos</label>
+      <div class="searchBar">
+        <gn-search-bar [searchValue]="searchTerm" (searchTermChanged)="changeSearchTerm($event)" [placeholder]="placeholder" [reset]="resetSearch"></gn-search-bar>
+      </div>
+      <div class="table">
+        <div class="thead">
+          <div>#</div>
+          <div>Tramitado</div>
+          <div>Vigencia</div>
+          <div>{{unidad}}</div>
+          <div>Estado</div>
+        </div>
+        <div class="tbody" *ngFor="let item of arrayAux; let i = index">
+          <div> <p>{{ (i+1) < 10  ? '0'+(i+1) : (i+1) }}</p> </div>
+          <div> <img id="img2" src="./assets/images/permiso_azul.svg" alt=""><img id="img1" src="./assets/images/permiso_gris.svg" alt=""><p><label >{{item.usuario.nombre + ' ' + item.usuario.apellido}}</label><label *ngIf="item.tramiteCofepris !== ''">Trámite COFEPRIS {{item.tramiteCofepris}}</label> <label *ngIf="item.tramiteCofepris == ''">Permiso: {{item.folioRegistro}}</label> </p> </div>
+          <div><p *ngIf="item.finicio !== null && item.finicio !== undefined"><label>{{item.finicio | dateFormatSlash}} Hasta {{item.ffin | dateFormatSlash}}</label><label [style.color]="item.vigente ? '#37B34A ' : '#C1272D'">{{item.diasNaturales == 1 ? item.diasNaturales + ' Día Natural' : item.diasNaturales + ' Días Naturales'}} </label></p> <p *ngIf="item.finicio == undefined || item.finicio == null" [ngStyle]="{'color': '#3369B1'}">N/D</p> </div>
+          <div><p [style.color]="item.vigente ? '#37B34A ' : item.finicio == null && item.estadoCofepris == 'Trámite en evaluación.' ? '#3B8EDE' : item.finicio == null && item.estadoCofepris != 'Trámite en evaluación.' ? '#E2C913' : '#C1272D'">{{item.cantidad | acFormatNumber}}</p></div>
+          <div><p *ngIf="item.vigente" [style.color]="'#37B34A'">Vigente</p> <p *ngIf="item.finicio == null && item.estadoCofepris == 'Trámite en evaluación.'" [style.color]="'#3B8EDE'">En Evaluación</p> <p *ngIf="item.finicio == null && item.estadoCofepris != 'Trámite en evaluación.'" [style.color]="'#E2C913'">En Elaboración</p> <p *ngIf="!item.vigente && item.finicio != null" [style.color]="'#C1272D'">Caducado</p> </div>
+        </div>
+      </div>
+      <div class="numPermisos">
+        <label >{{arrayAux.length == 1 ? '# '+ arrayAux.length + ' Permiso' : '# '+ arrayAux.length + ' Permisos'}}</label>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div id="id01" class="w3-modal">
+  <div [ngClass]="'w3-modal-content ' + classAnimation + ' w3-card-4'" [style.height]="'450px'">
+    <div class="modal">
+      <div class="title">
+        <p>
+          <label>Agregar Producto / Previsión {{nextYear}}</label>
+        </p>
+        <img (click)="cerrarProducto()" src="./assets/images/cerrar_azul.svg" alt="" onclick="setTimeout(function(){document.getElementById('id01').style.display='none'}, 198)">
+      </div>
+      <div class="header">
+        <div class="img">
+          <img src="./assets/images/icono_gris_tarjeta.svg" alt="">
+        </div>
+        <div class="label">
+          <label>Nombre de Producto *</label>
+          <input type="text" [ngStyle]="{'font-size':'12px', 'font-weight':'600', 'padding-bottom': '2px'}"
+                 [style.border-bottom]="producto.nombre !== '' ? '1px solid #b4c8e2': '1px solid #C1272D'"
+                 [(ngModel)]="producto.nombre"
+                 [ngModelOptions]="{standalone: true}">
+        </div>
+      </div>
+
+      <div class="body" >
+        <form >
+          <div class="cForm" [ngStyle]="{'width':'135px'}" [style.pointer-events]="'noen'">
+            <label [ngStyle]="{'margin-bottom':'6px', 'width':'170px'}">Tipo de Producto *</label>
+            <div class="droplist" [ngStyle]="{'width':'135px'}">
+              <gn-drop-list (valueDropList)="producto.tipoProducto = $event.tipo" [items]="itemsTipoProducto" [isSearch]="false" [isCategory]="true" [align]="'left'"
+                            [itemSelect]="defaultTipoProducto" [fontSize]="'12px'" [lineaColor]="producto.tipoProducto !== '' ? '1px solid #b4c8e2' : '1px solid #d9dfe3'"></gn-drop-list>
+            </div>
+          </div>
+
+          <div class="cForm" [ngStyle]="{'width':'267px', 'justify-content': 'space-between'}" [style.pointer-events]="'noen'">
+            <label>Presentación / Cantidad y Unidad *</label>
+            <div class="fecha" [ngStyle]="{'width':'267px'}">
+              <input [ngStyle]="{'font-size':'12px', 'padding-bottom': '2px'}" [style.border-bottom]="producto.presentacion !== '' ? '1px solid #b4c8e2': '1px solid #C1272D'" type="text" [(ngModel)]="producto.presentacion" [ngModelOptions]="{standalone: true}">
+            </div>
+          </div>
+
+          <div class="cForm" [ngStyle]="{'width':'100%', 'justify-content': 'space-between', 'margin-top':'20px'}" [style.pointer-events]="'noen'">
+            <label>Fracción Arancelaria *</label>
+            <div class="fecha" [ngStyle]="{'width':'100%'}">
+              <input [ngStyle]="{'font-size':'12px', 'padding-bottom': '2px'}" [style.border-bottom]="producto.codigo !== '' ? '1px solid #b4c8e2': '1px solid #C1272D'" type="text" [(ngModel)]="producto.codigo" [ngModelOptions]="{standalone: true}">
+            </div>
+          </div>
+
+          <div class="section">
+            <label [ngStyle]="{'width':'125px'}">Total Previsión Anual</label>
+
+            <div class="cForm" [ngStyle]="{'width':'85px', 'justify-content': 'space-between', 'margin-left':'65px'}">
+              <label>Cantidad *</label>
+              <div class="fecha" [ngStyle]="{'width':'85px'}">
+                <input [ngStyle]="{'font-size':'12px', 'padding-bottom': '2px'}" [style.border-bottom]="producto.cantidad !== '' ? '1px solid #b4c8e2': '1px solid #C1272D'" type="text" [(ngModel)]="producto.cantidad" [ngModelOptions]="{standalone: true}">
+              </div>
+            </div>
+
+            <div class="cForm" [ngStyle]="{'align-items': 'flex-end', 'width':'135px' , 'margin-left':'40px'}">
+              <label [ngStyle]="{'margin-bottom':'6px', 'width':'135px'}">Unidad *</label>
+              <div class="droplist" [ngStyle]="{'width':'135px'}">
+                <gn-drop-list (valueDropList)="producto.unidad = $event.nombre" [items]="itemsUnidad" [isSearch]="false" [isCategory]="true" [align]="'left'"
+                              [itemSelect]="defaultUnidad" [fontSize]="'12px'" [lineaColor]="producto.unidad !== '' ? '1px solid #b4c8e2' : '1px solid #d9dfe3'"
+                              [activeFirst]="true" [activeValidData]="true"></gn-drop-list>
+              </div>
+            </div>
+          </div>
+
+          <label [ngStyle]="{'position':'absolute', 'bottom':'75px','right': '25px', 'color':'#98A9B4', 'font-size':'10px'}">Campos Obligatorios *</label>
+
+        </form>
+
+      </div>
+
+      <div class="footer">
+        <a class="cancelar" onclick="setTimeout(function(){document.getElementById('id01').style.display='none'}, 198)">CANCELAR</a>
+        <a (click)="agregarProductoPrevision()" [ngClass]= "producto.unidad !== '' && producto.cantidad !== '' ? 'guardar' : 'guardarInactivo'" onclick="setTimeout(function(){document.getElementById('id01').style.display='none'}, 198)">AGREGAR</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,103 @@
+<div>
+  <img src="./assets/images/glosario_icono_nuevo.svg" alt="">
+  <p>Glosario</p>
+  <div class="boton">
+    <a class="btnCalendario" (click)="redirectCalendar()">
+      <p>MANUAL DATASTAGE</p>
+    </a>
+  </div>
+</div>
+<div>
+  <gn-filtro-tiempo [lstYears]="lstTabs" (emitYear)="emitTab($event)"></gn-filtro-tiempo>
+  <div *ngIf="divApendices">
+    <div>
+      <p>Título de Apéndices</p>
+      <div>
+        <div *ngFor="let item of lstApendices; let i = index" [ngClass]="lstActive[i] != '' ? lstActive[i] : 'item'" (click)="activeItem(i)" >
+          <div>
+            <label>#{{item.numApendice}}&nbsp;&middot;&nbsp;</label> <label [innerHTML]="item.nombreApendice | highlight: searchVar"></label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+        <div class="searchBar">
+            <gn-search-bar [searchValue]="searchTerm" (searchTermChanged)="changeSearchTerm2($event)" [placeholder]="placeholder" [reset]="resetSearch" [color]="'#818192'" ></gn-search-bar>
+        </div>
+      <p [innerHTML]="('Apéndice '+numApendice) | highlight: searchVar" [ngStyle]="{'margin-top':'30px'}"></p>
+      <p [innerHTML]="nombreApendice | highlight: searchVar"></p>
+      <div *ngIf="lstSecciones.length == 0 && !cabecerasMultiples">
+        <gn-tabla [searchVar]="searchVar" [lstCabeceras]="lstCabeceras" [lstData]="lstData" [scroll]='true' [minWidth]="minWidth" [nota]="nota" [selectedOption]="selectedOption"></gn-tabla>
+      </div>
+      <div *ngIf="lstSecciones.length > 0" class="multiTable">
+        <div *ngFor="let item of lstSecciones; let i = index" >
+          <p [innerHTML]="item | highlight: searchVar"></p>
+          <gn-tabla [searchVar]="searchVar" [lstCabeceras]="lstCabeceras" [lstData]="filterData(lstData, i+1)" [scroll]='false' [style.margin-top]="'-15px'" [minWidth]="minWidth" [nota]="nota" [selectedOption]="selectedOption"></gn-tabla>
+        </div>
+      </div>
+      <div *ngIf="cabecerasMultiples" class="multiTable">
+        <div *ngFor="let item of lstCabeceras; let i = index">
+          <p></p>
+          <gn-tabla [searchVar]="searchVar" [lstCabeceras]="item" [lstData]="filterData(lstData, i+1)" [scroll]='false' [style.margin-top]="'-15px'" [minWidth]="minWidth" [nota]="nota" [selectedOption]="selectedOption"></gn-tabla>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="divTratados">
+    
+    <div>
+      <p>Tratado</p>
+      <div>
+        <div *ngFor="let item of lstTratados; let i = index" [ngClass]="lstActive2[i] != '' ? lstActive2[i] : 'item'" (click)="activeItem2(i, item.subTitulo)">
+          <div *ngIf="item.subTitulo == 0">
+            <label>#{{item.numTratado}}&nbsp;&middot;&nbsp;</label> <label [innerHTML]="item.nombreTratado | highlight: searchVar"></label>
+          </div>
+          <div *ngIf="item.subTitulo == 1">
+            <label>#{{item.numTratado}}&nbsp;&middot;&nbsp;</label><label [innerHTML]="item.nombreTratado | highlight: searchVar"></label>
+          </div>
+          <div *ngIf="item.subTitulo == 2">
+            <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&middot;&nbsp;</label><label [innerHTML]="item.nombreTratado | highlight: searchVar"></label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div>
+        <div class="searchBar">
+            <gn-search-bar [searchValue]="searchTerm" (searchTermChanged)="changeSearchTerm2($event)" [placeholder]="placeholder" [reset]="resetSearch" [color]="'#818192'" [style.border-color]="'#818192'"></gn-search-bar>
+        </div>
+      <p [innerHTML]="'Tratado' | highlight: searchVar" [ngStyle]="{'margin-top':'30px'}"></p>
+      <p [innerHTML]="nombreTratado | highlight: searchVar"></p>
+        <div>
+          <gn-tabla [searchVar]="searchVar" [lstCabeceras]="lstCabecerasT" [lstData]="lstDataT" [scroll]='true' [minWidth]="minWidth" [nota]="nota" [selectedOption]="selectedOption"></gn-tabla>
+        </div>
+    </div>
+
+
+  </div>
+  <div *ngIf="divRegiones">
+    
+    <div>
+      <p>Región/País</p>
+      <div>
+        <div *ngFor="let item of lstRegiones; let i = index" [ngClass]="lstActive3[i] != '' ? lstActive3[i] : 'item'" (click)="activeItem3(i)">
+          <div >
+            <label>#{{item.numRegion}}&nbsp;&middot;&nbsp;</label> <label [innerHTML]="item.nombreRegion | highlight: searchVar"></label>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div>
+        <div class="searchBar">
+            <gn-search-bar [searchValue]="searchTerm" (searchTermChanged)="changeSearchTerm2($event)" [placeholder]="placeholder" [reset]="resetSearch" [color]="'#818192'" [style.border-color]="'#818192'"></gn-search-bar>
+        </div>
+      <p [innerHTML]="'Región' | highlight: searchVar" [ngStyle]="{'margin-top':'30px'}"></p>
+      <p [innerHTML]="nombreRegion | highlight: searchVar"></p>
+        <div>
+          <gn-tabla [searchVar]="searchVar" [lstCabeceras]="lstCabecerasR" [lstData]="lstDataR" [scroll]='true' [minWidth]="minWidth" [nota]="nota" [selectedOption]="selectedOption"></gn-tabla>
+        </div>
+    </div>
+  </div>
+</div>

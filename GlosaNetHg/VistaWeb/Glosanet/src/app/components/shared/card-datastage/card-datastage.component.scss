@@ -1,0 +1,294 @@
+@import "../../../../variables.scss";
+@import "../../../../mixins.scss";
+@import "../../../../colors.scss";
+
+:host{
+  @include flexColumn;
+  font-size: $globalFont;
+  width: 225px;
+  cursor: pointer;
+
+  .flip-container {
+    -webkit-perspective: 1000;
+    -moz-perspective: 1000;
+    -o-perspective: 1000;
+    perspective: 1000;
+  }
+
+  .flip-container.hover .flipper {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+  }
+
+  .flip-container, .front, .back {
+    width: 225px;
+    height: 225px;
+  }
+
+  .flipper {
+    -webkit-transition: 0.5s;
+    -webkit-transform-style: preserve-3d;
+
+    -moz-transition: 0.5s;
+    -moz-transform-style: preserve-3d;
+
+    -o-transition: 0.5s;
+    -o-transform-style: preserve-3d;
+
+    transition: 0.5s;
+    transform-style: preserve-3d;
+
+    position: relative;
+  }
+
+  .front, .back {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .front {
+    z-index: 2;
+    & > div:nth-of-type(1){
+      @include flexRow;
+      @include absoluteCenter;
+      box-sizing: border-box;
+      width: 225px;
+      height: 150px;
+      border: 0.5px solid $grisLinea;
+      border-bottom: 0px;
+      transition: .3s ease-in-out;
+      & > img:nth-of-type(1){
+        width: 80px;
+      }
+      & > img:nth-of-type(2){
+        width: 80px;
+        display: none;
+      }
+    }
+    & > div:nth-of-type(2){
+      @include flexColumn;
+      @include absoluteCenter;
+      box-sizing: border-box;
+      background: $gnAzulFondo;
+      width: 225px;
+      height: 75px;
+      border: 0.5px solid $grisLinea;
+      border-top: 0px;
+      transition: .3s ease-in-out;
+      & > p:nth-of-type(1){
+        font-size: 1em;
+        color: $gnAzulMedio;
+        font-weight: 600;
+        margin-bottom: 5px;
+      }
+      & > p:nth-of-type(2){
+        font-size: 1em;
+        color: $gnGrisRata;
+      }
+    }
+  }
+
+  .front:hover{
+    & > div:nth-of-type(1){
+      height: 120px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      & > img:nth-of-type(1){
+        display: none;
+      }
+      & > img:nth-of-type(2){
+        display: inherit;
+      }
+    }
+    & > div:nth-of-type(2){
+      background: $gnAzulMedio;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      height: 105px;
+      & > p:nth-of-type(1){
+        color: $gnBlanco;
+      }
+      & > p:nth-of-type(2){
+        color: $gnBlanco;
+      }
+    }
+  }
+
+  .back {
+    @include flexColumn;
+    @include absoluteCenter;
+
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+
+    z-index: 3;
+    background: $gnAzulFondo;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    & > div{
+      @include flexColumn;
+      width: 100%;
+      align-items: flex-end;
+      margin-right: 10px;
+    }
+    & > div:nth-of-type(2) {
+      margin-right: 0;
+    }
+    & > p:nth-of-type(1){
+      font-size: 1.05em;
+      color: $gnAzulMedio;
+      font-weight: 600;
+      margin-top: -5px;
+      margin-bottom: 5px;
+    }
+    & > p:nth-of-type(2){
+      font-size: 1.05em;
+      font-weight: 600;
+      color: $gnGrisRata;
+      margin-bottom: 15px;
+    }
+    & > p:nth-of-type(3){
+      font-size: 1em;
+      color: $gnAzulMedio;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+    & > p:nth-of-type(4){
+      font-size: 1em;
+      color: $gnAzulMedio;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+    & > p:nth-of-type(5){
+      font-size: 1em;
+      color: $gnAzulMedio;
+      font-weight: 400;
+      margin-bottom: 10px;
+    }
+    & > p:nth-of-type(6){
+      font-size: 1em;
+      color: $gnVerdeSemaforo;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    & > .boton {
+      @include flexColumn;
+      @include absoluteCenter;
+      width: 100%;
+      box-sizing: border-box;
+      justify-content: space-between;
+      padding: 0 10px 5px;
+      & > .btnCargar {
+        @include pfButton(195px, 25px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+        @include flexRow;
+        @include absoluteCenter;
+        cursor: pointer;
+        color: $gnBlanco;
+        font-size: 1.2em;
+        font-weight: 400;
+        margin-bottom: 5px;
+        & > p {
+          @include flexRow;
+          @include absoluteCenter;
+          @include safariOnlyStyle {
+            margin-top: 4px;
+          }
+        }
+      }
+      & > .btnShow {
+        @include pfButton(195px, 25px, $verdeBoton, rgba(55, 179, 74, 0.75), $verdeBoton, 0px);
+        @include flexRow;
+        @include absoluteCenter;
+        cursor: pointer;
+        color: $gnBlanco;
+        font-size: 1.2em;
+        font-weight: 400;
+        margin-top: 5px;
+        & > p {
+          @include flexRow;
+          @include absoluteCenter;
+          @include safariOnlyStyle {
+            margin-top: 4px;
+          }
+        }
+      }
+      & > .btnCargar-inactive{
+        @include pfButton(100px, 25px, #D5DEE2, #D5DEE2, #D5DEE2, 0px);
+        @include flexRow;
+        @include absoluteCenter;
+        cursor: pointer;
+        color: $gnBlanco;
+        font-size: 1.2em;
+        font-weight: "normal";
+        pointer-events: none;
+        & > p{
+          @include flexRow;
+          @include absoluteCenter;
+          margin-top: 4px;
+        }
+      }
+      & > .btnShow-inactive{
+        @include pfButton(195px, 25px, #D5DEE2, #D5DEE2, #D5DEE2, 0px);
+        @include flexRow;
+        @include absoluteCenter;
+        cursor: pointer;
+        color: $gnBlanco;
+        font-size: 1.2em;
+        font-weight: 400;
+        margin-top: 5px;
+        pointer-events: none;
+        & > p{
+          @include flexRow;
+          @include absoluteCenter;
+          @include safariOnlyStyle {
+            margin-top: 4px;
+          }
+        }
+      }
+    }
+  }
+  a{
+    text-decoration: none;
+  }
+
+}
+
+@media screen and (min-width: 1366px) {
+  :host{
+    width: 245px;
+    .flip-container, .front, .back {
+      width: 245px;
+    }
+    .front {
+      & > div:nth-of-type(1){
+        width: 245px;
+      }
+      & > div:nth-of-type(2){
+        width: 245px;
+      }
+    }
+    .back {
+      & > .boton{
+        & > .btnCargar, & > .btnShow{
+          width: 215px;
+        }
+        & > .btnCargar-inactive{
+          @include pfButton(215px, 25px, #D5DEE2, #D5DEE2, #D5DEE2, 0px);
+        }
+      }
+    }
+  }
+}
+
+
+
+
+

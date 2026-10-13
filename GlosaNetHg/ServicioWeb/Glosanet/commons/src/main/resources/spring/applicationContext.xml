@@ -1,0 +1,94 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-4.1.xsd
+    http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+
+	<!-- ************ SPRING CONFIG *********** -->
+	<context:annotation-config />
+
+	<context:component-scan base-package="org.mx.persistencia" />
+	<context:component-scan base-package="org.mx.resource" />
+	<context:component-scan base-package="org.mx.servicio.seguridad" />
+
+	<context:component-scan base-package="org.mx.servicio.comun.impl" />
+	<context:component-scan base-package="org.mx.servicio.catalogo.impl" />
+	<context:component-scan base-package="org.mx.servicio.automatico.impl" />
+	<context:component-scan base-package="org.mx.servicio.datastage.impl" />
+	<context:component-scan base-package="org.mx.servicio.descomprimir.impl" />
+	<context:component-scan base-package="org.mx.servicio.permisos.org.mx.servicio.impl" />
+	<context:component-scan base-package="org.mx.servicio.registros.impl" />
+	<context:component-scan base-package="org.mx.servicio.reporte.impl" />
+	<context:component-scan base-package="org.mx.servicio.jobs.datastage.loader.phase1.messaging.impl" />
+	<context:component-scan base-package="org.mx.servicio.jobs.datastage.loader.phase1.processing.impl" />
+	<context:component-scan base-package="org.mx.servicio.jobs.datastage.vucem.messaging.impl" />
+	<context:component-scan base-package="org.mx.servicio.jobs.datastage.vucem.partitioning.impl" />
+	<context:component-scan base-package="org.mx.servicio.cargasAdicionales.impl" />
+
+	<!-- ************ MESSAGE BROKER *********** -->
+	<context:component-scan base-package="ryndem.mx.glosanet.messagebroker" />
+
+	<!-- ************ JPA CONFIG *********** -->
+	<bean id="entityManagerFactory"
+		  class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="restDemoDS" />
+		<property name="packagesToScan">
+			<list>
+				<value>org.mx.modelo</value>
+				<value>ryndem.mx.glosanet.messagebroker.datastage.loader.phase1.model</value>
+				<value>ryndem.mx.glosanet.messagebroker.datastage.vucem.model</value>
+			</list>
+		</property>
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+		</property>
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.current_session_context_class">thread</prop>
+				<prop key="hibernate.show.sql">false</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="restDemoDS"
+		  class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+		<!-- DEV LOCAL -->
+		<!--<property name="url" value="jdbc:mysql://localhost:3306/GlosaNet?allowMultiQueries=true&amp;useSSL=false&amp;zeroDateTimeBehavior=convertToNull&amp;allowLoadLocalInfile=true" />
+		<property name="username" value="root" />
+		<property name="password" value="" />-->
+
+		<!-- DEV AMBIENTE -->
+<!--
+		 <property name="url" value="jdbc:mysql://172.24.32.19:3306/GlosaNet?allowMultiQueries=true&amp;useSSL=false&amp;zeroDateTimeBehavior=convertToNull&amp;allowLoadLocalInfile=true" />
+         <property name="username" value="root" />
+         <property name="password" value="5678" />
+-->
+<!--
+                     <property name="url" value="jdbc:mysql://localhost:3306/glosanet?allowMultiQueries=true&amp;useSSL=false&amp;zeroDateTimeBehavior=convertToNull&amp;allowLoadLocalInfile=true" />
+                     <property name="username" value="root" />
+                     <property name="password" value="xia9ro" />
+
+-->
+            <!-- PROD -->
+
+            <property name="url" value="jdbc:mysql://172.24.24.10:3306/GlosaNet?allowMultiQueries=true&amp;useSSL=false&amp;zeroDateTimeBehavior=convertToNull&amp;allowLoadLocalInfile=true" />
+            <property name="username" value="glosuser" />
+            <property name="password" value="S]fmZ5>VS[*(aLqC" />
+
+        </bean>
+        <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+            <property name="entityManagerFactory" ref="entityManagerFactory" />
+        </bean>
+        <tx:annotation-driven />
+        <bean id="persistenceExceptionTranslationPostProcessor" class=
+                "org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+        <!-- ************ QUARTZ CONFIG *********** -->
+	<import resource="classpath:config/quartz-GlosaNet.xml" />
+
+</beans>

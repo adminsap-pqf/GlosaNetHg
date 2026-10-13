@@ -1,0 +1,467 @@
+@import '../../../variables';
+@import '../../../mixins';
+@import '../../../colors';
+
+:host {
+    width: 100%;
+    .vucemTokenContainer {
+        @include flexRowWrap;
+        @include alignStart;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0 30px;
+        & > .head {
+            @include flexRow;
+            @include absoluteCenter;
+            width: 100%;
+            height: 90px;
+            border-bottom: 1px solid #98A9B4;
+            & > div:nth-of-type(1) {
+                @include flexRow;
+                @include absoluteCenter;
+                width: calc(100% - 200px);
+                box-sizing: border-box;
+                justify-content: flex-start;
+                & > img:nth-of-type(1) {
+                    width: 42px;
+                    margin-right: 10px;
+                }
+                & > h3 {
+                    @include fontFormat(21px, 900, #3B8EDE);
+                    margin-left: 10px;
+                }
+            }
+            & > div:nth-of-type(2) {
+                @include flexRow;
+                @include absoluteCenter;
+                width: 200px;
+                box-sizing: border-box;
+                justify-content: flex-end;
+                padding-left: 10px;
+                & > a:nth-of-type(1) {
+                    @include flexRow;
+                    @include absoluteCenter;
+                    @include pfButton(155px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+                    color: $gnBlanco;
+                    font-size: 14px;
+                    font-weight: normal;
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+        & > .content {
+            @include flexRowWrap;
+            width: 100%;
+            margin-top: 30px;
+            & > .withoutToken {
+                @include flexRow;
+                @include absoluteCenter;
+                width: 100%;
+                height: calc(100vh - 205px);
+                min-height: 300px;
+                & > p {
+                    @include fontFormat(35px, 900, #3369B1);
+                    opacity: 0.3;
+                    text-align: center;
+                }
+            }
+            & > .card {
+                @include flexRow;
+                width: 100%;
+                height: 120px;
+                &:hover {
+                    box-shadow: 0 4px 20px 0 rgba(152,169,180,0.50);
+                    cursor: pointer;
+                    & > div:nth-of-type(1) {
+                        & > img:nth-of-type(1) {
+                            display: none;
+                        }
+                        & > img:nth-of-type(2) {
+                            display: block;
+                        }
+                    }
+                    & > div:nth-of-type(2) {
+                        background-color: #3369B1;
+                        & > div:nth-of-type(1) {
+                            & >  p:nth-of-type(1), p:nth-of-type(3) {
+                                color: #FFFFFF;
+                            }
+                            & >  p:nth-of-type(2), p:nth-of-type(4)  {
+                                color: #E2C913;
+                            }
+                        }
+                        & > div:nth-of-type(2) {
+                            & > img:nth-of-type(1) {
+                                display: none;
+                            }
+                            & > img:nth-of-type(2) {
+                                display: block;
+                            }
+                        }
+                    }
+                }
+                & > div:nth-of-type(1) {
+                    @include flexRow;
+                    @include absoluteCenter;
+                    width: 119px;
+                    height: 118px;
+                    border-top: 1px solid #ECF0F3;
+                    border-bottom: 1px solid #ECF0F3;
+                    border-left: 1px solid #ECF0F3;
+                    & > img {
+                        width: 52px;
+                    }
+                    & > img:nth-of-type(1) {
+                        display: block;
+                    }
+                    & > img:nth-of-type(2) {
+                        display: none;
+                    }
+                }
+                & > div:nth-of-type(2) {
+                    @include flexRow;
+                    width: calc(100% - 120px);
+                    background-color: #ECF0F3;
+                    box-sizing: border-box;
+                    padding: 0 35px;
+                    & > div:nth-of-type(1) {
+                        @include flexColumn;
+                        @include absoluteCenter;
+                        width: calc(100% - 25px);
+                        & > p:nth-of-type(1) {
+                            @include fontFormat(14px, 900, #3369B1);
+                            width: 100%;
+                            margin-bottom: 10px;
+                            text-align: left;
+                        }
+                        & > p:nth-of-type(2) {
+                            @include fontFormat(14px, 900, #37B34A);
+                            width: 100%;
+                            text-align: left;
+                        }
+                        & > p:nth-of-type(3) {
+                            @include fontFormat(14px, 400, #3B8EDE);
+                            width: 100%;
+                            margin-top: 10px;
+                            text-align: left;
+                        }
+                        & > .expired {
+                            @include fontFormat(14px, 400, #df4343);
+                            margin-top: 10px;
+                            width: 100%;
+                            text-align: left;
+                        }
+                        & > .current {
+                            @include fontFormat(14px, 400, #37B34A);
+                            margin-top: 10px;
+                            width: 100%;
+                            text-align: left;
+                        }
+                    }
+                    & > div:nth-of-type(2) {
+                        @include flexRow;
+                        @include absoluteCenter;
+                        width: 25px;
+                        & > img {
+                            width: 20px;
+                        }
+                        & > img:nth-of-type(1) {
+                            display: block;
+                        }
+                        & > img:nth-of-type(2) {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.modalAdd {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(34, 46, 67, 0.9);
+    display: table;
+    transition: opacity .3s ease;
+    z-index: 1000;
+    &-wrapper {
+        display: table-cell;
+        vertical-align: middle;
+    }
+    &-container {
+        @include flexColumn;
+        width: 100%;
+        max-width: 500px;
+        height: 100%;
+        max-height: 517px;
+        background-color: #FFFFFF;
+        border-radius: 2px;
+        box-shadow: 1px 4px 8px 2px rgba(152, 169, 180, 0.70);
+        box-sizing: border-box;
+        justify-content: space-between;
+        margin: 0 auto;
+        padding: 25px 0;
+        transition: all .3s ease;
+    }
+    &-title {
+        @include flexRow;
+        @include absoluteCenter;
+        width: 100%;
+        box-sizing: border-box;
+        justify-content: space-between;
+        position: relative;
+        margin-bottom: 10px;
+        padding: 0 25px;
+        & > p:nth-of-type(1) {
+            @include fontFormat(21px, 600, #3B8EDE);
+        }
+        & > img:nth-of-type(1) {
+            width: 100%;
+            max-width: 25px;
+            position: absolute;
+            right: 25px;
+            top: 0;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+    &-content {
+        @include flexRow;
+        @include absoluteCenter;
+        width: 100%;
+        height: 120px;
+        background-color: #ECF0F3;
+        box-sizing: border-box;
+        & > div:nth-of-type(1) {
+            @include flexRowWrap;
+            width: 90%;
+            & > label:nth-of-type(1) {
+                width: 100%;
+                @include fontFormat(13px, 300, #98A9B4);
+                margin-right: 0;
+                text-align: left;
+            }
+            & > div:nth-of-type(1) {
+                width: 100%;
+                & > input {
+                    @include fontFormat(14px, 700, #3369B1);
+                    width: 100%;
+                    height: 20px;
+                    background-color: rgba(255, 255, 255, 0);
+                    border-top: none;
+                    border-left: none;
+                    border-right: none;
+                    border-bottom: solid 0.75px rgb(152, 169, 180);
+                    box-sizing: border-box;
+                    outline: none;
+                    text-align: left;
+                }
+            }
+            & > span:nth-of-type(1) {
+                @include fontFormat(13px, 300, #98A9B4);
+                width: 100%;
+                margin-top: 4px;
+                text-align: right;
+            }
+        }
+    }
+    &-buttons {
+        @include flexRowWrap;
+        width: 100%;
+        box-sizing: border-box;
+        justify-content: space-between;
+        padding: 0 25px;
+        & > div:nth-of-type(1) {
+            width: 100%;
+            height: 1px;
+            position: relative;
+            & > div:nth-of-type(1) {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-image: linear-gradient(to right, transparent 50%, #D5DEE2 50%);
+                background-size: 30px 100%;
+            }
+        }
+        & > div:nth-of-type(2) {
+            @include flexRow;
+            @include absoluteCenter;
+            width: 100%;
+            margin-bottom: 10px;
+            padding-top: 10px;
+            & > p:nth-of-type(1) {
+                @include fontFormat(13px, 700, #3369B1);
+            }
+        }
+        & > button:nth-of-type(1) {
+            @include flexRow;
+            @include absoluteCenter;
+            @include button(145px, 30px, $gnAzulMedio, rgba(51,105,177,0.75), $gnAzulMedio);
+            border-radius: 2px;
+            color: #FFFFFF;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        & > button:nth-of-type(2) {
+            @include flexRow;
+            @include absoluteCenter;
+            border-radius: 2px;
+            color: #FFFFFF;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        & > .enable {
+            @include button(145px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado);
+            pointer-events: auto;
+        }
+        & > .disable {
+            @include button(145px, 30px, #D5DEE2, #D5DEE2, #D5DEE2);
+            pointer-events: none;
+        }
+    }
+}
+
+.modalDelete {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(34, 46, 67, 0.9);
+    display: table;
+    transition: opacity .3s ease;
+    z-index: 1000;
+    &-wrapper {
+        display: table-cell;
+        vertical-align: middle;
+    }
+    &-container {
+        @include flexRowWrap;
+        width: 100%;
+        max-width: 500px;
+        height: 100%;
+        max-height: 225px;
+        align-content: flex-start;
+        align-items: flex-start;
+        background-color: #FFFFFF;
+        border-radius: 2px;
+        box-shadow: 1px 4px 8px 2px rgba(152, 169, 180, 0.70);
+        box-sizing: border-box;
+        transition: all .3s ease;
+        margin: 0 auto;
+        padding: 25px;
+    }
+    &-title {
+        @include flexRow;
+        @include absoluteCenter;
+        width: 100%;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        position: relative;
+        z-index: 2;
+        & > img:nth-of-type(1) {
+            width: 100%;
+            max-width: 25px;
+            position: absolute;
+            right: 0;
+            top: 0;
+            z-index: 2;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+    &-content {
+        @include flexRow;
+        @include absoluteCenter;
+        width: 100%;
+        height: 125px;
+        box-sizing: border-box;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        padding: 0 50px;
+        & > div:nth-of-type(1) {
+            @include flexRow;
+            width: 60px;
+            & > img:nth-of-type(1) {
+                width: 40px;
+            }
+        }
+        & > div:nth-of-type(2) {
+            @include flexRowWrap;
+            width: calc(100% - 60px);
+            & > p:nth-of-type(1) {
+                @include fontFormat(21px, 900, #3369B1);
+                width: 100%;
+                margin-bottom: 3px;
+            }
+            & > p:nth-of-type(2) {
+                @include fontFormat(21px, 400, #3B8EDE);
+                width: 100%;
+                margin-top: 3px;
+            }
+        }
+    }
+    &-buttons {
+        @include flexRowWrap;
+        width: 100%;
+        box-sizing: border-box;
+        align-content: flex-end;
+        align-items: flex-end;
+        justify-content: space-between;
+        & > div:nth-of-type(1) {
+            width: 100%;
+            height: 1px;
+            position: relative;
+            & > div:nth-of-type(1) {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-image: linear-gradient(to right, transparent 50%, #D5DEE2 50%);
+                background-size: 30px 100%;
+            }
+        }
+        & > div:nth-of-type(2) {
+            @include flexRow;
+            @include absoluteCenter;
+            width: 100%;
+            margin-bottom: 10px;
+            padding-top: 10px;
+            & > p:nth-of-type(1) {
+                @include fontFormat(13px, 700, #3369B1);
+            }
+        }
+        & > button:nth-of-type(1) {
+            @include flexRow;
+            @include absoluteCenter;
+            @include button(145px, 30px, $gnAzulMedio, rgba(51,105,177,0.75), $gnAzulMedio);
+            border-radius: 2px;
+            color: #FFFFFF;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        & > button:nth-of-type(2) {
+            @include flexRow;
+            @include absoluteCenter;
+            border-radius: 2px;
+            color: #FFFFFF;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        & > .enable {
+            @include button(145px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado);
+            pointer-events: auto;
+        }
+    }
+}

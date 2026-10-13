@@ -1,0 +1,106 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!--BEAN: TAREA GLOSANET-->
+	<bean id="tareaGLOSANET" class="org.mx.servicio.scheduler.TareaGLOSANET" />
+
+	<!--BEAN: VERIFICACION PROGRAMADA-->
+	<!-- specify the class and method that is going to be called on a specified
+     time basis -->
+	<bean id="verificacionProgramada"
+		  class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="tareaGLOSANET" />
+		<property name="targetMethod" value="ejecutaVerificacion" />
+	</bean>
+	<bean id="cronTriggerVerificacion"
+		  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+
+		<property name="jobDetail" ref="verificacionProgramada" />
+		<property name="cronExpression" value="0 0/10 * * * ?" />
+
+	</bean>
+	<!-- -->
+
+	<!--BEAN: PROGRAMACION DICIPA-->
+	<bean id="programacionDICIPA"
+		  class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="tareaGLOSANET" />
+		<property name="targetMethod" value="ejecutaProgramacionDICIPA" />
+	</bean>
+	<bean id="simpleTriggerDICIPA"
+		  class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="programacionDICIPA" />
+		<property name="repeatInterval" value="300000" />
+		<property name="startDelay" value="1000" />
+	</bean>
+	<!-- -->
+
+	<!--BEAN: NOTIFICACIONES PROGRAMADAS-->
+	<bean id="notificacionProgramada"
+		  class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="tareaGLOSANET" />
+		<property name="targetMethod" value="ejecutaProgramacionNotificaciones" />
+	</bean>
+	<bean id="cronTriggerNotificacion"
+		  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+
+		<property name="jobDetail" ref="notificacionProgramada" />
+		<!--<property name="cronExpression" value="0 0 5 * * ?" />-->
+		<property name="cronExpression" value="0 0 13 ? * MON,FRI *" /><!--Se ejecuta todos los lunes y viernes a las 12:30 -->
+	</bean>
+	<!-- -->
+
+	<!--BEAN: PROGRAMACION COFEPRIS-->
+	<bean id="programacionCOFEPRIS"
+		  class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="tareaGLOSANET" />
+		<property name="targetMethod" value="ejecutaProgramacionCOFEPRIS" />
+	</bean>
+	<bean id="cronTriggerCOFEPRIS"
+		  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+
+		<property name="jobDetail" ref="programacionCOFEPRIS" />
+		<property name="cronExpression" value="0 0/15 * * * ?" />
+
+	</bean>
+	<!--   -->
+
+	<!--BEAN: TIEMPO PROGRAMADO-->
+	<bean id="tiempoProgramado"
+		  class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="tareaGLOSANET" />
+		<property name="targetMethod" value="imprimeTiempoActual" />
+	</bean>
+	<!-- simple trigger specify repeat interval and delay time -->
+	<bean id="simpleTriggerTiempo"
+		  class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="tiempoProgramado" />
+		<property name="repeatInterval" value="5000" />
+		<property name="startDelay" value="1000" />
+	</bean>
+	<!-- -->
+
+	<!-- scheduler factory bean to bind,the executing code and time intervals
+     together -->
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="jobDetails">
+			<list>
+				<ref bean="verificacionProgramada"/>
+				<ref bean="programacionDICIPA"/>
+				<ref bean="notificacionProgramada"/>
+<!--				<ref bean="programacionCOFEPRIS"/>-->
+			</list>
+		</property>
+		<property name="triggers">
+			<list>
+				<ref bean="cronTriggerVerificacion" />
+				<ref bean="simpleTriggerDICIPA" />
+				<ref bean="cronTriggerNotificacion" />
+<!--				<ref bean="cronTriggerCOFEPRIS" />-->
+			</list>
+		</property>
+	</bean>
+
+</beans>

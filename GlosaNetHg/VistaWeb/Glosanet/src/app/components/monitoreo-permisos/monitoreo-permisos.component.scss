@@ -1,0 +1,2402 @@
+@import "../../../variables.scss";
+@import "../../../mixins.scss";
+@import "../../../colors.scss";
+
+
+.header{
+  @include flexColumn;
+  width: 100%;
+  box-sizing: border-box;
+  height: 150px;
+  & > .title{
+    @include flexRow;
+    width: 100%;
+    height: 30px;
+    box-sizing: border-box;
+    background-color: #3369B1;
+    align-items: center;
+    padding: 0 25px;
+    & > p{
+      //@include flexRow;
+      box-sizing: border-box;
+      & > label:nth-of-type(1){
+        font-size: 12px;
+        color: #FFFFFF;
+        font-weight: 500;
+      }
+      & > label:nth-of-type(2){
+        font-size: 12px;
+        color: #E2C913 ;
+      }
+    }
+  }
+  & > .product{
+    @include flexRow;
+    width: 100%;
+
+    box-sizing: border-box;
+    height: 120px;
+    padding: 0 25px;
+    justify-content: space-between;
+    align-items: center;
+    & > .item-producto{
+      @include flexRow;
+      box-sizing: border-box;
+      width: calc(100% - 200px);
+      height: 80px;
+      padding-right: 5px;
+      & > .img{
+        @include flexRow;
+        box-sizing: border-box;
+        width: 58px;
+        margin-right: 20px;
+        align-items: flex-start;
+        padding-top: 5px;
+      }
+      & > .text{
+        @include flexColumn;
+        box-sizing: border-box;
+        width: calc(100% - 78px);
+        justify-content: flex-start;
+        padding-top: 10px;
+        & > p:nth-of-type(1){
+          //@include flexRow;
+          width: 100%;
+          box-sizing: border-box;
+          font-family:'Roboto Cn';
+          @include multiLineTextTruncate(1,17px,17px,#FFF);
+          word-break: break-all;
+          margin-bottom: 5px;
+          & > label:nth-of-type(1){
+            font-size: 17px;
+            color: #E2C913;
+            font-weight: 500;
+          }
+          & > label:nth-of-type(2){
+            font-size: 17px;
+            font-weight: 500;
+            color:#3369B1;
+
+          }
+        }
+        & > p:nth-of-type(2){
+          @include flexRow;
+          width: 100%;
+          box-sizing: border-box;
+          font-size: 14px;
+          color: #3B8EDE;
+          font-weight: 300;
+
+        }
+        & > p:nth-of-type(3){
+          @include flexRow;
+          width: 100%;
+          box-sizing: border-box;
+          font-size: 13px;
+          color: #3B8EDE;
+        }
+        & > a{
+          @include flexRow;
+
+          $colorHover:  rgba(6, 188, 82, 0.2);
+          @include pfButton(145px, 20px, transparent, $colorHover, $gnBlanco, 0px);
+          @include flexRow;
+          @include absoluteCenter;
+          cursor: pointer;
+          font-size: 13px;
+          color: #37B34A;
+          font-weight: 300;
+          margin: 3px 0 0 0;
+        }
+
+
+      }
+    }
+    & > .boton{
+      @include flexRow;
+      width: 200px;
+      box-sizing: border-box;
+      height: 80px;
+      padding-top: 10px;
+      & > a{
+        @include pfButton(190px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+        @include flexRow;
+        @include absoluteCenter;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: normal;
+        color:$gnBlanco;
+
+      }
+    }
+  }
+}
+
+
+
+.container{
+  @include flexRow;
+  width: 100%;
+  background: #ECF0F3;
+  box-sizing: border-box;
+  padding:35px 25px 40px 25px;
+  position: relative;
+  min-height: calc(100vh - 236px);
+}
+
+.triangulo{
+  width: 0px;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 15px solid #FFF;
+  position: absolute;
+  top: 20px;
+  left: 40px;
+}
+
+.section, .section2{
+  @include flexColumn;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 40px 25px 50px 25px;
+  background-color: white;
+  //@include absoluteCenter;
+}
+
+.separacion{
+  width: calc(100% + 50px);
+  height: 15px;
+  box-sizing: border-box;
+  background-color: #ECF0F3;
+  margin: 0 -25px;
+}
+
+.bar-section{
+  @include flexColumn;
+  box-sizing: border-box;
+  width: 100%;
+  height: 30px;
+  & > .title{
+    @include flexRow;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-content: center;
+    & > label{
+      font-size: 19px;
+      color: #3B8EDE;
+      font-weight: 600;
+    }
+    & > a{
+      @include flexRow;
+
+      $colorHover:  rgba(6, 188, 82, 0.2);
+      @include pfButton(230px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+      @include flexRow;
+      @include absoluteCenter;
+      cursor: pointer;
+      font-size: 14px;
+      color: #37B34A;
+      font-weight: 500;
+    }
+  }
+}
+
+
+.resumen{
+  @include flexColumn;
+  box-sizing: border-box;
+  margin: 30px 0 0 0;
+  & > label{
+    font-size: 19px;
+    color: #3B8EDE;
+    font-weight: 600;
+    margin-bottom: 40px;
+  }
+}
+
+
+
+
+.item{
+  @include flexRow;
+  width:100%;
+  height: 65px;
+  box-sizing: border-box;
+  justify-content: space-between;
+  align-items: center;
+  background: #ECF0F3;;
+  padding:0 25px;
+  cursor: pointer;
+  font-family:'Roboto Cn';
+  & > .part1{
+    @include flexRow;
+    box-sizing: border-box;
+    & > .num{
+      @include flexRow;
+      width: 30px;
+      box-sizing: border-box;
+      align-items: center;
+      cursor: pointer;
+      & > label{
+        font-size: 17px;
+        color: #3B8EDE;
+        font-weight: 500;
+        font-family: 'Roboto Cn';
+        cursor: pointer;
+      }
+    }
+    & > p{
+      @include flexColumn;
+      box-sizing: border-box;
+      font-family: 'Roboto Cn';
+      cursor: pointer;
+      & > label:nth-of-type(1){
+        font-size: 17px;
+        color: #3B8EDE;
+        font-weight: 500;
+        font-family:'Roboto Cn';
+        cursor: pointer;
+      }
+      & > label:nth-of-type(2){
+        font-size: 12px;
+        color: #37B34A;
+        font-weight: 400;
+        margin-top: 3px;
+        font-family:'Roboto Cn';
+        cursor: pointer;
+      }
+      & > label:nth-of-type(3){
+        font-size: 12px;
+        color: #37B34A;
+        font-weight: 400;
+        margin-top: 3px;
+        font-family: 'Roboto Cn';
+        cursor: pointer;
+      }
+    }
+  }
+  & > .part2{
+    @include flexRow;
+    width: 200px;
+    justify-content: space-between;
+    cursor: pointer;
+    & > img{
+      cursor: pointer;
+    }
+  }
+
+  &:hover{
+    box-shadow: 0 10px 14px 0 rgba(152,169,180,0.50);
+  }
+}
+
+.itemComplet{
+  @include flexRow;
+  width:100%;
+  height: 65px;
+  box-sizing: border-box;
+  justify-content: space-between;
+  align-items: center;
+  background: #3369B1;;
+  padding:0 25px;
+  cursor: pointer;
+  font-family:'Roboto Cn';
+  & > .part1{
+    @include flexRow;
+    box-sizing: border-box;
+    cursor: pointer;
+    & > .num{
+      @include flexRow;
+      width: 30px;
+      box-sizing: border-box;
+      align-items: center;
+      cursor: pointer;
+      & > label{
+        font-size: 17px;
+        color: #E2C913;
+        font-weight: 500;
+        font-family: 'Roboto Cn';
+        cursor: pointer;
+      }
+    }
+    & > p{
+      @include flexColumn;
+      box-sizing: border-box;
+      font-family: 'Roboto Cn';
+      & > label:nth-of-type(1){
+        font-size: 17px;
+        color: #E2C913;
+        font-weight: 500;
+        font-family:'Roboto Cn';
+        cursor: pointer;
+      }
+      & > label:nth-of-type(2){
+        font-size: 12px;
+        color: #FFFFFF;
+        font-weight: 400;
+        margin-top: 3px;
+        font-family:'Roboto Cn';
+        cursor: pointer;
+      }
+      & > label:nth-of-type(3){
+        font-size: 12px;
+        color: #37B34A;
+        font-weight: 400;
+        margin-top: 3px;
+        font-family: 'Roboto Cn';
+        cursor: pointer;
+      }
+    }
+  }
+  & > .part2{
+    @include flexRow;
+    width: 200px;
+    justify-content: space-between;
+    cursor: pointer;
+    & > img{
+      cursor: pointer;
+    }
+  }
+  &:hover{
+    box-shadow: 0 10px 14px 0 rgba(152,169,180,0.50);
+  }
+}
+
+
+
+.item-body{
+  @include flexColumn;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: rgba(236,240,243, 0.35);
+  padding: 0 25px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  & > .tramite{
+    @include flexRow;
+    width:calc(100% + 50px);
+    box-sizing: border-box;
+    min-height: 75px;
+    background-color: rgba(242,245,247,0.9);
+    justify-content: center;
+    align-items: flex-end;
+    margin-left:-25px;
+    padding-bottom: 30px;
+
+    & > label{
+      font-family: 'Roboto Cn';
+      font-size: 14px;
+      color: #3369B1;
+      font-weight: 600;
+      margin-right: 15px;
+    }
+    & > input{
+      width: 135px;
+      height: 30px;
+      font-size: 17px;
+      color: #3369B1;
+      font-weight: 500;
+      background-color: transparent;
+      border: 1px solid #98A9B4;
+      outline: none;
+      padding:5px;
+      text-align: center;
+      font-family: 'Roboto Cn';
+      padding-bottom: 1px;
+    }
+  }
+  & > .head{
+    @include flexRow;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 120px;
+    padding: 30px 0px 25px 0px;
+    justify-content: center;
+    border-bottom: 1px dashed #D5DEE2;
+    & > .text{
+      @include flexColumn;
+      width:calc(100% - 280px);
+      box-sizing: border-box;
+      & > textarea{
+        @include flexRow;
+        width: 100%;
+        height: 65px;
+        box-sizing: border-box;
+        outline: none;
+        resize: none;
+        border: 1px solid #98A9B4;
+        padding:10px;
+        font-size: 12px;
+        color: #3369B1;
+      }
+    }
+    & > .boton{
+      @include flexColumn;
+      width:265px;
+      box-sizing: border-box;
+      justify-content: center;
+      align-items: center;
+      & > a:nth-of-type(1){
+        $textSize: ('base': convertPts(10, 'px'));
+        @include escaledFontFormat($textSize, 600, $gnBlanco);
+        @include pfButton(530px, 40px, $verdeBoton, rgba(55, 179, 74, 0.75), $verdeBoton, 0px);
+        @include flexRow;
+        @include absoluteCenter;
+        cursor: pointer;
+        font-size: 16px !important;
+        & > label{
+          @include multiLineTextTruncate(1,1.8em,1.8em,#FFF);
+          word-break: break-all;
+          height: 100%;
+          width: 100%;
+          text-align: center;
+          cursor: pointer;
+        }
+      }
+      & > a:nth-of-type(2){
+        @include flexRow;
+
+        $colorHover:  rgba(6, 188, 82, 0.2);
+        @include pfButton(265px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+        @include flexRow;
+        @include absoluteCenter;
+        cursor: pointer;
+        font-size: 14px;
+        color: #37B34A;
+        font-weight: 500;
+      }
+    }
+
+  }
+  & > .body{
+    @include flexColumn;
+    width:100%;
+    box-sizing: border-box;
+    //margin: 15px 0 0 0;
+    & > .item-pdf{
+      @include flexColumn;
+      width: 100%;
+      box-sizing: border-box;
+      border-bottom: 1px dashed #D5DEE2;
+      padding: 15px 0;
+      & > .title{
+        @include flexRow;
+        width: 100%;
+        height: 20px;
+        justify-content: space-between;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+        & > p{
+          & > label:nth-of-type(1){
+            font-size: 14px;
+            color: #3369B1;
+          }
+          & > label:nth-of-type(2){
+            font-size: 14px;
+            color: #3369B1;
+          }
+          & > img{
+            margin:0 5px;
+          }
+        }
+        & > img{
+
+        }
+      }
+      & > .body-pdf{
+        @include flexColumn;
+        box-sizing: border-box;
+        width: 100%;
+        & > p{
+          font-size: 13px;
+          color: #818192;
+          font-weight: 300;
+        }
+      }
+    }
+
+  }
+  & > .respEvento{
+    @include flexColumn;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0 10px 0;
+    border-bottom: 1px dashed #D5DEE2;
+    & > #title-resp{
+      width: 100%;
+      font-family: 'Roboto Cn';
+      font-size: 17px;
+      color: #3369B1;
+      text-align: left;
+      margin-bottom: 15px;
+    }
+    & > #not-resp{
+      width: 200px;
+      font-family: 'Roboto Cn';
+      font-size: 17px;
+      color: #37B34A;
+      margin-top: 15px;
+    }
+  }
+  & > .footer{
+    @include flexRow;
+    width: 100%;
+    min-height: 70px;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    & > .switch{
+
+    }
+    & > label{
+      font-size: 14px;
+      color: #3369B1;
+    }
+
+  }
+}
+
+
+
+.modalConfirm{
+  @include flexColumn;
+  height: 225px;
+  padding: 20px;
+  $color-primary: $gnAzulBajo ;
+  $color-secondary: $verdeBoton ;
+  $color-darkAccent: $gnDorado ;
+  $color-lightAccent: $gnAzulMedio;
+  $background: #222222;
+  $duration: 1.5s;
+  box-sizing: border-box;
+  & > .salir{
+    @include flexRow;
+    justify-content: flex-end;
+    & > img{
+      cursor: pointer;
+    }
+  }
+  & > .body{
+    @include flexRow;
+    width: 100%;
+    height: 80px;
+    box-sizing: border-box;
+    & > .img{
+      @include flexColumn;
+      width: 100px;
+      box-sizing: border-box;
+      align-items: center;
+      justify-content: center;
+      & > img{
+        width: 63px;
+      }
+    }
+    & > .title{
+      @include flexColumn;
+      width:calc(100% - 100px);
+      box-sizing: border-box;
+      justify-content: center;
+      & > label:nth-of-type(1){
+        font-size: 22px;
+        color: #3369B1;
+        font-weight: 500;
+      }
+      & > label:nth-of-type(2){
+        font-size: 19px;
+        color: #3B8EDE;
+        margin-top: 10px;
+      }
+    }
+  }
+  & > .boton{
+    @include flexRow;
+    justify-content: space-between;
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    margin-top: 40px;
+    & > a:nth-of-type(1){
+      @include flexRow;
+      @include absoluteCenter;
+      @include pfButton(145px, 30px, $gnAzulMedio, rgba(51,105,177,0.75), $gnAzulMedio, 0px);
+      cursor: pointer;
+      font-size: 14px;
+      color: #FFFFFF;
+      font-weight: 500;
+    }
+    & > a:nth-of-type(2){
+      @include flexRow;
+      @include absoluteCenter;
+      @include pfButton(145px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+      cursor: pointer;
+      font-size: 14px;
+      color: #FFFFFF;
+      font-weight: 500;
+    }
+  }
+}
+
+
+
+.boton_light{
+  @include flexColumn;
+  width: 100%;
+  box-sizing: border-box;
+  margin:20px 0;
+  & > a{
+    $textSize: ('base': convertPts(10, 'px'));
+    @include escaledFontFormat($textSize, 600, $gnBlanco);
+    @include pfButton(100%, 35px, $verdeBoton, rgba(55, 179, 74, 0.75), $verdeBoton, 0px);
+    @include flexRow;
+    @include absoluteCenter;
+    cursor: pointer;
+    font-size: 14px !important;
+    min-height: 35px;
+    & > label{
+      @include flexColumn;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+  }
+}
+
+.text_light{
+  @include flexColumn;
+  width: 100%;
+  box-sizing: border-box;
+  & > label{
+    font-size: 12px;
+    color: #98A9B4;
+    margin-bottom: 10px;
+  }
+  & > textarea{
+    @include flexRow;
+    width: 100%;
+    height: 35px;
+    box-sizing: border-box;
+    outline: none;
+    resize: none;
+    border: 1px solid #98A9B4;
+    padding:5px;
+    font-size: 12px;
+    color: #3369B1;
+  }
+}
+
+.agregar_light{
+  @include flexRow;
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: flex-end;
+  margin-top:5px;
+  margin-bottom:5px;
+  & > .activeB{
+    @include flexRow;
+    $colorHover:  rgba(6, 188, 82, 0.2);
+    @include pfButton(95px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+    @include flexRow;
+    @include absoluteCenter;
+    cursor: pointer;
+    font-size: 14px;
+    color: #37B34A;
+    font-weight: 500;
+  }
+  & > .inactiveB{
+    @include flexRow;
+    $colorHover:  rgba(6, 188, 82, 0.2);
+    @include pfButton(95px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+    @include flexRow;
+    @include absoluteCenter;
+    cursor: pointer;
+    font-size: 14px;
+    color: #D5DEE2;
+    font-weight: 500;
+    pointer-events: none;
+  }
+}
+
+.list_light{
+  @include flexColumn;
+  width: 100%;
+  height: 180px;
+  box-sizing: border-box;
+  overflow: scroll;
+  & > .item_light{
+    @include flexColumn;
+    width: 100%;
+    min-height: 62px;
+    box-sizing: border-box;
+    background-color: rgb(243,245,247);
+    position: relative;
+    padding: 10px 15px;
+    margin-bottom: 5px;
+    & > img{
+      position: absolute;
+      top: 10px;
+      right: 15px;
+    }
+    & > p:nth-of-type(1){
+      @include flexRow;
+      font-size: 14px;
+      color: #3369B1;
+      margin-bottom: 5px;
+      align-items: center;
+      & > img{
+        margin: 0 5px;
+      }
+    }
+    & > p:nth-of-type(2){
+      @include flexRow;
+      font-size: 13px;
+      color: #818192;
+      font-weight: 300;
+      line-height: 18px;
+    }
+  }
+}
+
+.footer_light{
+  @include flexRow;
+  justify-content: space-between;
+  width: 100%;
+  height: 40px;
+  box-sizing: border-box;
+  margin-top: 10px;
+  & > .salir{
+    @include flexRow;
+    @include absoluteCenter;
+    @include pfButton(145px, 30px, $gnAzulMedio, rgba(51,105,177,0.75), $gnAzulMedio, 0px);
+    cursor: pointer;
+    font-size: 14px;
+    color: #FFFFFF;
+    font-weight: 500;
+  }
+  & > .aceptar{
+    @include flexRow;
+    @include absoluteCenter;
+    @include pfButton(145px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+    cursor: pointer;
+    font-size: 14px;
+    color: #FFFFFF;
+    font-weight: 500;
+  }
+  & > .aceptarInactive{
+    @include flexRow;
+    @include absoluteCenter;
+    @include pfButton(145px, 30px, #D5DEE2, #D5DEE2, #D5DEE2, 0px);
+    cursor: pointer;
+    font-size: 14px;
+    color: #FFFFFF;
+    font-weight: 500;
+    pointer-events: none;
+  }
+}
+
+
+.upload {
+  display: none;
+}
+
+
+.footer{
+  & > a{
+    @include pfButton(100%, 35px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+    @include flexRow;
+    @include absoluteCenter;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: normal;
+    color:$gnBlanco;
+    margin-top: 30px;
+  }
+}
+
+
+
+.section2{
+  & > .title{
+    @include flexRow;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-content: center;
+    & > label{
+      font-size: 19px;
+      color: #3B8EDE;
+      font-weight: 600;
+    }
+    & > a{
+      @include flexRow;
+
+      $colorHover:  rgba(6, 188, 82, 0.2);
+      @include pfButton(230px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+      @include flexRow;
+      @include absoluteCenter;
+      cursor: pointer;
+      font-size: 14px;
+      color: #37B34A;
+      font-weight: 500;
+    }
+  }
+
+
+  .eventos-publicar{
+    @include flexColumn;
+    width: 100%;
+    box-sizing: border-box;
+    //margin-top: 30px;
+    border-bottom: 1px dashed #D5DEE2;
+    padding-bottom:90px;
+    & > label{
+      width:100%;
+      font-size: 19px;
+      color: #3B8EDE;
+      font-weight: 500;
+    }
+    & > .title-generarE{
+      @include flexRow;
+      width: 100%;
+      height: 40px;
+      box-sizing: border-box;
+      background-color: #37B34A;
+      align-items: center;
+      padding: 0 20px;
+      margin-top:20px;
+      cursor: pointer;
+      & > label{
+        @include flexRow;
+        width: 100%;
+        color:white;
+        font-size: 15px;
+        font-weight: 500;
+        cursor: pointer;
+      }
+      & > img{
+        cursor: pointer;
+      }
+      &:hover{
+        box-shadow: 0 10px 14px 0 rgba(152,169,180,0.50);
+      }
+    }
+    & > .title-generarE-open{
+      @include flexRow;
+      width: 100%;
+      height: 40px;
+      box-sizing: border-box;
+      background-color: #37B34A;
+      align-items: center;
+      padding: 0 20px;
+      margin-top:20px;
+      box-shadow: 0 10px 14px 0 rgba(152,169,180,0.50);
+      z-index:2;
+      cursor: pointer;
+      & > label{
+        @include flexRow;
+        width: 100%;
+        color:white;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      & > img{
+        cursor: pointer;
+      }
+      &:hover{
+        box-shadow: 0 10px 14px 0 rgba(152,169,180,0.50);
+      }
+    }
+    & > .body-generarE{
+      @include flexColumn;
+      width: 100%;
+      box-sizing: border-box;
+      background-color: rgb(248, 249, 250);
+      max-height: 500px;
+      transition: 0.5s;
+      //overflow: hidden;
+      & > .ev1{
+        @include flexRow;
+        //min-height: 210px;
+        max-width:740px;
+        box-sizing: border-box;
+        padding: 20px 15px;
+        & > form{
+          @include flexRowWrap;
+          width: 100%;
+          box-sizing: border-box;
+          justify-content: space-between;
+          & > div{
+            @include flexColumn;
+            height: 35px;
+            box-sizing: border-box;
+            margin: 0 0 30px 0;
+            //align-items: flex-end;
+            & > label{
+              font-size: 12px;
+              color: #98A9B4;
+              margin-bottom: 3px;
+            }
+            & > a{
+              @include flexRow;
+
+              $colorHover:  rgba(6, 188, 82, 0.2);
+              @include pfButton(100px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+              @include flexRow;
+              @include absoluteCenter;
+              cursor: pointer;
+              font-size: 14px;
+              color: #37B34A;
+              font-weight: 500;
+            }
+            & > div{
+              @include flexRow;
+              justify-content: space-between;
+              align-items: flex-start;
+            }
+
+          }
+          & > .options{
+            @include flexRow;
+            @include absoluteCenter;
+            justify-content: flex-start;
+            font-size: 12px;
+            color: #818192;
+            font-style: italic;
+            box-sizing: border-box;
+            border-bottom: 1px dashed #D5DEE2;
+            padding:10px 0 20px 0;
+            margin: 0 !important;
+            & > .item-options{
+              @include flexRow;
+              height: 20px;
+              background-color: rgba(129, 129, 146, 0.15);
+              padding:3px 5px;
+              justify-content: space-between;
+              align-items: center;
+              box-sizing: border-box;
+              margin-right: 8px;
+              margin-top: 3px;
+              & > p{
+                margin-right: 10px;
+                box-sizing: border-box;
+              }
+              & > img {
+                width: 8px;
+              }
+            }
+          }
+        }
+      }
+      & > .ev2{
+        @include flexRow;
+        width: 740px;
+        //min-height: 130px;
+        box-sizing: border-box;
+        padding: 0px 15px 10px 15px;
+        & > form{
+          @include flexRowWrap;
+          width: 100%;
+          box-sizing: border-box;
+          justify-content: space-between;
+          & > div{
+            @include flexColumn;
+            height: 35px;
+            box-sizing: border-box;
+            margin: 0 0 30px 0;
+            & > label{
+              font-size: 12px;
+              color: #98A9B4;
+            }
+            & > a{
+              @include flexRow;
+
+              $colorHover:  rgba(6, 188, 82, 0.2);
+              @include pfButton(100px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+              @include flexRow;
+              @include absoluteCenter;
+              cursor: pointer;
+              font-size: 14px;
+              color: #37B34A;
+              font-weight: 500;
+            }
+
+          }
+          & > .options{
+            @include flexRowWrap;
+            @include absoluteCenter;
+            justify-content: flex-start;
+            font-size: 12px;
+            color: #818192;
+            font-style: italic;
+            box-sizing: border-box;
+            padding:10px 0 20px 0;
+            margin: 0 !important;
+            & > .item-options{
+              @include flexRow;
+              height: 20px;
+              background-color: rgba(129, 129, 146, 0.15);
+              padding:3px 5px;
+              justify-content: space-between;
+              align-items: center;
+              box-sizing: border-box;
+              margin-right: 8px;
+              margin-top: 3px;
+              & > p{
+                margin-right: 10px;
+                box-sizing: border-box;
+              }
+              & > img {
+                width: 8px;
+              }
+            }
+          }
+        }
+      }
+      & > .ev3{
+        @include flexRow;
+        width: 100%;
+        height: 30px;
+        box-sizing: border-box;
+        justify-content: center;
+        align-items: center;
+        & > a{
+          @include pfButton(100%, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+          @include flexRow;
+          @include absoluteCenter;
+          cursor: pointer;
+          font-size: 14px;
+          font-weight: normal;
+          color:$gnBlanco;
+          box-sizing: border-box;
+        }
+      }
+    }
+
+    & > .body-generarE-close{
+      @include flexColumn;
+      width: 100%;
+      box-sizing: border-box;
+      background-color: rgb(248, 249, 250);
+      max-height: 0;
+      overflow: hidden;
+      transition: 0.5s;
+      & > .ev1{
+        @include flexRow;
+        //min-height: 210px;
+        max-width:740px;
+        box-sizing: border-box;
+        padding: 20px 15px;
+        & > form{
+          @include flexRowWrap;
+          width: 100%;
+          box-sizing: border-box;
+          justify-content: space-between;
+          & > div{
+            @include flexColumn;
+            height: 35px;
+            box-sizing: border-box;
+            margin: 0 0 30px 0;
+            & > label{
+              font-size: 12px;
+              color: #98A9B4;
+              margin-bottom: 3px;
+            }
+            & > a{
+              @include flexRow;
+
+              $colorHover:  rgba(6, 188, 82, 0.2);
+              @include pfButton(100px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+              @include flexRow;
+              @include absoluteCenter;
+              cursor: pointer;
+              font-size: 14px;
+              color: #37B34A;
+              font-weight: 500;
+            }
+            & > div{
+              @include flexRow;
+              justify-content: space-between;
+              align-items: flex-start;
+            }
+
+          }
+          & > .options{
+            @include flexRow;
+            @include absoluteCenter;
+            justify-content: flex-start;
+            font-size: 12px;
+            color: #818192;
+            font-style: italic;
+            box-sizing: border-box;
+            border-bottom: 1px dashed #D5DEE2;
+            padding:10px 0 20px 0;
+            margin: 0 !important;
+            & > .item-options{
+              @include flexRow;
+              height: 20px;
+              background-color: rgba(129, 129, 146, 0.15);
+              padding:3px 5px;
+              justify-content: space-between;
+              align-items: center;
+              box-sizing: border-box;
+              margin-right: 8px;
+              margin-top: 3px;
+              & > p{
+                margin-right: 10px;
+                box-sizing: border-box;
+              }
+              & > img {
+                width: 8px;
+              }
+            }
+          }
+        }
+      }
+      & > .ev2{
+        @include flexRow;
+        width: 740px;
+        //min-height: 130px;
+        box-sizing: border-box;
+        padding: 0px 15px 10px 15px;
+        & > form{
+          @include flexRowWrap;
+          width: 100%;
+          box-sizing: border-box;
+          justify-content: space-between;
+          & > div{
+            @include flexColumn;
+            height: 35px;
+            box-sizing: border-box;
+            margin: 0 0 30px 0;
+            & > label{
+              font-size: 12px;
+              color: #98A9B4;
+            }
+            & > a{
+              @include flexRow;
+
+              $colorHover:  rgba(6, 188, 82, 0.2);
+              @include pfButton(100px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+              @include flexRow;
+              @include absoluteCenter;
+              cursor: pointer;
+              font-size: 14px;
+              color: #37B34A;
+              font-weight: 500;
+            }
+
+          }
+          & > .options{
+            @include flexRowWrap;
+            @include absoluteCenter;
+            justify-content: flex-start;
+            font-size: 12px;
+            color: #818192;
+            font-style: italic;
+            box-sizing: border-box;
+            padding:10px 0 20px 0;
+            margin: 0 !important;
+            & > .item-options{
+              @include flexRow;
+              height: 20px;
+              background-color: rgba(129, 129, 146, 0.15);
+              padding:3px 5px;
+              justify-content: space-between;
+              align-items: center;
+              box-sizing: border-box;
+              margin-right: 8px;
+              margin-top: 3px;
+              & > p{
+                margin-right: 10px;
+                box-sizing: border-box;
+              }
+              & > img {
+                width: 8px;
+              }
+            }
+          }
+        }
+      }
+      & > .ev3{
+        @include flexRow;
+        width: 100%;
+        height: 30px;
+        box-sizing: border-box;
+        background-color: #E2C913;
+        justify-content: center;
+        align-items: center;
+        & > a{
+          @include pfButton(100%, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+          @include flexRow;
+          @include absoluteCenter;
+          cursor: pointer;
+          font-size: 14px;
+          font-weight: normal;
+          color:$gnBlanco;
+          box-sizing: border-box;
+        }
+      }
+    }
+
+
+  }
+}
+
+.totalEventos{
+  font-size: 13px;
+  color: #3369B1;
+  font-weight: 700;
+  width: 100%;
+  text-align: center;
+  margin: 10px 0;
+}
+
+input{
+  width: 100%;
+  border-right: none;
+  border-left: none;
+  border-top: none;
+  border-bottom: solid 0.75px $grisLinea;
+  outline: none;
+  display: inline-block;
+  font-size: 14px;
+  color:$gnAzulMedio;
+  background-color: transparent;
+  //padding-bottom: 2px;
+}
+
+.open{
+  transform: rotate(180deg);
+
+  -webkit-transform: rotate(180deg);
+
+  -moz-transform: rotate(180deg);
+
+  -o-transform: rotate(180deg);
+}
+
+.close{
+  transform: rotate(0deg);
+
+  -webkit-transform: rotate(0deg);
+
+  -moz-transform: rotate(0deg);
+
+  -o-transform: rotate(0deg);
+}
+
+
+
+.item-eventos{
+  @include flexRow;
+  width: 100%;
+  height: 45px;
+  box-sizing: border-box;
+  margin:10px 0 0 0;
+
+  & > .number{
+    @include flexRow;
+    width: 25px;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    & > label{
+      font-size: 12px;
+      color: #3369B1;
+      font-weight: 700;
+      font-style: italic;
+    }
+  }
+  & > .body-item-eventos{
+    @include flexRow;
+    width: calc(100% - 25px);
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+    background-color:#ECF0F3;
+    padding:0 20px;
+    cursor: pointer;
+
+    & > .part1{
+      @include flexColumn;
+      width: 50%;
+      box-sizing: border-box;
+      & > label:nth-of-type(1){
+        font-size: 14px;
+        color: #3369B1;
+        font-weight: 500;
+        font-family: 'Roboto Cn';
+        cursor: pointer;
+      }
+      & > label:nth-of-type(2){
+        font-size: 12px;
+        color: #37B34A;
+        font-weight: 500;
+        margin-top: 3px;
+        font-family: 'Roboto Cn';
+        cursor: pointer;
+      }
+    }
+    & > .part2{
+      @include flexRow;
+      width: 200px;
+      box-sizing: border-box;
+      justify-content:space-between;
+      align-items: center;
+      //height: 15px;
+      & > .newEvent{
+        @include flexColumn;
+        height: 35px;
+        justify-content: space-around;
+        min-width: 200px;
+        box-sizing: border-box;
+        //align-items: flex-end;
+        & > label:nth-of-type(1){
+          @include flexColumn;
+          font-size: 12px;
+          color: #3B8EDE;
+          font-family:'Roboto Cn';
+          justify-content: flex-end;
+          cursor: pointer;
+        }
+        & > label:nth-of-type(2){
+          @include flexColumn;
+          font-size: 12px;
+          color: #37B34A;
+          font-family:'Roboto Cn';
+          justify-content: flex-end;
+          cursor: pointer;
+        }
+      }
+      & > label{
+        @include flexColumn;
+        height: 18px;
+        font-size: 12px;
+        color: #3B8EDE;
+        justify-content: flex-end;
+        font-family:'Roboto Cn';
+        cursor: pointer;
+      }
+      & > input{
+        width: 35px;
+        padding-bottom: 1px;
+        font-family: 'Roboto Cn';
+      }
+      & > .droplist{
+        width: 75px;
+        margin-bottom: 1px;
+        font-family: 'Roboto Cn';
+      }
+      & > img{
+        margin-left: 10px;
+        cursor: pointer;
+      }
+      & > label:nth-of-type(2){
+        color: #37B34A;
+        font-family: 'Roboto Cn';
+        cursor: pointer;
+      }
+    }
+    &:hover{
+      box-shadow: 0 10px 14px 0 rgba(152,169,180,0.50);
+    }
+  }
+  & > .body-item-eventos-open{
+    @include flexRow;
+    width: calc(100% - 25px);
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+    background-color:#3369B1;
+    padding:0 20px;
+    //padding-top: 8px;
+    //box-shadow: 0 10px 14px 0 rgba(152,169,180,0.50);
+    //z-index: 2;
+    cursor: pointer;
+    & > .part1{
+      @include flexColumn;
+      width: 50%;
+      box-sizing: border-box;
+      & > label:nth-of-type(1){
+        font-size: 14px;
+        color: #E2C913;
+        font-weight: 500;
+        font-family: 'Roboto Cn';
+        cursor: pointer;
+      }
+      & > label:nth-of-type(2){
+        font-size: 12px;
+        color: #FFFFFF;
+        font-weight: 500;
+        margin-top: 3px;
+        font-family: 'Roboto Cn';
+        cursor: pointer;
+      }
+    }
+    & > .part2{
+      @include flexRow;
+      width: 200px;
+      box-sizing: border-box;
+      justify-content:space-between;
+      align-items: center;
+      //align-items: flex-end;
+      //height: 15px;
+      & > .newEvent{
+        @include flexRow;
+        height: 35px;
+        justify-content: space-around;
+        min-width: 200px;
+        box-sizing: border-box;
+        & > label:nth-of-type(1){
+          @include flexColumn;
+          font-size: 12px;
+          color: #3B8EDE;
+          font-family:'Roboto Cn';
+          justify-content: flex-end;
+          cursor: pointer;
+        }
+        & > label:nth-of-type(2){
+          @include flexColumn;
+          font-size: 12px;
+          color: #37B34A;
+          font-family:'Roboto Cn';
+          justify-content: flex-end;
+          cursor: pointer;
+        }
+        & span{
+          @include flexColumn;
+          font-size: 12px;
+          color: #3B8EDE;
+          font-family:'Roboto Cn';
+          justify-content: center;
+          cursor: pointer;
+        }
+      }
+      & > label{
+        @include flexColumn;
+        height: 18px;
+        font-size: 12px;
+        color: #3B8EDE;
+        justify-content: flex-end;
+        font-family:'Roboto Cn';
+        cursor: pointer;
+      }
+      & > input{
+        width: 35px;
+        padding-bottom: 1px;
+        font-family: 'Roboto Cn';
+      }
+      & > .droplist{
+        width: 75px;
+        margin-bottom: 1px;
+        font-family: 'Roboto Cn';
+      }
+      & > img{
+        margin-left: 10px;
+        cursor: pointer;
+      }
+      & > label:nth-of-type(2){
+        color: #37B34A;
+        font-family: 'Roboto Cn';
+        cursor: pointer;
+      }
+    }
+
+    &:hover{
+      box-shadow: 0 10px 14px 0 rgba(152,169,180,0.50);
+    }
+  }
+}
+
+
+
+
+
+.body-itemE{
+  @include flexColumn;
+  width: calc( 100% - 25px);
+  box-sizing: border-box;
+  background-color: rgb(248, 249, 250);
+  max-height: 500px;
+  transition: 0.5s;
+  //overflow: hidden;
+  margin-left: 25px;
+  & > .ev1{
+    @include flexRow;
+    //min-height: 210px;
+    max-width:740px;
+    box-sizing: border-box;
+    padding: 20px 15px;
+    & > form{
+      @include flexRowWrap;
+      width: 100%;
+      box-sizing: border-box;
+      justify-content: space-between;
+      & > div{
+        @include flexColumn;
+        height: 35px;
+        box-sizing: border-box;
+        margin: 0 0 30px 0;
+        & > label{
+          font-size: 12px;
+          color: #98A9B4;
+          margin-bottom: 3px;
+        }
+        & > a{
+          @include flexRow;
+
+          $colorHover:  rgba(6, 188, 82, 0.2);
+          @include pfButton(100px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+          @include flexRow;
+          @include absoluteCenter;
+          cursor: pointer;
+          font-size: 14px;
+          color: #37B34A;
+          font-weight: 500;
+        }
+        & > div{
+          @include flexRow;
+          justify-content: space-between;
+          align-items: flex-start;
+        }
+
+      }
+      & > .options{
+        @include flexRowWrap;
+        @include absoluteCenter;
+        justify-content: flex-start;
+        font-size: 12px;
+        color: #818192;
+        font-style: italic;
+        box-sizing: border-box;
+        border-bottom: 1px dashed #D5DEE2;
+        padding:10px 0 20px 0;
+        margin: 0 !important;
+        & > .item-options{
+          @include flexRow;
+          height: 20px;
+          background-color: rgba(129, 129, 146, 0.15);
+          padding:3px 5px;
+          justify-content: space-between;
+          align-items: center;
+          box-sizing: border-box;
+          margin-right: 8px;
+          margin-top: 3px;
+          & > p{
+            margin-right: 10px;
+            box-sizing: border-box;
+          }
+          & > img {
+            width: 8px;
+          }
+        }
+      }
+    }
+  }
+  & > .ev2{
+    @include flexRow;
+    width: 740px;
+    //min-height: 130px;
+    box-sizing: border-box;
+    padding: 0px 15px 10px 15px;
+    & > form{
+      @include flexRowWrap;
+      width: 100%;
+      box-sizing: border-box;
+      justify-content: space-between;
+      & > div{
+        @include flexColumn;
+        height: 35px;
+        box-sizing: border-box;
+        margin: 0 0 30px 0;
+        & > label{
+          font-size: 12px;
+          color: #98A9B4;
+        }
+        & > a{
+          @include flexRow;
+
+          $colorHover:  rgba(6, 188, 82, 0.2);
+          @include pfButton(100px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+          @include flexRow;
+          @include absoluteCenter;
+          cursor: pointer;
+          font-size: 14px;
+          color: #37B34A;
+          font-weight: 500;
+        }
+
+      }
+      & > .options{
+        @include flexRowWrap;
+        @include absoluteCenter;
+        justify-content: flex-start;
+        font-size: 12px;
+        color: #818192;
+        font-style: italic;
+        box-sizing: border-box;
+        padding:10px 0 20px 0;
+        margin: 0 !important;
+        & > .item-options{
+          @include flexRow;
+          height: 20px;
+          background-color: rgba(129, 129, 146, 0.15);
+          padding:3px 5px;
+          justify-content: space-between;
+          align-items: center;
+          box-sizing: border-box;
+          margin-right: 8px;
+          margin-top: 3px;
+          & > p{
+            margin-right: 10px;
+            box-sizing: border-box;
+          }
+          & > img {
+            width: 8px;
+          }
+        }
+      }
+    }
+  }
+  & > .ev3{
+    @include flexRow;
+    width: 100%;
+    height: 30px;
+    box-sizing: border-box;
+    background-color: #E2C913;
+    justify-content: center;
+    align-items: center;
+    & > label{
+      color:white;
+      font-size: 14px;
+    }
+  }
+}
+
+.body-itemE-close{
+  @include flexColumn;
+  width: calc( 100% - 25px);
+  box-sizing: border-box;
+  background-color: rgb(248, 249, 250);
+  max-height: 0;
+  overflow: hidden;
+  transition: 0.5s;
+  margin-left: 25px;
+  & > .ev1{
+    @include flexRow;
+    //min-height: 210px;
+    max-width:740px;
+    box-sizing: border-box;
+    padding: 20px 15px;
+    & > form{
+      @include flexRowWrap;
+      width: 100%;
+      box-sizing: border-box;
+      justify-content: space-between;
+      & > div{
+        @include flexColumn;
+        height: 35px;
+        box-sizing: border-box;
+        margin: 0 0 30px 0;
+        & > label{
+          font-size: 12px;
+          color: #98A9B4;
+          margin-bottom: 3px;
+        }
+        & > a{
+          @include flexRow;
+
+          $colorHover:  rgba(6, 188, 82, 0.2);
+          @include pfButton(100px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+          @include flexRow;
+          @include absoluteCenter;
+          cursor: pointer;
+          font-size: 14px;
+          color: #37B34A;
+          font-weight: 500;
+        }
+        & > div{
+          @include flexRow;
+          justify-content: space-between;
+          align-items: flex-start;
+        }
+
+      }
+      & > .options{
+        @include flexRowWrap;
+        @include absoluteCenter;
+        justify-content: flex-start;
+        font-size: 12px;
+        color: #818192;
+        font-style: italic;
+        box-sizing: border-box;
+        border-bottom: 1px dashed #D5DEE2;
+        padding:10px 0 20px 0;
+        margin: 0 !important;
+        & > .item-options{
+          @include flexRow;
+          height: 20px;
+          background-color: rgba(129, 129, 146, 0.15);
+          padding:3px 5px;
+          justify-content: space-between;
+          align-items: center;
+          box-sizing: border-box;
+          margin-right: 8px;
+          margin-top: 3px;
+          & > p{
+            margin-right: 10px;
+            box-sizing: border-box;
+          }
+          & > img {
+            width: 8px;
+          }
+        }
+      }
+    }
+  }
+  & > .ev2{
+    @include flexRow;
+    width: 740px;
+    //min-height: 130px;
+    box-sizing: border-box;
+    padding: 0px 15px 10px 15px;
+    & > form{
+      @include flexRowWrap;
+      width: 100%;
+      box-sizing: border-box;
+      justify-content: space-between;
+      & > div{
+        @include flexColumn;
+        height: 35px;
+        box-sizing: border-box;
+        margin: 0 0 30px 0;
+        & > label{
+          font-size: 12px;
+          color: #98A9B4;
+        }
+        & > a{
+          @include flexRow;
+
+          $colorHover:  rgba(6, 188, 82, 0.2);
+          @include pfButton(100px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+          @include flexRow;
+          @include absoluteCenter;
+          cursor: pointer;
+          font-size: 14px;
+          color: #37B34A;
+          font-weight: 500;
+        }
+
+      }
+      & > .options{
+        @include flexRowWrap;
+        @include absoluteCenter;
+        justify-content: flex-start;
+        font-size: 12px;
+        color: #818192;
+        font-style: italic;
+        box-sizing: border-box;
+        padding:10px 0 20px 0;
+        margin: 0 !important;
+        & > .item-options{
+          @include flexRow;
+          height: 20px;
+          background-color: rgba(129, 129, 146, 0.15);
+          padding:3px 5px;
+          justify-content: space-between;
+          align-items: center;
+          box-sizing: border-box;
+          margin-right: 8px;
+          margin-top: 3px;
+          & > p{
+            margin-right: 10px;
+            box-sizing: border-box;
+          }
+          & > img {
+            width: 8px;
+          }
+        }
+      }
+    }
+  }
+  & > .ev3{
+    @include flexRow;
+    width: 100%;
+    height: 30px;
+    box-sizing: border-box;
+    background-color: #E2C913;
+    justify-content: center;
+    align-items: center;
+    & > label{
+      color:white;
+      font-size: 14px;
+    }
+  }
+}
+
+.cita{
+  @include flexRow;
+  box-sizing: border-box;
+  padding: 25px 20px;
+  justify-content: center;
+  align-items: flex-end;
+  margin-bottom: 10px;
+  & > label{
+    font-size: 14px;
+    color: #3369B1;
+    font-weight: 600;
+    margin-right: 10px;
+  }
+  & > .citaFecha{
+    width: 135px;
+  }
+}
+
+.invalid_notification {
+  width: 100%;
+  margin: 30px 0;
+
+  & > .title {
+    @include flexRow;
+    @include absoluteCenter;
+    width: 100%;
+    height: auto !important;
+    background-color: #C1272D;
+    opacity: 0.7;
+    padding: 10px 0;
+
+    & > p {
+      color: #FFFFFF;
+      font-size: 19px;
+      font-weight: 600;
+    }
+  }
+
+  & > .detail {
+    width: calc(100% - 30px);
+    margin-top: 15px;
+    padding: 0 15px;
+
+    & > div:nth-of-type(1) {
+      width: 100%;
+      margin-bottom: 10px;
+
+      & > p {
+        color: #3369B1;
+        font-size: 16px;
+        font-weight: 500;
+      }
+    }
+
+    & > div:nth-of-type(2) {
+      @include flexRowWrap;
+      width: 100%;
+
+      & > div {
+        background-color: rgba(193, 39, 45, 0.15);
+        font-size: 13px;
+        font-style: italic;
+        margin: 0 5px 8px;
+        padding: 7px 8px;
+
+        & > div:nth-of-type(1) {
+          & > p {
+            & > span:nth-of-type(1) {
+              color: #818192;
+            }
+
+            & > span:nth-of-type(2) {
+              color: rgba(193, 39, 45, 0.6);
+              margin: 0 4px;
+            }
+
+            & > span:nth-of-type(3) {
+              color: rgba(193, 39, 45, 0.6);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.boton-wizard{
+  @include flexRow;
+  @include absoluteCenter;
+  justify-content: space-between;
+  width: 100%;
+  //margin-top: 16px;
+  box-sizing: border-box;
+  & > .btnCancelar{
+    margin-top: 10px;
+    @include pfButton(320px, 30px, $gnAzulMedio, rgba(51,105,177,0.75), $gnAzulMedio, 0px);
+    @include flexRow;
+    @include absoluteCenter;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: normal;
+    color:$gnBlanco;
+    box-sizing: border-box;
+  }
+
+  & > .btnGuardar{
+    margin-top: 10px;
+    @include pfButton(320px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+    @include flexRow;
+    @include absoluteCenter;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: normal;
+    color:$gnBlanco;
+    box-sizing: border-box;
+  }
+
+  & > .btnGuardarInactivo{
+    margin-top: 10px;
+    @include pfButton(320px, 30px, #D5DEE2, #D5DEE2, #D5DEE2, 0px);
+    @include flexRow;
+    @include absoluteCenter;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 900;
+    color:$gnBlanco;
+    box-sizing: border-box;
+    pointer-events: none;
+  }
+}
+
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  padding-bottom: 1px;
+}
+
+input[type=number] { -moz-appearance:textfield; }
+
+#pdfLink{
+  &:hover{
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+
+
+
+.bar{
+  @include flexColumn;
+  width: 100%;
+  //height: 90px;
+  position: relative;
+  box-sizing: border-box;
+  justify-content: center;
+  margin: 120px 0 150px 0;
+  & > .containerBar{
+    @include flexRow;
+    width: 100%;
+    height: 30px;
+    border: 1px solid #98A9B4;
+    background-color: transparent;
+    box-sizing: border-box;
+    & > .progressBar{
+      @include flexRow;
+      width: 0%;
+      height: 100%;
+      box-sizing: border-box;
+      //transition: 1s;
+      position: relative;
+      cursor: pointer;
+      & > .contentBar{
+        @include flexRow;
+        width: 0%;
+        height: 100%;
+        box-sizing: border-box;
+        transition: 0.5s;
+        position: relative;
+      }
+    }
+  }
+
+  & > .lines{
+    width: 1px;
+    height: 70px;
+    border-bottom: none;
+    border-top: none;
+    //border-right: 1px dashed #37B34A;
+    border-left: 2px dashed #37B34A;
+    background-color: transparent;
+    position: absolute;
+    box-sizing: border-box;
+    top: -20px;
+  }
+
+}
+
+
+.legendBar{
+  @include flexRow;
+  @include absoluteCenter;
+  width: 200px;
+  position: absolute;
+  margin:auto;
+  left: 0;
+  right: 0;
+  bottom:0;
+  bottom: -90px;
+  font-size: 11px;
+  color: #818192;
+  justify-content: space-around;
+  & > div{
+    width: 30px;
+    height: 15px;
+  }
+
+}
+
+
+.etiquetas{
+
+  max-width: 150px;
+  width: 150px;
+  position: absolute;
+  font-size: 10px;
+  color: #37B34A;
+  font-weight: 600;
+  //transform: rotate(90deg);
+  background-color: transparent;
+  z-index: 1;
+  padding: 0 3px;
+}
+
+#lineToday{
+  width: 1px;
+  height: 110px;
+  border-bottom: none;
+  border-top: none;
+  //border-right: 1px dashed #37B34A;
+  border-left: 2px dashed #E2C913;
+  background-color: transparent;
+  position: absolute;
+  box-sizing: border-box;
+  bottom:-20px;
+}
+
+#labelToday{
+  width: 150px;
+  position: absolute;
+  box-sizing: border-box;
+  bottom:180px;
+  font-size: 14px;
+  color: #E2C913;
+  font-weight: 600;
+  text-align: center;
+}
+
+.active{
+  box-shadow: 0 10px 14px 0 rgba(152,169,180,0.50);
+  opacity: .99;
+}
+
+
+
+
+
+
+
+
+.item-folio{
+  @include flexRow;
+  width:100%;
+  height: 60px;
+  box-sizing: border-box;
+  justify-content: space-between;
+  align-items: center;
+  background: #37B34A;;
+  padding:0 25px;
+  cursor: pointer;
+  font-family:'Roboto Cn';
+  & > .part1{
+    @include flexRow;
+    box-sizing: border-box;
+    cursor: pointer;
+    & > .num{
+      @include flexRow;
+      width: 30px;
+      box-sizing: border-box;
+      align-items: center;
+      cursor: pointer;
+      & > label{
+        font-size: 17px;
+        color: white;
+        font-weight: 500;
+        font-family: 'Roboto Cn';
+        cursor: pointer;
+      }
+    }
+    & > p{
+      @include flexColumn;
+      box-sizing: border-box;
+      font-family: 'Roboto Cn';
+      cursor: pointer;
+      & > label:nth-of-type(1){
+        font-size: 17px;
+        color: white;
+        font-weight: 500;
+        font-family:'Roboto Cn';
+        cursor: pointer;
+      }
+      & > label:nth-of-type(2){
+        font-size: 12px;
+        color: #37B34A;
+        font-weight: 400;
+        margin-top: 3px;
+        font-family:'Roboto Cn';
+        cursor: pointer;
+      }
+    }
+  }
+  & > .part2{
+    @include flexRow;
+    width: 200px;
+    justify-content: space-between;
+    cursor: pointer;
+    & > img{
+      cursor: pointer;
+    }
+  }
+  &:hover{
+    box-shadow: 0 10px 14px 0 rgba(152,169,180,0.50);
+  }
+}
+
+.item-body-folio{
+  @include flexColumn;
+  box-sizing: border-box;
+  widows: 100%;
+  background-color: #f5fbf6;
+  margin-bottom: 10px;
+  //overflow: hidden;
+  & > .tramite{
+    @include flexRowWrap;
+    width:100%;
+    box-sizing: border-box;
+    min-height: 75px;
+    background-color: #ebf7ec;
+    justify-content: center;
+    align-items: center;
+    height: 160px;
+    & > label{
+      font-family: 'Roboto Cn';
+      font-size: 17px;
+      color: #98A9B4;
+      font-weight: 600;
+      margin-right: 15px;
+    }
+    & > .divFolio{
+      @include flexRow;
+      box-sizing: border-box;
+      justify-content: center;
+      align-items: center;
+      //height: 80px;
+      & > label{
+        font-family: 'Roboto Cn';
+        font-size: 17px;
+        color: #98A9B4;
+        font-weight: 500;
+        margin-right: 15px;
+      }
+      & > input{
+        width: 135px;
+        height: 30px;
+        font-size: 17px;
+        color: #37B34A ;
+        font-weight: 500;
+        background-color: transparent;
+        border: 1px solid #98A9B4;
+        outline: none;
+        padding:5px;
+        text-align: center;
+        font-family: 'Roboto Cn';
+        margin-right: 60px;
+        padding-bottom: 1px;
+      }
+
+      & > .vigenciaFolio{
+        width: 135px;
+      }
+    }
+  }
+
+  & > .container-body{
+    @include flexColumn;
+    box-sizing: border-box;
+    widows: 100%;
+    background-color: #f5fbf6;
+    padding: 0 25px;
+    //padding-bottom: 30px;
+    & > .head{
+      @include flexRow;
+      box-sizing: border-box;
+      width: 100%;
+      min-height: 120px;
+      padding: 30px 0px 25px 0px;
+      justify-content: center;
+      border-bottom: 1px dashed #D5DEE2;
+      & > .text{
+        @include flexColumn;
+        width:calc(100% - 280px);
+        box-sizing: border-box;
+        & > textarea{
+          @include flexRow;
+          width: 100%;
+          height: 65px;
+          box-sizing: border-box;
+          outline: none;
+          resize: none;
+          border: 1px solid #37B34A;
+          padding:10px;
+          font-size: 12px;
+          color: #818192;
+        }
+      }
+      & > .boton{
+        @include flexColumn;
+        width:265px;
+        box-sizing: border-box;
+        justify-content: center;
+        align-items: center;
+        & > a:nth-of-type(1){
+          $textSize: ('base': convertPts(10, 'px'));
+          @include escaledFontFormat($textSize, 600, $gnBlanco);
+          @include pfButton(530px, 40px, $verdeBoton, rgba(55, 179, 74, 0.75), $verdeBoton, 0px);
+          @include flexRow;
+          @include absoluteCenter;
+          cursor: pointer;
+          font-size: 16px !important;
+          & > label{
+            @include multiLineTextTruncate(1,1.8em,1.8em,#FFF);
+            word-break: break-all;
+            height: 100%;
+            width: 100%;
+            text-align: center;
+            cursor: pointer;
+          }
+        }
+        & > a:nth-of-type(2){
+          @include flexRow;
+
+          $colorHover:  rgba(6, 188, 82, 0.2);
+          @include pfButton(265px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+          @include flexRow;
+          @include absoluteCenter;
+          cursor: pointer;
+          font-size: 14px;
+          color: #37B34A;
+          font-weight: 500;
+        }
+      }
+
+    }
+    & > .body{
+      @include flexColumn;
+      width:100%;
+      box-sizing: border-box;
+      //margin: 15px 0 0 0;
+      & > .item-pdf{
+        @include flexColumn;
+        width: 100%;
+        box-sizing: border-box;
+        border-bottom: 1px dashed #D5DEE2;
+        padding: 15px 0;
+        & > .title{
+          @include flexRow;
+          width: 100%;
+          height: 20px;
+          justify-content: space-between;
+          box-sizing: border-box;
+          margin-bottom: 10px;
+          & > p{
+            & > label:nth-of-type(1){
+              font-size: 14px;
+              color: #37B34A;
+            }
+            & > label:nth-of-type(2){
+              font-size: 14px;
+              color: #37B34A;
+            }
+            & > img{
+              margin:0 5px;
+            }
+          }
+          & > img{
+
+          }
+        }
+        & > .body-pdf{
+          @include flexColumn;
+          box-sizing: border-box;
+          width: 100%;
+          & > p{
+            font-size: 13px;
+            color: #818192;
+            font-weight: 300;
+          }
+        }
+      }
+
+    }
+    & > .respEvento{
+      @include flexColumn;
+      width: 100%;
+      box-sizing: border-box;
+      justify-content: center;
+      align-items: center;
+      padding: 30px 0 10px 0;
+      border-bottom: 1px dashed #D5DEE2;
+      & > #title-resp{
+        width: 100%;
+        font-family: 'Roboto Cn';
+        font-size: 17px;
+        color: #37B34A;
+        text-align: left;
+        margin-bottom: 15px;
+        font-weight: 600;
+      }
+      & > #not-resp{
+        width: 200px;
+        font-family: 'Roboto Cn';
+        font-size: 17px;
+        color: #37B34A;
+        margin-top: 15px;
+      }
+    }
+    & > .footer{
+      @include flexRow;
+      width: 100%;
+      min-height: 70px;
+      height: 100px;
+      box-sizing: border-box;
+      justify-content: center;
+      align-items: center;
+      & > .switch{
+
+      }
+      & > label{
+        font-size: 14px;
+        color: #37B34A;
+      }
+
+    }
+  }
+  /* &:hover{
+      box-shadow: 0 10px 14px 0 rgba(152,169,180,0.50);
+  } */
+}

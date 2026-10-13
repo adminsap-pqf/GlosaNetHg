@@ -1,0 +1,144 @@
+@import "../../../../variables";
+@import "../../../../mixins";
+@import "../../../../colors";
+
+:host {
+  @include flexColumn;
+  @include absoluteCenter;
+  font-size: $globalFont;
+  & > .descargas{
+    @include flexRow;
+    @include absoluteCenter;
+    min-width: 30px;
+    min-height: 30px;
+    max-width: 30px;
+    max-height: 30px;
+    border-radius: 100px;
+    background-color: $gnAzulMedio;
+    margin-left: 15px;
+    & > div{
+      @include flexRow;
+      @include absoluteCenter;
+      background-color: $verdeBoton;
+      border-radius: 100%;
+      min-width: 17px;
+      min-height: 17px;
+      max-width: 17px;
+      max-height: 17px;
+      position: absolute;
+      top: 21px;
+      left: 240px;
+      color: $gnBlanco;
+      font-size: 11px;
+    }
+  }
+
+  & > .descargas:hover{
+    background-color: rgba(51, 106, 177, 0.75);
+  }
+
+  & > .container{
+    @include flexRowWrap;
+    @include absoluteCenter;
+    width: 185px;
+    box-shadow: 0px 3px 28px -7px rgba(0,0,0,0.25);
+    box-sizing: border-box;
+    position: absolute;
+    left: 143px;
+    top: 63px;
+    border:1px solid $gnInactivo;
+    background-color: $gnBlanco;
+    z-index: 2;
+    & > .triangulo{
+      width:0px;
+      height:0px;
+      border-left:8px solid transparent; /* izquierda flecha */
+      border-right:8px solid transparent; /* derecha flecha */
+      border-bottom:8px solid $gnInactivo; /* base flecha y color*/
+      font-size:0px;
+      line-height:0px;
+      position: absolute;
+      right: 84px;
+      top:-8px;
+    }
+    & > .triangulo2{
+      width:0px;
+      height:0px;
+      border-left:8px solid transparent; /* izquierda flecha */
+      border-right:8px solid transparent; /* derecha flecha */
+      border-bottom:8px solid white; /* base flecha y color*/
+      font-size:0px;
+      line-height:0px;
+      position: absolute;
+      right: 91px;
+      top: 0px;
+      margin: -7px;
+    }
+    & > .contenedor{
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px 20px;
+      max-height: 270px;
+      overflow-x: scroll;
+      & > div{
+        @include flexColumn;
+        align-items: flex-end;
+        border-bottom:0.2px solid $grisLinea;
+        margin-bottom: 5px;
+        cursor: pointer;
+        & > div:nth-of-type(1){
+          @include flexRow;
+          color:$gnAzulObscuro;
+          font-size: 10px;
+          width: 100%;
+          margin-bottom: 3px;
+          & > p{
+            width: 100%;
+          }
+        }
+        & > div:nth-of-type(2){
+          width: 100%;
+          & > div{
+            width: 100%;
+            min-height:10px;
+            border:0.3px solid $grisLinea;
+            & > div{
+              min-height:10px;
+              background-image: linear-gradient(90deg, #009372 1%, #74BC3C 99%);
+              transition: 1s;
+            }
+            .barra{
+              animation: moveBar 2s;
+              animation-iteration-count: 10000;
+            }
+
+            .error{
+              background-image: linear-gradient(90deg, #C1272D 1%, #EA992F 99%);
+              width: 100% !important;
+            }
+            @keyframes moveBar {
+              from { width: 0px;}
+              to { width: 143px;}
+            }
+          }
+        }
+        & > div:nth-of-type(3){
+          margin-top: 5px;
+          color: $gnGrisRata;
+          width: 100%;
+          font-size: 9px;
+          margin-bottom: 5px;
+        }
+      }
+
+      & > div:hover{
+        & > div:nth-of-type(1){
+          & > p{
+            font-weight: 600;
+          }
+        }
+      }
+    }
+
+  }
+}

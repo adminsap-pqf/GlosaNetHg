@@ -1,0 +1,801 @@
+@import "../../../variables.scss";
+@import "../../../mixins.scss";
+@import "../../../colors.scss";
+
+
+.container{
+    @include flexColumn;
+    //width:100%;
+    padding:0px;
+    font-size: 9pt;
+    & > .row{
+        @include flexRowWrap;
+        width:100%;
+        min-width: 740px;
+        
+        & > .column{
+            @include flexRow;
+            //width:100%;
+            margin:0 5px;
+            & > div{
+                & > .apply{
+                  @include pfButton(160px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+                  @include flexRow;
+                  @include absoluteCenter;
+                  cursor: pointer;
+                  font-size: 1.2em;
+                  font-weight: normal;
+                  color:$gnBlanco;
+                }
+                & > .exp{
+                    @include flexRow;
+                    $textSize: ('base': convertPts(12, 'px'));
+                    @include escaledFontFormat($textSize, 600,$verdeBoton);
+                    $colorHover:  rgba(6, 188, 82, 0.2);
+                    @include pfButton(115px, 30px, $gnBlanco, $colorHover, $gnBlanco, 0px);
+                    @include flexRow;
+                    @include absoluteCenter;
+                    cursor: pointer;
+                    font-size: 1.2em;
+                }
+               
+            } 
+        }
+    }
+    & > .section{
+        & > .row{
+            @include flexRow;
+            width:100%;
+            justify-content: center;
+            & > .column{
+                @include flexRowWrap;
+                @include absoluteCenter;
+                width:100%;
+                
+                  & > canvas{
+        
+                  }
+
+                  & > .legend{
+                    @include flexColumn;
+                    width: 240px;
+                    height: 300px;
+                    //position: absolute;
+                    //right: 20px;
+                    //top:70px;
+                      & > .head{
+                        @include flexRow;
+                        @include absoluteCenter;
+                        width: 100%;
+                        height: 50px;
+                        border-bottom: 0.75px solid #BABDC8;
+                        font-size: 1.4em;
+                        padding:5px 0;
+                        box-sizing: border-box;
+                        & > label{
+                            @include flexRow;
+                            width: 100%;
+                            text-align: right;
+                            
+                        }
+                      }
+                      & > .body{
+                        @include flexColumn;
+                        @include absoluteCenter;
+                        width: 100%;
+                        height: 150px;
+                        border-bottom: 0.75px solid #BABDC8;
+                        font-size: 1em;
+                        padding:10px 5px;
+                        box-sizing: border-box;
+                        & > div{
+                            @include flexRow;
+                            width: 100%;
+                            height: 33%;
+                            box-sizing: border-box;
+                            font-size:1.2em;
+                            align-items: center;
+                            & > span{
+                                width: 13%;
+                                height: 10px;
+
+                            }
+                            & > label:nth-of-type(1){
+                                width: 50%;
+                                margin-left: 5px;
+                            }
+                            & > label:nth-of-type(2){
+                                width: 37%;
+                                text-align: right;
+                            }
+                        } 
+                      }
+                      & > .foot{
+                        @include flexRow;
+                        @include absoluteCenter;
+                        width: 100%;
+                        height: 50px;
+                        font-size: 1.4em;
+                        padding:5px 0;
+                        box-sizing: border-box;
+                        & > label{
+                            width: 100%;
+                            text-align: right;
+                            font-weight: 700;
+                            
+                        }
+                      }
+                  }
+
+
+                  & > .headerLine{
+                    @include flexRow;
+                    position: absolute;
+                    top: 25px;
+                    left: 55px;
+                    color: white;
+                    box-sizing: border-box;
+                    font-size: 1.4em;
+                  }
+                  
+    
+                  
+            }
+            
+        }
+
+    }
+
+
+
+    .footerLine{
+        @include flexRow;
+        width: 100%;
+        box-sizing: border-box;
+        justify-content: space-between;
+        padding: 0 3px 0 35px;
+        font-size:1em;
+        & > label{
+            @include flexRow;
+            //width: 100%;
+            box-sizing: border-box;
+            color:white;
+        }
+        
+      }
+
+
+
+    .total{
+        @include flexColumn;
+        position: absolute;
+        width: 140px;
+        height: 70px;
+            margin:auto;
+            left:0;
+            right: 0;
+            top:0;
+            bottom:0;
+            z-index: -1;
+            & > label:nth-of-type(1), label:nth-of-type(3){
+                font-size: 14px;
+                text-align: center;
+                font-weight: 300;
+            }
+            & > label:nth-of-type(2){
+                //font-size: 40px;
+                text-align: center;
+                font-weight: 700;
+            }
+      }
+
+
+
+
+
+
+    .legendBar{
+        @include flexColumn;
+        position: absolute;
+        box-sizing: border-box;
+        font-size: 9pt;
+        right: 15px;
+        bottom: 25px;
+        border: 1px solid #004660;
+        width: 150px;
+        height: 60px;
+        justify-content: center;
+        background-color: white;
+        & > div{
+            @include flexRow;
+            box-sizing: border-box;
+            align-items: center;
+            padding: 10px;
+            & > span{
+                width:35%;
+                height: 5px;
+            }
+            & > label  {
+                width:65%;
+                color:#5A95F0;
+                font-size: 1em;
+                font-weight: 300;
+                padding-left: 5px;
+            }
+        } 
+    }
+
+    #doughnut1Div, #doughnut2Div,#doughnut3Div, #doughnut4Div, #doughnut5Div{
+        z-index: 1;
+        display: flex;
+        position: relative;
+    }
+
+    #lineChart1Div{
+        width: 100%;
+        height: 200px;
+        z-index: 1;
+        display: flex;
+        position: relative;
+        padding: 15px 5px 0px 5px;
+        box-sizing: border-box;
+        flex-direction: column;
+    }
+
+    #totalDoughnut2, #totalDoughnut1,  #totalDoughnut4,  #totalDoughnut5{
+        width: 140px !important;
+        z-index: -1;
+        display: flex;
+        justify-content: center;
+    }
+
+    
+
+    #barStackedChartVertical1Div{
+        width:300px; 
+        height:200px; 
+        position:relative;
+    }
+
+    #label1barStackedChartVertical{
+        position:absolute; 
+        bottom:-20px; 
+        left:78px;
+        text-align:center;
+        font-size: 1em;
+        color:#222E43;
+        font-weight: 500;
+    }
+
+    #label2barStackedChartVertical{
+        position:absolute;
+        bottom:-20px; 
+        right:22px;
+        text-align:center;
+        font-size: 1em;
+        color:#222E43;
+        font-weight: 500;
+    }
+
+    #totalDoughnut3{
+        top: 0;
+        left: 0;
+        margin: auto;
+        bottom: 0;
+        right: 0;
+        width: 180px;
+        z-index: -1;
+        & > label{
+            font-size: 18px;
+            text-align: center;
+            font-weight: 300;
+        }
+        & > label:nth-of-type(2){
+            font-size: 19px;
+            text-align: center;
+            font-weight: 700;
+        }
+    }
+
+
+    #doughnut3Legend{
+        width:280px;
+        height:250px; 
+        top:35px; 
+        right:30px;
+    }
+
+    #droplist{
+        width: 150px;
+    }
+    #datepicker1{
+        width: 100px;
+    }
+    #datepicker2{
+        width: 100px;
+    }
+    #boton{
+        width: 215px;
+        & > div{
+            & > a{
+                width: 100px;
+            }
+        }
+    }
+
+    #legendDoughnut4{
+        display: flex;
+        flex-direction: column;
+        width: 340px;
+        height: 300px;
+    }
+
+    #legendDoughnut5{
+        display: flex;
+        flex-direction: column;
+        width: 340px;
+        height: 300px;
+    }
+
+    .doughnut1Label1{
+        font-size: 42px;
+    }
+    .doughnut1Label2{
+        font-size: 32px;
+    }
+    .doughnut1Label3{
+        font-size: 26px;
+    }
+
+
+    .doughnut2Label1{
+        font-size: 32px;
+    }
+    .doughnut2Label2{
+        font-size: 28px;
+    }
+    .doughnut2Label3{
+        font-size: 26px;
+    }
+
+
+    /* ************************************** Resolucion a 800px *************************************** */
+
+    @include responsive_layout('small') {
+
+        #titleTablero{
+            width: 100%;
+        }
+
+        #doughnut1Div{
+            width: 200px;
+            height: 160px;
+            margin-left: 0;
+        }
+        #legendDoughnut1{
+            display: flex;
+            flex-direction: column;
+            width: 240px;
+            height: 300px;
+        }
+        #totalDoughnut1{
+            height: 70px;
+            margin:auto;
+            left:0;
+            right: 0;
+            top:0;
+            bottom:0;
+            z-index: -1;
+            display: flex;
+            justify-content: center;
+            & > label:nth-of-type(1),label:nth-of-type(3) {
+                font-size: 14px;
+                text-align: center;
+                font-weight: 300;
+            }
+            & > label:nth-of-type(2){
+                //font-size: 40px;
+                text-align: center;
+                font-weight: 700;
+            }
+        }
+
+        .doughnut1Label1{
+            font-size: 42px;
+        }
+        .doughnut1Label2{
+            font-size: 32px;
+        }
+        .doughnut1Label3{
+            font-size: 26px;
+        }
+
+
+        #doughnut2Div{
+            width: 200px;
+            height: 160px;
+            margin-right: -35px;
+        }
+        #totalDoughnut2{
+            height: 70px;
+            margin:auto;
+            left:0;
+            right: 0;
+            top:0;
+            bottom:0;
+            z-index: -1;
+            display: flex;
+            justify-content: center;
+            & > label:nth-of-type(1), label:nth-of-type(3){
+                font-size: 14px;
+                text-align: center;
+                font-weight: 300;
+            }
+            & > label:nth-of-type(2){
+                //font-size: 40px;
+                text-align: center;
+                font-weight: 700;
+            }
+        }
+
+        .doughnut2Label1{
+            font-size: 32px;
+        }
+        .doughnut2Label2{
+            font-size: 28px;
+        }
+        .doughnut2Label3{
+            font-size: 26px;
+        }
+
+        #barStackedChartVertical1Div{
+            width: 200px;
+        }
+
+        #label1barStackedChartVertical{
+            left:50px;
+        }
+
+        #label2barStackedChartVertical{
+            right:0;
+        }
+
+
+        #doughnut3Div{
+            width:200px; 
+            height:230px;
+            z-index:1; 
+            display:flex;
+        }
+        #totalDoughnut3{
+            top: 0;
+            left: 0;
+            margin: auto;
+            bottom: 0;
+            right: 0;
+            width: 180px;
+            z-index: -1;
+            display: flex;
+            justify-content: center;
+            & > label{
+                font-size: 18px;
+                text-align: center;
+                font-weight: 300;
+            }
+            & > label:nth-of-type(2){
+                font-size: 19px;
+                text-align: center;
+                font-weight: 700;
+            }
+        }
+
+
+        #doughnut4Div{
+            width: 200px;
+            height: 160px;
+            margin-left: 0;
+        }
+        #legendDoughnut4{
+            display: flex;
+            flex-direction: column;
+            width: 240px;
+            height: 300px;
+        }
+        #totalDoughnut4{
+            height: 70px;
+            margin:auto;
+            left:0;
+            right: 0;
+            top:0;
+            bottom:0;
+            z-index: -1;
+            & > label:nth-of-type(1), label:nth-of-type(3){
+                font-size: 14px;
+                text-align: center;
+                font-weight: 300;
+            }
+            & > label:nth-of-type(2){
+                //font-size: 40px;
+                text-align: center;
+                font-weight: 700;
+            }
+        }
+
+        #doughnut5Div{
+            width: 200px;
+            height: 160px;
+            margin-left: 0;
+        }
+
+        #legendDoughnut5{
+            display: flex;
+            flex-direction: column;
+            width: 270px;
+            height: 300px;
+        }
+
+        #totalDoughnut5{
+            height: 70px;
+            margin:auto;
+            left:0;
+            right: 0;
+            top:0;
+            bottom:0;
+            z-index: -1;
+            & > label:nth-of-type(1), label:nth-of-type(3){
+                font-size: 14px;
+                text-align: center;
+                font-weight: 300;
+            }
+            & > label:nth-of-type(2){
+                //font-size: 40px;
+                text-align: center;
+                font-weight: 700;
+            }
+        }
+
+        
+
+    }
+        
+
+     /* ************************************************************************************************ */
+
+
+    /* ************************************** Resolucion a 1366px *************************************** */
+     
+    @include responsive_layout('medium') {
+
+        #titleTablero{
+            width: 120px;
+        }
+
+        #doughnut1Div{
+            width:300px; 
+            height:250px;
+            z-index:1; 
+            display:flex;
+        }
+        #totalDoughnut1{
+            height: 110px;
+            margin:auto;
+            left:0;
+            right: 0;
+            top:0;
+            bottom:0;
+            z-index: -1;
+            display: flex;
+            justify-content: center;
+            & > label:nth-of-type(1), label:nth-of-type(3) {
+                font-size: 22px;
+                text-align: center;
+                font-weight: 300;
+            }
+            & > label:nth-of-type(2){
+                //font-size: 60px;
+                text-align: center;
+                font-weight: 700;
+            }
+        }
+
+        
+        .doughnut1Label1{
+            font-size: 60px;
+        }
+        .doughnut1Label2{
+            font-size: 48px;
+        }
+        .doughnut1Label3{
+            font-size: 40px;
+        }
+
+
+        #doughnut2Div{
+            width:250px; 
+            height:200px;
+            z-index:1; 
+            display:flex;
+        }
+        #totalDoughnut2{
+            height: 90px;
+            margin:auto;
+            left:0;
+            right: 0;
+            top:0;
+            bottom:0;
+            z-index: -1;
+            display: flex;
+            justify-content: center;
+            & > label:nth-of-type(1), label:nth-of-type(3){
+                font-size: 20px;
+                text-align: center;
+                font-weight: 300;
+            }
+            & > label:nth-of-type(2){
+                //font-size: 50px;
+                text-align: center;
+                font-weight: 700;
+            }
+        }
+
+        .doughnut2Label1{
+            font-size: 50px;
+        }
+        .doughnut2Label2{
+            font-size: 40px;
+        }
+        .doughnut2Label3{
+            font-size: 32px;
+        }
+
+        #barStackedChartVertical1Div{
+            width: 300px;
+        }
+
+        #label1barStackedChartVertical{
+            left:78px;
+        }
+
+        #label2barStackedChartVertical{
+            right:22px;
+        }
+
+        #doughnut3Div{
+            width:250px; 
+            height:260px;
+            z-index:1; 
+            display:flex;
+        }
+        #totalDoughnut3{
+            top: 0;
+            left: 0;
+            margin: auto;
+            bottom: 0;
+            right: 0;
+            width: 180px;
+            z-index: -1;
+            & > label{
+                font-size: 20px;
+                text-align: center;
+                font-weight: 300;
+            }
+            & > label:nth-of-type(2){
+                font-size: 22px;
+                text-align: center;
+                font-weight: 700;
+            }
+        }
+
+        #doughnut3Legend{
+            width:285px;
+        }
+
+        #droplist{
+            width: 180px;
+        }
+        #datepicker1{
+            width: 115px;
+        }
+        #datepicker2{
+            width: 115px;
+        }
+        #boton{
+            width: 215px;
+        }
+
+
+        #doughnut4Div{
+            width:300px; 
+            height:250px;
+            z-index:1; 
+            display:flex;
+        }
+        #totalDoughnut4{
+            height: 110px;
+            margin:auto;
+            left:0;
+            right: 0;
+            top:0;
+            bottom:0;
+            z-index: -1;
+            & > label:nth-of-type(1), label:nth-of-type(3){
+                font-size: 22px;
+                text-align: center;
+                font-weight: 300;
+            }
+            & > label:nth-of-type(2){
+                //font-size: 60px;
+                text-align: center;
+                font-weight: 700;
+            }
+        }
+
+        #doughnut5Div{
+            width:300px; 
+            height:250px;
+            z-index:1; 
+            display:flex;
+        }
+        #totalDoughnut5{
+            height: 110px;
+            margin:auto;
+            left:0;
+            right: 0;
+            top:0;
+            bottom:0;
+            z-index: -1;
+            & > label:nth-of-type(1), label:nth-of-type(3){
+                font-size: 22px;
+                text-align: center;
+                font-weight: 300;
+            }
+            & > label:nth-of-type(2){
+                //font-size: 60px;
+                text-align: center;
+                font-weight: 700;
+            }
+        }
+
+    }
+    /* ************************************************************************************************ */
+
+    @include responsive_layout('large') {
+        #doughnut3Legend{
+            width:335px;
+        }
+        #droplist{
+            width: 250px;
+        }
+        .doughnut1Label1{
+            font-size: 60px;
+        }
+        .doughnut1Label2{
+            font-size: 48px;
+        }
+        .doughnut1Label3{
+            font-size: 40px;
+        }
+    }
+
+    @include responsive_layout('extraLarge') {
+        #doughnut3Legend{
+            width:335px;
+        }
+        .doughnut1Label1{
+            font-size: 60px;
+        }
+        .doughnut1Label2{
+            font-size: 48px;
+        }
+        .doughnut1Label3{
+            font-size: 40px;
+        }
+    }
+}
+
+
+
+.resY{
+    width: 1000px !important;
+    //height: 185px !important;
+}

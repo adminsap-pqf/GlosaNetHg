@@ -1,0 +1,196 @@
+@import "../../../../variables";
+@import "../../../../mixins";
+@import "../../../../colors";
+
+:host {
+    height: 100vh;
+    z-index: 2;
+}
+
+aside {
+    box-sizing: border-box;
+    height: 100%;
+    width: calc(#{$navBarSize} + #{$auxBarSize});
+    transition: right 0.8s;
+    transition: width 0.8s;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#36c8c4+0,0071bc+29,4a58cb+66,2b3959+100 */
+    /* background: #36c8c4;
+    background: -moz-linear-gradient(-45deg, #36c8c4 0%, #0071bc 29%, #4a58cb 66%, #2b3959 100%);
+    background: -webkit-linear-gradient(-45deg, #36c8c4 0%, #0071bc 29%, #4a58cb 66%, #2b3959 100%);
+    background: linear-gradient(135deg, #36c8c4 0%, #0071bc 29%, #4a58cb 66%, #2b3959 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#36c8c4', endColorstr='#2b3959', GradientType=1); */
+    //box-shadow: 3px 0px 10px 1px $pfNavBarShadow;
+    background: #222E43;
+    box-shadow: 0 3px 13px 4px rgba(0,0,0,0.50);
+
+    &.closed {
+        $navBarSize: 0px;
+        width: calc(#{$navBarSize} + #{$auxBarSize});
+        & > nav {
+            width: $navBarSize;
+            & > div:nth-of-type(1) {
+                >img {
+                    width: 60px;
+                    //height: 50px;
+                }
+            }
+        }
+        & > .sizeSwitch {
+            left: calc(100%);
+            transform: rotate(0deg);
+        }
+    }
+    &.opened {
+        $navBarSize: $baseNavBarSize;
+        width: calc(#{$navBarSize} + #{$auxBarSize});
+        & > nav {
+            width: $navBarSize;
+            & > div:nth-of-type(1) {
+                >img {
+                    width: 100%;
+                    height: 50px;
+                }
+            }
+        }
+        & > .sizeSwitch {
+            transform: rotate(0deg);
+        }
+    }
+    &.peek {
+        $navBarSize: $basePeekNavSize;
+        width: calc(#{$navBarSize} + #{$auxBarSize});
+        & > nav {
+            width: $navBarSize;
+            & > div:nth-of-type(1) {
+                >img {
+                    @include fireFoxOnlyStyle {
+                        width: 60px !important;
+                        //height: 50px;
+                        transition-delay: 3ms !important;
+                    }
+                    width: auto;
+                }
+            }
+        }
+        & > section {
+            &.closed {
+                left: calc(#{$navBarSize});
+            }
+            &.opened {
+                left: calc(#{$navBarSize} - #{$auxBarSize});
+            }
+        }
+        & > .sizeSwitch {
+            transform: rotate(180deg);
+        }
+    }
+
+    & > nav {
+        overflow: hidden;
+        width: $navBarSize;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
+        z-index: 2;
+        transition: width 0.8s;
+        & > div{
+          border-bottom: solid 1px rgba(59, 142, 222, 0.3);
+            & > a:nth-of-type(1) {
+                text-decoration: none;
+                @include flexRow;
+                @include absoluteCenter;
+                width: 100%;
+                height: 70px;
+                >img {
+                    width: 60px;
+                    box-sizing: border-box;
+                    padding: 0 10px;
+                    @include fireFoxOnlyStyle {
+                        height: 50px;
+                    }
+                }
+                >span.txtLogo {
+                    color: #fff;
+                    font-weight: bolder;
+                    font-size: 1.4em;
+                    padding-right: 25px;
+                    >img {
+                        width: 110px;
+                        box-sizing: border-box;
+                    }
+                }
+                >span.txtLogoHide {
+                    display: none;
+                    color: #fff;
+                    font-weight: bolder;
+                    font-size: 1.5em;
+                    padding-right: 15px;
+                    >img {
+                        width: 110px;
+                        box-sizing: border-box;
+                    }
+                }
+            }
+
+            & > ul {
+
+            }
+        }
+    }
+    /* Sección emergente de la navegación */
+    & > section {
+        position: absolute;
+        height: 100%;
+        width: $auxBarSize;
+        top: 0;
+        left: 0px;
+        transition: all 0.8s;
+        //box-shadow: 3px 0px 10px 1px $pfNavBarShadow;
+        z-index: 1;
+        overflow: hidden;
+
+        & > div:nth-of-type(1) {
+            height: 0;
+            width: 0;
+        }
+
+        &.closed {
+            left: calc(#{$navBarSize});
+            $auxBarSize: 0px;
+            width: $auxBarSize;
+            box-shadow: none;
+        }
+        &.opened {
+            left: calc(#{$navBarSize} - #{$auxBarSize});
+            $auxBarSize: $baseAuxBarSize;
+            width: $auxBarSize;
+        }
+    }
+    & > .sizeSwitch {
+        position: relative;
+        height: 30px;
+        width: 30px;
+        top: calc(-50% - 30px);
+        left: calc(100% - 30px);
+        cursor: pointer;
+        transition: left 0.8s;
+        &::hover {
+            background-color: rgba(37, 37, 38, .7);
+        }
+    }
+}
+
+aside.explorer {
+    transition: none !important;
+
+    & > nav {
+        transition: none !important;
+    }
+
+    & > section {
+        transition: none !important;
+    }
+
+    & > .sizeSwitch {
+        transition: none !important;
+    }
+}

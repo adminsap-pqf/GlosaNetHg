@@ -1,0 +1,106 @@
+@import "../../../variables";
+@import "../../../mixins";
+@import "../../../colors";
+
+:host {
+    @include flexRowWrap;
+    position: relative;
+    justify-content: space-between;
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden !important;
+    box-sizing: border-box;
+
+    @media screen and (-moz-images-in-menus:0) {
+        overflow: hidden !important;
+    }
+    & pf-nav-bar {
+        z-index: 1000;
+    }
+
+    & #components {
+        @include flexColumn;
+        justify-content: space-between;
+        height: calc(100% - 1px);
+        width: calc(100vw - #{$basePeekNavSize});
+        transition: transform 0.8s;
+        position: absolute;
+        right: 0;
+        overflow: auto;
+        & > .routerOutlet {
+            box-sizing: border-box;
+            min-width: 740px;
+            height: calc(100% - 105px);
+            @include windowsScrollbars('autohide');
+            overflow: auto;
+        }
+
+        &.originPosition {
+            transform: translateX(1px);
+        }
+
+        &.closedPosition {
+            transform: translateX(0px);
+        }
+
+        &.peekPosition {
+            transform: translateX($basePeekNavSize);
+        }
+
+        &.openedPosition {
+            transform: translateX($baseNavBarSize - 59px);
+        }
+    }
+
+    .container{
+        position: fixed;
+        box-sizing: border-box;
+        width: 100%;
+        background: rgba(204, 209, 209, .6);
+        z-index:10;
+        margin:auto;
+        top:0;
+        bottom:0;
+        left:0;
+
+        right:0;
+        & > .message{
+            @include flexColumn;
+            @include absoluteCenter;
+            width:200px;
+            height:100px;
+            background-color: $gnBlanco;
+            position: fixed;
+            margin:auto;
+            top:0;
+            bottom:0;
+            left:0;
+            right:0;
+            box-shadow:1px 5px 10px $gnInactivo;
+            border-radius: 5px;
+            padding:2em;
+            & > i{
+                @include flexRowWrap;
+                margin: 0;
+                font-size: 1em
+            }
+            & > p{
+                @include flexRowWrap;
+                margin: .5em 0 1em 0;
+                text-align:center;
+            }
+            & > a{
+                $textSize: ('base': convertPts(13, 'px'));
+                @include flexRowWrap;
+                @include absoluteCenter;
+                @include pfButton(80%, 30px, $gnAzulMedio, $gnAzulMedio, $gnAzulMedio);
+                @include escaledFontFormat($textSize, 500, $gnBlanco);
+                text-decoration: none;
+                &:visited {
+                    text-decoration: none;
+                    color: $gnBlanco;
+                }
+            }
+        }
+    }
+}

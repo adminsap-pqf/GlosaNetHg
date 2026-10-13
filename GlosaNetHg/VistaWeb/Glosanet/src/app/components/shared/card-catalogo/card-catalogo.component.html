@@ -1,0 +1,60 @@
+<div class="flip-container" [class.hover]="hover">
+  <div class="flipper">
+    <div class="front">
+      <div>
+        <div>
+          <div (click)="editReport()"></div>
+          <div>
+            <img (click)="abrir()" src="./assets/images/bote_gris.svg" alt="">
+            <img (click)="abrir()" src="./assets/images/bote_rojo.svg" alt="">
+          </div>
+        </div>
+        <div (click)="editReport()">
+          <img src="./assets/images/reportes_personalizados_gris.svg" alt="">
+          <img src="./assets/images/reportes_personalizados_hover.svg" alt="">
+        </div>
+      </div>
+      <div (click)="editReport()">
+        <p>Creación: {{data.fechaCreacion | dateFormatSlash}}</p>
+        <p>{{data.nombre}}</p>
+        <p><span>Autor:</span>&nbsp;{{data.autor.nombre}}&nbsp;{{data.autor.apellido}}</p>
+        <p class="tooltip">Ver Descripción <span class="tooltiptext"><span>Descripción</span>&nbsp;{{data.descripcion}}</span></p>
+      </div>   
+    </div>
+  </div>
+</div>
+
+<div [id]="'id'+ data.idReportePersonalizado" class="w3-modal">
+  <div [ngClass]="'w3-modal-content ' + classAnimation + ' w3-card-4'" [style.height]="data.descripcion.length > 50 ? '355px' : '285px'">
+    <div class="modal">
+      <div>
+        <img (click)="closeModal()" src="./assets/images/cerrar_azul.svg" alt="x">
+      </div>
+      <div>
+        <img src="./assets/images/bote_eliminar.svg" alt="">
+        <p>¿Estas seguro que deseas eliminar el siguiente campo?</p>
+      </div>
+      <div>
+        <div>
+          <p>{{data.nombre}}</p>
+          <p class="tooltipModal"><span>Descripción:</span>&nbsp;{{data.descripcion}}<span class="tooltiptextModal">
+            <span>Descripción</span>&nbsp;{{data.descripcion}}</span>
+          </p>
+          <p>Autor:&nbsp;{{data.autor.nombre}}&nbsp;{{data.autor.apellido}}</p>
+        </div>
+        <div>
+          <p> {{data.fechaCreacion | dateFormatSlash}}</p>
+          <p>Creación</p>
+        </div>
+      </div>
+      <div>
+        <a class="btnCancelar" (click)="closeModal()">
+          <p>CANCELAR</p>
+        </a>
+        <a class="btnEliminar" (click)="eliminar()">
+          <p>ELIMINAR</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

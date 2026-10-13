@@ -1,0 +1,84 @@
+@import "../../../../variables";
+@import "../../../../mixins";
+@import "../../../../colors";
+
+
+
+.slideThree {
+    @include appleBlinkFix;
+    width: 40px;
+    height: 21px;
+    box-sizing: border-box;
+    position: relative;
+    border-radius: 50px;
+    transition: background-color 0.4s;
+    cursor: pointer;
+
+    &.active {
+        background-color: #3369B1;
+    }
+    &.activeGreen {
+        background-color: #37B34A;
+    }
+
+    &.inactive {
+        background-color: #D5DEE2;
+    } 
+
+    &:after {
+        color: #222E43;
+        position: absolute;
+        right: 10px;
+        z-index: 0;
+        font: 12px/26px Roboto, sans-serif;
+        font-weight: bold;
+        text-shadow: 1px 1px 0px rgba(255, 255, 255, .15);
+    }
+
+    &:before {
+        color: #3369B1;
+        position: absolute;
+        left: 10px;
+        z-index: 0;
+        font: 12px/26px Arial, sans-serif;
+        font-weight: bold;
+    }
+
+    label {
+        @include appleBlinkFix;
+        display: block;
+        position: relative;
+        box-sizing: border-box;
+        width: 22px;
+        height: 22px;
+        top: -1px;
+        left: -3px;
+        cursor: pointer;
+        position: absolute;
+        z-index: 1;
+        border:solid 1.5px white;
+        background-color: white;
+        //background-color: transparent;
+        border-radius: 50px;
+
+        transition: all 0.4s ease;
+        //box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.3);
+
+        box-shadow: 0 1px 3px 0 rgba(0,0,0,0.50);
+        & >img{
+            width: 35px;
+            height: 35px;
+            position: absolute;
+            left: -3px;
+            top: -21px;
+        }
+
+    }
+
+    input[type=checkbox] {
+        visibility: hidden;
+        &:checked+label {
+            left: calc((100% - (50% + 0px)) );
+        }
+    }
+}

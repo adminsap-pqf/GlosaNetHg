@@ -1,0 +1,84 @@
+@import "../../../../variables.scss";
+@import "../../../../mixins.scss";
+@import "../../../../colors.scss";
+
+:host{
+  font-size: $globalFont;
+  width: 100%;
+  .navs{
+    @include flexRow;
+    width: 100%;
+    font-size: '1.2em';
+    color: $gnAzulMedio;
+    font-weight: bold;
+    @include absoluteCenter;
+    height: 100%;
+    & > .items{
+      @include flexRow;
+      width: 100%;
+      @include absoluteCenter;
+      & > .itemSelected{
+        @include flexRow;
+        color:$gnAzulMedio;
+        width: 100%;
+        border-bottom: solid 5px $gnAzulMedio;
+        @include absoluteCenter;
+        height: 15px;
+        text-align: center;
+        & > img{
+          margin-right: 5px;
+        }
+      }
+      & > .itemGray{
+        @include flexRow;
+        color:$gnInactivo;
+        width: 100%;
+        border-bottom: solid 1px $gnInactivo;
+        @include absoluteCenter;
+        height: 15px;
+        text-align: center;
+        margin-bottom: 4px;
+        & > img{
+          margin-right: 5px;
+        }
+      }
+      & > .itemOk{
+        @include flexRow;
+        color:$gnAzulMedio;
+        width: 100%;
+        border-bottom: solid 1px $gnInactivo;
+        @include absoluteCenter;
+        height: 15px;
+        text-align: center;
+        margin-bottom: 4px;
+        & > img{
+          margin-right: 5px;
+        }
+      }
+    }
+    & > .items2{
+      @include flexRow;
+      width: 30% !important;
+      @include absoluteCenter;
+      & > .itemSelected{
+        color:$gnAzulMedio;
+        width: 100%;
+        border-bottom: solid 5px $gnAzulMedio;
+        @include absoluteCenter;
+        height: 15px;
+      }
+      & > .itemGray{
+        color:$gnInactivo;
+        width: 100%;
+        border-bottom: solid 1px $gnInactivo;
+        @include absoluteCenter;
+        height: 15px;
+        margin-bottom: 4px;
+      }
+    }
+
+
+
+   
+  }
+}

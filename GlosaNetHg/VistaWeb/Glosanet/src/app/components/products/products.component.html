@@ -1,0 +1,46 @@
+<section class="productsContainer">
+  <header class="title">
+    <div>
+      <div>
+        <img src="./assets/images/icono_azul_header.svg" alt="product_logo" />
+      </div>
+      <div>
+        <h1>Catálogo de Productos</h1>
+        <h6>{{totalProducts | acFormatNumber}}{{totalProducts === 1 ?  ' Producto' : ' Productos'}}</h6>
+      </div>
+    </div>
+    <div>
+      <a>Regresar</a>
+    </div>
+  </header>
+  <section class="container">
+    <div class="searchContainer">
+      <div>
+        <gn-search-bar [placeholder]="'Buscar por'"
+                       [searchValue]="searchTerm"
+                       (searchTermChanged)="changeSearchTerm($event)"></gn-search-bar>
+      </div>
+      <div>
+        <img (click)="isList = false"
+             [src]="isList ? './assets/images/vista_cuadricula_gris.svg' : './assets/images/vista_cuadricula_azul.svg'"
+             alt="control" />
+        <img (click)="isList = true"
+             [src]="isList ? './assets/images/vista_lista_azul.svg' : './assets/images/vista_lista_gris.svg'"
+             alt="control" />
+      </div>
+    </div>
+
+    <div class="productsList">
+      <gn-product-list [buffer]="buffer"
+                       [firstItem]="firstItem"
+                       [grandTotal]="grandTotal"
+                       [currentTotal]="currentTotal"
+                       [currentPage]="currentPage"
+                       [loading]="loading"
+                       [isList]="isList"
+                       [getData]="getData"
+                       (emitCurrentPage)="handleCurrentPage($event)"
+                       (emitLoading)="handleLoading($event)"></gn-product-list>
+    </div>
+  </section>
+</section>

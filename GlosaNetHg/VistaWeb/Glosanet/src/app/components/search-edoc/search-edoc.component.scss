@@ -1,0 +1,137 @@
+@import '../../../variables';
+@import '../../../mixins';
+@import '../../../colors';
+
+:host {
+    width: 100%;
+    .searchEdocContainer {
+        @include flexRowWrap;
+        @include alignStart;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0 25px;
+        & > .header {
+            @include flexRow;
+            @include absoluteCenter;
+            width: 100%;
+            height: 90px;
+            & > div:nth-of-type(1) {
+                @include flexRow;
+                width: 60px;
+                & > img:nth-of-type(1) {
+                    width: 45px;
+                }
+            }
+            & > div:nth-of-type(2) {
+                @include flexRow;
+                width: calc(100% - 60px);
+                & > p:nth-of-type(1) {
+                    @include fontFormat(21px, 900, #3B8EDE);
+                }
+            }
+        }
+        & > .container {
+            @include flexRowWrap;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0 0 40px;
+            & > .filters {
+                @include flexRow;
+                @include absoluteCenter;
+                width: 100%;
+                background-color: #ECF0F3;
+                box-sizing: border-box;
+                justify-content: space-between;
+                margin-bottom: 25px;
+                padding: 25px 20px;
+
+                & > .filterBy {
+                    @include flexRowWrap;
+                    @include absoluteCenter;
+                    width: calc((100% / 4) - 30px);
+                    box-sizing: border-box;
+                    order: 1;
+                    padding-right: 7.5px;
+
+                    & > label:nth-of-type(1) {
+                        width: 100%;
+                        @include fontFormat(13px, 300, #818192);
+                        margin-right: 0;
+                        text-align: left;
+                    }
+
+                    & > div:nth-of-type(1) {
+                        width: 100%;
+                        & > input {
+                            @include fontFormat(12px, 300, #3369B1);
+                            width: 100%;
+                            height: 20px;
+                            background-color: rgba(255, 255, 255, 0);
+                            border-top: none;
+                            border-left: none;
+                            border-right: none;
+                            border-bottom: solid 0.75px rgb(152, 169, 180);
+                            outline: none;
+                            text-align: left;
+                        }
+                    }
+                }
+
+                & > .filterByDate {
+                    @include flexRowWrap;
+                    @include absoluteCenter;
+                    width: calc((100% / 4) - 30px);
+                    box-sizing: border-box;
+                    order: 2;
+                    padding-right: 7.5px;
+
+                    & > label {
+                        width: 100%;
+                        @include fontFormat(13px, 300, #818192);
+                        margin-right: 0;
+                        text-align: left;
+                    }
+
+                    & > div:nth-of-type(1) {
+                        width: 100%;
+                        position: relative;
+
+                        & > img {
+                            width: 9px;
+                            position: absolute;
+                            top: 5px;
+                            right: 13px;
+                            display: none;
+                        }
+                    }
+                }
+
+                & > .apply {
+                    @include flexRow;
+                    @include absoluteCenter;
+                    width: 120px;
+                    justify-content: flex-end;
+                    order: 2;
+
+                    & > a:nth-of-type(1) {
+                        @include flexRow;
+                        @include absoluteCenter;
+                        @include pfButton(100px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+                        color: $gnBlanco;
+                        font-size: 14px;
+                        font-weight: normal;
+
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+            & > .table {
+                @include flexRow;
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    }
+}

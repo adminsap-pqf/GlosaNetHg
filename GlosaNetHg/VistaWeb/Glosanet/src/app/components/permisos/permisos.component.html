@@ -1,0 +1,171 @@
+<div class="gn-permisos fadeIn animated">
+
+  <!-- <div class="subTitle">
+    <div>
+      <span class="spTitle">Previsión Vigente</span>
+      <span class="spSubTitle">Enero - Diciembre 2018</span>
+    </div>
+    <div>
+      <div class="btnGlosa" (click)="redirectToForecastNotice()">
+        <a>Agregar Previsión</a>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="title">
+    <div>
+      <div>
+        <img src="./assets/images/prevision_header.svg" alt="">
+        <div>Previsiones
+          <p>
+            <span>Previsión {{prevision.vigencia}} · Folio {{prevision.folioPrevision}}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <a *ngIf="!prevision.proxPrevision" (click)="redirectToForecastNotice()" [style.width]="'220px'">GENERAR PREVISIÓN {{nextYear}}</a>
+    <a *ngIf="prevision.proxPrevision" (click)="redirectToMonitoreo()">PREVISIÓN {{nextYear}}</a>
+  </div>
+
+  <!--  <div class="dvPrevision">
+     <div class="dvSearch">
+       <gn-search-bar [searchValue]="searchTerm" [placeholder]="placeholder" [reset]="resetSearch" (searchTermChanged)="searchTermChanged($event)" ></gn-search-bar>
+       <div>
+         <div class="btnGlosa" (click)="searchTermChanged(searchTerm)" >
+           Buscar
+         </div>
+       </div>
+     </div>
+     <div class="dvProductos">
+       <div *ngFor="let item of array2; index as i;">
+         <div>
+           <div class="codigo">{{item.codigo}}</div>
+           <span class="concepto" [class]="item.show ? 'concepto bounce animated show' : 'concepto hide'" [ngStyle]="{'text-transform': 'uppercase'}" >{{item.codigo +" "+ item.nombre}} </span>
+           <span class="moreText" [style.display]="truncateText(item.concepto)" (click)="showText(item)">
+             <svg *ngIf="!item.show" aria-hidden="true" data-prefix="fal" data-icon="plus-square" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-plus-square fa-w-14 fa-2x">
+               <path fill="currentColor" d="M400 64c8.8 0 16 7.2 16 16v352c0 8.8-7.2 16-16 16H48c-8.8 0-16-7.2-16-16V80c0-8.8 7.2-16 16-16h352m0-32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-60 206h-98v-98c0-6.6-5.4-12-12-12h-12c-6.6 0-12 5.4-12 12v98h-98c-6.6 0-12 5.4-12 12v12c0 6.6 5.4 12 12 12h98v98c0 6.6 5.4 12 12 12h12c6.6 0 12-5.4 12-12v-98h98c6.6 0 12-5.4 12-12v-12c0-6.6-5.4-12-12-12z" class=""></path>
+             </svg>
+             <svg *ngIf="item.show" aria-hidden="true" data-prefix="fal" data-icon="minus-square" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-minus-square fa-w-14 fa-2x">
+               <path fill="currentColor" d="M400 64c8.8 0 16 7.2 16 16v352c0 8.8-7.2 16-16 16H48c-8.8 0-16-7.2-16-16V80c0-8.8 7.2-16 16-16h352m0-32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-60 242c6.6 0 12-5.4 12-12v-12c0-6.6-5.4-12-12-12H108c-6.6 0-12 5.4-12 12v12c0 6.6 5.4 12 12 12h232z" class=""></path>
+             </svg>
+           </span>
+         </div>
+         <div class="dvBarra">
+           <div class="dvBarraGris">
+             <div class="rubberBand animated" *ngIf="((item.total/item.cantidad)*100) < 60" [style.width]="((item.total/item.cantidad)*100) + '%'" style="background: #37B34A;"></div>
+             <div class="rubberBand animated" *ngIf="((item.total/item.cantidad)*100) >= 60 && ((item.total/item.cantidad)*100) < 80" [style.width]="((item.total/item.cantidad)*100) + '%'" style="background: #FFA637;"></div>
+             <div class="rubberBand animated" *ngIf="((item.total/item.cantidad)*100) >= 80"  [style.width]="((item.total/item.cantidad)*100) + '%'" style="background: #E52342;"></div>
+           </div>
+           <div><span>{{item.total}} {{item.unidad}} de {{item.cantidad}} {{item.unidad}}</span>
+           </div>
+         </div>
+         <div class="dvHistorial">
+           <a (click)="historialImportaciones()"><span><img />Historial de importaciones</span></a>
+           <a (click)="previsionExtemporanea()" onclick="document.getElementById('id01').style.display='block'"><span *ngIf="((item.total/item.cantidad)*100) >= 60"><img/>Crear Previsión Extemporánea</span></a>
+         </div>
+       </div>
+     </div>
+   </div> -->
+
+  <div class="filter-container">
+    <div class="wizard">
+      <!-- <gn-wizard #wizard [lstItems]="lstItems" [pWizard]="pWizard" [check]="false" [tabs]="true" (tabSelected)="tab($event)"></gn-wizard> -->
+      <gn-filtro-tiempo #wizard id="tiempo" [lstYears]="lstItems" (emitYear)="tab($event)"></gn-filtro-tiempo>
+    </div>
+  </div>
+
+  <div class="search">
+    <div class="searchBar">
+      <gn-search-bar [searchValue]="searchTerm" [placeholder]="placeholder" [reset]="resetSearch" (searchTermChanged)="searchTermChanged($event)" ></gn-search-bar>
+    </div>
+
+    <img *ngIf="cuadricula" (click)="cuadricula = true" src="./assets/images/vista_cuadricula_azul.svg" alt="">
+    <img *ngIf="!cuadricula" (click)="cuadricula = true" src="./assets/images/vista_cuadricula_gris.svg" alt="">
+    <img *ngIf="!cuadricula" (click)="cuadricula = false" src="./assets/images/vista_lista_azul.svg" alt="">
+    <img *ngIf="cuadricula" (click)="cuadricula = false" src="./assets/images/vista_lista_gris.svg" alt="">
+  </div>
+
+  <div class="body1" *ngIf="cuadricula" >
+    <div class="item" *ngFor='let item of array2; let i = index' (click)="historialImportaciones(item.idProducto)">
+      <div class="img">
+        <img id="img1" src="./assets/images/prevision_gris.svg" alt="">
+        <img id="img2" src="./assets/images/prevision_hover_azul.svg" alt="">
+      </div>
+      <div class="bodyItem" [ngStyle]="{'position':'relative'}">
+        <p [ngStyle]="{'font-size':'14px'}"> <label [ngStyle]="{'font-weight':'700'}"># {{i+1}} · </label> <label>{{item.codigo}}  · </label> {{item.nombre}} </p>
+        <div class="bar">
+          <div class="contentBar animated bounceInLeft" [style.width]="((item.totalProducto/item.cantidad)*100) + '%'">
+          </div>
+        </div>
+        <p [ngStyle]="{'font-size':'10px'}" ><label >{{item.totalProducto}} {{item.unidad}} de &nbsp;</label><label>{{item.cantidad}} {{item.unidad}}</label></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="body2" *ngIf="!cuadricula" >
+    <div class="item" *ngFor='let item of array2; let i = index' (click)="historialImportaciones(item.idProducto)">
+
+      <div class="img">
+        <img id="img1" src="./assets/images/prevision_gris.svg" alt="">
+        <img id="img2" src="./assets/images/prevision_hover_azul.svg" alt="">
+
+      </div>
+      <div class="bodyItem">
+        <div class="part1">
+          <p><label># {{i+1}}  · </label>  <label>{{item.codigo}}  · </label>   <label>{{item.nombre}}</label> </p>
+          <div class="bar">
+            <div class="contentBar animated bounceInLeft" [style.width]="((item.totalProducto/item.cantidad)*100) + '%'">
+            </div>
+          </div>
+          <p><label >{{item.totalProducto}} {{item.unidad}} de &nbsp;</label><label>{{item.cantidad}} {{item.unidad}}</label></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <label>{{array2.length == 1 ? "# " + array2.length + " Producto" : "# " +array2.length + " Productos"}}</label>
+  </div>
+
+</div>
+
+<div id="id01" class="w3-modal">
+  <div [ngClass]="'w3-modal-content ' + classAnimation + ' w3-card-4'">
+    <div class="modal">
+      <div class="title">
+        <p>
+          <label>Agregar Previsión Extemporánea</label>
+        </p>
+        <img (click)="cerrarPrevison()" src="./assets/images/cerrar_azul.svg" alt="" onclick="setTimeout(function(){document.getElementById('id01').style.display='none'}, 198)" [ngStyle]="{'margin-right':'-18px'}">
+      </div>
+      <div class="header">
+        <div class="label">
+          <label>Diluyente p/Dynastat Iny Pitex 8(mg)</label>
+        </div>
+      </div>
+      <div class="body" >
+        <form [formGroup]="modalForm" autocomplete="off">
+          <div class="cForm" [ngStyle]="{'width':'70%'}">
+            <label>Cantidad</label>
+            <input type="text" name="" value="">
+          </div>
+          <div class="cForm" [ngStyle]="{'align-items': 'flex-end', 'width':'30%'}">
+            <label [ngStyle]="{'margin-bottom':'6px', 'width': '80px'}">Unidad</label>
+            <div class="droplist" [ngStyle]="{'width': '80px'}">
+              <gn-drop-list (valueDropList)="dropList($event)" [items]="itemsDropList" [isSearch]="false" [isCategory]="true" [align]="'left'"
+                            [itemSelect]="defaultSelected1" [fontSize]="'12px'"></gn-drop-list>
+            </div>
+          </div>
+          <div class="cForm" [ngStyle]="{'width':'100%', 'margin-top': '5px'}">
+            <label>Descripción</label>
+            <textarea [ngStyle]="{'height':'80px'}"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="footer">
+        <a class="cancelar">CANCELAR</a>
+        <a class="guardar">AGREGAR</a>
+      </div>
+    </div>
+  </div>
+</div>

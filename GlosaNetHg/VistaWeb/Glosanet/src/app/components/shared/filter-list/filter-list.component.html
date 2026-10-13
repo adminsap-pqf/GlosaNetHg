@@ -1,0 +1,16 @@
+<img src="./assets/images/ordenar_por.svg" alt="" (click)="open = !open">
+<div class="container" *ngIf="open">
+  <div class="triangulo">
+
+  </div>
+  <div class="triangulo2">
+
+  </div>
+  <label >Ordenar Por:</label>
+  <ul class="listItems">
+
+    <li [ngClass]="classActive[i] ? 'itemsActive' : 'items'" *ngFor="let item of items; let i = index" (click)="select(item, i )">
+        <p ><img src="./assets/images/check_amarillo.svg" alt="" [style.opacity]="classActive[i] ? 1 : 0"><label>{{item.nombre}}</label></p>
+    </li>
+  </ul>
+</div>

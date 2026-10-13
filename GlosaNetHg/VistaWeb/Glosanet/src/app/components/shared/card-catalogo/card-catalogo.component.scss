@@ -1,0 +1,334 @@
+@import "../../../../variables.scss";
+@import "../../../../mixins.scss";
+@import "../../../../colors.scss";
+
+:host{
+  @include flexColumn;
+  font-size: $globalFont;
+  width: 225px;
+  cursor: pointer;
+
+  .front {
+    z-index: 2;
+    & > div:nth-of-type(1){
+      @include flexColumn;
+      @include absoluteCenter;
+      box-sizing: border-box;
+      width: 225px;
+      height: 95px;
+      border: 0.5px solid $grisLinea;
+      border-bottom: 0px;
+      transition: .3s ease-in-out;
+      & > div:nth-of-type(1){
+        @include flexRow;
+        @include absoluteCenter;
+        box-sizing: border-box;
+        width: 100%;
+        justify-content: flex-end;
+        & > div:nth-of-type(1){
+          width: 100%;
+          height: 20px;
+        }
+        & > div:nth-of-type(2){
+          @include flexRow;
+          @include absoluteCenter;
+          width: 20px;
+          height: 20px;
+          margin-right: 10px;
+          & > img:nth-of-type(2){
+            width: 20px;
+            height: 20px;
+            display: none;
+          }
+        }
+
+        & > div:nth-of-type(2):hover{
+          & > img:nth-of-type(1){
+            display: none;
+          }
+          & > img:nth-of-type(2){
+            display: inherit;
+          }
+        }
+      }
+      & > div:nth-of-type(2){
+        @include flexRow;
+        @include absoluteCenter;
+        width: 100%;
+        & > img:nth-of-type(1){
+          width: 47px;
+        }
+        & > img:nth-of-type(2){
+          width: 47px;
+          display: none;
+        }
+      }
+    }
+    & > div:nth-of-type(2){
+      @include flexColumn;
+      @include absoluteCenter;
+      justify-content: flex-start;
+      box-sizing: border-box;
+      background: $gnBlanco;
+      width: 225px;
+      height: 130px;
+      border: 0.5px solid $grisLinea;
+      border-top: 0px;
+      padding: 12px 20px;
+      transition: .3s ease-in-out;
+      & > p:nth-of-type(1){
+        font-size: 1em;
+        color: $verdeBoton;
+        font-weight: "bold";
+        margin-bottom: 5px;
+      }
+      & > p:nth-of-type(2){
+        font-size: 1em;
+        margin-top: 11px;
+        height: 30px;
+        text-align: center;
+        color: $gnAzulMedio;
+      }
+      & > p:nth-of-type(3){
+        margin-top: 11px;
+        font-size: 1em;
+        color: $gnGrisRata;
+        & > span{
+          color: $gnDorado;
+        }
+      }
+      & > p:nth-of-type(4){
+        margin-top: 10px;
+        font-size: 1em;
+        color: $gnDorado;
+      }
+    }
+  }
+
+  .front:hover{
+    & > div:nth-of-type(1){
+      height: 85px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      & > div:nth-of-type(2){
+        & > img:nth-of-type(1){
+          display: none;
+        }
+        & > img:nth-of-type(2){
+          height: 50px;
+          display: inherit;
+        }
+      }
+    }
+    & > div:nth-of-type(2){
+      height: 140px;
+      background: $gnAzulMedio;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      & > p:nth-of-type(1){
+        color: $gnBlanco;
+      }
+      & > p:nth-of-type(2){
+        color: $gnBlanco;
+      }
+      & > p:nth-of-type(3){
+        color: $gnDorado;
+      }
+      & > p:nth-of-type(4){
+        color: $gnBlanco;
+      }
+    }
+  }
+
+  .tooltip {
+    position: relative;
+    display: inline-block;
+  }
+
+  .tooltipModal {
+    position: relative;
+    display: inline-block;
+  }
+
+
+  .tooltip .tooltiptext {
+    border: 1px solid #D5DEE2;
+    visibility: hidden;
+    width: 160px;
+    background-color: $gnAzulObscuro;
+    color: #fff;
+    text-align: left  ;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 5px;
+    margin-left: -60px;
+    padding: 10px 15px;
+    border-radius:2px;
+
+    /* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
+    opacity: 0;
+    transition: opacity 1s;
+    box-shadow: 1px 3px 4px 0 rgba(53,53,53,0.50);
+
+    & > span{
+      color: $gnDorado;
+    }
+  }
+
+
+  .tooltipModal .tooltiptextModal {
+    border: 1px solid #D5DEE2; 
+    visibility: hidden;
+    min-width: 50px;
+    max-width: 300px;
+    background-color: $gnAzulObscuro;
+    color: #fff;
+    text-align: left  ;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 5px;
+    margin-left: -15px;
+    padding: 10px 15px;
+    border-radius:4px;
+
+    /* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
+    opacity: 0;
+    transition: opacity 1s;
+    box-shadow: 1px 3px 4px 0 rgba(53,53,53,0.50);
+
+    & > span{
+      color: $gnDorado;
+    }
+  }
+
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .tooltipModal:hover .tooltiptextModal {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+@media screen and (min-width: 1366px) {
+  :host{
+    width: 245px;
+    .flip-container, .front, .back {
+      width: 245px;
+    }
+    .front {
+      & > div:nth-of-type(1){
+        width: 245px;
+      }
+      & > div:nth-of-type(2){
+        width: 245px;
+      }
+    }
+  }
+}
+
+.modal{
+  @include flexColumn;
+  @include absoluteCenter;
+
+  & > div:nth-of-type(1){
+    @include flexRow;
+    @include absoluteCenter;
+    width: 100%;
+    justify-content: flex-end;
+    padding: 20px 20px 0px 20px;
+    box-sizing: border-box;
+  }
+  & > div:nth-of-type(2){
+    @include flexRow;
+    @include absoluteCenter;
+    align-items: flex-end;
+    width: 100%;
+    color: $gnAzulBajo;
+    font-size: 1.7em;
+    padding: 0px 40px 23px 40px;
+    box-sizing: border-box;
+    & > p{
+      padding-left: 10px;
+      font-size: 21px;
+      font-weight: 500;
+    }
+
+  }
+  & > div:nth-of-type(3){
+    @include flexRow;
+    @include absoluteCenter;
+    padding: 14px 40px;
+    width: 100%;
+    background: $gnAzulFondo;
+    box-sizing: border-box;
+    font-size: 12px;
+    & > div:nth-of-type(1){
+      @include flexColumn;
+      width: 78%;
+      & > p:nth-of-type(1){
+        color: $gnAzulMedio;
+        padding-bottom: 5px;
+      }
+      & > p:nth-of-type(2){
+        color: $gnGrisRata;
+        padding-bottom: 5px;
+        & > span:nth-of-type(1){
+          color: $gnDorado;
+        }
+      }
+      & > p:nth-of-type(3){
+        color: $gnAzulMedio;
+      }
+    }
+    & > div:nth-of-type(2){
+      @include flexColumn;
+      @include absoluteCenter;
+      width: 22%;
+      height: 100%;
+      & > p:nth-of-type(1){
+        width: 100%;
+        text-align: right;
+        color: $gnVerdeSemaforo ;
+      }
+      & > p:nth-of-type(2){
+        width: 100%;
+        text-align: right;
+        color: $gnGrisRata;
+      }
+    }
+  }
+  & > div:nth-of-type(4){
+    @include flexRow;
+    @include absoluteCenter;
+    box-sizing: border-box;
+    justify-content: space-between;
+    width: 100%;
+    padding: 25px;
+    & > .btnCancelar{
+      margin-top: 10px;
+      @include pfButton(145px, 30px, $gnAzulMedio, $gnAzulMedio, $gnAzulMedio, 0px);
+      @include flexRow;
+      @include absoluteCenter;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: normal;
+      color:$gnBlanco;
+    }
+
+    & > .btnEliminar{
+      margin-top: 10px;
+      @include pfButton(145px, 30px, $gnDorado, $gnDorado, $gnDorado, 0px);
+      @include flexRow;
+      @include absoluteCenter;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: normal;
+      color:$gnBlanco;
+    }
+  }
+}

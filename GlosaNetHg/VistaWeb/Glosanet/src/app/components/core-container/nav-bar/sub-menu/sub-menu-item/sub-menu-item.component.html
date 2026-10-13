@@ -1,0 +1,13 @@
+<div (click)="navigateToRoute()" [ngClass]="activeRouteClass" *ngIf="item.key !== 'title' && item.section" [style.width]="!item.section ? '0': null">
+  <!-- <img src="{{item.iconPath}}" [style.margin-left]="item.iconPath == './assets/images/asset_7.svg' ? '15px' : '0'"> -->
+  <div>
+    <p>{{item.translatedName}}</p>
+    <!-- <span>{{item.itemsCount}}</span> -->
+
+  </div>
+</div>
+
+<div (click)="navigateToRoute()" [ngClass]="activeRouteClass" *ngIf="item.key == 'title' && item.section" [style.width]="!item.section ? '0': null">
+  <p>{{item.translatedName}}</p>
+  <!-- <span>{{item.itemsCount | number:'1.0-0'}}</span> -->
+</div>

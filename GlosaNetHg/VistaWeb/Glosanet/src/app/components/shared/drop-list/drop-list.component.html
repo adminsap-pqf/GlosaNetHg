@@ -1,0 +1,55 @@
+<div [ngClass]="dropListClass" >
+  <div class="container-drop">
+    <div class="Title" [ngClass]="activeValid ? 'inValidBorderBottom' : ''" (click)="openDropList($event)" [style.border-bottom]="lineaColor" [style.color]="color">
+      <p *ngIf="!radio" [ngClass]="align" [style.font-size]="fontSize" [style.font-weight]="fontWeight" [style.font-family]="fontFamily">{{title}}</p>
+      <p *ngIf="radio" [ngClass]="align" [style.font-size]="fontSize" [style.font-weight]="fontWeight" [style.font-family]="fontFamily"> <span [ngStyle]="{'font-weight':'600'}">{{title1}}</span> <span [ngStyle]="{'color':'#818192', 'font-weight': '300'}">/</span> <span [ngStyle]="{'color':'#3B8EDE', 'font-weight': '300'}">{{title2}}</span>   </p>
+      <img *ngIf="color !== '#FFFFFF' && color !== '#37B34A' && color !== '#D5DEE2' && flecha" src="./assets/images/drop_list.svg" alt="">
+      <img *ngIf="(color == '#FFFFFF' || color == '#D5DEE2') && flecha" src="./assets/images/flecha_blanca.svg" alt="">
+      <img *ngIf="color == '#37B34A' && flecha" src="./assets/images/flecha_verde.svg" alt="">
+    </div>
+
+      <!-- normal -->
+    <div [hidden]="!showDropList" class="content" [style.width]="widthContent" [style.margin-left]="marginLeftContent" *ngIf="!radio">
+      <div [ngClass]="'triangulo '+size">
+      </div>
+      <div [ngClass]="'triangulo2'">
+      </div>
+      <div class="search" *ngIf="isSearch">
+        <gn-search-bar [searchValue]="searchTerm" (searchTermChanged)="changeSearchTerm($event)" [placeholder]="placeholder" [reset]="resetSearch"></gn-search-bar>
+      </div>
+      <div>
+        <div class="dropper">
+          <ul class="lista"  *ngIf="(arrayAux != undefined)">
+            <li *ngFor="let item of arrayAux" [style.align-items]="'left'" [ngClass]="(isCategory && item.tipo =='cat')?'category tooltip':'tooltip'" (click)="selectItem(item, i , $event)" [style.font-size]="fontSize">{{item.nombre}} <span class="tooltiptext" *ngIf="tooltip">{{item.nombre}}</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+      <!-- radio buttons -->
+    <div [hidden]="!showDropList" class="content" [style.width]="widthContent" [style.margin-left]="marginLeftContent" *ngIf="radio">
+        <div [ngClass]="'triangulo '+size">
+        </div>
+        <div [ngClass]="'triangulo2'">
+        </div>
+        <div class="search" *ngIf="isSearch">
+          <gn-search-bar [searchValue]="searchTerm" (searchTermChanged)="changeSearchTerm($event)" [placeholder]="placeholder" [reset]="resetSearch"></gn-search-bar>
+        </div>
+        <div>
+          <div class="dropper">
+            <ul class="lista"  *ngIf="(arrayAux != undefined)">
+                <li *ngFor="let item of arrayAux; let i = index" [ngClass]="(isCategory && item.tipo =='cat')?'category tooltip':'tooltip'" (click)="selectItem(item,i, $event)" [style.font-size]="fontSize" [ngStyle]="{'display':'flex', 'align-items':'center'}">
+                    <img *ngIf="item.tipo !== 'cat'" [style.width]="'10px'" [src] = "radioArray[i] ? './assets/images/radio_selected.svg':'./assets/images/radio_unselected.svg'"
+                    alt="check">
+                  {{item.nombre}}
+                </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+  </div>
+  <!-- <label [ngClass]="effectS">Label</label> -->
+</div>

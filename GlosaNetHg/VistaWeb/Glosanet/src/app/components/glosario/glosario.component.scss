@@ -1,0 +1,166 @@
+@import "../../../variables.scss";
+@import "../../../mixins.scss";
+@import "../../../colors.scss";
+
+:host {
+  font-size: $globalFont;
+
+  
+  & > div:nth-of-type(1){
+    @include flexRow;
+    margin: 0px 25px 17px 25px;
+    border-bottom: 2px solid rgb(240,242,244);
+    & > img{
+      margin: 25px 10px 25px 0px;
+    }
+    & > p{
+      @include flexRow;
+      @include absoluteCenter;
+      width: 100%;
+      color: $gnAzulBajo;
+      font-weight: 500;
+      font-size: 21px;
+      justify-content: space-between;
+    }
+
+    & > .boton{
+      @include flexRow;
+      @include absoluteCenter;
+      justify-content: space-between;
+      align-items: center;
+      & > .btnCalendario{
+        @include pfButton(165px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+        @include flexRow;
+        @include absoluteCenter;
+        cursor: pointer;
+        font-size: 1.2em;
+        margin-top: 10px;
+        font-weight: normal;
+        color:$gnBlanco;
+      }
+    }
+  }
+
+  & > div:nth-of-type(2){
+    @include flexColumn;
+    margin: 0px 25px 0px 25px;
+    & > div:nth-of-type(1){
+      @include flexRow;
+      margin-top: 45px;
+      & > div:nth-of-type(1){
+        width: 35%;
+        & > p:nth-of-type(1){
+          margin-right: 20px;
+          padding-bottom: 8px;
+          border-bottom: 2px dashed $gnInactivo;
+          font-size: 19px;
+          font-weight: 500;
+          color: $gnAzulMedio;
+        }
+        & > div:nth-of-type(1){
+          border-right: 2px dashed $gnInactivo;
+          height: calc(100vh - 350px);
+          overflow-y: scroll;
+          margin-left: -25px;
+          & > .item{
+            color: $gnGrisRata;
+            font-size: 14px;
+            cursor: pointer;
+            & > div{
+              margin-left: 25px;
+              margin-right: 20px;
+              border-bottom: 2px dashed $gnInactivo;
+              @include multiLineTextTruncate(1,41px,41px,#FFF);
+            }
+          }
+
+          & > .item:hover{
+            background-color: $gnAzulFondo;
+            color: #3369B1;
+          }
+
+          & > .itemActive{
+            background-color: $gnAzulFondo;
+            color: #3369B1;
+            border-right: 2px dashed $gnInactivo;
+            font-size: 14px;
+            & > div{
+              margin-left: 25px;
+              margin-right: 20px;
+              border-bottom: 2px dashed $gnInactivo;
+              @include multiLineTextTruncate(1,41px,41px,#FFF);
+              & > label:nth-of-type(1){
+                color: $gnDorado;
+              }
+            }
+          }
+
+        }
+      }
+      & > div:nth-of-type(2){
+        width: 65%;
+        margin: 0px 0px 0px 20px;
+        & > p:nth-of-type(1){
+          color : $gnDorado;
+          font-size: 15px;
+          font-weight: 500;
+        }
+        & > p:nth-of-type(2){
+          color : $gnAzulMedio;
+          font-size: 19px;
+          font-weight: 500;
+          margin-top: 3px;
+          padding-bottom: 4px;
+          border-bottom: 2px dashed $gnInactivo;
+          @include multiLineTextTruncate(1,31px,31px,#FFF);
+          
+        }
+        & > .multiTable{
+          height: calc(100vh - 370px);
+          overflow-y: scroll;
+          padding-bottom: 10px;
+          & > div{
+            margin-top: 11px;
+            & > p{
+              color: $gnAzulMedio;
+              font-size: 14px;
+              font-weight: 500;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  
+}
+
+
+
+
+.searchBar{
+  width: 300px;
+  height: 30px;
+  box-sizing: border-box;
+  position: absolute;
+  right: 25px;
+}
+
+
+
+
+.searchWord{
+  background-color: #3369B1;
+}
+
+
+
+:host ::ng-deep .highlight{
+  background-color: rgb(235, 223, 144);
+}
+
+ 
+
+
+
+

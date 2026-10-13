@@ -1,0 +1,195 @@
+<div class="header">
+  <div class="title">
+    <p>
+      <label (click)="irPermisos()" [ngStyle]="{'cursor':'pointer'}">Previsión {{yearActual}} > <span (click)="irMonitoreo()">Tramitación Previsión {{nextYear}} ></span> </label>
+      <label>  Listado de Productos {{nextYear}}</label>
+    </p>
+  </div>
+  <div class="product">
+    <div class="item-producto">
+      <div class="img">
+        <img id="img1" src="./assets/images/prevision_gris.svg" alt="">
+      </div>
+      <div class="text">
+        <p>
+          <label>Listado de Productos · &nbsp;</label>
+          <label>Previsión {{nextYear}}</label>
+        </p>
+        <p>Folio de Previsión {{prevision.folioPrevision}} · Folio COFEPRIS {{prevision.citaCofepris | dateFormatSlash}}  </p>
+        <p>Gestor de Previsión: {{prevision.usuario !== null ? prevision.usuario.nombre + ' ' + prevision.usuario.apellido : ''}} </p>
+
+        <a (click)="irMonitoreo()" [style.border]="'1px solid #def1df'">Tramitación</a>
+      </div>
+    </div>
+    <div class="boton">
+      <a (click)="irPermisos()">REGRESAR</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="triangulo">
+
+  </div>
+  <div class="section" >
+
+    <div class="listado">
+
+      <div class="title">
+        <label>Listado de Productos</label>
+        <a [style.color]="prevision.publicado ? '#D5DEE2': null" [style.pointer-events]="prevision.publicado ? 'none':'auto'" (click)="irAgregarProducto()">AGREGAR PRODUCTO</a>
+      </div>
+      <div class="resumen">
+        <div class="col"><p>{{lst.length}}</p><p>Productos Totales</p></div>
+        <div *ngIf="lstKG > 0" class="col"><p>{{lstKG | acFormatNumber3decimal}}</p><p>Kg Totales</p></div>
+        <div *ngIf="lstL > 0" class="col"><p>{{lstL | acFormatNumber3decimal}}</p><p>L Totales</p></div>
+        <div *ngIf="lstPZA > 0" class="col"><p>{{lstPZA | acFormatNumber}}</p><p>Piezas Totales</p></div>
+      </div>
+      <div class="searchBar">
+        <gn-search-bar [searchValue]="searchTerm" (searchTermChanged)="changeSearchTerm($event)" [placeholder]="placeholder" [reset]="resetSearch"></gn-search-bar>
+      </div>
+      <div class="productos">
+        <div class="headerProducts">
+          <div>#</div>
+          <div>Producto</div>
+          <div>Tipo</div>
+          <div>Cant. Previsión</div>
+          <div></div>
+          <div></div>
+        </div>
+
+        <div #body1 class="body2">
+          <div *ngIf="lst.length == 0" [ngStyle]="{'width':'100%','height':'330px', 'font-size': '35px','color': '#3369B1', 'font-weight':'600', 'opacity':'0.3', 'display': 'flex', 'justify-content': 'center','align-items': 'center'}">
+            No se han agregado productos
+          </div>
+
+          <virtual-scroller *ngIf="lst.length != 0" [items]="buffer" (vsUpdate)="scrollItems = $event" (vsEnd)="fetchMore($event)">
+
+            <div [ngClass]="classItem[i]" *ngFor='let item of scrollItems; let i = index' >
+
+              <div> <p>{{"# "+ item.index}}</p> </div>
+              <div>
+                <div class="img">
+                  <img id="img1" src="./assets/images/icono_gris_tarjeta.svg" alt="">
+                  <img id="img2" src="./assets/images/icono_azul_tarjeta.svg" alt="">
+                </div>
+                <p>
+                  <label>{{item.codigo + " ·"}}</label>
+                  <label>{{item.nombre}}</label>
+                </p>
+              </div>
+              <div>{{item.tipoProducto == 1 ? 'Controlado' : 'No Controlado'}}</div>
+              <div>{{item.cantidad | acFormatNumber}}&nbsp;{{item.unidad}}</div>
+              <div><img (click)="nuevoProducto(item)" onclick="document.getElementById('id01').style.display='block'" id="img2" src="./assets/images/editar_listado.svg" alt=""></div>
+              <div><img (click)="eliminarProducto(item)" id="img2" src="./assets/images/cerrar_listado.svg"  alt=""></div>
+
+            </div>
+
+            <!-- <div *ngIf="loading" class="loader">Loading...</div> -->
+            <div *ngIf="loading"  class="container-loader" [style.height]="buffer.length == 0 ? '100%': null">
+              <div  class='loader'>
+                <div class='loading-square'></div>
+                <div class='loading-square'></div>
+                <div class='loading-square'></div>
+                <div class='loading-square'></div>
+              </div>
+            </div>
+          </virtual-scroller>
+
+          <div id="inicio" (click)="scrollTo()">
+            <img src="./assets/images/flecha_blanca.svg" alt="">
+          </div>
+
+        </div>
+      </div>
+      <label [ngStyle]="{'margin':'10px 0', 'display':'flex', 'justify-content': 'center', 'color':'#3369B1', 'font-size':'13px', 'font-weight':'700'}">{{lst.length == 1 ? '# ' + lst.length + ' Producto': '# ' + lst.length + ' Productos'}}</label>
+      <a class="pub" [style.background-color]="lst.length > 0 && !prevision.publicado ? '' :'#D5DEE2'" [style.pointer-events]="lst.length > 0 && !prevision.publicado ? 'auto' :'none'" (click)="guardarProductos()">PUBLICAR</a>
+    </div>
+
+  </div>
+</div>
+
+<div id="id01" class="w3-modal">
+  <div [ngClass]="'w3-modal-content ' + classAnimation + ' w3-card-4'" [style.height]="'450px'">
+    <div class="modal">
+      <div class="title">
+        <p>
+          <label>Editar Producto / Previsión {{nextYear}}</label>
+        </p>
+        <img (click)="cerrarProducto()" src="./assets/images/cerrar_azul.svg" alt="" onclick="setTimeout(function(){document.getElementById('id01').style.display='none'}, 198)">
+      </div>
+      <div class="header">
+        <div class="img">
+          <img src="./assets/images/icono_gris_tarjeta.svg" alt="">
+        </div>
+        <div class="label">
+          <label>Nombre de Producto *</label>
+          <input type="text" [ngStyle]="{'font-size':'12px', 'font-weight':'600', 'padding-bottom': '2px'}" [style.border-bottom]="productoEdit.nombre !== '' ? '1px solid #b4c8e2': '1px solid #d9dfe3'"  [(ngModel)]="productoEdit.nombre" [ngModelOptions]="{standalone: true}">
+        </div>
+      </div>
+
+      <div class="body" >
+
+        <form >
+          <div class="cForm" [ngStyle]="{'width':'135px'}">
+            <label [ngStyle]="{'margin-bottom':'6px', 'width':'170px'}">Tipo de Producto *</label>
+            <div class="droplist" [ngStyle]="{'width':'135px'}">
+              <gn-drop-list (valueDropList)="productoEdit.tipoProducto = $event.tipo" [items]="itemsTipoProducto" [isSearch]="false" [isCategory]="true" [align]="'left'"
+                            [itemSelect]="defaultTipoProducto" [fontSize]="'12px'" [lineaColor]="producto.tipoProducto !== '' ? '1px solid #b4c8e2' : '1px solid #d9dfe3'"></gn-drop-list>
+            </div>
+          </div>
+
+          <div class="cForm" [ngStyle]="{'width':'267px', 'justify-content': 'space-between'}">
+            <label>Presentación / Cantidad y Unidad *</label>
+            <div class="fecha" [ngStyle]="{'width':'267px'}">
+              <input [ngStyle]="{'font-size':'12px', 'padding-bottom': '2px'}" [style.border-bottom]="productoEdit.presentacion !== '' ? '1px solid #b4c8e2': '1px solid #d9dfe3'" type="text" [(ngModel)]="productoEdit.presentacion" [ngModelOptions]="{standalone: true}">
+            </div>
+          </div>
+
+          <div class="cForm" [ngStyle]="{'width':'100%', 'justify-content': 'space-between', 'margin-top':'20px', 'position':'relative'}">
+            <div class="tooltipFrac" [style.opacity]="ttProducto" [style.transition]="'0.5s'" [style.pointer-events]="'none'">
+              <div class="triangulo-tooltip">
+
+              </div>
+              <p>Fracción, Secuencia Fracción, Subdivision Fracción</p>
+            </div>
+            <label [style.width]="'130px'" (mouseenter)="ttProducto = 1" (mouseleave)="ttProducto = 0" (touchstart)="ttProducto = 1" (touchend)="ttProducto = 0">Fracción Arancelaria *</label>
+            <div class="fecha" [ngStyle]="{'width':'100%'}">
+              <input [ngStyle]="{'font-size':'12px', 'padding-bottom': '2px'}" [style.border-bottom]="productoEdit.codigo !== '' ? '1px solid #b4c8e2': '1px solid #d9dfe3'" type="text" [(ngModel)]="productoEdit.codigo" [ngModelOptions]="{standalone: true}">
+            </div>
+          </div>
+
+          <div class="section">
+            <label [ngStyle]="{'width':'125px'}">Total Previsión Anual</label>
+
+            <div class="cForm" [ngStyle]="{'width':'85px', 'justify-content': 'space-between', 'margin-left':'65px'}">
+              <label>Cantidad *</label>
+              <div class="fecha" [ngStyle]="{'width':'85px'}">
+                <input [ngStyle]="{'font-size':'12px', 'padding-bottom': '2px'}" [style.border-bottom]="productoEdit.cantidad !== '' ? '1px solid #b4c8e2': '1px solid #d9dfe3'" type="text" [(ngModel)]="productoEdit.cantidad" [ngModelOptions]="{standalone: true}">
+              </div>
+            </div>
+
+            <div class="cForm" [ngStyle]="{'align-items': 'flex-end', 'width':'135px' , 'margin-left':'40px'}">
+              <label [ngStyle]="{'margin-bottom':'6px', 'width':'135px'}">Unidad *</label>
+              <div class="droplist" [ngStyle]="{'width':'135px'}">
+                <gn-drop-list (valueDropList)="productoEdit.unidad = $event.nombre" [items]="itemsUnidad" [isSearch]="false" [isCategory]="true" [align]="'left'"
+                              [itemSelect]="defaultUnidad" [fontSize]="'12px'" [lineaColor]="productoEdit.unidad !== '' ? '1px solid #b4c8e2' : '1px solid #d9dfe3'"></gn-drop-list>
+              </div>
+            </div>
+          </div>
+
+          <label [ngStyle]="{'position':'absolute', 'bottom':'75px','right': '25px', 'color':'#98A9B4', 'font-size':'10px'}">Campos Obligatorios *</label>
+
+        </form>
+
+      </div>
+
+      <div class="footer">
+        <a class="cancelar" onclick="setTimeout(function(){document.getElementById('id01').style.display='none'}, 198)">CANCELAR</a>
+        <a (click)="editarProducto()" [ngClass]="productoEdit.nombre !== '' && productoEdit.tipoProducto !== '' && productoEdit.presentacion !== '' && productoEdit.codigo !== '' && productoEdit.cantidad !== '' && productoEdit.cantidad > 0 && productoEdit.unidad !== '' ? 'guardar' : 'guardarInactivo'" onclick="setTimeout(function(){document.getElementById('id01').style.display='none'}, 198)">GUARDAR</a>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,153 @@
+<div class="container">
+
+  <div class="title">
+    <div>
+      <div>
+        <img src="./assets/images/icono_azul_header.svg" alt="">
+        <div>Catálogo de Productos
+          <p>
+            <span>{{grandTotal == 1 ? (grandTotal | acFormatNumber) + " Producto" : (grandTotal | acFormatNumber) + " Productos"}}</span>
+            <!-- <span >· Catálogo de Productos</span> -->
+          </p>
+        </div>
+      </div>
+    </div>
+    <a (click)="irLibreria()">IR A LIBRERÍA</a>
+  </div>
+
+
+  <div class="filter-container">
+      <div class="wizard">
+        <!-- <gn-wizard #wizard [lstItems]="lstItems" [pWizard]="pWizard" [check]="false" [tabs]="true" (tabSelected)="tab($event)"></gn-wizard> -->
+        <gn-filtro-tiempo id="tiempo" [lstYears]="lstItems" (emitYear)="tab($event)"></gn-filtro-tiempo>
+      </div>
+
+  </div>
+
+
+  <div class="search">
+
+      <div class="dropList">
+          <label>Ordenar Por:</label>
+          <div class="drop">
+              <gn-drop-list (valueDropList)="dropListFiltro($event)" [items]="itemsFiltros" [isSearch]="false" [isCategory]="true" [align]="'left'"
+              [itemSelect]="defaultSelectedFiltros" [fontSize]="'13px'"></gn-drop-list>
+          </div>
+        </div>
+        <div>
+          <div class="searchBar">
+              <gn-search-bar [searchValue]="searchTerm" (searchTermChanged)="changeSearchTerm($event)" [placeholder]="placeholder" [reset]="resetSearch"></gn-search-bar>
+          </div>
+
+          <img (click)="isList = false"
+               [src]="isList ? './assets/images/vista_cuadricula_gris.svg' : './assets/images/vista_cuadricula_azul.svg'"
+               alt="control" />
+          <img (click)="isList = true"
+               [src]="isList ? './assets/images/vista_lista_azul.svg' : './assets/images/vista_lista_gris.svg'"
+               alt="control" />
+        </div>
+    </div>
+
+
+
+    <div id="scrollLoad" class="body1" *ngIf="false"><!-- !isList -->
+      <virtual-scroller #scroll [items]="buffer" (vsUpdate)="scrollItems = $event" (vsEnd)="fetchMore($event)">
+        <div [ngClass]="classItem1[i]" *ngFor='let item of scrollItems; let i = index' (click)="selectItem(item)">
+          <div class="img">
+            <img id="img1" src="./assets/images/icono_gris_tarjeta.svg" alt="">
+            <img id="img2" src="./assets/images/icono_azul_tarjeta.svg" alt="">
+          </div>
+          <div class="bodyItem">
+            <p [ngStyle]="{'font-size':'14px'}"> <span [style.font-weight]="'600'">{{"# "+ item.index}}</span>
+              <label [ngStyle]="{'font-weight':'700'}">{{"· "+item.codigo}}&nbsp;</label> {{item.nombre}}</p>
+            <p [ngStyle]="{'font-size':'13px'}">
+              <label [ngClass]="item.numRegistros == 0 ? 'labelOrange': 'labelGreen'">{{item.numRegistros == 0 ? 'Registros N/D' : 'Registros '+ item.numRegistros}}&nbsp;</label>
+            </p>
+            <p [ngStyle]="{'font-size':'12px'}">
+              <label>Origen:</label>
+              <label>{{item.origen}}</label>
+            </p>
+          </div>
+        </div>
+        <!-- <div  class="loader">Loading...</div> -->
+        <div *ngIf="loading"  class="container-loader" [style.height]="buffer.length == 0 ? '100%': null">
+          <div class='loader'>
+            <div class='loading-square'></div>
+            <div class='loading-square'></div>
+            <div class='loading-square'></div>
+            <div class='loading-square'></div>
+          </div>
+        </div>
+      </virtual-scroller>
+      <div id="inicio" (click)="scrollTo()">
+        <img src="./assets/images/flecha_blanca.svg" alt="">
+      </div>
+    </div>
+
+    <div #body1 class="body2" *ngIf="false"> <!-- isList -->
+
+      <virtual-scroller #scroll [items]="buffer" (vsUpdate)="scrollItems = $event" (vsEnd)="fetchMore($event)">
+
+        <div [ngClass]="classItem[i]" *ngFor='let item of scrollItems; let i = index' (click)="selectItem(item)">
+          <div class="img">
+            <img id="img1" src="./assets/images/icono_gris_tarjeta.svg" alt="">
+            <img id="img2" src="./assets/images/icono_azul_tarjeta.svg" alt="">
+          </div>
+          <div class="bodyItem">
+            <div class="part1">
+              <p>
+                <span class="span" [style.font-weight]="'600'">{{"# "+ item.index}}</span>
+                <label>{{"· "+item.codigo}}&nbsp;</label>
+                <label>{{item.nombre}}</label>
+              </p>
+              <p>
+                <label [ngClass]="item.numRegistros == 0 ? 'labelOrange': 'labelGreen'">{{item.numRegistros == 0 ? 'Registros N/D' : 'Registros '+ item.numRegistros}}</label>
+              </p>
+            </div>
+            <div class="part2">
+              <p>
+                <label>{{item.origen}}</label>
+                <label>Origen</label>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="notResults" *ngIf="scrollItems && scrollItems.length === 0">
+          <p>No hay información que mostrar</p>
+        </div>
+        <!-- <div *ngIf="loading" class="loader">Loading...</div> -->
+        <div *ngIf="loading"  class="container-loader" [style.height]="buffer.length == 0 ? '100%': null">
+          <div  class='loader'>
+            <div class='loading-square'></div>
+            <div class='loading-square'></div>
+            <div class='loading-square'></div>
+            <div class='loading-square'></div>
+          </div>
+        </div>
+      </virtual-scroller>
+
+      <div id="inicio" (click)="scrollTo()">
+          <img src="./assets/images/flecha_blanca.svg" alt="">
+      </div>
+
+    </div>
+    <div class="foot" *ngIf="false">
+      <label>{{arrayAux.length == 1 ? "# " + (arrayAux.length | acFormatNumber) + " Producto" : "# " + (arrayAux.length | acFormatNumber) + " Productos"}}</label>
+    </div>
+  <div class="productsList">
+    <gn-product-list [buffer]="buffer"
+                     [firstItem]="firstItem"
+                     [grandTotal]="grandTotal"
+                     [currentTotal]="currentTotal"
+                     [currentPage]="currentPage"
+                     [loading]="loading"
+                     [isList]="isList"
+                     [getData]="getData"
+                     [showRecords]="selectedTab === 'Todos' || selectedTab === 'Con Registro'"
+                     [showPermission]="selectedTab === 'Con Permiso'"
+                     (emitCurrentPage)="handleCurrentPage($event)"
+                     (emitLoading)="handleLoading($event)"
+                     (emitSelectItem)="selectItem($event)"></gn-product-list>
+  </div>
+
+</div>

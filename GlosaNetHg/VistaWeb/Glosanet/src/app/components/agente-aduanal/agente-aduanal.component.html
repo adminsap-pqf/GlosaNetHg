@@ -1,0 +1,327 @@
+<div class="container">
+
+  <div class="head">
+    <div class="title">
+      <img src="./assets/images/agente_icono_nuevo.svg" alt="" [style.margin-right]="'10px'">
+      <label [style.font-size]="'21px'">Agente Aduanal</label>
+    </div>
+  </div>
+
+
+  <div class="body">
+
+    <div class="patentes">
+      <div class="titlePatentes">
+        <label>Patentes</label>
+      </div>
+
+      <div class="droplist">
+        <label>Ordenar Por:</label>
+        <div class="divDroplist">
+          <gn-drop-list (valueDropList)="dropList(1, $event)" [items]="itemsDropList" [isSearch]="false" [align]="'left'"
+                        [itemSelect]="itemsDropList[0]" [widthContent]="'200px'" [marginLeftContent]="'-40px'"></gn-drop-list>
+        </div>
+
+      </div>
+
+      <div class="list">
+
+
+
+        <div [ngClass]="itemAgentes[i]" *ngFor="let item of arrayAgentes; let i = index" (click)="itemSelected(item, i)">
+          <div class="items">
+            <label >#{{i+1}} &nbsp;&middot;&nbsp;</label>
+            <label >{{item.numeroPatente}} &nbsp;&middot;&nbsp;</label>
+            <label *ngIf="item.nombre !== ''">{{item.nombre + ' ' + item.apellido}}</label>
+            <label *ngIf="item.nombre == ''">N/D</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="agente">
+      <div class="agente-aduanal">
+        <div class="titleAgente">
+          <label>Agente Aduanal</label>
+          <a *ngIf="nombre == ''" class="btnAgregar" (click)="agregarDatos($event, 1)" onclick="document.getElementById('id01').style.display='block'">
+            <p>AGREGAR DATOS</p>
+          </a>
+        </div>
+        <div class="SinDatosGenerales" [ngStyle]="{'width':'100%', 'height':'230px', 'position':'relative'}" *ngIf="nombre == ''">
+          <label [ngStyle]="{'width':'380px','height':'30px','color':'#3369B1', 'font-size':'25px', 'opacity':'0.3', 'font-weight':'700', 'position':'absolute', 'margin':'auto', 'left':'0', 'right':'0', 'top':'0', 'bottom':'0'}">No has agregado datos generales</label>
+        </div>
+        <div class="body-agente" *ngIf="nombre !== ''" [class.body-agenteActive]="classOpen == 'open'" (click)="open()">
+          <label>Datos Generales</label>
+          <div [ngStyle]="{'flex-direction':'row', 'justify-content':'space-between', 'width':'80px', 'display':'flex', 'align-items':'center', 'align-content':'center'}">
+            <div (click)="agregarDatos($event, 2)" [ngStyle]="{'cursor': 'pointer'}" onclick="document.getElementById('id01').style.display='block'">
+              <img src="./assets/images/editar.svg" alt="">
+            </div>
+            <div [ngClass]="classOpen" [ngStyle]="{'cursor': 'pointer', 'margin-left':'5px'}" [style.transition]="'0.5s'">
+              <img src="./assets/images/flecha_colapsable.svg" alt="">
+
+            </div>
+
+          </div>
+        </div>
+        <div [ngClass]="classAgente" [style.transition]="'0.5s'" *ngIf="nombre !== ''" >
+          <div class="line1">
+            <div class="col1" >
+              <label [ngStyle]="{'color':'#3369B1', 'font-size':'1em'}">{{nombre + ' ' + apellido}}</label>
+              <label [ngStyle]="{'color':'#818192', 'font-size':'1em'}">Nombre</label>
+            </div>
+            <div class="col2">
+              <label [ngStyle]="{'color':'#3369B1', 'font-size':'1em', 'font-weight':'700'}">{{rfc}}</label>
+              <label [ngStyle]="{'color':'#818192', 'font-size':'1em'}">Rfc</label>
+            </div>
+            <div class="col2">
+              <label [ngStyle]="{'color':'#3369B1', 'font-size':'1em'}">{{telefono}}</label>
+              <label [ngStyle]="{'color':'#818192', 'font-size':'1em'}">Teléfono</label>
+            </div>
+            <div class="col1">
+              <label [ngStyle]="{'color':'#3369B1', 'font-size':'1em', 'font-weight':'700'}">{{correo}}</label>
+              <label [ngStyle]="{'color':'#818192', 'font-size':'1em'}">Correo Electrónico</label>
+            </div>
+          </div>
+          <label>Dirección Fiscal</label>
+          <div class="line2">
+            <div class="col1">
+              <label [ngStyle]="{'color':'#3369B1', 'font-size':'1em'}">{{calle}}</label>
+              <label [ngStyle]="{'color':'#818192', 'font-size':'1em'}">Calle</label>
+            </div>
+            <div class="col5">
+              <label [ngStyle]="{'color':'#3369B1', 'font-size':'1em', 'font-weight':'700'}">{{noExt}}</label>
+              <label [ngStyle]="{'color':'#818192', 'font-size':'1em'}">No. Exterior</label>
+            </div>
+            <div class="col5">
+              <label [ngStyle]="{'color':'#3369B1', 'font-size':'1em'}">{{noInt}}</label>
+              <label [ngStyle]="{'color':'#818192', 'font-size':'1em'}">No. Interior</label>
+            </div>
+            <div class="col1">
+              <label [ngStyle]="{'color':'#3369B1', 'font-size':'1em', 'font-weight':'700'}">{{delCol}}</label>
+              <label [ngStyle]="{'color':'#818192', 'font-size':'1em'}">Delegación Colonia</label>
+            </div>
+            <div class="col2">
+              <label [ngStyle]="{'color':'#3369B1', 'font-size':'1em'}">{{estado}}</label>
+              <label [ngStyle]="{'color':'#818192', 'font-size':'1em'}">Estado</label>
+            </div>
+            <div class="col2">
+              <label [ngStyle]="{'color':'#3369B1', 'font-size':'1em', 'font-weight':'700'}">{{pais}}</label>
+              <label [ngStyle]="{'color':'#818192', 'font-size':'1em'}">País</label>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="rfc">
+        <div class="rfc-container">
+          <div class="titleRfc">
+            <label>RFC</label>
+            <a *ngIf="nombre !== ''" class="btnAgregar" (click)="agregarDatos($event, 3)" onclick="document.getElementById('id01').style.display='block'">
+              <p>AGREGAR RFC</p>
+            </a>
+          </div>
+
+          <div class="SinRfc" [ngStyle]="{'width':'100%', 'height':'340px', 'position':'relative'}" *ngIf="arrayRfc.length == 0">
+            <label [ngStyle]="{'width':'315px','height':'30px','color':'#3369B1', 'font-size':'25px', 'opacity':'0.3', 'font-weight':'700', 'position':'absolute', 'margin':'auto', 'left':'0', 'right':'0', 'top':'0', 'bottom':'0'}">No has agregado ningún rfc</label>
+          </div>
+
+          <div class="containerRfc" *ngFor="let item of arrayRfc; let i = index" (click)="openRfc(i)">
+            <div class="body-rfc" [class.body-rfcActive]="classOpenRfc[i] == 'open'">
+              <label>#{{i+1}} · {{item.rfc}}</label>
+              <div [ngStyle]="{'flex-direction':'row', 'justify-content':'space-between','width':'80px', 'display':'flex', 'align-items':'center', 'align-content':'center'}">
+                <div (click)="agregarDatos($event, 4, item)" [ngStyle]="{'cursor': 'pointer'}" onclick="document.getElementById('id01').style.display='block'">
+                  <img src="./assets/images/editar.svg" alt="">
+                </div>
+                <div [ngClass]="classOpenRfc[i]" [ngStyle]="{'cursor': 'pointer', 'margin-left':'5px'}"  [style.transition]="'0.5s'">
+                  <img src="./assets/images/flecha_colapsable.svg" alt="">
+
+                </div>
+
+              </div>
+            </div>
+            <div [ngClass]="rfcClass[i]" [style.transition]="'0.5s'">
+              <div class="line1">
+                <div class="col3">
+                  <label [ngStyle]="{'color':'#3369B1', 'font-size':'1.05em'}">{{item.rfc}}</label>
+                  <label [ngStyle]="{'color':'#818192', 'font-size':'1em'}">Rfc</label>
+                </div>
+                <div class="col3">
+                  <label [ngStyle]="{'color':'#3369B1', 'font-size':'1.05em', 'font-weight':'700'}">{{item.razonSocial}}</label>
+                  <label [ngStyle]="{'color':'#818192', 'font-size':'1em'}">Razón Social</label>
+                </div>
+                <div class="col3">
+                  <label [ngStyle]="{'color':'#3369B1', 'font-size':'1.05em'}">{{item.nombre}}</label>
+                  <label [ngStyle]="{'color':'#818192', 'font-size':'1em'}">Nombre</label>
+                </div>
+                <div class="col3">
+                  <label [ngStyle]="{'color':'#3369B1', 'font-size':'1.05em', 'font-weight':'700'}">{{item.telefono}}</label>
+                  <label [ngStyle]="{'color':'#818192', 'font-size':'1em'}">Teléfono</label>
+                </div>
+                <div class="col3">
+                  <label [ngStyle]="{'color':'#3369B1', 'font-size':'1.05em'}">{{item.correoElectronico}}</label>
+                  <label [ngStyle]="{'color':'#818192', 'font-size':'1em'}">Correo Electrónico</label>
+                </div>
+              </div>
+              <div class="line2">
+
+                <div class="col3">
+                  <label [ngStyle]="{'color':'#3369B1', 'font-size':'1.05em', 'font-weight':'700'}">{{item.direccion.calle}}</label>
+                  <label [ngStyle]="{'color':'#818192', 'font-size':'1em'}">Calle</label>
+                </div>
+                <div class="col4">
+                  <label [ngStyle]="{'color':'#3369B1', 'font-size':'1.05em'}">{{item.direccion.noExterior}}</label>
+                  <label [ngStyle]="{'color':'#818192', 'font-size':'1em'}">No. Exterior</label>
+                </div>
+                <div class="col4">
+                  <label [ngStyle]="{'color':'#3369B1', 'font-size':'1.05em', 'font-weight':'700'}">{{item.direccion.noInterior}}</label>
+                  <label [ngStyle]="{'color':'#818192', 'font-size':'1em'}">No. Interior</label>
+                </div>
+                <div class="col3">
+                  <label [ngStyle]="{'color':'#3369B1', 'font-size':'1.05em'}">{{item.direccion.colonia}}</label>
+                  <label [ngStyle]="{'color':'#818192', 'font-size':'1em'}">Delegación Colonia</label>
+                </div>
+                <div class="col3">
+                  <label [ngStyle]="{'color':'#3369B1', 'font-size':'1.05em', 'font-weight':'700'}">{{item.direccion.estado}}</label>
+                  <label [ngStyle]="{'color':'#818192', 'font-size':'1em'}">Estado</label>
+                </div>
+                <div class="col3">
+                  <label [ngStyle]="{'color':'#3369B1', 'font-size':'1.05em'}">{{item.direccion.pais}}</label>
+                  <label [ngStyle]="{'color':'#818192', 'font-size':'1em'}">País</label>
+                </div>
+              </div>
+              <!-- <div class="line3">
+
+              </div> -->
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="id01" class="w3-modal">
+  <div [ngClass]="'w3-modal-content ' + classAnimation + ' w3-card-4'" [style.height]="'450px'">
+    <div class="modal">
+      <div>
+        <p>
+          <label *ngIf="typePopUp == 1">Agregar Datos /&nbsp;</label>
+          <label *ngIf="typePopUp == 2">Editar Agente Aduanal /&nbsp;</label>
+          <label *ngIf="typePopUp == 3">Agregar RFC /&nbsp;</label>
+          <label *ngIf="typePopUp == 4">Editar RFC /&nbsp;</label>
+          <label [ngStyle]="{'color':'#E2C913'}">Patente {{numeroPatente}}</label>
+        </p>
+        <img (click)="closeModal()" src="./assets/images/cerrar_azul.svg" alt="" onclick="setTimeout(function(){document.getElementById('id01').style.display='none'}, 198)">
+      </div>
+
+      <div>
+        <gn-wizard [lstItems]="lstItems" [pWizard]="pWizard" [check]="check" [tabs]="tabs" (tabSelected)="tab($event)"></gn-wizard>
+      </div>
+
+      <div class="datosGenerales" *ngIf="pWizard2 == 0">
+        <form [formGroup]="dForm" autocomplete="off">
+          <div [ngStyle]="{'width':'118px'}">
+            <p class="titulo" *ngIf="typePopUp == 1 || typePopUp == 2">Nombre *</p>
+            <p class="titulo" *ngIf="typePopUp == 3 || typePopUp == 4">RFC *</p>
+            <input type="text" *ngIf="typePopUp == 1 || typePopUp == 2" formControlName="nombre" name="nombre" [style.border-bottom]="dForm.controls.nombre.valid == true ? '1px solid #98A9B4' : '1px solid #C1272D'">
+            <input type="text" *ngIf="typePopUp == 3 || typePopUp == 4" formControlName="rfc" name="rfc" [style.border-bottom]="dForm.controls.rfc.valid == true ? '1px solid #98A9B4' : '1px solid #C1272D'">
+          </div>
+          <div [ngStyle]="{'width':'300px'}">
+            <p class="titulo" *ngIf="typePopUp == 1 || typePopUp == 2">Apellidos *</p>
+            <p class="titulo" *ngIf="typePopUp == 3 || typePopUp == 4">Razon Social *</p>
+            <input type="text" formControlName="apellidos" name="apellidos" [style.border-bottom]="dForm.controls.apellidos.valid == true ? '1px solid #98A9B4' : '1px solid #C1272D'">
+          </div>
+          <div [ngStyle]="{'width':'270px'}">
+            <p class="titulo" *ngIf="typePopUp == 1 || typePopUp == 2">RFC *</p>
+            <p class="titulo" *ngIf="typePopUp == 3 || typePopUp == 4">Nombre *</p>
+            <input type="text" *ngIf="typePopUp == 1 || typePopUp == 2" formControlName="rfc" name="rfc" [style.border-bottom]="dForm.controls.rfc.valid == true ? '1px solid #98A9B4' : '1px solid #C1272D'">
+            <input type="text" *ngIf="typePopUp == 3 || typePopUp == 4" formControlName="nombre" name="nombre" [style.border-bottom]="dForm.controls.nombre.valid == true ? '1px solid #98A9B4' : '1px solid #C1272D'">
+          </div>
+          <div [ngStyle]="{'width':'147px'}">
+            <p class="titulo">Teléfono *</p>
+            <input type="text" formControlName="telefono" name="telefono" [style.border-bottom]="dForm.controls.telefono.valid == true ? '1px solid #98A9B4' : '1px solid #C1272D'">
+          </div>
+          <div [ngStyle]="{'width':'270px'}">
+            <p class="titulo">Correo Electronico *</p>
+            <input type="text" formControlName="correo" name="correo" [style.border-bottom]="dForm.controls.correo.valid == true ? '1px solid #98A9B4' : '1px solid #C1272D'">
+          </div>
+          <div [ngStyle]="{'width':'270px'}"></div>
+          <div>
+            <p class="titulo">Campos Obligatorios *</p>
+          </div>
+        </form>
+      </div>
+
+      <div class="dirFiscal" *ngIf="pWizard2 == 1">
+        <form [formGroup]="fForm" autocomplete="off">
+          <div [ngStyle]="{'width':'305px'}">
+            <p class="titulo">Calle *</p>
+            <input type="text" formControlName="calle" name="calle" [style.border-bottom]="fForm.controls.calle.valid == true ? '1px solid #98A9B4': '1px solid #C1272D'">
+          </div>
+          <div [ngStyle]="{'width':'120px'}">
+            <p class="titulo">No. Exterior *</p>
+            <input type="text" formControlName="noExt" name="noExt" [style.border-bottom]="fForm.controls.noExt.valid == true ? '1px solid #98A9B4' : '1px solid #C1272D'">
+          </div>
+          <div [ngStyle]="{'width':'305px'}">
+            <p class="titulo">Delegación/Colonia *</p>
+            <input type="text" formControlName="col" name="col" [style.border-bottom]="fForm.controls.col.valid == true ? '1px solid #98A9B4' : '1px solid #C1272D'">
+          </div>
+          <div [ngStyle]="{'width':'120px'}">
+            <p class="titulo">No. Interior *</p>
+            <input type="text" formControlName="noInt" name="noInt" [style.border-bottom]="fForm.controls.noInt.valid == true ? '1px solid #98A9B4' : '1px solid #C1272D'">
+          </div>
+          <div [ngStyle]="{'width':'135px'}">
+            <p class="titulo">Estado *</p>
+            <input type="text" formControlName="estado" name="estado" [style.border-bottom]="fForm.controls.estado.valid == true ? '1px solid #98A9B4' : '1px solid #C1272D'">
+          </div>
+          <div [ngStyle]="{'width':'145px'}">
+            <p class="titulo">País *</p>
+            <input type="text" formControlName="pais" name="pais" [style.border-bottom]="fForm.controls.pais.valid == true ? '1px solid #98A9B4' : '1px solid #C1272D'">
+          </div>
+          <div [ngStyle]="{'width':'120px'}">
+            <p class="titulo">Código Postal *</p>
+            <input type="text" formControlName="cp" name="cp" [style.border-bottom]="fForm.controls.cp.valid == true ? '1px solid #98A9B4' : '1px solid #C1272D'">
+          </div>
+          <div [ngStyle]="{'width':'270px'}"></div>
+          <div>
+            <p class="titulo">Campos Obligatorios *</p>
+          </div>
+        </form>
+      </div>
+
+      <div>
+        <a *ngIf="pWizard == 0 && (typePopUp == 1 || typePopUp == 3)" class="btnCancelar" (click)="closeModal()" onclick="setTimeout(function(){document.getElementById('id01').style.display='none'}, 198)">
+          <p>CANCELAR</p>
+        </a>
+        <a *ngIf="pWizard == 0 && (typePopUp == 1 || typePopUp == 3)" [style.background-color]="datosGeneralesValid ? '':'#D5DEE2'" [style.pointer-events]="datosGeneralesValid ? 'auto':'none'" class="btnGuardar" (click)="next()">
+          <p>SIGUIENTE</p>
+        </a>
+        <a *ngIf="pWizard == 1 && (typePopUp == 1 || typePopUp == 3)" class="btnCancelar" (click)="back()">
+          <p>CANCELAR</p>
+        </a>
+        <a *ngIf="pWizard == 1 && (typePopUp == 1 || typePopUp == 3)"
+           [style.background-color]="rfcValid ? '':'#D5DEE2'"
+           [style.pointer-events]="rfcValid ? 'auto':'none'"
+           class="btnGuardar"
+           (click)="guardar(dForm.value, fForm.value)"
+           onclick="setTimeout(function(){document.getElementById('id01').style.display='none'}, 198)">
+          <p>ACEPTAR</p>
+        </a>
+        <a *ngIf="typePopUp == 2 || typePopUp == 4" class="btnCancelar" (click)="closeModal()" onclick="setTimeout(function(){document.getElementById('id01').style.display='none'}, 198)">
+          <p>CANCELAR</p>
+        </a>
+        <a *ngIf="(typePopUp == 2 || typePopUp == 4)"
+           [style.background-color]="rfcValid && datosGeneralesValid ? '':'#D5DEE2'"
+           [style.pointer-events]="rfcValid && datosGeneralesValid ? 'auto':'none'"
+           class="btnGuardar"
+           (click)="guardar(dForm.value, fForm.value)"
+           onclick="setTimeout(function(){document.getElementById('id01').style.display='none'}, 198)">
+          <p>ACEPTAR</p>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>

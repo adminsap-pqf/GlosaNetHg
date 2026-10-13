@@ -1,0 +1,14 @@
+<div class="navs" [style.flex-direction]="direction">
+  <div
+  *ngFor= "let item of lstItems; let i = index;"
+  (click)= "activeItem(i)"
+  [class]= "borderBottom ?hover+' borderBottom':hover"
+  [style.width]= "widthTotal"
+  >
+    <img
+    [style.width] = "imgSize"
+    [src] = "!disble ? './assets/images/radio_inactive.svg':lstEstados[i]?'./assets/images/radio_selected.svg':'./assets/images/radio_unselected.svg'"
+    alt="check">
+    <p [style.font-weight]= "fontWeight"  [style.color]="lstEstados[i]? colorTextSelected: colorText" >{{subFijo + item}}</p>
+  </div>
+</div>

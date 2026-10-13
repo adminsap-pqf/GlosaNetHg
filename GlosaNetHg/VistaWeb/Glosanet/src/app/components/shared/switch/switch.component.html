@@ -1,0 +1,4 @@
+<div class="slideThree" [ngClass]="switchState" (click)="changeStatus()" >
+    <input id="slideThree" name="check" type="checkbox" [checked]="isActive" (change)="changeEvent($event)">
+    <label for="slideThree" [style.pointer-events]="'none'">  </label>
+  </div>

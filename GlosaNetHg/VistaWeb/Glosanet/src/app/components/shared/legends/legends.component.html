@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="item" *ngFor="let data of items; let i = index">
+    <label [style.max-width]="'350px'" [style.color]="data.colorLabel">{{data.titulo}}</label>
+    <div class="info">
+      <div class="default">
+        <div class="color" [style.background-color]="data.colorDefault"></div>
+        <div class="name" [style.color]="data.colorLabel == '#FFFFFF' ? '#FFFFFF' : null">{{data.nameDefault}}</div>
+        <div class="data" [style.color]="data.colorLabel == '#FFFFFF' ? '#FFFFFF' : null">{{data.dataDefault}}</div>
+      </div>
+      <div class="double" *ngIf="data.double">
+          <div class="color" [style.background-color]="data.colorDouble"></div>
+          <div class="name" [style.color]="data.colorLabel == '#FFFFFF' ? '#FFFFFF' : null">{{data.nameDouble}}</div>
+          <div class="data" [style.color]="data.colorLabel == '#FFFFFF' ? '#FFFFFF' : null">{{data.dataDouble}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

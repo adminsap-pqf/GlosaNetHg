@@ -1,0 +1,272 @@
+@import '../../../../variables';
+@import '../../../../mixins';
+@import '../../../../colors';
+
+:host {
+    width: 100%;
+
+    .pedimentoContainer {
+        @include flexRowWrap;
+        @include alignStart;
+        width: 100%;
+
+        & > .header {
+            @include flexColumn;
+            width: 100%;
+            height: 140px;
+            box-sizing: border-box;
+
+            & > .topBar {
+                @include flexRow;
+                @include absoluteCenter;
+                width: 100%;
+                height: 30px;
+                background-color: #3369B1;
+                box-sizing: border-box;
+                justify-content: flex-start;
+                padding: 0 25px;
+
+                & > p:nth-of-type(1) {
+                    @include flexRow;
+                    width: auto;
+                    box-sizing: border-box;
+
+                    & > label {
+                        font-size: 12px;
+                        font-weight: 500;
+                    }
+
+                    & > label:nth-of-type(1) {
+                        color: #FFFFFF;
+
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+
+                    & > label:nth-of-type(2) {
+                        color: #E2C913;
+                        margin-left: 5px;
+                    }
+                }
+            }
+
+            & > .title {
+                @include flexRow;
+                width: 100%;
+                box-sizing: border-box;
+                height: 110px;
+                padding: 0 25px;
+                justify-content: space-between;
+                align-items: center;
+
+                & > div:nth-of-type(1) {
+                    @include flexRow;
+                    box-sizing: border-box;
+                    width: calc(100% - 200px);
+                    height: 110px;
+
+                    & > div:nth-of-type(1) {
+                        @include flexRow;
+                        box-sizing: border-box;
+                        width: 58px;
+                        margin-right: 20px;
+                    }
+
+                    & > div:nth-of-type(2) {
+                        @include flexColumn;
+                        @include absoluteCenter;
+                        box-sizing: border-box;
+                        width: calc(100% - 78px);
+
+                        & > p:nth-of-type(1) {
+                            @include multiLineTextTruncate(1, 17px, 17px, #FFFFFF);
+                            width: 100%;
+                            box-sizing: border-box;
+                            word-break: break-all;
+
+                            & > label:nth-of-type(1) {
+                                @include fontFormat(17px, 900, #E2C913);
+                            }
+
+                            & > label:nth-of-type(2) {
+                                @include fontFormat(17px, 900, #3369B1);
+                            }
+                        }
+
+                        & > p:nth-of-type(2) {
+                            @include fontFormat(14px, 300, #818192);
+                            width: 100%;
+                            box-sizing: border-box;
+                            margin: 5px 0;
+                        }
+
+                        & > p:nth-of-type(3) {
+                            @include fontFormat(14px, 300, #3B8EDE);
+                            width: 100%;
+                            box-sizing: border-box;
+                        }
+                    }
+                }
+
+                & > div:nth-of-type(2) {
+                    @include flexRow;
+                    @include absoluteCenter;
+                    width: 200px;
+                    height: 110px;
+                    box-sizing: border-box;
+                    justify-content: flex-end;
+                    padding-left: 10px;
+
+                    & > a:nth-of-type(1) {
+                        @include flexRow;
+                        @include absoluteCenter;
+                        @include pfButton(155px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+                        color: $gnBlanco;
+                        font-size: 14px;
+                        font-weight: normal;
+
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+
+        & > .container {
+            @include flexRow;
+            width: 100%;
+            min-height: calc(100vh - 236px);
+            background: #ECF0F3;
+            box-sizing: border-box;
+            padding: 20px 25px 40px 25px;
+            position: relative;
+
+            & > .separator {
+                width: 0;
+                height: 0;
+                border-left: 15px solid transparent;
+                border-right: 15px solid transparent;
+                border-bottom: 15px solid #FFF;
+                position: absolute;
+                top: 5px;
+                left: 50px;
+            }
+
+            & > .content {
+                @include flexColumn;
+                width: 100%;
+                box-sizing: border-box;
+                padding: 40px 25px 40px 25px;
+                background-color: white;
+
+                & > .title {
+                    @include flexRow;
+                    @include absoluteCenter;
+                    width: 100%;
+                    box-sizing: border-box;
+                    justify-content: space-between;
+                    margin-bottom: 25px;
+
+                    & > label {
+                        @include fontFormat(19px, 900, #3B8EDE);
+                    }
+                }
+
+                & > .filters {
+                    @include flexRow;
+                    @include absoluteCenter;
+                    width: 100%;
+                    background-color: #ECF0F3;
+                    box-sizing: border-box;
+                    margin-bottom: 25px;
+                    padding: 25px 20px;
+
+                    & > .filterBy {
+                        @include flexRowWrap;
+                        @include absoluteCenter;
+                        width: calc((100% / 4) - 30px);
+                        box-sizing: border-box;
+                        order: 1;
+                        padding-right: 7.5px;
+
+                        & > label:nth-of-type(1) {
+                            width: 100%;
+                            @include fontFormat(13px, 300, #818192);
+                            margin-right: 0;
+                            text-align: left;
+                        }
+
+                        & > div:nth-of-type(1) {
+                            width: 100%;
+                        }
+                    }
+
+                    & > .filterByDate {
+                        @include flexRowWrap;
+                        @include absoluteCenter;
+                        width: calc((100% / 4) - 30px);
+                        box-sizing: border-box;
+                        order: 2;
+                        padding-right: 7.5px;
+
+                        & > label {
+                            width: 100%;
+                            @include fontFormat(13px, 300, #818192);
+                            margin-right: 0;
+                            text-align: left;
+                        }
+
+                        & > div:nth-of-type(1) {
+                            width: 100%;
+                            position: relative;
+
+                            & > img {
+                                width: 9px;
+                                position: absolute;
+                                top: 5px;
+                                right: 13px;
+                                display: none;
+                            }
+                        }
+                    }
+
+                    & > .apply {
+                        @include flexRow;
+                        @include absoluteCenter;
+                        width: 120px;
+                        justify-content: flex-end;
+                        order: 2;
+
+                        & > a:nth-of-type(1) {
+                            @include flexRow;
+                            @include absoluteCenter;
+                            @include pfButton(100px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+                            color: $gnBlanco;
+                            font-size: 14px;
+                            font-weight: normal;
+
+                            &:hover {
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
+
+                & > .searchBar {
+                    @include flexRow;
+                    width: 100%;
+                    height: 30px;
+                    margin-bottom: 25px;
+                }
+
+                & > .table {
+                    @include flexRow;
+                    width: 100%;
+                    justify-content: center;
+                }
+            }
+        }
+    }
+}

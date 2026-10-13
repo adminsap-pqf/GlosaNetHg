@@ -1,0 +1,423 @@
+@import "../../../../variables.scss";
+@import "../../../../mixins.scss";
+@import "../../../../colors.scss";
+
+:host{
+  @include flexColumn;
+  justify-content: flex-end;
+  width: 100%;
+  height: 100%;
+  font-size: $globalFont;
+
+  $grayColor:$gnGrisRata;
+  $blueColor:$gnAzulMedio;
+
+  .dropper {
+    overflow: auto;
+    height: 100%;
+  }
+
+  & > .dropList{
+    width:100%;
+    padding:0;
+    position:relative;
+    display: inline-block;
+    & > .container-drop{
+      width:100%;
+      padding:0;
+      position:relative;
+      & > .Title{
+        @include flexRow;
+        justify-content: space-between;
+        width:100%;
+        height:20px;
+        color:$blueColor;
+        box-sizing: border-box;
+        border-bottom:1px solid $grayColor;
+        font-size: 1.2em;
+        color:$blueColor;
+        & > p{
+          @include flexRow;
+          @include absoluteCenter;
+          width: 100%;
+          @include multiLineTextTruncate(1,20px,18px,#FFF);
+          word-break: break-all;
+          align-items: flex-start;
+        }
+        & > .left{
+          @include flexRow;
+          @include absoluteCenter;
+          width: 100%;
+          text-align: left ;
+          justify-content: flex-start;
+          align-items: flex-start;
+          @include multiLineTextTruncate(1,20px,18px,#FFF);
+          word-break: break-all;
+        }
+        & > .center {
+          @include flexRow;
+          @include absoluteCenter;
+          width: 100%;
+          text-align: center ;
+        }
+        & > i {
+          @include flexRow;
+          @include absoluteCenter;
+          color:lightblue;
+        }
+        & > img {
+          width: 10px;
+        }
+        & img {
+          width: 10px;
+        }
+
+      }
+      & > .Title.Disabled{
+        pointer-events: none;
+        @include flexRow;
+        justify-content: space-between;
+        width:100%;
+        height:10px;
+        box-sizing: border-box;
+        border-bottom: 0.75px solid $grayColor;
+        & > p{
+          @include flexRow;
+          @include absoluteCenter;
+          @include multiLineTextTruncate(1,20px,18px,#FFF);
+          word-break: break-all;
+          align-items: flex-start;
+        }
+        & > i{
+          @include flexRow;
+          @include absoluteCenter;
+          color:lightgray;
+        }
+
+      }
+
+      & > .content{
+        width:100%;
+        max-height: 200px;
+        top: 28px;
+        background-color: white;
+        //border-radius: 0 0 5px 5px;
+        border:1px solid $gnInactivo;
+        position:absolute;
+        z-index:100;
+        box-shadow: 0px 3px 28px -7px rgba(0,0,0,0.25);
+        transition: all 1s;
+        padding-bottom: 20px;
+        & > .triangulo{
+          width:0px;
+          height:0px;
+          border-left:8px solid transparent; /* izquierda flecha */
+          border-right:8px solid transparent; /* derecha flecha */
+          border-bottom:8px solid $gnInactivo; /* base flecha y color*/
+          font-size:0px;
+          line-height:0px;
+          position: relative;
+          left: 0;
+          top: -9px;
+          right: 0;
+          margin: auto;
+          bottom: 0;
+        }
+        & > .triangulo2{
+          width:0px;
+          height:0px;
+          border-left:8px solid transparent; /* izquierda flecha */
+          border-right:8px solid transparent; /* derecha flecha */
+          border-bottom:8px solid white; /* base flecha y color*/
+          font-size:0px;
+          line-height:0px;
+          bottom:6px;
+          position: relative;
+          left: 0;
+          top: -15px;
+          margin: auto;
+          right: 0;
+          bottom: 0;
+        }
+        & > .search{
+          padding:10px 20px 10px 20px;
+        }
+        .lista{
+          @include windowsScrollbars('none');
+          max-height: 125px;
+          margin:5px 15px 10px 15px;
+          //overflow-y: scroll;
+          & > li{
+            @include flexRow;
+            height:32px;
+            border-bottom: solid 2px rgb(245,246,247) !important;
+            transition: .5s all;
+            color:$grayColor;
+            cursor: pointer;
+            font-size: 1.2em;
+            padding: 0px 5px;
+            @include multiLineTextTruncate(1,30px,30px,#FFF);
+            word-break: break-all;
+            &:hover{
+              font-size: 1.2em;
+              color:$blueColor;
+              font-weight: bold;
+            }
+          }
+          & > .category{
+            pointer-events: none;
+            color:$gnInactivo;
+            font-size: 1em;
+            cursor: none;
+            left: -5px;
+            padding: 0px 0px;
+          }
+        }
+        /* ul::-webkit-scrollbar-track
+        {
+          border-radius: 10px;
+          background-color: rgba(0, 113, 188, 0.05);
+        }
+
+        ul::-webkit-scrollbar
+        {
+          width: 8px;
+          background-color: #F5F5F5;
+        }
+
+        ul::-webkit-scrollbar-thumb
+        {
+          border-radius: 10px;
+          -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,.3);
+          background-color: $pf_buttonBlue_base;
+        } */
+        & > .button{
+
+          /* @include pfButton(100%, 30px, $pf_buttonBlue_base, $pf_buttonBlue_hover, $pf_buttonBlue_active); */
+          @include absoluteCenter;
+          @include flexRow;
+          margin-top:20px;
+          border-radius:0 0 5px 5px !important;
+        }
+      }
+    }
+  }
+  & > .dropListSelect{
+    width:100%;
+    padding:0;
+    position:relative;
+    display: inline-block;
+    & > .container-drop{
+      width:100%;
+      padding:0;
+      position:relative;
+      & > .Title{
+        @include flexRow;
+        width:100%;
+        height:20px;
+        color: #3369B1;
+        justify-content: space-between;
+        box-sizing: border-box;
+        border-bottom:1px solid #3369B1;
+        font-size: 1.2em;
+
+        & > p{
+          @include flexRow;
+          @include absoluteCenter;
+          width: 100%;
+          @include multiLineTextTruncate(1,20px,18px,#FFF);
+          word-break: break-all;
+          align-items: flex-start;
+        }
+        & > .left{
+          @include flexRow;
+          @include absoluteCenter;
+          width: 100%;
+          text-align: left ;
+          justify-content: flex-start;
+          align-items: flex-start;
+          @include multiLineTextTruncate(1,20px,18px,#FFF);
+          word-break: break-all;
+        }
+        & > .center{
+          @include flexRow;
+          @include absoluteCenter;
+          width: 100%;
+          text-align: center ;
+          justify-content: flex-start;
+          align-items: flex-start;
+        }
+        & > i{
+          @include flexRow;
+          @include absoluteCenter;
+          color:lightblue;
+        }
+
+      }
+      & > .Title.Disabled{
+        pointer-events: none;
+        @include flexRow;
+        justify-content: space-between;
+        width:100%;
+        height:10px;
+        box-sizing: border-box;
+        border-bottom: 0.75px solid $grayColor;
+        font-size: 1.2em;
+        & > p{
+          @include flexRow;
+          @include absoluteCenter;
+          @include multiLineTextTruncate(1,20px,18px,#FFF);
+          word-break: break-all;
+          align-items: flex-start;
+        }
+        & > i{
+          @include flexRow;
+          @include absoluteCenter;
+          color:lightgray;
+        }
+
+      }
+
+      & > .content{
+        width:100%;
+        max-height: 200px;
+        top: 28px;
+        background-color: white;
+        border:1px solid $gnInactivo;
+        //border-radius: 0 0 5px 5px;
+        position:absolute;
+        z-index:100;
+        box-shadow: 0px 3px 28px -7px rgba(0,0,0,0.25);
+        transition: all 1s;
+        padding-bottom: 20px;
+        & > .triangulo{
+          width:0px;
+          height:0px;
+          border-left:8px solid transparent; /* izquierda flecha */
+          border-right:8px solid transparent; /* derecha flecha */
+          border-bottom:8px solid $gnInactivo; /* base flecha y color*/
+          font-size:0px;
+          line-height:0px;
+          position: relative;
+          left: 50%;
+          top:-8px;
+        }
+        & > .small{
+          left: 40%;
+        }
+        & > .triangulo2{
+          width:0px;
+          height:0px;
+          border-left:8px solid transparent; /* izquierda flecha */
+          border-right:8px solid transparent; /* derecha flecha */
+          border-bottom:8px solid white; /* base flecha y color*/
+          font-size:0px;
+          line-height:0px;
+          position: relative;
+
+          //left: 52.2%;
+          left:calc(50% + 7px);
+          top: -7px;
+          margin: -7px;
+        }
+        & > .search{
+          padding:10px 20px 10px 20px;
+        }
+        .lista{
+          @include windowsScrollbars('none');
+          max-height: 125px;
+          margin:5px 15px 10px 15px;
+          //overflow-y: scroll;
+          & > li{
+            @include flexRow;
+            color:$grayColor;
+            height:32px;
+            border-bottom: solid 2px rgb(245,246,247) !important;
+            transition: .5s all;
+            cursor: pointer;
+            font-size: 1.2em;
+            @include multiLineTextTruncate(1,30px,30px,#FFF);
+            word-break: break-all;
+
+
+            &:hover{
+              font-size: 1.2em;
+              color:$blueColor;
+              font-weight: bold;
+            }
+          }
+          & > .category{
+            pointer-events: none;
+            color:$gnInactivo;
+            font-size: 1em;
+          }
+        }
+        /* ul::-webkit-scrollbar-track
+        {
+          border-radius: 10px;
+          background-color: rgba(0, 113, 188, 0.05);
+        }
+
+        ul::-webkit-scrollbar
+        {
+          width: 8px;
+          background-color: #F5F5F5;
+        }
+
+        ul::-webkit-scrollbar-thumb
+        {
+          border-radius: 10px;
+          -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,.3);
+          background-color: $pf_buttonBlue_base;
+        } */
+        & > .button{
+
+          /* @include pfButton(100%, 30px, $pf_buttonBlue_base, $pf_buttonBlue_hover, $pf_buttonBlue_active); */
+          @include absoluteCenter;
+          @include flexRow;
+          margin-top:20px;
+          border-radius:0 0 5px 5px !important;
+        }
+      }
+    }
+  }
+
+  .tooltip {
+    position: relative !important;
+    display: inline-block !important;
+    z-index: 1;
+  }
+
+  .tooltip .tooltiptext {
+    border: 1px solid $grisLinea;
+    visibility: hidden;
+    width: 160px;
+    background-color: $gnAzulObscuro;
+    color: #fff;
+    text-align: left  ;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 10;
+    bottom: 100%;
+    left: 5px;
+    margin-left: -60px;
+    padding: 10px 15px;
+
+    /* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
+    opacity: 0;
+    transition: opacity 1s;
+
+    & > span{
+      color: $gnDorado;
+    }
+  }
+
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.inValidBorderBottom {
+  border-bottom: solid 0.75px #C1272D !important;
+}

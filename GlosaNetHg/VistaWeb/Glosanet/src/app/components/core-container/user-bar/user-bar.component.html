@@ -1,0 +1,112 @@
+  <div class="boton" *ngIf="!cargando">
+    <label class="btnCargar" [ngClass]="listPermisos[0].activo ? 'btnCargar' : 'btnCargar-inactive'" for="file1">
+      <p>CARGAR DATASTAGE</p>
+    </label>
+    <input type="file" #file1 id="file1" (change)="fileChange1($event)" accept=".zip,.rar" class="upload">
+  </div>
+
+  <div class="loading" *ngIf="cargando">
+    <p>Actualizando base de datos ...</p>
+    <div>
+      <div class="barra" [ngStyle]="{'width': progress + '%'}"></div>
+    </div>
+  </div>
+
+  <div class="descargas" >
+    <gn-download-history></gn-download-history>
+  </div>
+
+  <div class="user">
+    <gn-menu-user [items]="items" (itemSelected)="filterSelected($event)" [user]="user" ></gn-menu-user>
+  </div>
+
+  <div id="idLoading" class="w3-modal" >
+    <div [ngClass]="'w3-modal-content ' + classAnimation + ' w3-card-4'" [style.height]="'280px'">
+      <div class="modal">
+        <div class='loader'>
+          <div class='loading-square'></div>
+          <div class='loading-square'></div>
+          <div class='loading-square'></div>
+          <div class='loading-square'></div>
+        </div>
+        <div class="mensaje">
+          <p>Su solicitud esta en proceso,</p>
+          <p>Espere un momento por favor.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="idOk" class="w3-modal">
+    <div [ngClass]="'w3-modal-content ' + classAnimation + ' w3-card-4'">
+      <div class="modalOk">
+        <div>
+          <img src="./assets/images/cerrar_azul.svg" alt="" onclick="setTimeout(function(){document.getElementById('idOk').style.display='none'}, 198)">
+        </div>
+        <div>
+          <img src="./assets/images/like.svg" alt="">
+          <p>¡{{getMessage()}} <span>Exitosamente!</span></p>
+        </div>
+        <div *ngIf="getMessage() === 'El Datastage se subio'" class="viewProgress">
+          <button (click)="redirectToMonitoreo()">Revisar estatus del Datastage</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="idError" class="w3-modal">
+    <div [ngClass]="'w3-modal-content ' + classAnimation + ' w3-card-4'">
+      <div class="modalError">
+        <div>
+          <img src="./assets/images/cerrar_azul.svg" alt="" onclick="setTimeout(function(){document.getElementById('idError').style.display='none'}, 198)">
+        </div>
+        <div>
+          <img src="./assets/images/error.svg" alt="">
+          <div>
+            <p>
+              {{tError}}
+            </p>
+            <p>
+              {{sError}}
+            </p>
+          </div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="idNoDisponible" class="w3-modal">
+    <div [ngClass]="'w3-modal-content ' + classAnimation + ' w3-card-4'">
+      <div class="modalError">
+        <div>
+          <img src="./assets/images/cerrar_azul.svg" alt="" onclick="setTimeout(function(){document.getElementById('idNoDisponible').style.display='none'}, 198)">
+        </div>
+        <div>
+          <img src="./assets/images/error.svg" alt="">
+          <div>
+            <p>
+              {{noDisponible}}
+            </p>
+            <p>
+            </p>
+          </div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="requestFailed" class="w3-modal">
+    <div [ngClass]="'w3-modal-content ' + classAnimation + ' w3-card-4'">
+      <div class="modalFailed">
+        <div>
+          <img src="./assets/images/cerrar_azul.svg" alt="" onclick="setTimeout(() => { document.getElementById('requestFailed').style.display='none'; }, 198)">
+        </div>
+        <div>
+          <img src="./assets/images/error.svg" alt="">
+          <p [innerHTML]="getMessageFailed() | sanitizeHtml"></p>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,809 @@
+@import "../../../variables.scss";
+@import "../../../mixins.scss";
+@import "../../../colors.scss";
+
+.header{
+  @include flexColumn;
+  width: 100%;
+  box-sizing: border-box;
+  height: 90px;
+  & > .product{
+    @include flexRow;
+    width: 100%;
+
+    box-sizing: border-box;
+    height: 90px;
+    padding: 0 25px;
+    justify-content: space-between;
+    align-items: flex-end;
+    & > .item-producto{
+      @include flexRow;
+      box-sizing: border-box;
+      width: calc(100% - 200px);
+      height: 80px;
+      padding-right: 5px;
+      & > .img{
+        @include flexRow;
+        box-sizing: border-box;
+        width: 58px;
+      }
+      & > .text{
+        @include flexColumn;
+        box-sizing: border-box;
+        width: calc(100% - 78px);
+        justify-content: center;
+        & > p:nth-of-type(1){
+          //@include flexRow;
+          width: 100%;
+          box-sizing: border-box;
+          font-family:'Roboto Cn';
+
+          font-size: 21px;
+          color: #3B8EDE;
+          font-weight: 600;
+        }
+      }
+    }
+    & > .boton{
+      @include flexRow;
+      width: 200px;
+      box-sizing: border-box;
+      height: 60px;
+      & > a{
+        @include pfButton(190px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+        @include flexRow;
+        @include absoluteCenter;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: normal;
+        color:$gnBlanco;
+
+      }
+    }
+
+  }
+}
+
+.container{
+  @include flexRow;
+  width: 100%;
+  background: #ECF0F3;
+  box-sizing: border-box;
+  padding:35px 25px 40px 25px;
+  position: relative;
+  min-height: calc(100vh - 236px);
+}
+
+.triangulo{
+  width: 0px;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 15px solid #FFF;
+  position: absolute;
+  top: 20px;
+  left: 40px;
+}
+
+.section{
+  @include flexColumn;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 40px 25px 40px 25px;
+  background-color: white;
+  @include absoluteCenter;
+}
+
+.title{ //Seccion usuario y datos generales
+  @include flexRow;
+  box-sizing: border-box;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  max-width: 900px;
+  & > p{
+    font-size: 19px;
+    color: #3B8EDE;
+    font-weight: 600;
+  }
+  & > .boton{
+    & > a{
+      @include flexRow;
+
+      $colorHover:  rgba(6, 188, 82, 0.2);
+      @include pfButton(110px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+      @include flexRow;
+      @include absoluteCenter;
+      cursor: pointer;
+      font-size: 14px;
+      color: #37B34A;
+    }
+  }
+  & > .botonEdit{
+    @include flexRow;
+    & > .boton{
+      margin-left: 10px;
+      & > a{
+        @include flexRow;
+
+        $colorHover:  rgba(6, 188, 82, 0.2);
+        @include pfButton(110px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+        @include flexRow;
+        @include absoluteCenter;
+        cursor: pointer;
+        font-size: 14px;
+        color: #37B34A;
+      }
+    }
+  }
+}
+
+
+.card{ //Seccion usuario y datos generales
+  @include flexRow;
+  box-sizing: border-box;
+  width:100%;
+  padding: 10px 0;
+  max-width: 900px;
+  & > .img{
+    & > img{
+      width: 45px;
+      height: 45px;
+    }
+  }
+  & > .infoCard{
+    @include flexColumn;
+    box-sizing: border-box;
+    width: calc(100% - 45px);
+    padding: 0 0 0 10px;
+    justify-content: center;
+    & > p:nth-of-type(1){
+      font-size: 17px;
+      color: #3369B1;
+      font-weight: 600;
+      margin: 0 0 3px 0;
+    }
+    & > p:nth-of-type(2){
+      font-size: 12px;
+      color: #818192;
+    }
+  }
+  & > .infoCardEdit{
+    @include flexRow;
+    box-sizing: border-box;
+    & > div{
+      @include flexColumn;
+      box-sizing: border-box;
+      & > p{
+        font-size: 12px;
+        color: #98A9B4;
+      }
+    }
+  }
+}
+
+.cardEmpresa{ //Seccion usuario y datos generales
+  @include flexRow;
+  box-sizing: border-box;
+  width:100%;
+  padding: 30px 20px 0 20px;
+  opacity: 0.99;
+  position: relative;
+  & > .img{
+    @include flexColumn;
+    align-items: center;
+    & > img{
+      width: 45px;
+      height: 45px;
+    }
+    & > a{
+      width: 30px;
+      height: 20px;
+      cursor: pointer;
+      & > label{
+        @include flexRow;
+        @include absoluteCenter;
+        width: 100%;
+        height: 100%;
+        //margin-top: 3px;
+        font-size: 10px;
+        color: #37B34A;
+        cursor: pointer;
+      }
+    }
+  }
+  & > .infoCard{
+    @include flexColumn;
+    box-sizing: border-box;
+    width: calc(100% - 45px);
+    height: 70px;
+    padding: 5px 0 0 10px;
+    justify-content: flex-start;
+    & > p:nth-of-type(1){
+      font-size: 17px;
+      color: #3369B1;
+      font-weight: 600;
+      margin: 0 0 3px 0;
+    }
+    & > p:nth-of-type(2){
+      font-size: 12px;
+      color: #818192;
+    }
+  }
+  & > img{
+    position: absolute;
+    right: 20px;
+    top: 50%;
+  }
+  &:hover{
+    box-shadow: 0 10px 14px 0 rgba(152,169,180,0.50);
+  }
+}
+
+.activeCardEmpresa{
+  box-shadow: 0 10px 14px 0 rgba(152,169,180,0.50);
+}
+
+.upload {
+  display: none;
+}
+
+
+
+.user{
+  @include flexColumn;
+  box-sizing: border-box;
+  width: 100%;
+  height: 225px;
+  min-height:225px;
+  max-width: 900px;
+  & > .foot{
+    @include flexRow;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 0;
+    justify-content: space-between;
+    margin-top: 20px;
+    & > .correo{
+      @include flexColumn;
+      box-sizing: border-box;
+      & > p:nth-of-type(1){
+        font-size: 13px;
+        color: #3369B1;
+        margin: 0 0 3px 0;
+      }
+      & > p:nth-of-type(2){
+        font-size: 12px;
+        color: #818192;
+      }
+    }
+    & > .fecha{
+      @include flexColumn;
+      box-sizing: border-box;
+      & > p:nth-of-type(1){
+        font-size: 13px;
+        color: #F7931E;
+        text-align: right;
+        margin: 0 0 3px 0;
+      }
+      & > p:nth-of-type(2){
+        font-size: 12px;
+        color: #818192;
+        text-align: right;
+      }
+    }
+
+  }
+  & > .footEdit{
+    @include flexRow;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 0;
+    justify-content: space-between;
+    margin-top: 20px;
+    & > div{
+      @include flexColumn;
+      box-sizing: border-box;
+      & > input{
+
+      }
+      & > p{
+        font-size: 12px;
+        color: #98A9B4;
+      }
+    }
+  }
+}
+
+.separacion{
+  width: calc(100% + 50px);
+  height: 15px;
+  box-sizing: border-box;
+  background-color: #ECF0F3;
+  margin: 0 -25px;
+}
+
+.datosGenerales{
+  @include flexColumn;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 30px 0 0 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.info{ //se repite
+  @include flexRow;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px 0;
+  justify-content: space-between;
+  margin: 20px 0 0 0;
+  align-items: center;
+  max-width: 900px;
+  & > div{
+    @include flexColumn;
+    box-sizing: border-box;
+    & > p:nth-of-type(1){
+      font-size: 13px;
+      color: #3369B1;
+      margin:0 0 3px 0;
+      @include multiLineTextTruncate(1,14px,14px,#FFF);
+      word-break: break-all;
+    }
+    & > p:nth-of-type(2){
+      font-size: 12px;
+      color: #818192;
+    }
+  }
+}
+
+.paquete{
+  @include flexRow;
+  box-sizing: border-box;
+  width: 100%;
+  height: 70px;
+  margin: 25px 0 40px 0;
+  border: 1px solid #d7dde0;
+  max-width: 900px;
+  & > .logo{
+    @include flexRow;
+    width: 90px;
+    box-sizing: border-box;
+    justify-content: center;
+    & > img{
+      width: 50px;
+    }
+  }
+  & > .infoProducto{
+    @include flexRow;
+    box-sizing: border-box;
+    width: calc(100% - 90px);
+    background-color: #ECF0F3;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    & > .part1{
+      @include flexColumn;
+      box-sizing: border-box;
+      & > p:nth-of-type(1){
+        font-size: 15px;
+        color: #3B8EDE;
+        font-weight: 600;
+        margin: 0 0 3px 0;
+      }
+      & > p:nth-of-type(2){
+        font-size: 13px;
+        color: #818192;
+        & > span{
+          font-weight: 600;
+        }
+      }
+    }
+    & > .part2{
+      & > p:nth-of-type(1){
+        font-size: 12px;
+        color: #818192;
+        font-weight: 600;
+        margin: 0 0 3px 0;
+      }
+      & > p:nth-of-type(2){
+        font-size: 12px;
+        color: #3B8EDE;
+      }
+    }
+  }
+}
+
+.subtitle{
+  width: 100%;
+  font-size: 17px;
+  color: #3369B1;
+  font-weight: 600;
+  max-width: 900px;
+}
+
+.contentCard{
+  @include flexRow;
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: space-between;
+  padding: 0px 20px;
+  background-color: rgb(249, 250, 251) ;
+  //overflow: hidden;
+  & > .p1{
+    @include flexRow;
+    box-sizing: border-box;
+    margin: 40px 0;
+    & > .img{
+      @include flexRow;
+      width: 40px;
+      margin-right: 10px;
+      align-content: center;
+      & > img{
+        width: 35px;
+        height: 80px;
+      }
+    }
+    & > .infoP1{
+      @include flexColumn;
+      box-sizing: border-box;
+      & > p:nth-of-type(1){
+        font-size: 17px;
+        color: #3369B1;
+        font-weight: 600;
+        margin: 0 0 5px 0;
+      }
+      & > p:nth-of-type(2){
+        max-width: 300px;
+        font-size: 11px;
+        color: #3369B1;
+        margin: 0 0 5px 0;
+        line-height: 15px;
+      }
+      & > div{
+        @include flexRow;
+        box-sizing: border-box;
+        & > a{
+          @include flexRow;
+
+          $colorHover:  rgba(6, 188, 82, 0.2);
+          @include pfButton(110px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+          @include flexRow;
+          @include absoluteCenter;
+          cursor: pointer;
+          font-size: 14px;
+          color: #37B34A;
+          margin:0 10px 0 0;
+        }
+      }
+    }
+  }
+  & > .p2{
+    @include flexColumn;
+    box-sizing: border-box;
+    justify-content: center;
+    & > p:nth-of-type(1){
+      font-size: 13px;
+      color: #3369B1;
+      margin: 0 0 5px 0;
+      text-align: right;
+    }
+    & > p:nth-of-type(2){
+      font-size: 12px;
+      color: #818192;
+      text-align: right;
+    }
+  }
+  & > .p2Edit{
+    @include flexColumn;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 10px 0 0 0;
+    & > .fechas{
+      @include flexRow;
+      box-sizing: border-box;
+      & > div{
+        margin-left: 15px;
+        & > .datePicker{
+          width:105px;
+          min-width: 105px;
+        }
+        & > p{
+          font-size: 12px;
+          color: #98A9B4;
+          margin-top: 3px;
+        }
+      }
+    }
+    & > .botonEdit{
+      @include flexRow;
+      box-sizing: border-box;
+      margin-top: 25px;
+      & > a{
+        @include pfButton(140px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+        @include flexRow;
+        @include absoluteCenter;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: normal;
+        color:$gnBlanco;
+        & > label{
+          @include flexRow;
+          @include absoluteCenter;
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+}
+
+
+.open{
+  transform: rotate(180deg);
+
+  -webkit-transform: rotate(180deg);
+
+  -moz-transform: rotate(180deg);
+
+  -o-transform: rotate(180deg);
+}
+
+.close{
+  transform: rotate(0deg);
+
+  -webkit-transform: rotate(0deg);
+
+  -moz-transform: rotate(0deg);
+
+  -o-transform: rotate(0deg);
+}
+
+
+.tabla{
+  @include flexColumn;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 900px;
+  margin-top:30px;
+  & > .headTabla{
+    @include flexRow;
+    width: 100%;
+    box-sizing: border-box;
+    & > .nombre{
+      min-width: 100px;
+      width: 12%;
+      position: relative;
+    }
+    & > .element{
+      @include flexColumn;
+      justify-content: center;
+
+      font-size: 10px;
+      color: #818192;
+      width: 8%;
+      min-width: 50px;
+      text-align: center;
+      & > span{
+        @include multiLineTextTruncate(1,12px,12px,#FFF);
+        word-break: break-all;
+      }
+    }
+  }
+  & > .bodyTabla{
+    @include flexRow;
+    width: 100%;
+    box-sizing: border-box;
+    height: 60px;
+    position: relative;
+    & > .nombre{
+      @include flexColumn;
+      min-width: 100px;
+      width: 12%;
+      justify-content: center;
+      position: relative;
+      & > p:nth-of-type(1){
+        font-size: 13px;
+        color: #3369B1;
+        font-weight: 600;
+        margin:0 0 3px 0;
+      }
+      & > p:nth-of-type(2){
+        font-size: 12px;
+        color: #818192;
+        font-weight: 300;
+      }
+    }
+    & > .element{
+      @include flexRow;
+      @include absoluteCenter;
+      width: 8%;
+      min-width: 50px;
+      #img2{
+
+      }
+    }
+  }
+}
+
+input{
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom:1px solid #98A9B4;
+  outline: none;
+  font-size: 13px;
+  color: #3369B1;
+}
+
+.itemEmpresa{
+  width: 100%;
+  max-width: 900px;
+}
+
+
+
+.modal{
+  @include flexColumn;
+  @include absoluteCenter;
+  justify-content: flex-start;
+  padding: 25px;
+  height: 517px;
+  font-size: 9pt;
+  box-sizing: border-box;
+  & > .title{
+    @include flexRow;
+    @include absoluteCenter;
+    justify-content: space-between;
+    width: 100%;
+    height: 30px;
+    color: $gnAzulBajo;
+    font-weight: 500;
+    font-size: 21px;
+    align-items: flex-start;
+    box-sizing: border-box;
+    & > p{
+      margin-top: 2px;
+    }
+    & > img{
+      cursor: pointer;
+    }
+  }
+
+  & > .pdfview {
+    @include flexRow;
+    @include absoluteCenter;
+    box-sizing: border-box;
+    width: 100%;
+    height: 300px;
+    min-height: 300px;
+    border-bottom: 1px solid #b5bfc6;
+    //overflow: scroll;
+  }
+
+  & > .footer{
+    @include flexRow;
+    width: 100%;
+    box-sizing: border-box;
+    height: 40px;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    & > .cancelar{
+      @include pfButton(145px, 30px, $gnAzulMedio, rgba(51,105,177,0.75), $gnAzulMedio, 0px);
+      @include flexRow;
+      @include absoluteCenter;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: normal;
+      color:$gnBlanco;
+      box-sizing: border-box;
+    }
+    & > .guardar{
+      @include pfButton(145px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+      @include flexRow;
+      @include absoluteCenter;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: normal;
+      color:$gnBlanco;
+      box-sizing: border-box;
+    }
+    & > .guardarInactivo{
+      @include pfButton(145px, 30px, #D5DEE2, #e1e7e9, #D5DEE2, 0px);
+      @include flexRow;
+      @include absoluteCenter;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: normal;
+      color:$gnBlanco;
+      box-sizing: border-box;
+      pointer-events: none;
+    }
+  }
+}
+
+.cardModal  { //Seccion usuario y datos generales
+  @include flexRow;
+  box-sizing: border-box;
+  width:100%;
+  //padding: 30px 20px 0 20px;
+  opacity: 0.99;
+  position: relative;
+  border-bottom: 1px solid #b5bfc6;
+  margin-top: 15px;
+  height: 90px;
+  & > .img{
+    @include flexColumn;
+    align-items: center;
+    & > img{
+      width: 45px;
+      height: 45px;
+    }
+    & > p{
+      margin-top: 3px;
+      font-size: 10px;
+      color: #37B34A;
+    }
+  }
+  & > .infoCard {
+    @include flexColumn;
+    box-sizing: border-box;
+    width: calc(100% - 45px);
+    height: 70px;
+    padding: 5px 0 0 10px;
+    justify-content: flex-start;
+    & > p:nth-of-type(1){
+      font-size: 17px;
+      color: #3369B1;
+      font-weight: 600;
+      margin: 0 0 3px 0;
+      @include multiLineTextTruncate(1,18px,18px,#FFF);
+      word-break: break-all;
+    }
+    & > p:nth-of-type(2){
+      font-size: 12px;
+      color: #818192;
+    }
+  }
+  & > img {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+  }
+}
+
+
+.tooltip {
+  @include flexColumn;
+  max-width:180px;
+  min-width: 100px;
+  //height: 30px;
+  min-height: 30px;
+  background: #222E43;
+  border: 1px solid #D5DEE2;
+  box-shadow: 1px 3px 4px 0 rgba(53,53,53,0.50);
+  border-radius: 2px;
+  justify-content: center;
+  position:absolute;
+  margin: auto;
+  left: 0;
+  //right: 0;
+  bottom: 20px;
+  padding: 5px 5px;
+  box-sizing: border-box;
+  z-index: 1;
+  & > label:nth-of-type(1){
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+  }
+}
+
+.contentDiv{
+  @include flexColumn;
+  @include absoluteCenter;
+}
+

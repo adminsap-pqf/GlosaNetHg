@@ -1,0 +1,149 @@
+<div class="containerFileMonitoring">
+  <div class="title">
+    <div><img src="./assets/images/file-monitoring/icono_monitor.svg" alt=""/></div>
+    <div>
+      <p>Monitoreo de Archivos</p>
+      <p>{{ totalFiles === 1 ? totalFiles + ' Archivo' : totalFiles + ' Archivos' }}</p>
+    </div>
+  </div>
+  <div class="filters">
+    <div class="filterBy">
+      <label >Ordenar Por:</label>
+      <div class="drop-container">
+        <gn-drop-list #drop (valueDropList)="orderByDate($event)"
+                      [items]="optionsOrderBy"
+                      [itemSelect]="selectedOrderBy"
+                      [isSearch]="false"
+                      [isCategory]="false"
+                      [align]="'left'"
+                      [fontSize]="'14px'"></gn-drop-list>
+      </div>
+    </div>
+    <div class="filterBy">
+      <label >Filtrar Por:</label>
+      <div class="drop-container">
+        <gn-drop-list #drop (valueDropList)="filterByStatus($event)"
+                      [items]="optionsFilterByStatus"
+                      [itemSelect]="selectedFilterByStatus"
+                      [isSearch]="false"
+                      [isCategory]="false"
+                      [align]="'left'"
+                      [fontSize]="'14px'"></gn-drop-list>
+      </div>
+    </div>
+
+    <div class="filterByDate">
+      <div>
+        <label>Filtrar desde:</label>
+        <div>
+          <gn-date-picker [(date)]="startDate" dateFormat="YYYYMMDD" [sizeInput]="'14px'" (onSelect)="handleStartDate($event)"
+                          [lineColor]="invalidStartDate ? '#C1272D' : '#98A9B4'" [colorDate]="'#3369B1'" [fontFamily]="'Roboto Cn'" [weightInput]="'600'"
+                          [paddingInput]="'0px'" [textAlignInput]="'center'" [fontFamily]="'Roboto Cn'" (dateChange)="validateDates(startDate, 1)">
+          </gn-date-picker>
+          <img (click)="resetStartDate()" *ngIf="startDate" src="./assets/images/cerrar_azul.png">
+        </div>
+      </div>
+      <div>
+        <label>Hasta</label>
+        <div>
+          <gn-date-picker [(date)]="endDate" dateFormat="YYYYMMDD" [sizeInput]="'14px'" (onSelect)="handleEndDate($event)"
+                          [lineColor]="invalidEndDate ? '#C1272D' : '#98A9B4'" [colorDate]="'#3369B1'" [fontFamily]="'Roboto Cn'" [weightInput]="'600'"
+                          [paddingInput]="'0px'" [textAlignInput]="'center'" [fontFamily]="'Roboto Cn'" (dateChange)="validateDates(endDate, 2)">
+          </gn-date-picker>
+          <img (click)="resetEndDate()" *ngIf="endDate" src="./assets/images/cerrar_azul.png">
+        </div>
+      </div>
+    </div>
+
+    <div class="update">
+      <a (click)="update()">ACTUALIZAR</a>
+    </div>
+
+    <div class="searchBar" *ngIf="false">
+      <gn-search-bar [placeholder]="'Buscar'" [searchValue]="searchTerm" (searchTermChanged)="handleKeySearch($event)"></gn-search-bar>
+    </div>
+  </div>
+  <div class="table">
+    <div class="tableHead">
+      <div><p>#</p></div>
+      <div><p>Nombre</p></div>
+      <div><p>Fecha Descarga</p></div>
+      <div><p>Estado</p></div>
+      <div></div>
+    </div>
+    <div class="tableBody">
+      <div *ngIf="buffer.length === 0" class="withoutResults">
+        <p *ngIf="!loading">Sin Resultados</p>
+        <div *ngIf="loading"  class="containerLoader" [style.height]="buffer.length == 0 ? '100%': null">
+          <div class='loader'>
+            <div class='loading-square'></div>
+            <div class='loading-square'></div>
+            <div class='loading-square'></div>
+            <div class='loading-square'></div>
+          </div>
+        </div>
+      </div>
+      <virtual-scroller #scroll *ngIf="buffer.length > 0" [items]="buffer" (vsUpdate)="scrollItems = $event" (vsEnd)="fetchMore($event)">
+        <div class="row" *ngFor='let file of scrollItems; let i = index'>
+          <div>
+            <div>
+              <p>{{file.index}}</p>
+              <div></div>
+            </div>
+            <div>
+              <p>{{file.fileName}}</p>
+              <p>{{file.user}}</p>
+            </div>
+            <div><p>{{file.date | dateFormatCustom}}</p></div>
+            <div>
+              <p [ngStyle]="{'color':file.status === 0 ? '#E2C913' : file.status === 1 ? '#3B8EDE' : file.status === 2 ? '#C1272D' : '#37B34A' }">{{file.statusText}}</p>
+              <div class="load-circle" *ngIf="file.status === 0 || file.status === 1">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+              </div>
+            </div>
+            <div>
+              <p *ngIf="file.status === 2" (mouseenter)="file.activeTooltip = true" (mouseleave)="file.activeTooltip = false" [ngStyle]="{'cursor': file.stackTrace ? 'pointer' : 'default'}" (click)="openLightbox(file)">
+                Ver {{file.stackTrace ? 'StackTrace' : 'Comentarios'}}
+              </p>
+              <div class="tooltip" [style.opacity]="file.activeTooltip ? '1': '0'" [style.pointer-events]="'none'" [style.transition]="'0.5s'">
+                <p><span>Comentarios</span>{{file.comments}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="buffer.length > 0  && loading && !disableLoading"  class="containerLoader" [style.height]="buffer.length == 0 ? '100%': null">
+          <div class='loader'>
+            <div class='loading-square'></div>
+            <div class='loading-square'></div>
+            <div class='loading-square'></div>
+            <div class='loading-square'></div>
+          </div>
+        </div>
+      </virtual-scroller>
+      <div id="scrollStart" (click)="scrollTo()">
+        <img src="./assets/images/flecha_blanca.svg" alt="">
+      </div>
+    </div>
+    <div class="tableFoot">
+      <p>{{totalFiles === 1 ? '# ' + (totalFiles | acFormatNumber) + ' Archivo' : '# ' + (totalFiles | acFormatNumber) + ' Archivos'}}</p>
+    </div>
+  </div>
+</div>
+
+<div #lightbox id="lightbox_Stacktrace" class="w3-modal">
+  <div [ngClass]="'w3-modal-content ' + classAnimation + ' w3-card-4'" [style.height]="'540px'">
+    <div #containerLightbox class="lightbox" [style.height]="'540px'">
+      <div class="title">
+        <p>
+          <label>StackTrace</label>
+        </p>
+        <img src="./assets/images/cerrar_azul.svg" alt="" (click)="closeLightbox()">
+      </div>
+      <div class="body">
+        <p>{{currentStackTrace}}</p>
+      </div>
+    </div>
+  </div>
+</div>

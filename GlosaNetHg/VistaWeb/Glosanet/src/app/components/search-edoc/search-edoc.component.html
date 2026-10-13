@@ -1,0 +1,84 @@
+<div class="searchEdocContainer">
+    <div class="header">
+        <div>
+            <img src="./assets/images/datastage_search.svg" />
+        </div>
+        <div>
+            <p>Buscar E-doc</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="filters">
+            <div class="filterBy">
+                <label>Pedimento:</label>
+                <div class="drop-container">
+                    <input placeholder="Escribe Aquí"
+                           [(ngModel)]="searchByPedimento"
+                           (ngModelChange)="handleKeySearchPedimento($event)" />
+                </div>
+            </div>
+
+            <div class="filterBy">
+                <label>Número E-doc:</label>
+                <div class="drop-container">
+                    <input placeholder="Escribe Aquí"
+                           [(ngModel)]="searchByEDoc"
+                           (ngModelChange)="handleKeySearchEDoc($event)" />
+                </div>
+            </div>
+
+            <div class="filterByDate">
+                <label>Recepción desde:</label>
+                <div>
+                    <gn-date-picker [(date)]="startDate" dateFormat="YYYYMMDD" [sizeInput]="'14px'"
+                                    (onSelect)="handleStartDate($event)"
+                                    [lineColor]="invalidStartDate ? '#C1272D' : '#98A9B4'" [colorDate]="'#3369B1'"
+                                    [fontFamily]="'Roboto Cn'" [weightInput]="'600'"
+                                    [paddingInput]="'0px'" [textAlignInput]="'center'" [fontFamily]="'Roboto Cn'"
+                                    (dateChange)="validateDates(startDate, 1)">
+                    </gn-date-picker>
+                    <img (click)="resetStartDate()" *ngIf="startDate" src="./assets/images/cerrar_azul.png">
+                </div>
+            </div>
+
+            <div class="filterByDate">
+                <label>Hasta</label>
+                <div>
+                    <gn-date-picker [(date)]="endDate" dateFormat="YYYYMMDD" [sizeInput]="'14px'"
+                                    (onSelect)="handleEndDate($event)"
+                                    [lineColor]="invalidEndDate ? '#C1272D' : '#98A9B4'" [colorDate]="'#3369B1'"
+                                    [fontFamily]="'Roboto Cn'" [weightInput]="'600'"
+                                    [paddingInput]="'0px'" [textAlignInput]="'center'" [fontFamily]="'Roboto Cn'"
+                                    (dateChange)="validateDates(endDate, 2)">
+                    </gn-date-picker>
+                    <img (click)="resetEndDate()" *ngIf="endDate" src="./assets/images/cerrar_azul.png">
+                </div>
+            </div>
+
+            <div class="apply">
+                <a (click)="updateData()">APLICAR</a>
+            </div>
+
+        </div>
+        <div class="table">
+            <gn-datastage-table [buffer]="buffer"
+                                [firstItem]="firstItem"
+                                [grandTotal]="grandTotal"
+                                [currentTotal]="currentTotal"
+                                [currentPage]="currentPage"
+                                [loading]="loading"
+                                [getData]="getData"
+                                [tableHead]="tableHead"
+                                [maxWidth]="'100%'"
+                                [minWidth]="'880px'"
+                                [settings]="settings"
+                                [showTotal]="showTotal"
+                                [withoutMessage]="withoutMessage"
+                                [vucemTokenActive]="vucemTokenActive"
+                                [footerTitle]="'E-doc'"
+                                (emitCurrentPage)="handleCurrentPage($event)"
+                                (emitLoading)="handleLoading($event)"
+                                (emitLink)="handleSingleDownload($event)"></gn-datastage-table>
+        </div>
+    </div>
+</div>

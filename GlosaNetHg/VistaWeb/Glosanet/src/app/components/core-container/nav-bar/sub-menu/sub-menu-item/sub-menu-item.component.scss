@@ -1,0 +1,75 @@
+@import "../../../../../../variables";
+@import "../../../../../../mixins";
+@import "../../../../../../colors";
+:host {
+    width: 100%;
+    height: 40px;
+    font-size:$globalFont;
+    &>div:nth-of-type(1) {
+        @include flexColumn;
+        justify-content: flex-end;
+        align-items: center;
+        box-shadow: border-box;
+        height: 100%;
+        
+        //padding: 0 20px;
+        cursor: pointer;
+        /* border-bottom: solid 0.75px #3B8EDE;
+        border-left: solid 10px rgba(0,0,0,0);
+        border-right: solid 10px rgba(0,0,0,0); */
+        padding:0 20px 0 20px;
+        & > div:nth-of-type(1){
+            @include flexRow;
+            box-sizing: border-box;
+            width: 100%;
+            border-bottom: solid 0.75px rgba(59, 142, 222, 0.3);
+            justify-content: space-between;
+            padding-bottom: 10px;
+            &>p {
+                /* $textSizes: ('base': convertPts(18, 'px'));
+                @include escaledFontFormat($textSizes, 400, $pfMysticBlue); */
+                $textSizes: ('base': convertPts(13, 'px'));
+                @include escaledFontFormat($textSizes, 400, $gnBlanco);
+                min-width:205px;
+                //margin-left: 15px;
+                font-size: 14px;
+                color: #FFFFFF;
+            }
+            &>span {
+                $textSizes: ('base': convertPts(12, 'px'));
+                @include flexRow;
+                @include absoluteCenter;
+                @include escaledFontFormat($textSizes, 400, $gnBlanco);
+                box-sizing: border-box;
+                //height: 25px;
+                width: 25px;
+                //padding: 5;
+                //background-color: $pfCyan;
+                border-radius: 25px;
+                font-size: 15px;
+                color: #E2C913;
+            }
+        }
+
+        &:hover {
+            background: rgba(51,105,177,0.49);
+            
+            & > div:nth-of-type(1){
+                
+                &>p {
+                    font-weight: 600 !important;
+                }
+
+            }
+        }
+
+        &.active {
+            & > div:nth-of-type(1){
+                &>p {
+                    font-weight: 600 !important;
+                }
+
+            }
+        }
+    }
+}

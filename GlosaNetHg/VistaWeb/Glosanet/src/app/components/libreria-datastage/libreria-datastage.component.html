@@ -1,0 +1,54 @@
+<div>
+  <img src="./assets/images/libreria_header.svg" alt="">
+  <p>Librería DataStages</p>
+  <div class="boton">
+    <a class="btnCalendario" (click)="redirectCalendar()">
+      <p>IR A CALENDARIO</p>
+    </a>
+  </div>
+</div>
+<div>
+  <gn-filtro-tiempo [lstYears]="lstYears" (emitYear)="emitYear($event)"></gn-filtro-tiempo>
+
+  <div class="section_1">
+    <a class="btnAplicar">
+      <p (click)="filtrar()">APLICAR</p>
+    </a>
+    <div [style.width]="'115px'">
+      <gn-date-picker [(date)]="date2"
+                      dateFormat="YYYYMMDD"
+                      (fecha)="getFechaImpl($event)"
+                      [lineColor]="invalidDates ? '#C1272D' : '#3369B1'"
+                      (dateChange)="handleValidDates()"
+                      (handleCalculateDate)="handleCalculateDate($event)"
+                      (onSelect)="handleDate($event, 'end')">
+      </gn-date-picker>
+    </div>
+    <p>Hasta:</p>
+    <div [style.width]="'115px'">
+      <gn-date-picker [(date)]="date"
+                      dateFormat="YYYYMMDD"
+                      (fecha)="getFechaImpl($event)"
+                      [lineColor]="invalidDates ? '#C1272D' : '#3369B1'"
+                      (dateChange)="handleValidDates()"
+                      (handleCalculateDate)="handleCalculateDate($event)"
+                      (onSelect)="handleDate($event, 'start')">
+      </gn-date-picker>
+    </div>
+    <p>Ordenar desde:</p>
+  </div>
+
+  <div class="section_2" *ngIf="lstData && lstData.length > 0">
+    <gn-grid-card-container [tipo]="true" [lstData]="lstData" [idCliente]="idCliente" [rfc]="rfc"></gn-grid-card-container>
+  </div>
+
+  <div class="notResults" *ngIf="lstData && lstData.length === 0">
+    <p>No hay información que mostrar</p>
+  </div>
+
+</div>
+<div class="boton2" *ngIf="lstData && lstData.length > 0">
+  <a class="btnDescargarTodo" (click)="compressed_files()">
+    <p>DESCARGAR TODO</p>
+  </a>
+</div>

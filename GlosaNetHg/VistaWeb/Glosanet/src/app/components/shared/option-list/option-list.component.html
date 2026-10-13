@@ -1,0 +1,17 @@
+<div (click)="open = !open">
+    <img src="./assets/images/mas_informacion.svg" alt="" >
+</div>  
+<div class="container" *ngIf="open">
+  <div class="triangulo">
+
+  </div>
+  <div class="triangulo2">
+
+  </div>
+  <ul class="listItems">
+
+    <li [ngClass]="classActive[i] ? 'itemsActive' : 'items'" *ngFor="let item of items; let i = index" (click)="select(item, i )">
+        <p ><label>{{item.nombre}}</label></p>
+    </li>
+  </ul>
+</div>

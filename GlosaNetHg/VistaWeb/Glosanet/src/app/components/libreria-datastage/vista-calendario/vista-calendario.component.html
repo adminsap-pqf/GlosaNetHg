@@ -1,0 +1,28 @@
+<div>
+  <img src="./assets/images/calendario_header.svg" alt="">
+  <p>Calendario DataStages</p>
+  <div class="boton">
+    <a class="btnCalendario" (click)="redirectLibrary()">
+      <p>IR A LIBRERIA</p>
+    </a>
+  </div>
+</div>
+<div >
+  <gn-filtro-tiempo [lstYears]="lstYears" (emitYear)="emitYear($event)"></gn-filtro-tiempo>
+  <div>
+    <gn-grid-calendar [year]="year" [lstDataInput]="lstData" [rfc]="rfc" [idCliente]="idCliente"></gn-grid-calendar>
+  </div>
+</div>  
+<div id="nomen"><p> <span [style.background-color]="'#E2C913'"></span>  Último Datastage Subido</p><p> <span [style.background-color]="'#3369B1'"></span> Con Datastage</p><p> <span [style.background-color]="'#D5DEE2'"></span>Sin Datastage</p></div>
+<div [style.background-color]="'transparent'">
+  <p>Bitácora de Actualización</p>
+  <div *ngFor="let data of lstData; let i = index">
+    <div class="hover">
+      <gn-card-bitacora [data]="data" [rfc]="rfc" [idCliente]="idCliente" ></gn-card-bitacora>
+    </div>
+  </div>
+
+  <div *ngIf="lstData.length === 0" class="withoutResults">
+    <p>Sin Resultados</p>
+  </div>
+</div>

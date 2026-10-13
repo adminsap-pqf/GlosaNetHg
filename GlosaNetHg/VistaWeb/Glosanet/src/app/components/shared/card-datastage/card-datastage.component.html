@@ -1,0 +1,31 @@
+<div class="flip-container" [class.hover]="hover">
+  <div class="flipper">
+    <div class="front"  (click)="voltearTarjeta()" >
+      <div>
+        <img src="./assets/images/libreria_gris_tarjeta.svg" alt="">
+        <img src="./assets/images/libreria_azul_tarjeta.svg" alt="">
+      </div>
+      <div>
+        <p>Del {{data.finicio | dateFormatDot}}</p>
+        <p>al {{data.ffin | dateFormatDot}}</p>
+      </div>
+    </div>
+    <div class="back">
+      <div><img (click)="voltearTarjeta()" src="./assets/images/cerrar_azul.svg" alt=""></div>
+      <p>Del  {{data.finicio | dateFormatDot}}</p>
+      <p>al {{data.ffin | dateFormatDot}}</p>
+      <p>Número Identificador: #{{data.dataStage.folio }}</p>
+      <p>Fecha Solicitud: {{data.resumen.fechaEjecucion | dateFormatDot}}</p>
+      <p>Fecha Inclusión: {{data.dataStage.fua | dateFormatDot}}</p>
+      <p>Valor Total: {{data.totalDeducibles | acFormatMoney}}</p>
+      <div class="boton">
+        <a [ngClass]="listPermisos[1].activo ? 'btnCargar':'btnCargar-inactive'"(click)="obtenerArchivo()">
+          <p>DESCARGAR</p>
+        </a>
+        <a [ngClass]="listPermisos[11].activo ? 'btnShow':'btnShow-inactive'" (click)="redirectTo()">
+          <p>Ver</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

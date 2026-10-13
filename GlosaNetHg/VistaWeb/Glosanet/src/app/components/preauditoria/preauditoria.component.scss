@@ -1,0 +1,883 @@
+@import "../../../variables.scss";
+@import "../../../mixins.scss";
+@import "../../../colors.scss";
+
+.container {
+  @include flexColumn;
+  //width:100%;
+  //padding:0px 20px;
+  font-size: 9pt;
+  box-sizing: border-box;
+  @include absoluteCenter;
+
+  & > .head {
+    @include absoluteCenter;
+    width: 100%;
+
+    & > .row {
+      @include flexRow;
+      width: 100%;
+      //min-width: 740px;
+      box-sizing: border-box;
+
+      & > .column {
+        @include flexRow;
+        width: 100%;
+        box-sizing: border-box;
+
+        & > div {
+          box-sizing: border-box;
+
+          .btnAgregar {
+            @include flexRow;
+            $textSize: ('base': convertPts(12, 'px'));
+            @include escaledFontFormat($textSize, 600, $verdeBoton);
+            $colorHover: rgba(6, 188, 82, 0.2);
+            @include pfButton(115px, 30px, $gnBlanco, $colorHover, $gnBlanco, 0px);
+            @include flexRow;
+            @include absoluteCenter;
+            cursor: pointer;
+            font-size: 14px;
+            /* & > img{
+              margin-left: 5px;
+            } */
+          }
+        }
+      }
+    }
+  }
+
+
+  #droplist1 {
+    width: 65px;
+  }
+
+  #droplist2 {
+    width: 150px;
+  }
+
+  #columnTitle {
+    width: 38%;
+    font-size: 1.7em;
+
+    & > div {
+      & > label {
+        @include flexColumn;
+      }
+    }
+  }
+
+  #columnBoton {
+    width: 17%;
+    display: flex;
+    justify-content: flex-end;
+    //padding-right: 5px;
+  }
+
+  #column1 {
+    width: 15%;
+    font-size: 1.05em;
+  }
+
+  #column2 {
+    width: 30%;
+    font-size: 1.05em;
+  }
+
+
+  & > .body {
+    @include flexRow;
+    width: 100%;
+    height: calc(100vh - 216px);
+    min-height: 684px;
+    font-size: 9pt;
+    box-sizing: border-box;
+
+    & > .column:nth-of-type(1) {
+      @include flexColumn;
+      width: 285px;
+      padding: 35px 0 35px 0;
+      box-sizing: border-box;
+
+      & > .section {
+        @include flexColumn;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        border-right: 1.5px dashed #D5DEE2;
+
+        & > .labelDiv {
+          @include flexRow;
+          width: 100%;
+          height: 55px;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.2em;
+          color: #818192;
+          font-weight: 400;
+          box-sizing: border-box;
+          cursor: pointer;
+          padding: 0 25px;
+
+          & > label {
+            @include flexRow;
+            align-items: center;
+            width: 100%;
+            height: 55px;
+            border-bottom: 1.5px dashed #D5DEE2;
+            box-sizing: border-box;
+            cursor: pointer;
+          }
+        }
+
+        & > .labelDiv:hover {
+          @include flexRow;
+          width: 100%;
+          min-height: 55px;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.2em;
+          color: #3369B1;
+          font-weight: 400;
+          box-sizing: border-box;
+          background-color: #ECF0F3;
+          cursor: pointer;
+          padding: 0 25px;
+
+          & > label {
+            @include flexRow;
+            align-items: center;
+            width: 100%;
+            height: 55px;
+            border-bottom: 1.5px dashed #D5DEE2;
+            box-sizing: border-box;
+            cursor: pointer;
+          }
+        }
+
+        & > .labelDivSelect {
+          @include flexRow;
+          width: 100%;
+          min-height: 55px;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.2em;
+          color: #3369B1;
+          font-weight: 400;
+          box-sizing: border-box;
+          background-color: #ECF0F3;
+          cursor: pointer;
+          padding: 0 25px;
+
+          & > label {
+            @include flexRow;
+            align-items: center;
+            width: 100%;
+            height: 55px;
+            border-bottom: 1.5px dashed #D5DEE2;
+            box-sizing: border-box;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    & > .column:nth-of-type(2) {
+      @include flexColumn;
+      width: calc(100% - 285px);
+      padding: 35px 25px 35px 0;
+      box-sizing: border-box;
+
+      & > .title {
+        @include flexColumn;
+
+        //align-items: center;
+        width: 100%;
+        height: 60px;
+        box-sizing: border-box;
+
+        & > .divTitle {
+          @include flexRow;
+          //align-items: center;
+          /* justify-content: center; */
+          //align-content: center;
+          display: flex;
+          //width: 100%;
+          height: 60px;
+          color: #3369B1;
+          font-size: 1.55em;
+          font-weight: 700;
+          margin: 0 0 0 15px;
+          border-bottom: 1.5px dashed #D5DEE2;
+          line-height: 1em;
+          justify-content: space-between;
+          align-items: flex-end;
+
+          & > label {
+            height: 100%;
+          }
+
+          & > .img {
+            @include flexRow;
+            height: 20px;
+            margin-bottom: 5px;
+
+            & > img:nth-of-type(1) {
+              margin-right: 15px;
+            }
+          }
+        }
+      }
+
+      & > .container-table {
+        padding: 0 0 0 20px;
+        min-width: 1300px;
+        & > .table {
+          height: 547px;
+          overflow: auto;
+        }
+        & > .search-bar {
+          padding: 10px 0 10px 0;
+        }
+      }
+
+      & > .container-step6 {
+        @include flexColumn;
+        height: calc(100% - 25px);
+        padding: 30px 0 0 0;
+        & > .table-head {
+          height: 30px;
+          padding: 0 0 0 20px;
+          & > div {
+            @include flexRow;
+            border-bottom: 1px dashed #D5DEE2;
+            height: 30px;
+            padding: 0 0 0 20px;
+            & > div {
+              width: 50px;
+              min-width: 40px;
+              & > label {
+                font-size: 13px;
+                color: #B7C3CE;
+              }
+            }
+          }
+        }
+        & > .table-body {
+          width: calc(100% - 20px);
+          height: calc(100% - 30px);
+          padding: 0 0 0 20px;
+          & > virtual-scroller {
+            height: 100%;
+          }
+          .row {
+            @include flexRow;
+            border-bottom: 1px dashed #D5DEE2;
+            height: 48px;
+            align-items: center;
+            padding: 0 0 0 20px;
+            & > :nth-child(even) {
+              & > label {
+                font-size: 13px;
+                color: #B7C3CE;
+              }
+            }
+            & > :nth-child(odd) {
+              & > label {
+                font-size: 13px;
+                color: #3369B1;
+              }
+            }
+            & > div {
+              text-align: left;
+            }
+          }
+          .row:hover {
+            background-color: #ECF0F3;
+          }
+        }
+      }
+
+      & > .graph {
+        /*
+                        @include flexColumn;
+                        justify-content: space-between; */
+        box-sizing: border-box;
+        /*
+                        align-items: center; */
+        padding-top: 25px;
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+
+        & > .efecto {
+          width: 100%;
+          min-width: 100%;
+          max-width: 100%;
+          height: 100%;
+
+          & > canvas {
+          }
+
+          & > .legend {
+            @include flexColumn;
+            width: 100%;
+            height: 280px;
+            //position: absolute;
+            //right: 20px;
+            //top:70px;
+            font-size: 9pt;
+            padding: 0 20px;
+            box-sizing: border-box;
+
+            & > .head {
+              @include flexColumn;
+              @include absoluteCenter;
+              justify-content: space-between;
+              width: 100%;
+              min-height: 65px;
+              border-bottom: 0.75px solid #BABDC8;
+              font-size: 1.55em;
+              padding: 5px 0;
+              box-sizing: border-box;
+              font-weight: 700;
+
+              & > label {
+                @include flexRow;
+                width: 100%;
+                text-align: left;
+                justify-content: space-between;
+
+                & > span {
+                  width: 200px;
+                  font-size: 13px;
+                  font-weight: 700;
+                  color: #818192;
+                }
+
+              }
+            }
+
+            & > .body {
+              //@include flexColumn;
+              @include absoluteCenter;
+              justify-content: flex-start;
+              width: 100%;
+              height: 150px;
+              border-bottom: 0.75px solid #BABDC8;
+              font-size: 1em;
+              //padding:10px 0px;
+              box-sizing: border-box;
+              overflow: scroll;
+
+              & > div {
+                @include flexRow;
+                width: 100%;
+                max-height: 60px;
+                min-height: 30px;
+                box-sizing: border-box;
+                font-size: 13px;
+                align-items: center;
+                color: #818192;
+                margin: 5px 0;
+
+                & > span {
+                  width: 10px;
+                  min-width: 10px;
+                  height: 10px;
+                  border-radius: 50px;
+                }
+
+                & > div {
+                  width: calc(70% - 10px);
+                  margin-left: 5px;
+
+                }
+
+                & > label {
+                  width: 30%;
+                  text-align: right;
+                }
+              }
+            }
+
+            & > .body2 {
+              @include flexColumn;
+              @include absoluteCenter;
+              width: 100%;
+              height: 150px;
+              border-bottom: 0.75px solid #BABDC8;
+              font-size: 1em;
+              padding: 10px 0px;
+              box-sizing: border-box;
+              overflow: scroll;
+
+              & > div {
+                @include flexRow;
+                width: 100%;
+                height: 30px;
+                min-height: 30px;
+                box-sizing: border-box;
+                font-size: 13px;
+                align-items: center;
+                color: #818192;
+
+                & > span {
+                  width: 10px;
+                  height: 10px;
+                  border-radius: 50px;
+                }
+
+                & > div {
+                  width: calc(25% - 10px);
+                  margin-left: 5px;
+
+                }
+
+                & > label:nth-of-type(1) {
+                  width: 25%;
+                  text-align: right;
+                }
+
+                & > label:nth-of-type(2) {
+                  width: 25%;
+                  text-align: right;
+                }
+
+                & > label:nth-of-type(3) {
+                  width: 25%;
+                  text-align: right;
+                }
+              }
+            }
+
+            & > .foot {
+              @include flexRow;
+              @include absoluteCenter;
+              width: 100%;
+              height: 35px;
+              font-size: 14px;
+              padding: 5px 0;
+              box-sizing: border-box;
+              color: #222E43;
+
+              & > label {
+                width: 100%;
+                text-align: right;
+                font-weight: 400;
+
+              }
+            }
+          }
+
+        }
+      }
+    }
+  }
+
+
+  #doughnut1Div, #doughnut2Div {
+    z-index: 1;
+    //display: flex;
+    position: relative;
+  }
+
+
+  .total {
+    @include flexColumn;
+    position: absolute;
+    justify-content: space-between;
+    width: 240px;
+    height: 40px;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+
+    & > label {
+      font-size: 20px;
+      text-align: center;
+      font-weight: 300;
+      color: #818192;
+      font-size: 13px;
+    }
+
+    & > label:nth-of-type(2) {
+      font-size: 19px;
+      text-align: center;
+      font-weight: 700;
+      color: #222E43;
+    }
+  }
+
+
+  @include responsive_layout('small') {
+    #column1 {
+      width: 15%;
+    }
+    #column2 {
+      width: 30%;
+    }
+    #columnBoton {
+      width: 17%;
+      display: flex;
+      justify-content: flex-end;
+      //padding-right: 5px;
+    }
+    #columnTitle {
+      width: 38%;
+
+      & > div {
+        & > label {
+          @include flexColumn;
+        }
+      }
+    }
+
+
+    #doughnut1Div {
+      width: 350px;
+      height: 250px;
+      margin-left: 0;
+    }
+
+    #doughnut2Div {
+      width: 350px;
+      height: 250px;
+      margin-left: 0;
+    }
+
+    #totalDoughnut1 {
+      height: 40px;
+      margin: auto;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: -1;
+
+      & > label {
+        font-size: 13px;
+        text-align: center;
+        font-weight: 300;
+      }
+
+      & > label:nth-of-type(2) {
+        font-size: 19px;
+        text-align: center;
+        font-weight: 700;
+      }
+    }
+
+    #legendDoughnut1 {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 280px;
+    }
+
+
+    #legendDoughnut2 {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 280px;
+    }
+
+    .graph {
+      @include flexRow;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .efecto {
+      @include flexColumn;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  @include responsive_layout('mid') {
+    #column1 {
+      width: 110px;
+      margin: 0 10px;
+    }
+    #column2 {
+      width: 210px;
+      margin: 0 10px;
+    }
+    #columnBoton {
+      width: 125px;
+      margin: 0 0 0 10px;
+    }
+    #columnTitle {
+      width: calc(100% - (110px - 210px - 250px));
+
+      & > div {
+        & > label {
+          @include flexRow;
+
+          & > span {
+            margin-left: 5px;
+          }
+        }
+      }
+    }
+
+    #doughnut1Div {
+      width: 450px;
+      height: 450px;
+      z-index: 1;
+      //display:flex;
+      //margin-left: 33%;
+    }
+
+    #doughnut2Div {
+      width: 450px;
+      height: 450px;
+      z-index: 1;
+      display: flex;
+    }
+
+    #legendDoughnut1 {
+      display: flex;
+      flex-direction: column;
+      width: 450px;
+      height: 280px;
+      margin-left: 50px;
+
+      & > .head {
+        font-size: 18px;
+      }
+    }
+
+    #legendDoughnut2 {
+      display: flex;
+      flex-direction: column;
+      width: 450px;
+      height: 280px;
+      margin-left: 50px;
+
+      & > .head {
+        font-size: 18px;
+      }
+    }
+
+
+    #totalDoughnut1 {
+
+      height: 40px;
+      margin: auto;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: -1;
+
+      & > label {
+        font-size: 16px;
+        text-align: center;
+        font-weight: 300;
+      }
+
+      & > label:nth-of-type(2) {
+        font-size: 20px;
+        text-align: center;
+        font-weight: 700;
+      }
+    }
+
+    .graph {
+      @include flexRow;
+      box-sizing: border-box;
+      align-items: center;
+      padding-left: 40px;
+      justify-content: space-between;
+
+    }
+
+
+    .efecto {
+      @include flexRow;
+      box-sizing: border-box;
+      align-items: center;
+      justify-content: center;
+    }
+
+  }
+}
+:host ::ng-deep .mat-header-cell{
+  color: #B7C3CE;
+}
+:host ::ng-deep .mat-footer-row, .mat-header-row, .mat-row{
+  border-bottom: 1px dashed #D5DEE2;
+}
+:host ::ng-deep .mat-row .mat-cell {
+  font-size: 13px;
+}
+:host ::ng-deep .mat-row:hover {
+  background-color: #ECF0F3;
+}
+:host ::ng-deep .mat-row:hover .mat-cell{
+  font-weight: 900;
+}
+:host ::ng-deep .mat-row .mat-cell:nth-child(even) {
+  color: #818192;
+}
+:host ::ng-deep .mat-row .mat-cell:nth-child(odd) {
+  color: #3369B1;
+}
+:host ::ng-deep .mat-form-field-infix {
+  text-align: center;
+}
+.containerLoader {
+  @include flexRow;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  height: 547px;
+  & > .loader {
+    $color-primary: $gnAzulBajo ;
+    $color-secondary: $verdeBoton ;
+    $color-darkAccent: $gnDorado ;
+    $color-lightAccent: $gnAzulMedio;
+    $background: #222222;
+    $duration: 1.5s;
+    display: block;
+    position: relative;
+    height: 20px;
+    width: 86px;
+    .loading-square {
+      position: absolute;
+      height: 20px;
+      width: 20px;
+      top: 0;
+    }
+    .loading-square:nth-child(1) {
+      left: 0;
+      animation: square1 $duration linear forwards infinite;
+    }
+
+    .loading-square:nth-child(2) {
+      left: 22px;
+      animation: square2 $duration linear forwards infinite;
+    }
+
+    .loading-square:nth-child(3) {
+      left: 44px;
+      animation: square3 $duration linear forwards infinite;
+    }
+
+    .loading-square:nth-child(4) {
+      left: 66px;
+      animation: square4 $duration linear forwards infinite;
+    }
+
+    @keyframes square1 {
+      0% {
+        background-color: $color-primary;
+        transform: translate(0, 0);
+      }
+      9.09091% {
+        transform: translate(0, calc(-100% - 2px));
+        background-color: $color-primary;
+      }
+      18.18182% {
+        transform: translate(calc(100% + 2px), calc(-100% - 2px));
+        background-color: $color-secondary;
+      }
+      27.27273% {
+        transform: translate(calc(100% + 2px), 0);
+      }
+      100% {
+        background-color: $color-secondary;
+        transform: translate(calc(100% + 2px), 0);
+      }
+    }
+    @keyframes square2 {
+      0% {
+        background-color: $color-secondary;
+        transform: translate(0, 0);
+      }
+      18.18182% {
+        transform: translate(0, 0);
+      }
+      27.27273% {
+        transform: translate(0, calc(100% + 2px));
+        background-color: $color-secondary;
+      }
+      36.36364% {
+        transform: translate(calc(100% + 2px), calc(100% + 2px));
+        background-color: $color-darkAccent;
+      }
+      45.45455% {
+        transform: translate(calc(100% + 2px), 0);
+      }
+      100% {
+        background-color: $color-darkAccent;
+        transform: translate(calc(100% + 2px), 0);
+      }
+    }
+    @keyframes square3 {
+      0% {
+        background-color: $color-darkAccent;
+        transform: translate(0, 0);
+      }
+      36.36364% {
+        transform: translate(0, 0);
+      }
+      45.45455% {
+        transform: translate(0, calc(-100% - 2px));
+        background-color: $color-darkAccent;
+      }
+      54.54545% {
+        transform: translate(calc(100% + 2px), calc(-100% - 2px));
+        background-color: $color-lightAccent;
+      }
+      63.63636% {
+        transform: translate(calc(100% + 2px), 0);
+      }
+      100% {
+        background-color: $color-lightAccent;
+        transform: translate(calc(100% + 2px), 0);
+      }
+    }
+    @keyframes square4 {
+      0% {
+        transform: translate(0, 0);
+        background-color: $color-lightAccent;
+      }
+      54.54545% {
+        transform: translate(0, 0);
+      }
+      63.63636% {
+        transform: translate(0, calc(100% + 2px));
+        background-color: $color-lightAccent;
+      }
+      72.72727% {
+        background-color: $color-darkAccent;
+      }
+      81.81818% {
+        background-color: $color-secondary;
+      }
+      90.90909% {
+        transform: translate(calc(-300% - 6px), calc(100% + 2px));
+        background-color: $color-primary;
+      }
+      100% {
+        transform: translate(calc(-300% - 6px), 0);
+        background-color: $color-primary;
+      }
+    }
+  }
+}
+
+
+
+
+

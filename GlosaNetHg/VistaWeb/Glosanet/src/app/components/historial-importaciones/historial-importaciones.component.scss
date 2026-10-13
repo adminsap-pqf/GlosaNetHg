@@ -1,0 +1,1094 @@
+@import "../../../variables.scss";
+@import "../../../mixins.scss";
+@import "../../../colors.scss";
+
+
+.gn-historialImportaciones{
+  @include flexColumn;
+  height: 100%;
+  margin: 0 25px;
+
+  & .Title{
+    @include flexRow;
+    height: 42px;
+    border-bottom: 0.5px solid #98A9B4;
+    padding-top: 2px;
+    align-items: flex-end;
+    padding-bottom: 20px;
+    & > div {
+      width: 75%;
+      @include flexColumn;
+      flex-direction: row;
+      justify-content: space-between;
+      align-content: flex-start;
+      align-items: flex-start;
+      &  > .hTitle{
+        font-family: 'Roboto Cn';
+        font-weight: 700;
+        font-size: 20px;
+        color: #3B8EDE;
+        padding-top: 2px;
+      }
+    }
+  }
+
+  & > .dvPrevision{
+    @include flexRow;
+    width: 100%;
+    margin-top: 26px;
+    & > div:nth-of-type(1){
+      & > div:nth-of-type(1){
+        @include flexColumn;
+        & > span:nth-of-type(1){
+          font-family: 'Roboto Cn';
+          font-size: 18px;
+          color: #222E43;
+          font-weight: 300;
+        } & div:nth-of-type(1){
+          & > span:nth-of-type(1){
+            font-size: 16px;
+            color: #818192;
+          } & > span:nth-of-type(2){
+            font-family: 'Roboto Cn';
+            font-size: 16px;
+            color: #333300;
+            line-height: 19px;
+            font-weight: 700;
+          }
+        }
+        & > span:nth-of-type(2){
+          font-size: 16px;
+          color: #3B8EDE;
+        }
+      }
+    }
+  }
+  & > .importaciones{
+    @include flexRow;
+    justify-content: center;
+    margin-bottom: 10px;
+    margin-top: 14px;
+    & > span:nth-of-type(1){
+      width: 100%;
+      margin-top: 22px;
+      font-family: 'Roboto Cn';
+      font-size: 20px;
+      color: #3B8EDE;
+      font-weight: 700;
+    }
+  }
+
+  & > .fecha{
+    @include flexRow;
+    margin-top:10.8px;
+    width: 100%;
+    justify-content: space-between;
+    &   > .contenedor1{
+      @include flexRow;
+      justify-content: space-between;
+      align-items: center;
+      height: 30px;
+      width: 100%;
+      & > div:nth-of-type(1){
+
+      }
+      & > div:nth-of-type(1){
+        @include flexRow;
+        & > div:nth-of-type(1){
+          position:relative;
+          @include flexColumn;
+          margin-left: 0px;
+          align-items: center;
+          & > span{
+            font-size: 13px;
+            color: #818192;
+            margin-right: 5px
+          }
+          & > div:nth-of-type(1){
+            @include flexRow;
+          }
+          & > a.btn{
+            position: absolute;
+            right: -2px;
+            background: #FFF;
+          }
+        }
+      }
+      & >.select4{
+        @include flexRow;
+        width: 43%;
+        margin-top: 13px;
+        & > div:nth-of-type(1){
+          @include flexRow;
+          align-items: flex-end;
+          top: 334px;
+          & > span{
+            position: absolute;
+            font-family: 'Roboto Cn';
+            font-size: 13px;
+            color: #818192;
+            text-align: left;
+            font-weight: 400;
+
+          }
+        } & > div:nth-of-type(2){
+          @include flexColumn;
+          & > span{
+            margin-top: -15px;
+            position: absolute;
+            font-family: 'Roboto Cn';
+            font-size: 13px;
+            color: #818192;
+            text-align: left;
+            font-weight: 400;
+
+          }
+        } & > div:nth-of-type(3){
+          @include flexRow;
+          align-items: flex-end;
+          margin-left: -11px;
+          position: absolute;
+          margin-left: 75px;
+          margin-top: 20px;
+          & > span{
+            position: absolute;
+            font-family: 'Roboto Cn';
+            font-size: 13px;
+            color: #818192;
+            text-align: left;
+            font-weight: 400;
+          }
+        }
+      }
+    }
+    & > .contenedor2 {
+      @include flexRow;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      position: relative;
+      & >  .select1{
+        align-items: center;
+        width: 100%;
+        position: relative;
+        @include flexRow;
+        & > span{
+          width: 90px;
+          font-size: 13px;
+          color: #818192;
+        } & > div:nth-of-type(1){
+          position: absolute;
+          background-color: #A9A9A9;
+          height: 36px;
+          border-bottom: none;
+        }
+      }
+      & > .select2{
+        @include flexRow;
+        align-items: center;
+        margin-left: 25px;
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: 0%;
+        & > span{
+          font-size: 13px;
+          color: #818192;
+        } & > div:nth-of-type(1){
+          position: absolute;
+          background-color: #A9A9A9;
+          height: 36px;
+          border-bottom: none;
+        }
+      }
+    }
+    & > .contenedor3{
+      @include flexRow;
+      justify-content: space-between;
+      align-items: center;
+      width: 65%;
+      position: relative;
+       & > div.div0{
+         @include flexRow;
+         flex-grow: 0.9;
+         flex-shrink: 1;
+         flex-basis: 0%;
+       }
+      & > div:nth-of-type(2){
+          @include flexRow;
+        & > a:nth-of-type(1){
+          & >p:nth-of-type(1){
+            cursor: pointer;
+            @include flexRow;
+            margin-top: 0px;
+            width: 100px;
+            height: 30px;
+            background-color: #3369B1;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            font-weight: normal;
+            color: #FFFFFF;
+          }
+        }
+      } & > div:nth-of-type(3){
+        @include flexRow;
+        & > a:nth-of-type(1){
+          display: flex;
+          $colorHover:#eaf4ea;
+          justify-content: center;
+          align-items: center;
+          @include pfButton(115px, 30px, $gnBlanco, $colorHover, $gnBlanco, 0px);
+          align-items: center;
+          justify-content: center;
+          height: 30px;
+          width: 100px;
+          background: #FFFFFF;
+          border: 1px solid #EAF4EA;
+          &> p:nth-of-type(1){
+            cursor: pointer;
+            text-align:center;
+            font-size: 14px;
+            color: #37B34A;
+          }
+        }
+      }
+    }
+  }
+}
+/* .table{
+  height: 600px;
+  overflow-x: scroll;
+  margin-top: 30px;
+  .body{
+    @include flexColumn;
+    width: 100%;
+    font-size: 9pt;
+    box-sizing: border-box;
+    padding-top: 35px;
+    & > th:nth-of-type(1){
+      color: $gnAzulMedio;
+      font-size: 18px;
+      font-weight: 500;
+      margin: 23px 20px;
+    }
+    & > thead:nth-of-type(1){
+      //@include absoluteCenter;
+      margin: 0px 20px;
+      & > tr:nth-of-type(1){
+        @include flexRow;
+        border-bottom: 2px dashed $gnInactivo;
+        width: 100%;
+        & > th{
+          @include flexRow;
+          align-items: flex-end;
+          box-sizing: border-box;
+          font-size: 14px;
+          color: $grisLinea;
+
+        }
+      }
+      & > thead:nth-of-type(2){
+        overflow-y: scroll;
+        height: calc(100vh - 380px);
+        width: 100%;
+        & > .rowTable:hover{
+          background-color: $gnAzulFondo;
+          & > th{
+            font-weight: 600;
+          }
+        }
+      }
+    } & > tbody:nth-of-type(1){
+      @include flexColumn;
+      margin: 0px 20px;
+      .rowTable{
+        @include flexRow;
+        height: 82px;
+        border-bottom: 2px dashed $gnInactivo;
+
+        & > td{
+          @include flexRow;
+          align-items: center;
+          box-sizing: border-box;
+          font-size: 10pt;
+          color: $gnGrisRata;
+        }
+      }
+    }
+  }
+} */
+
+
+
+@media screen and (min-width: 1220px){
+  .select3{
+    flex-direction: row !important;
+  }
+  .select2{
+    margin-left:96px;
+  }
+}
+
+@media screen and (max-width: 1220px){
+  .btn1{
+    position: absolute !important;
+    bottom: 100%;
+    right: 0;
+  }
+  .btn{
+    top:14px;
+  }
+  .select2{
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  .select1{
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  .select3{
+    align-items: flex-start !important;
+
+  }
+
+    @media screen and (max-width: 800px){
+    .body{
+          min-width: 710px;
+    }
+  }
+}
+
+
+/////////////////////////////////////////////////////////el rishy//////////////////////////////////////////////////////////
+
+
+
+.header{
+  @include flexColumn;
+  width: 100%;
+  box-sizing: border-box;
+  height: 170px;
+  & > .title{
+      @include flexRow;
+      width: 100%;
+      height: 30px;
+      box-sizing: border-box;
+      background-color: #3369B1;
+      align-items: center;
+      padding: 0 25px;
+      & > p{
+          //@include flexRow;
+          box-sizing: border-box;
+          & > label:nth-of-type(1){
+              font-size: 12px;
+              color: #FFFFFF;
+              font-weight: 500;
+          }
+          & > label:nth-of-type(2){
+              font-size: 12px;
+              color: #E2C913 ;
+          }
+      }
+  }
+  & > .product{
+      @include flexRow;
+      width: 100%;
+
+      box-sizing: border-box;
+      height: 140px;
+      padding: 0 25px;
+      justify-content: space-between;
+      align-items: center;
+      & > .item-producto{
+          @include flexRow;
+          box-sizing: border-box;
+          width: calc(100% - 200px);
+          height: 95px;
+          padding-right: 5px;
+          & > .img{
+              @include flexRow;
+              box-sizing: border-box;
+              width: 58px;
+              margin-right: 20px;
+              align-items: flex-start;
+              padding-top: 5px;
+          }
+          & > .text{
+              @include flexColumn;
+              box-sizing: border-box;
+              width: calc(100% - 78px);
+              justify-content: space-between;
+              & > p:nth-of-type(1){
+                  //@include flexRow;
+                  width: 100%;
+                  box-sizing: border-box;
+                  font-family:'Roboto Cn';
+                  @include multiLineTextTruncate(1,17px,17px,#FFF);
+                  word-break: break-all;
+                  & > label:nth-of-type(1){
+                      font-size: 17px;
+                      color: #E2C913;
+                      font-weight: 500;
+                  }
+                  & > label:nth-of-type(2){
+                      font-size: 17px;
+                      font-weight: 500;
+                      color:#3369B1;
+
+                  }
+              }
+              & > p:nth-of-type(2){
+                  @include flexRow;
+                  width: 100%;
+                  box-sizing: border-box;
+                  font-size: 14px;
+                  color: #3B8EDE;
+                  font-weight: 500;
+
+              }
+              & > p:nth-of-type(3){
+                  @include flexRow;
+                  width: 100%;
+                  box-sizing: border-box;
+                  font-size: 15px;
+                  color: #3369B1;
+                  font-weight: 300;
+              }
+
+              & > p:nth-of-type(4){
+                  @include flexRow;
+                  width: 100%;
+                  box-sizing: border-box;
+                  font-size: 14px;
+                  color: #3B8EDE;
+                  font-weight: 300;
+              }
+              & > a{
+                @include flexRow;
+
+                $colorHover:  rgba(6, 188, 82, 0.2);
+                @include pfButton(210px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+                @include flexRow;
+                @include absoluteCenter;
+                cursor: pointer;
+                font-size: 14px;
+                color: #37B34A;
+                font-weight: 500;
+                margin: 8px 0 0 0;
+            }
+
+
+          }
+      }
+      & > .boton{
+          @include flexRow;
+          width: 200px;
+          box-sizing: border-box;
+          height: 80px;
+          & > a{
+              @include pfButton(190px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+              @include flexRow;
+              @include absoluteCenter;
+              cursor: pointer;
+              font-size: 14px;
+              font-weight: normal;
+              color:$gnBlanco;
+
+          }
+      }
+  }
+}
+
+
+
+.container{
+  @include flexRow;
+  width: 100%;
+  background: #ECF0F3;
+  box-sizing: border-box;
+  padding:35px 25px 40px 25px;
+  position: relative;
+  min-height: calc(100vh - 236px);
+}
+
+.triangulo{
+  width: 0px;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 15px solid #FFF;
+  position: absolute;
+  top: 20px;
+  left: 40px;
+}
+
+.section{
+  @include flexColumn;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 40px 25px 40px 25px;
+  background-color: white;
+  //@include absoluteCenter;
+}
+
+.separacion{
+  width: calc(100% + 50px);
+  height: 15px;
+  box-sizing: border-box;
+  background-color: #ECF0F3;
+  margin: 40px -25px 0 -25px;
+}
+
+
+
+.bar-section{
+  @include flexColumn;
+  box-sizing: border-box;
+  width: 100%;
+  height: 235px;
+  & > label{
+    font-size: 19px;
+    color: #3B8EDE;
+    font-weight: 600;
+  }
+}
+
+
+.historial{
+  @include flexColumn;
+  box-sizing: border-box;
+  padding: 25px 0 0 0;
+  & > label{
+    font-size: 19px;
+    color: #3B8EDE;
+    font-weight: 600;
+    margin-bottom: 25px;
+  }
+  & > .searchBar{
+      width: 100%;
+      height: 30px;
+      box-sizing: border-box;
+      margin-bottom: 40px;
+  }
+  & > .table{
+    @include flexColumn;
+    box-sizing: border-box;
+    width: 100%;
+    & > .thead{
+      @include flexRow;
+      width: 100%;
+      box-sizing: border-box;
+      font-size: 12px;
+      color: #B7C3CE;
+      border-bottom: 1px dashed #D5DEE2;
+      & > div{
+        padding:0 3px;
+      }
+      & > div:nth-of-type(1){
+        @include flexRow;
+        box-sizing: border-box;
+        width: 5%;
+        height: 20px;
+      }
+      & > div:nth-of-type(2){
+        @include flexRow;
+        box-sizing: border-box;
+        width: 32%;
+        height: 20px;
+      }
+      & > div:nth-of-type(3){
+        @include flexRow;
+        box-sizing: border-box;
+        width: 28%;
+        height: 20px;
+      }
+      & > div:nth-of-type(4){
+        @include flexRow;
+        justify-content: center;
+        box-sizing: border-box;
+        width: 15%;
+        height: 20px;
+      }
+      & > div:nth-of-type(5){
+        @include flexRow;
+        justify-content: center;
+        box-sizing: border-box;
+        width: 20%;
+        height: 20px;
+      }
+    }
+    & > .tbody{
+      @include flexRow;
+      width: 100%;
+      box-sizing: border-box;
+      font-size: 13px;
+      height: 60px;
+      align-items: center;
+      border-bottom: 1px dashed #D5DEE2;
+      & > div{
+        padding:0 3px;
+      }
+      & > div:nth-of-type(1){
+        @include flexColumn;
+        justify-content: center;
+        box-sizing: border-box;
+        width: 5%;
+        color: #3369B1;
+      }
+      & > div:nth-of-type(2){
+        @include flexRow;
+        box-sizing: border-box;
+        width: 32%;
+        & > #img1{
+          width: 27px;
+          height: 30px;
+          margin-right: 3px;
+        }
+      & > #img2{
+          width: 27px;
+          height: 30px;
+          display: none;
+          margin-right: 3px;
+        }
+        & > p{
+          @include flexColumn;
+          box-sizing: border-box;
+          & > label:nth-of-type(1){
+            margin-bottom: 3px;
+            color: #3369B1;
+          }
+          & > label:nth-of-type(2){
+            font-size: 11px;
+            color: #818192;
+          }
+        }
+      }
+      & > div:nth-of-type(3){
+        @include flexColumn;
+        box-sizing: border-box;
+        width: 28%;
+        & > p{
+          @include flexColumn;
+          box-sizing: border-box;
+          & > label:nth-of-type(1){
+            margin-bottom: 3px;
+            color: #3369B1;
+          }
+          & > label:nth-of-type(2){
+            font-size: 11px;
+          }
+        }
+      }
+      & > div:nth-of-type(4){
+        @include flexColumn;
+        @include absoluteCenter;
+        box-sizing: border-box;
+        width: 15%;
+        & > p{
+          @include flexColumn;
+          box-sizing: border-box;
+
+        }
+      }
+      & > div:nth-of-type(5){
+        @include flexColumn;
+        @include absoluteCenter;
+        box-sizing: border-box;
+        width: 20%;
+
+        & > p{
+          @include flexColumn;
+          box-sizing: border-box;
+
+        }
+      }
+
+      &:hover{
+        @include flexRow;
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 13px;
+        height: 60px;
+        align-items: center;
+        border-bottom: 1px dashed #D5DEE2;
+        background-color: #ECF0F3;
+        & > div{
+          padding:0 3px;
+        }
+        & > div:nth-of-type(1){
+          @include flexColumn;
+          justify-content: center;
+          box-sizing: border-box;
+          width: 5%;
+          color: #3369B1;
+          font-weight: 700;
+        }
+        & > div:nth-of-type(2){
+          @include flexRow;
+          box-sizing: border-box;
+          width: 32%;
+          & > #img1{
+            display: none;
+          }
+        & > #img2{
+            display: inherit;
+          }
+          & > p{
+            @include flexColumn;
+            box-sizing: border-box;
+            & > label:nth-of-type(1){
+              margin-bottom: 3px;
+              font-weight: 700;
+            }
+            & > label:nth-of-type(2){
+              font-size: 11px;
+              color: #3B8EDE;
+            }
+          }
+        }
+        & > div:nth-of-type(3){
+          @include flexColumn;
+          box-sizing: border-box;
+          width: 28%;
+          & > p{
+            @include flexColumn;
+            box-sizing: border-box;
+            & > label:nth-of-type(1){
+              margin-bottom: 3px;
+              color: #3369B1;
+              font-weight: 700;
+            }
+            & > label:nth-of-type(2){
+              font-size: 11px;
+            }
+          }
+        }
+        & > div:nth-of-type(4){
+          @include flexColumn;
+          @include absoluteCenter;
+          box-sizing: border-box;
+          width: 15%;
+          & > p{
+            @include flexColumn;
+            box-sizing: border-box;
+            font-weight: 700;
+          }
+        }
+        & > div:nth-of-type(5){
+          @include flexColumn;
+          @include absoluteCenter;
+          box-sizing: border-box;
+          width: 20%;
+          & > p{
+            @include flexColumn;
+            box-sizing: border-box;
+            font-weight: 700;
+          }
+        }
+      }
+    }
+  }
+  & > .numPermisos{
+    @include flexRow;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: center;
+    & > label{
+      font-size: 13px;
+      color: #3369B1;
+      font-weight: 700;
+      margin-top:8px;
+    }
+  }
+}
+
+
+
+
+
+
+.modal{
+  @include flexColumn;
+  @include absoluteCenter;
+  justify-content: flex-start;
+  padding: 25px;
+  height: 450px;
+  font-size: 9pt;
+  box-sizing: border-box;
+  & > .title{
+    @include flexRow;
+    @include absoluteCenter;
+    justify-content: space-between;
+    width: 100%;
+    height: 30px;
+    color: $gnAzulBajo;
+    font-weight: 500;
+    font-size: 21px;
+    align-items: flex-start;
+    box-sizing: border-box;
+    & > p{
+      margin-top: 2px;
+    }
+    & > img{
+      cursor: pointer;
+    }
+  }
+  & > .header{
+      @include flexRow;
+      width: 100%;
+      height: 35px;
+      box-sizing: border-box;
+      margin-top: 20px;
+      margin-bottom: 35px;
+      & .img{
+          @include flexRow;
+          width: 40px;
+          margin-right: 15px;
+          justify-content: center;
+          align-items: center;
+          & > img{
+            width: 38px;
+        height: 36px;
+        }
+      }
+      & > .label{
+          @include flexColumn;
+          width: calc(100% - 40px);
+          justify-content: space-around;
+          //border-bottom: 1px solid #98A9B4;;
+          & > label:nth-of-type(1){
+              font-size: 12px;
+              color: #98A9B4;
+          }
+          & > label:nth-of-type(2){
+              font-size: 14px;
+              color: #3369B1;
+              font-weight: 600;
+          }
+      }
+      }
+      & > .body{
+          @include flexRow;
+          box-sizing: border-box;
+          width: 100%;
+          & > form{
+              @include flexRowWrap;
+              box-sizing: border-box;
+              width: 100%;
+              justify-content: space-between;
+              & > .cForm{
+                  @include flexColumn;
+                  width: 50%;
+                  box-sizing: border-box;
+                  & > label{
+                      @include flexRow;
+                      font-size: 12px;
+                      color: #98A9B4;
+                      margin-bottom: 5px;
+                  }
+                  & > .fecha{
+
+                  }
+                  & > .droplist{
+
+                  }
+                  & > textarea{
+                      @include flexRow;
+                      width: 100%;
+                      height: 115px;
+                      box-sizing: border-box;
+                      outline: none;
+                      resize: none;
+                      border: 1px solid #98A9B4;
+                      font-size: 14px;
+                      color: #3369B1;
+                      padding:10px;
+                  }
+              }
+              & > .section{
+                @include flexRow;
+                box-sizing: border-box;
+                width: calc(100% + 50px);
+                height: 90px;
+                margin: 25px -25px 0 -25px;
+                padding: 30px 25px;
+                background-color: #ECF0F3;
+                align-items: flex-end;
+                & > label{
+                  @include flexRow;
+                  font-size: 13px;
+                  color: #3B8EDE;
+                  font-weight: 600;
+              }
+                & > .cForm{
+                  @include flexColumn;
+                  width: 50%;
+                  box-sizing: border-box;
+                  & > label{
+                    @include flexRow;
+                    font-size: 12px;
+                    color: #98A9B4;
+                    margin-bottom: 5px;
+                }
+              }
+              }
+          }
+      }
+
+
+      & > .footer{
+          @include flexRow;
+          width: 100%;
+          box-sizing: border-box;
+          height: 40px;
+          justify-content: space-between;
+          align-items: center;
+          margin-top: 30px;
+          & > .cancelar{
+              @include pfButton(145px, 30px, $gnAzulMedio, rgba(51,105,177,0.75), $gnAzulMedio, 0px);
+              @include flexRow;
+              @include absoluteCenter;
+              cursor: pointer;
+              font-size: 14px;
+              font-weight: normal;
+              color:$gnBlanco;
+              box-sizing: border-box;
+          }
+          & > .guardar{
+              @include pfButton(145px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+              @include flexRow;
+              @include absoluteCenter;
+              cursor: pointer;
+              font-size: 14px;
+              font-weight: normal;
+              color:$gnBlanco;
+              box-sizing: border-box;
+          }
+          & > .guardarInactivo{
+              @include pfButton(145px, 30px, #D5DEE2, #e1e7e9, #D5DEE2, 0px);
+              @include flexRow;
+              @include absoluteCenter;
+              cursor: pointer;
+              font-size: 14px;
+              font-weight: normal;
+              color:$gnBlanco;
+              box-sizing: border-box;
+              pointer-events: none;
+          }
+      }
+
+  }
+
+  input{
+    width: 100%;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    border-bottom: solid 0.75px $grisLinea;
+    outline: none;
+    display: inline-block;
+    font-size: 14px;
+    color:$gnAzulMedio;
+    background-color: transparent;
+    padding-bottom: 1px;
+}
+
+
+
+
+
+
+.bar{
+  @include flexColumn;
+  width: 100%;
+  //height: 90px;
+  position: relative;
+  box-sizing: border-box;
+  justify-content: center;
+  margin: 80px 0 70px 0;
+  & > .containerBar{
+      @include flexRow;
+      width: 100%;
+      height: 30px;
+      border: 1px solid #98A9B4;
+      background-color: transparent;
+      box-sizing: border-box;
+      & > .progressBar{
+          @include flexRow;
+          width: 0%;
+          height: 100%;
+          box-sizing: border-box;
+          //transition: 1s;
+          position: relative;
+          //cursor: pointer;
+          & > .contentBar{
+              @include flexRow;
+              width: 0%;
+              height: 100%;
+              box-sizing: border-box;
+              transition: 0.5s;
+              position: relative;
+          }
+      }
+  }
+
+  & > .lines{
+      width: 1px;
+      height: 70px;
+      border-bottom: none;
+      border-top: none;
+      //border-right: 1px dashed #37B34A;
+      border-left: 2px dashed #37B34A;
+      background-color: transparent;
+      position: absolute;
+      box-sizing: border-box;
+      top: -20px;
+  }
+
+}
+
+
+.legendBar{
+  @include flexRow;
+  @include absoluteCenter;
+  width: 350px;
+  position: absolute;
+  margin:auto;
+  left: 0;
+  right: 0;
+  bottom:0;
+  bottom: -105px;
+  font-size: 12px;
+  color: #818192;
+  justify-content: space-around;
+  & > div{
+      width: 30px;
+      height: 15px;
+  }
+
+}
+
+
+#lineToday{
+  width: 1px;
+  height: 70px;
+  border-bottom: none;
+  border-top: none;
+  //border-right: 1px dashed #37B34A;
+  border-left: 2px dashed #E2C913;
+  background-color: transparent;
+  position: absolute;
+  box-sizing: border-box;
+  bottom:-20px;
+}
+
+#labelToday{
+  @include flexColumn;
+  width: 150px;
+  position: absolute;
+  box-sizing: border-box;
+  bottom:180px;
+  font-size: 14px;
+  color: #E2C913;
+  font-weight: 600;
+}

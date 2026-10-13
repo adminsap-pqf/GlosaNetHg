@@ -1,0 +1,311 @@
+@import "../../../../mixins";
+@import "../../../../colors";
+@import "../../../../variables";
+
+:host {
+  width:100%;
+  height: 100%;
+  font-size: $globalFont;
+}
+
+.datepicker {
+  width:100%;
+  height: 100%;
+  display: inline-block;
+  color: #2b2b2b;
+}
+
+.datepicker__calendar {
+  //height: 280px;
+  width: 135px;
+  background-color: $gnBlanco !important;
+  cursor: default;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.datepicker__calendar__labels {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.datepicker__calendar__label {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin: 0 0.2em;
+  line-height: 15px;
+  text-align: center;
+  color: $gnInactivo !important;
+  font-family: 'Source Sans Pro', sans-serif !important;
+  font-size: 1.05em !important;
+  font-weight: 300;
+}
+
+.datepicker__calendar__month {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.datepicker__calendar__month__day {
+  display: inline-block;
+  width: 14px;
+  height: 15px;
+  margin: 0 0.2em 0.4em;
+  border-radius: 15px;
+  line-height: 15px;
+  text-align: center;
+  -webkit-transition: 0.37s;
+  transition: 0.37s;
+  font-family: 'Source Sans Pro', sans-serif !important;
+  font-size: 1.05em !important;
+  cursor: pointer;
+  position: relative;
+
+}
+
+.negro{
+  color: $gnGrisRata;
+  font-weight: 300;
+}
+
+.negro:hover{
+  color: $gnAzulBajo;
+  font-weight:500;
+}
+
+.head{
+  @include flexRow;
+  @include absoluteCenter;
+  width:100%;
+  background-color: $gnBlanco;
+  color:$gnAzulBajo;
+  font-weight: 300;
+  height: 60px;
+  margin-top: -8px;
+  font-size: 1.7em;
+  justify-content: flex-start;
+}
+
+.gris{
+  color: $gnInactivo !important;
+}
+
+.azul{
+  color: $gnAzulMedio !important;
+}
+
+.dorado{
+  color: $gnDorado !important;
+}
+
+//gris:hover{
+ // color: $gnAzulBajo !important;
+ //font-weight:500;
+//}
+
+.tooltip{
+  position: absolute;
+  display: none;
+}
+
+.container{
+  @include flexRowWrap;
+  @include absoluteCenter;
+  width: 200px;
+  height: 260px;
+  box-shadow: 0px 3px 28px -7px rgba(0,0,0,0.25);
+  box-sizing: border-box;
+  right: -208px;
+  top: -51px;
+  position: absolute;
+  border:2px solid $gnInactivo;
+  background-color: $gnAzulObscuro;
+  z-index: 10;
+  & > .triangulo{
+    width:0px;
+    height:0px;
+    border-right:8px solid $gnInactivo; /* derecha flecha */
+    border-top:8px solid transparent; /* izquierda flecha */
+    border-bottom:8px solid transparent; /* base flecha y color*/
+
+    font-size:0px;
+    line-height:0px;
+    position: absolute;
+    left: -10px;
+    top:50px;
+  }
+  & > .triangulo2{
+    width:0px;
+    height:0px;
+    border-right:8px solid $gnAzulObscuro; /* izquierda flecha */
+    border-top:8px solid transparent; /* derecha flecha */
+    border-bottom:8px solid transparent; /* base flecha y color*/
+
+    font-size:0px;
+    line-height:0px;
+    position: absolute;
+    left: -7px;
+    top: 50px;
+    //margin: -7px;
+  }
+
+  & > .tooltipContainer{
+    @include flexColumn;
+    @include absoluteCenter;
+    width: 100%;
+    margin: 15px;
+    & > div:nth-of-type(1){
+      text-align: left;
+      justify-content: flex-start;
+      width: 100%;
+      padding-bottom: 5px;
+      border-bottom: 1px solid $gnDorado;
+      margin-bottom: 13px;
+      & > p:nth-of-type(1){
+        color:$gnBlanco !important;
+        font-size: 1em;
+        margin-bottom: 6px;
+      }
+      & > p:nth-of-type(2){
+        color:$gnDorado !important;
+        font-size: 1.2em;
+        margin-bottom: 21px;
+      }
+      & > p:nth-of-type(3){
+        color:$gnBlanco !important;
+        font-size: 1em;
+      }
+    }
+    & > div:nth-of-type(2){
+      text-align: left;
+      justify-content: flex-start;
+      width: 100%;
+      & > p{
+        color:$gnBlanco !important;
+        font-size: 1em;
+        margin-bottom: 10px;
+        margin-bottom: 21px;
+      }
+    }
+    & > .btnDecarga{
+      @include flexRow;
+      @include absoluteCenter;
+      color: $gnBlanco;
+      @include pfButton( 100%, 20px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+      cursor: pointer;
+      font-size: 1.2em;
+      padding-top: 2px;
+      text-decoration: none !important;
+    }
+  }
+}
+
+.container2{
+  @include flexRowWrap;
+  @include absoluteCenter;
+  width: 200px;
+  height: 260px;
+  box-shadow: 0px 3px 28px -7px rgba(0,0,0,0.25);
+  box-sizing: border-box;
+  right: 23px;
+  top: -51px;
+  position: absolute;
+  border:2px solid $gnInactivo;
+  background-color: $gnAzulObscuro;
+  z-index: 10;
+  & > .triangulo{
+    width:0px;
+    height:0px;
+    border-left:8px solid $gnInactivo; /* derecha flecha */
+    border-top:8px solid transparent; /* izquierda flecha */
+    border-bottom:8px solid transparent; /* base flecha y color*/
+
+    font-size:0px;
+    line-height:0px;
+    position: absolute;
+    right: -10px;
+    top:50px;
+  }
+  & > .triangulo2{
+    width:0px;
+    height:0px;
+    border-left:8px solid $gnAzulObscuro; /* izquierda flecha */
+    border-top:8px solid transparent; /* derecha flecha */
+    border-bottom:8px solid transparent; /* base flecha y color*/
+
+    font-size:0px;
+    line-height:0px;
+    position: absolute;
+    right: -7px;
+    top: 50px;
+    //margin: -7px;
+  }
+  & > .tooltipContainer{
+    @include flexColumn;
+    @include absoluteCenter;
+    width: 100%;
+    margin: 15px;
+    & > div:nth-of-type(1){
+      text-align: left;
+      justify-content: flex-start;
+      width: 100%;
+      padding-bottom: 5px;
+      border-bottom: 1px solid $gnDorado;
+      margin-bottom: 13px;
+      & > p:nth-of-type(1){
+        color:$gnBlanco !important;
+        font-size: 1em;
+        margin-bottom: 6px;
+      }
+      & > p:nth-of-type(2){
+        color:$gnDorado !important;
+        font-size: 1.2em;
+        margin-bottom: 21px;
+      }
+      & > p:nth-of-type(3){
+        color:$gnBlanco !important;
+        font-size: 1em;
+      }
+    }
+    & > div:nth-of-type(2){
+      text-align: left;
+      justify-content: flex-start;
+      width: 100%;
+      & > p{
+        color:$gnBlanco !important;
+        font-size: 1em;
+        margin-bottom: 10px;
+        margin-bottom: 21px;
+      }
+    }
+    & > .btnDecarga{
+      @include flexRow;
+      @include absoluteCenter;
+      color: $gnBlanco;
+      @include pfButton( 100%, 20px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+      cursor: pointer;
+      font-size: 1.2em;
+      padding-top: 2px;
+      text-decoration: none !important;
+    }
+  }
+
+
+}
+

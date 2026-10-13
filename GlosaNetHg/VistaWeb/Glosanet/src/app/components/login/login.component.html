@@ -1,0 +1,50 @@
+<section id="loginContainer" class="animated fadeIn">
+  <div>
+    <div class="loginSection">
+
+      <div class="loginForm">
+
+        <img src="./assets/images/logo_glosaLogin.svg" alt="">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+          <div>
+            <p>Usuarios</p>
+            <input type="text" minlength="1" [value]="usuario" name="usuario" formControlName="usuario" placeholder="" required>
+          </div>
+
+          <div>
+            <p>Contraseña</p>
+            <input type="password" (ngModelChange)="change()" [ngClass]="password" minlength="1" name="password" formControlName="password" placeholder="" required>
+          </div>
+
+          <div class="invalidData" *ngIf="loginFailed">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            <p>
+              Datos inválidos
+            </p>
+          </div>
+
+          <div>
+            <input type="submit" value="ENTRAR" [disabled]="!loginForm.valid || isLoading">
+          </div>
+
+          <div *ngIf="isLoading" class="loading">
+            <div class="container-loader">
+              <div  class='loader'>
+                <div class='loading-square'></div>
+                <div class='loading-square'></div>
+                <div class='loading-square'></div>
+                <div class='loading-square'></div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</section>
+<div class="ryndem">
+  <a target="_blank" href="http://www.ryndem.mx">
+    <img src="./assets/images/logo_ryndem.svg" alt="Ryndem Studio Logo">
+  </a>
+</div>

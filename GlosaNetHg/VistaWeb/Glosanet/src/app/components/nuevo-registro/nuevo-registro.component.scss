@@ -1,0 +1,3885 @@
+@import "../../../variables.scss";
+@import "../../../mixins.scss";
+@import "../../../colors.scss";
+
+.container{
+  @include flexColumn;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 25px;
+}
+
+.title {
+  @include flexRow;
+  box-sizing: border-box;
+  width: 100%;
+  height: 90px;
+  justify-content: space-between;
+  align-items: center;
+  //border-bottom: 0.5px solid #98A9B4;
+  & > div{
+    @include flexColumn;
+    width: 550px;
+    box-sizing: border-box;
+    & > p{
+      @include flexRow;
+      width: 100%;
+      box-sizing: border-box;
+      & > img{
+        @include flexColumn;
+        box-sizing: border-box;
+      }
+      & > label{
+        @include flexColumn;
+        box-sizing: border-box;
+        font-size: 20px;
+        color: #3B8EDE;
+        text-align: left;
+        font-weight: 600;
+      }
+    }
+    & > label{
+      @include flexRow;
+      width:100%;
+      box-sizing: border-box;
+      font-size: 13px;
+      color: #818192;
+      text-align: left;
+      margin-top: 3px;
+    }
+  }
+  & > a{
+    @include pfButton(190px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+    @include flexRow;
+    @include absoluteCenter;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: normal;
+    color:$gnBlanco;
+  }
+}
+
+.search{
+  @include flexRowWrap;
+  width: 100%;
+  box-sizing: border-box;
+  height: 80px;
+  align-items: center;
+  margin-top: 20px;
+  justify-content: space-between;
+  //&align-items: center;
+  & > label{
+    width:100%;
+    font-size: 20px;
+    color: #3B8EDE;
+    text-align: left;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  & > .searchBar{
+    width: calc(100% - 60px);
+    height: 30px;
+    box-sizing: border-box;
+  }
+  & > img{
+    width:20px;
+    cursor: pointer;
+  }
+}
+
+.options{
+  @include flexRow;
+  width: 100%;
+  box-sizing: border-box;
+  height: 60px;
+  align-items: center;
+  justify-content: space-between;
+  & > .dropList{
+    @include flexRow;
+    width:250px;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: space-around;
+    & > label{
+      font-size: 13px;
+      color: #818192;
+    }
+    & > .drop{
+      width: 145px;
+    }
+  }
+  & > a{
+    @include flexRow;
+    $textSize: ('base': convertPts(12, 'px'));
+    @include escaledFontFormat($textSize, 600,$verdeBoton);
+    $colorHover:  rgba(6, 188, 82, 0.2);
+    @include pfButton(155px, 30px, $gnBlanco, $colorHover, $gnBlanco, 0px);
+    @include flexRow;
+    @include absoluteCenter;
+    cursor: pointer;
+  }
+}
+
+.body1 ::ng-deep .scrollable-content{
+  display: flex;
+  flex-flow: row wrap;
+  flex-direction: row;
+}
+
+.body1{
+  @include flexRowWrap;
+  width: 100%;
+  //min-height: calc(100vh - 390px );
+  border-bottom: 1px dashed #D5DEE2;
+  margin: 0 -5px;
+  padding-bottom: 20px;
+  position: relative;
+
+  & > .item{
+    @include flexColumn;
+    width:225px;
+    height: 225px;
+    box-sizing: border-box;
+    border: 1px solid #ECF0F3;
+    //transition: .3s ease-in-out;
+    margin: 2.5px;
+    overflow: hidden;
+    background: #ECF0F3;
+    cursor: pointer;
+    & > .img{
+      @include flexRow;
+      width:225px;
+      min-height: 100px;
+      box-sizing: border-box;
+      transition: .4s ease-in-out;
+      background: white;
+      justify-content: center;
+      align-items: center;
+      & > #img1{
+        width: 57px;
+        height: 55px;
+      }
+      & > #img2{
+        width: 57px;
+        height: 55px;
+        display: none;
+      }
+    }
+    & > .bodyItem{
+      @include flexColumn;
+      width:225px;
+      min-height: 125px;
+      box-sizing: border-box;
+      background: #ECF0F3;
+      justify-content: space-around;
+      padding-top:10px;
+      //transition: .3s Linear;
+      & > p{
+        //@include flexRow;
+        justify-content: center;
+        text-align: center;
+        //width: 100%;
+      }
+      & > p:nth-of-type(1){
+        color:#3369B1;
+        & > label{
+          color:#3369B1;
+        }
+      }
+      & > p:nth-of-type(2){
+        & > label:nth-of-type(1){
+          color:#F7931E;
+        }
+      }
+      & > p:nth-of-type(3){
+        //@include flexRow;
+        justify-content: center;
+        text-align: center;
+        //width: 100%;
+        & > label:nth-of-type(1){
+          color:#E2C913;
+        }
+        & > label:nth-of-type(2){
+          color:#818192;
+        }
+      }
+    }
+
+  }
+  & > .item:hover{
+    @include flexColumn;
+    width:225px;
+    height: 225px;
+    box-sizing: border-box;
+    //border: 0.5px solid #ECF0F3;
+    border:none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    & > .img{
+      @include flexRow;
+      width:225px;
+      min-height: 90px !important;
+      box-sizing: border-box;
+      & > #img1{
+        display: none;
+      }
+      & > #img2{
+        display: inherit;
+      }
+    }
+    & > .bodyItem{
+      @include flexColumn;
+      width:225px;
+      min-height: 135px;
+      box-sizing: border-box;
+      background: #3369B1;
+      //justify-content: space-around;
+      padding-top:10px;
+      padding-bottom: 10px;
+      & > p{
+        //@include flexRow;
+        justify-content: center;
+        text-align: center;
+        //width: 100%;
+      }
+      & > p:nth-of-type(1){
+        color:white;
+        & > label{
+          color:#E2C913;
+        }
+      }
+      & > p:nth-of-type(2){
+        & > label:nth-of-type(1){
+          color:#E2C913;
+        }
+      }
+      & > p:nth-of-type(3){
+        //@include flexRow;
+        justify-content: center;
+        text-align: center;
+        //width: 100%;
+        & > label:nth-of-type(1){
+          color:#E2C913;
+        }
+        & > label:nth-of-type(2){
+          color:white;
+        }
+      }
+    }
+
+  }
+  & > .itemSelected{
+    @include flexColumn;
+    width:225px;
+    height: 225px;
+    box-sizing: border-box;
+    //border: 0.5px solid #ECF0F3;
+    border:none;
+    margin: 2.5px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    & > .img{
+      @include flexRow;
+      width:225px;
+      min-height: 90px !important;
+      box-sizing: border-box;
+      transition: .4s ease-in-out;
+      background: white;
+      justify-content: center;
+      align-items: center;
+      & > #img1{
+        display: none;
+      }
+      & > #img2{
+        width: 57px;
+        height: 55px;
+        display: inherit;
+      }
+    }
+    & > .bodyItem{
+      @include flexColumn;
+      width:225px;
+      min-height: 135px;
+      box-sizing: border-box;
+      background: #3369B1;
+      justify-content: space-around;
+      padding-top:10px;
+      padding-bottom: 10px;
+      & > p{
+        //@include flexRow;
+        justify-content: center;
+        text-align: center;
+        //width: 100%;
+      }
+      & > p:nth-of-type(1){
+        color:white;
+        & > label{
+          color:#E2C913;
+        }
+      }
+      & > p:nth-of-type(2){
+        & > label:nth-of-type(1){
+          color:#E2C913;
+        }
+      }
+      & > p:nth-of-type(3){
+        //@include flexRow;
+        justify-content: center;
+        text-align: center;
+        //width: 100%;
+        & > label:nth-of-type(1){
+          color:#E2C913;
+        }
+        & > label:nth-of-type(2){
+          color:white;
+        }
+      }
+    }
+
+  }
+}
+.body2{
+  @include flexColumn;
+  width: 100%;
+  //min-height: calc(100vh - 390px );
+  border-bottom: 1px dashed #D5DEE2;
+  padding-bottom: 20px;
+  position: relative;
+
+  & > .item{
+    @include flexRow;
+    width: 100%;
+    height: 90px;
+    box-sizing: border-box;
+    border: 1px solid #ECF0F3;
+    margin-bottom: 5px;
+    overflow: hidden;
+    background: #ECF0F3;
+    cursor: pointer;
+    & > .img{
+      @include flexRow;
+      min-width: 120px;
+      transition: .4s ease-in-out;
+      background: white;
+      justify-content: center;
+      align-items: center;
+      & > #img1{
+        width: 57px;
+        height: 55px;
+      }
+      & > #img2{
+        width: 57px;
+        height: 55px;
+        display: none;
+      }
+    }
+    & > .bodyItem{
+      @include flexRow;
+      min-width:calc(100% - 120px);
+      box-sizing: border-box;
+      background: #ECF0F3;
+      padding: 25px 40px 25px 25px;
+      align-items: center;
+      & > .part1{
+        @include flexColumn;
+        width: 100%;
+        box-sizing: border-box;
+        & > p:nth-of-type(1){
+          //@include flexRow;
+          width: 100%;
+          font-size: 14px;
+          box-sizing: border-box;
+          color: #3369B1;
+          & > .span{
+            font-size: 14px;
+            color: #3369B1;
+          }
+          & > label:nth-of-type(1){
+            color: #3369B1;
+            font-weight: 600;
+          }
+          & > label:nth-of-type(2){
+            color: #3369B1;
+          }
+        }
+        & > p:nth-of-type(2){
+          @include flexRow;
+          width: 100%;
+          font-size: 13px;
+          box-sizing: border-box;
+          margin-top:5px;
+          & > label:nth-of-type(1){
+            color:#37B34A;
+          }
+        }
+      }
+      & > .part2{
+        @include flexRow;
+        min-width: 100px;
+        box-sizing: border-box;
+        text-align: right;
+        & > p{
+          @include flexColumn;
+          width: 100%;
+          font-size: 13px;
+          box-sizing: border-box;
+          //color: #E2C913;
+          & > label:nth-of-type(1){
+            color: #818192;
+          }
+          & > label:nth-of-type(2){
+            color: #E2C913;
+            margin-top: 5px;
+          }
+        }
+      }
+    }
+  }
+  & > .item:hover{
+    @include flexRow;
+    width: 100%;
+    height: 90px;
+    box-sizing: border-box;
+    border: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    & > .img{
+      @include flexRow;
+      min-width: 100px;
+      & > #img1{
+        display: none;
+      }
+      & > #img2{
+        display: inherit;
+      }
+    }
+    & > .bodyItem{
+      @include flexRow;
+      min-width: calc(100% - 100px);
+      box-sizing: border-box;
+      background: #3369B1;
+      padding: 25px 40px 25px 25px;
+      align-items: center;
+      & > .part1{
+        @include flexColumn;
+        width:100%;
+        box-sizing: border-box;
+        & > p:nth-of-type(1){
+          //@include flexRow;
+          width: 100%;
+          font-size: 14px;
+          box-sizing: border-box;
+          color: white;
+          & > .span{
+            font-size: 14px;
+            color: white;
+          }
+          & > label:nth-of-type(1){
+            color: #E2C913;
+            font-weight: 600;
+          }
+          & > label:nth-of-type(2){
+            color: white;
+            font-weight: 600;
+          }
+        }
+        & > p:nth-of-type(2){
+          @include flexRow;
+          width: 100%;
+          font-size: 13px;
+          box-sizing: border-box;
+          margin-top:5px;
+          & > label:nth-of-type(1){
+            color:#E2C913;
+          }
+        }
+      }
+      & > .part2{
+        @include flexRow;
+        min-width: 100px;
+        box-sizing: border-box;
+        text-align: right;
+        & > p{
+          @include flexColumn;
+          width: 100%;
+          font-size: 13px;
+          box-sizing: border-box;
+          //color:white;
+
+          & > label:nth-of-type(1){
+            color: white;
+          }
+          & > label:nth-of-type(2){
+            color: #E2C913;
+            margin-top: 5px;
+          }
+        }
+      }
+    }
+  }
+  & > .itemSelected{
+    @include flexRow;
+    width: 100%;
+    height: 90px;
+    box-sizing: border-box;
+    border: none;
+    margin-bottom: 5px;
+    overflow: hidden;
+    background: #ECF0F3;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    & > .img{
+      @include flexRow;
+      min-width: 100px;
+      transition: .3s ease-in-out;
+      background: white;
+      justify-content: center;
+      align-items: center;
+      & > #img1{
+        display: none;
+      }
+      & > #img2{
+        width: 57px;
+        height: 55px;
+        display: inherit;
+      }
+    }
+    & > .bodyItem{
+      @include flexRow;
+      min-width: calc(100% - 100px);
+      box-sizing: border-box;
+      background: #3369B1;
+      padding: 25px 40px 25px 25px;
+      align-items: center;
+      & > .part1{
+        @include flexColumn;
+        width:100%;
+        box-sizing: border-box;
+        & > p:nth-of-type(1){
+          //@include flexRow;
+          width: 100%;
+          font-size: 14px;
+          box-sizing: border-box;
+          color: white;
+          & > .span{
+            font-size: 14px;
+            color: white;
+          }
+          & > label:nth-of-type(1){
+            color: #E2C913;
+            font-weight: 600;
+          }
+          & > label:nth-of-type(2){
+            color: white;
+            font-weight: 600;
+          }
+        }
+        & > p:nth-of-type(2){
+          @include flexRow;
+          width: 100%;
+          font-size: 13px;
+          box-sizing: border-box;
+          margin-top:5px;
+          & > label:nth-of-type(1){
+            color:#E2C913;
+          }
+        }
+      }
+      & > .part2{
+        @include flexRow;
+        min-width: 100px;
+        box-sizing: border-box;
+        text-align: right;
+        & > p{
+          @include flexColumn;
+          width: 100%;
+          font-size: 13px;
+          box-sizing: border-box;
+          //color:white;
+
+          & > label:nth-of-type(1){
+            color: white;
+          }
+          & > label:nth-of-type(2){
+            color: #E2C913;
+            margin-top: 5px;
+          }
+        }
+      }
+    }
+  }
+
+
+
+}
+
+.foot{
+  @include flexRow;
+  width:100%;
+  height: 30px;
+  justify-content: center;
+  //align-items: center;
+  box-sizing: border-box;
+  & > label{
+    @include flexRow;
+    font-size: 13px;
+    color: #3369B1;
+    font-weight: 600;
+    height: 20px;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+  }
+}
+
+.productsList {
+  width: 100%;
+}
+
+
+.producto-publicar{
+  @include flexColumn;
+  width:100%;
+  box-sizing: border-box;
+  margin-top: 20px;
+  & > label:nth-of-type(1){
+    @include flexRow;
+    width:100%;
+    box-sizing: border-box;
+    font-size: 19px;
+    color: #3B8EDE;
+    font-weight: 600;
+  }
+  & > label:nth-of-type(2){
+    @include flexRow;
+    width:100%;
+    box-sizing: border-box;
+    margin-top: 15px;
+    font-size: 12px;
+    color: #98A9B4;
+  }
+  & > .cardProducto{
+    @include flexRow;
+    width: 100%;
+    height: 70px;
+    box-sizing: border-box;
+    margin-top: 5px;
+    position: relative;
+    & > .img{
+      @include flexRow;
+      width: 75px;
+      box-sizing: border-box;
+      border-left: 1px solid #98A9B4;
+      border-top: 1px solid #98A9B4;
+      border-bottom: 1px solid #98A9B4;
+      justify-content: center;
+      & > img{
+        width: 38px;
+      }
+    }
+    & > .body{
+      @include flexRow;
+      width: calc(100% - 75px);
+      box-sizing: border-box;
+      background-color: #3369B1;
+      padding:10px 15px;
+      & > .part1{
+        @include flexColumn;
+        width: calc(100% - 100px);
+        box-sizing: border-box;
+        justify-content: space-around;
+        & > p{
+
+        }
+      }
+      & > .part2{
+        @include flexRow;
+        width: 100px;
+        box-sizing: border-box;
+        justify-content: center;
+        align-items: center;
+        & > .tooltip-producto{
+          @include flexRow;
+          width: 190px;
+          position: absolute;
+          background-color: #222E43;
+          border:1px solid white;
+          bottom: 55px;
+          right: -20px;
+          pointer-events: none;
+          padding:10px;
+          box-shadow: 1px 3px 4px 0 rgba(53,53,53,0.50);
+          & > .triangulo{
+            width: 0px;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #222E43;
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            margin:auto;
+          }
+          & > p{
+            font-size: 12px;
+            color:white;
+            line-height: 14px;
+            & > label{
+              font-size: 12px;
+              color: #E2C913;
+            }
+          }
+        }
+      }
+    }
+
+
+  }
+  & > .uploadFiles {
+    @include flexRowWrap;
+    width: 100%;
+    margin-top: 25px;
+    & > .uploadHead {
+      @include flexRow;
+      @include absoluteCenter;
+      width: 100%;
+      height: 65px;
+      background-color: #3369B1;
+      justify-content: space-between;
+      padding: 0 24px;
+      &:hover {
+        cursor: pointer;
+        box-shadow: 0 10px 14px 0 rgba(152, 169, 180, 0.5);
+      }
+      & > div:nth-of-type(1) {
+        @include flexRow;
+        width: auto;
+        justify-content: flex-start;
+        & > p:nth-of-type(1) {
+          color: #E2C913;
+          font-family: 'Roboto Cn', sans-serif;
+          font-size: 17px;
+          font-weight: 800;
+        }
+      }
+      & > div:nth-of-type(2) {
+        @include flexRow;
+        width: auto;
+        & > div:nth-of-type(1) {
+          @include flexRow;
+          @include absoluteCenter;
+          margin-right: 30px;
+          justify-content: space-between;
+          & > img:nth-of-type(1) {
+            width: 100%;
+            max-width: 20px;
+            margin-right: 5px;
+          }
+          & > p:nth-of-type(1) {
+            color: #FFFFFF;
+            font-family: 'Roboto Cn', sans-serif;
+            font-size: 14px;
+            min-width: 70px;
+          }
+        }
+        & > div:nth-of-type(2) {
+          @include flexRow;
+          width: auto;
+          margin-left: 30px;
+          & > img:nth-of-type(1) {
+            width: 100%;
+            max-width: 15px;
+            transition: 0.5s;
+          }
+          & > .arrowDirectionUp {
+            transform: rotate(-180deg);
+            -webkit-transform: rotate(-180deg);
+            -moz-transform: rotate(-180deg);
+            -o-transform: rotate(-180deg);
+          }
+          & > .arrowDirectionDown {
+            transform: rotate(0deg);
+            -webkit-transform: rotate(0deg);
+            -moz-transform: rotate(0deg);
+            -o-transform: rotate(0deg);
+          }
+        }
+      }
+    }
+    & > .uploadHeadOpen {
+      box-shadow: 0 10px 14px 0 rgba(152, 169, 180, 0.5);
+    }
+    & > .uploadHeadClose {
+
+    }
+    & > .uploadContent {
+      @include flexRowWrap;
+      width: 100%;
+      background-color: rgba(236, 240, 243, 0.3);
+      overflow: hidden;
+      transition: max-height 0.15s ease-out;
+      & > div:nth-of-type(1) {
+        @include flexRow;
+        @include absoluteCenter;
+        width: 100%;
+        margin: 28px 0;
+        & > button:nth-of-type(1) {
+          @include button(80%, 40px, #37B34A, #3fc454, #319f42);
+          @include fontFormat(17px, 500, #FFFFFF);
+          border-radius: 2px;
+          font-family: 'Roboto Cn';
+          font-size: 16px;
+          font-weight: 500;
+        }
+      }
+      & > div:nth-of-type(2) {
+        @include flexColumn;
+        @include absoluteCenter;
+        width: 100%;
+        padding-bottom: 28px;
+        & > div:nth-of-type(1) {
+          border-top: 1px dashed #D5DEE2;
+        }
+        & > div {
+          @include flexRowWrap;
+          width: 90%;
+          min-height: 62px;
+          align-content: flex-start;
+          align-items: flex-start;
+          border-bottom: 1px dashed #D5DEE2;
+          box-sizing: border-box;
+          margin-bottom: 6px;
+          padding: 15px;
+          overflow: hidden;
+          margin: 0 8px;
+          & > div:nth-of-type(1) {
+            @include flexRow;
+            width: 100%;
+            align-content: flex-start;
+            align-items: flex-start;
+            margin-bottom: 5px;
+            & > div:nth-of-type(1) {
+              @include flexRow;
+              width: calc(100% - 15px);
+              align-content: center;
+              align-items: center;
+              & > p:nth-of-type(1), & > p:nth-of-type(2) {
+                @include fontFormat(14px, 700, #3369B1);
+              }
+              & > p:nth-of-type(2) {
+                & > span {
+                  margin: 0 5px;
+                }
+                &:hover {
+                  text-decoration-line: underline;
+                  cursor: pointer;
+                }
+              }
+              & > p:nth-of-type(3) {
+                @include fontFormat(14px, 700, #37B34A);
+              }
+              & > img:nth-of-type(1) {
+                width: 17px;
+                margin: 0 8px;
+              }
+            }
+            & > div:nth-of-type(2) {
+              @include flexRow;
+              width: 15px;
+              justify-content: flex-end;
+              & > img:nth-of-type(1) {
+                width: 10px;
+                &:hover {
+                  cursor: pointer;
+                }
+              }
+            }
+          }
+          & > div:nth-of-type(2) {
+            @include flexRow;
+            width: 100%;
+            & > p:nth-of-type(1) {
+              @include fontFormat(13px, 300, #818192);
+              line-height: 18px;
+            }
+          }
+        }
+      }
+    }
+    & > .openContent {
+      max-height: 9999px;
+      transition: max-height 0.25s ease-in;
+    }
+    & > .closeContent {
+      max-height: 0;
+    }
+  }
+}
+
+
+.eventos-publicar{
+  @include flexColumn;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 30px;
+  border-bottom: 1px dashed #D5DEE2;
+  padding-bottom:20px;
+  & > label{
+    width:100%;
+    font-size: 19px;
+    color: #3B8EDE;
+    font-weight: 600;
+  }
+  & > .title-generarE{
+    @include flexRow;
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    background-color: #3369B1;
+    align-items: center;
+    padding: 0 20px;
+    margin-top:20px;
+    cursor: pointer;
+    & > label{
+      @include flexRow;
+      width: 100%;
+      color:white;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    & > img{
+      cursor: pointer;
+    }
+    &:hover{
+      box-shadow: 0 10px 14px 0 rgba(152,169,180,0.50);
+    }
+  }
+  & > .title-generarE-open{
+    @include flexRow;
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    background-color: #3369B1;
+    align-items: center;
+    padding: 0 20px;
+    margin-top:20px;
+    box-shadow: 0 10px 14px 0 rgba(152,169,180,0.50);
+    z-index:2;
+    cursor: pointer;
+    opacity: .99;
+    & > label{
+      @include flexRow;
+      width: 100%;
+      color:white;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    & > img{
+      cursor: pointer;
+    }
+    &:hover{
+      box-shadow: 0 10px 14px 0 rgba(152,169,180,0.50);
+    }
+  }
+  & > .body-generarE{
+    @include flexColumn;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rgb(248, 249, 250);
+    max-height: 500px;
+    transition: 0.5s;
+    //overflow: hidden;
+    & > .ev1 {
+      @include flexRow;
+      //min-height: 210px;
+      width: 100%;
+      max-width: 740px;
+      box-sizing: border-box;
+      padding: 20px 15px;
+      & > form{
+        @include flexRowWrap;
+        width: 100%;
+        box-sizing: border-box;
+        justify-content: space-between;
+        & > div {
+          @include flexColumn;
+          height: 35px;
+          box-sizing: border-box;
+          margin: 0 0 30px 0;
+          & > label{
+            font-size: 12px;
+            color: #98A9B4;
+            margin-bottom: 3px;
+          }
+          & > a {
+            @include flexRow;
+
+            $colorHover:  rgba(6, 188, 82, 0.2);
+            @include pfButton(100px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+            @include flexRow;
+            @include absoluteCenter;
+            cursor: pointer;
+            font-size: 14px;
+            color: #37B34A;
+            font-weight: 500;
+          }
+          & > div{
+            @include flexRow;
+            justify-content: space-between;
+            align-items: flex-end;
+          }
+
+        }
+        & > .options{
+          @include flexRowWrap;
+          @include absoluteCenter;
+          justify-content: flex-start;
+          font-size: 12px;
+          color: #818192;
+          font-style: italic;
+          box-sizing: border-box;
+          border-bottom: 1px dashed #D5DEE2;
+          padding:10px 0 20px 0;
+          margin: 0 !important;
+          & > .item-options{
+            @include flexRow;
+            height: 20px;
+            background-color: rgba(129, 129, 146, 0.15);
+            padding:3px 5px;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            margin-right: 8px;
+            margin-top: 3px;
+            & > p{
+              margin-right: 10px;
+              box-sizing: border-box;
+            }
+            & > img {
+              width: 8px;
+            }
+          }
+        }
+      }
+    }
+    & > .ev2 {
+      @include flexRow;
+      max-width: 740px;
+      //min-height: 130px;
+      box-sizing: border-box;
+      padding: 0px 15px 10px 15px;
+      & > form{
+        @include flexRowWrap;
+        width: 100%;
+        box-sizing: border-box;
+        justify-content: space-between;
+        & > div{
+          @include flexColumn;
+          height: 35px;
+          box-sizing: border-box;
+          margin: 0 0 30px 0;
+          & > label{
+            font-size: 12px;
+            color: #98A9B4;
+          }
+          & > a{
+            @include flexRow;
+
+            $colorHover:  rgba(6, 188, 82, 0.2);
+            @include pfButton(100px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+            @include flexRow;
+            @include absoluteCenter;
+            cursor: pointer;
+            font-size: 14px;
+            color: #37B34A;
+            font-weight: 500;
+          }
+
+        }
+        & > .options{
+          @include flexRowWrap;
+          @include absoluteCenter;
+          justify-content: flex-start;
+          font-size: 12px;
+          color: #818192;
+          font-style: italic;
+          box-sizing: border-box;
+          padding:10px 0 20px 0;
+          margin: 0 !important;
+          & > .item-options{
+            @include flexRow;
+            height: 20px;
+            background-color: rgba(129, 129, 146, 0.15);
+            padding:3px 5px;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            margin-right: 8px;
+            margin-top: 3px;
+            & > p{
+              margin-right: 10px;
+              box-sizing: border-box;
+            }
+            & > img {
+              width: 8px;
+            }
+          }
+        }
+      }
+    }
+    & > .ev3 {
+      @include flexRow;
+      width: 100%;
+      height: 30px;
+      box-sizing: border-box;
+      //background-color: #E2C913;
+      justify-content: center;
+      align-items: center;
+      & > a {
+        @include pfButton(100%, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+        @include flexRow;
+        @include absoluteCenter;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: normal;
+        color:$gnBlanco;
+        box-sizing: border-box;
+      }
+    }
+    & > .disableEvent1 {
+
+    }
+    & > .disableEvent2 {
+      & > form {
+        & > div {
+          & > label {
+            color: #FFF;
+          }
+        }
+        & > .options {
+          color: #818192;
+          & > .item-options{
+            background-color: rgba(129, 129, 146, 0.15);
+            & > img {
+              width: 8px;
+            }
+          }
+        }
+      }
+      ////////////////////
+    }
+  }
+
+  & > .body-generarE-close{
+    @include flexColumn;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rgb(248, 249, 250);
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.5s;
+    & > .ev1{
+      @include flexRow;
+      //min-height: 210px;
+      width: 740px;
+      box-sizing: border-box;
+      padding: 20px 15px;
+      & > form{
+        @include flexRowWrap;
+        width: 100%;
+        box-sizing: border-box;
+        justify-content: space-between;
+        & > div{
+          @include flexColumn;
+          height: 35px;
+          box-sizing: border-box;
+          margin: 0 0 30px 0;
+          & > label{
+            font-size: 12px;
+            color: #98A9B4;
+            margin-bottom: 3px;
+          }
+          & > a{
+            @include flexRow;
+
+            $colorHover:  rgba(6, 188, 82, 0.2);
+            @include pfButton(100px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+            @include flexRow;
+            @include absoluteCenter;
+            cursor: pointer;
+            font-size: 14px;
+            color: #37B34A;
+            font-weight: 500;
+          }
+          & > div{
+            @include flexRow;
+            justify-content: space-between;
+            align-items: flex-end;
+          }
+
+        }
+        & > .options{
+          @include flexRowWrap;
+          @include absoluteCenter;
+          justify-content: flex-start;
+          font-size: 12px;
+          color: #818192;
+          font-style: italic;
+          box-sizing: border-box;
+          border-bottom: 1px dashed #D5DEE2;
+          padding:10px 0 20px 0;
+          margin: 0 !important;
+          & > .item-options{
+            @include flexRow;
+            height: 20px;
+            background-color: rgba(129, 129, 146, 0.15);
+            padding:3px 5px;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            margin-right: 8px;
+            margin-top: 3px;
+            & > p{
+              margin-right: 10px;
+              box-sizing: border-box;
+            }
+            & > img {
+              width: 8px;
+            }
+          }
+        }
+      }
+    }
+    & > .ev2{
+      @include flexRow;
+      max-width: 740px;
+      //min-height: 130px;
+      box-sizing: border-box;
+      padding: 0px 15px 10px 15px;
+      & > form{
+        @include flexRowWrap;
+        width: 100%;
+        box-sizing: border-box;
+        justify-content: space-between;
+        & > div{
+          @include flexColumn;
+          height: 35px;
+          box-sizing: border-box;
+          margin: 0 0 30px 0;
+          & > label{
+            font-size: 12px;
+            color: #98A9B4;
+          }
+          & > a{
+            @include flexRow;
+
+            $colorHover:  rgba(6, 188, 82, 0.2);
+            @include pfButton(100px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+            @include flexRow;
+            @include absoluteCenter;
+            cursor: pointer;
+            font-size: 14px;
+            color: #37B34A;
+            font-weight: 500;
+          }
+
+        }
+        & > .options{
+          @include flexRowWrap;
+          @include absoluteCenter;
+          justify-content: flex-start;
+          font-size: 12px;
+          color: #818192;
+          font-style: italic;
+          box-sizing: border-box;
+          padding:10px 0 20px 0;
+          margin: 0 !important;
+          & > .item-options{
+            @include flexRow;
+            height: 20px;
+            background-color: rgba(129, 129, 146, 0.15);
+            padding:3px 5px;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            margin-right: 8px;
+            margin-top: 3px;
+            & > p{
+              margin-right: 10px;
+              box-sizing: border-box;
+            }
+            & > img {
+              width: 8px;
+            }
+          }
+        }
+      }
+    }
+    & > .ev3{
+      @include flexRow;
+      width: 100%;
+      height: 30px;
+      box-sizing: border-box;
+      background-color: #E2C913;
+      justify-content: center;
+      align-items: center;
+      & > a{
+        @include pfButton(100%, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+        @include flexRow;
+        @include absoluteCenter;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: normal;
+        color:$gnBlanco;
+        box-sizing: border-box;
+      }
+    }
+  }
+}
+
+
+
+.item-eventos {
+  @include flexRow;
+  width: 100%;
+  height: 45px;
+  box-sizing: border-box;
+  margin:10px 0 0 0;
+
+  & > .number{
+    @include flexRow;
+    width: 25px;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    & > label{
+      font-size: 12px;
+      color: #3369B1;
+      font-weight: 700;
+      font-style: italic;
+    }
+  }
+  & > .body-item-eventos {
+    @include flexRow;
+    width: calc(100% - 25px);
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+    background-color:#ECF0F3;
+    padding:0 20px;
+    cursor: pointer;
+    //padding-top: 8px;
+    //z-index: 2;
+    & > .check {
+      @include flexRow;
+      width: 25px;
+      height: 25px;
+      box-sizing: border-box;
+      background-color: white;
+      position: relative;
+      cursor: pointer;
+      & > img {
+        width: 29px;
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        cursor: pointer;
+      }
+    }
+    & > .part1  {
+      @include flexColumn;
+      width: calc(100% - 425px);
+      box-sizing: border-box;
+      cursor: pointer;
+      & > label:nth-of-type(1){
+        font-size: 14px;
+        color: #3369B1;
+        font-weight: 500;
+        cursor: pointer;
+      }
+      & > label:nth-of-type(2){
+        font-size: 12px;
+        color: #37B34A;
+        font-weight: 500;
+        margin-top: 3px;
+        cursor: pointer;
+      }
+    }
+    & > .part2 {
+      @include flexRow;
+      width: 350px;
+      box-sizing: border-box;
+      justify-content:space-between;
+      align-items: center;
+      cursor: pointer;
+      //align-items: flex-end;
+      //height: 15px;
+      & > .newEvent {
+        @include flexColumn;
+        height: 35px;
+        justify-content: space-around;
+        min-width: 200px;
+        box-sizing: border-box;
+        cursor: pointer;
+        & > label:nth-of-type(1) {
+          @include flexColumn;
+          font-size: 12px;
+          color: #3B8EDE;
+          font-family:'Roboto Cn';
+          justify-content: flex-end;
+          cursor: pointer;
+        }
+        & > label:nth-of-type(2) {
+          @include flexColumn;
+          font-size: 12px;
+          color: #37B34A;
+          font-family:'Roboto Cn';
+          justify-content: flex-end;
+          cursor: pointer;
+        }
+      }
+      & > label {
+        @include flexColumn;
+        height: 18px;
+        font-size: 12px;
+        color: #3B8EDE;
+        justify-content: flex-end;
+        cursor: pointer;
+      }
+      & > input {
+        width: 35px;
+        padding-bottom: 1px;
+      }
+      & > .droplist {
+        width: 75px;
+        margin-bottom:1px;
+      }
+      & > img {
+        margin-left: 10px;
+        cursor: pointer;
+      }
+      & > label:nth-of-type(2) {
+        color: #37B34A;
+        cursor: pointer;
+      }
+    }
+    & > .disablePart {
+      & > input {
+        color: #FFF;
+        border-bottom: solid 0.75px #FFF;
+      }
+      & > label {
+        color: #FFF !important;
+      }
+    }
+    &:hover {
+      box-shadow: 0 10px 14px 0 rgba(152,169,180,0.50);
+    }
+  }
+  & > .body-item-eventos-open {
+    @include flexRow;
+    width: calc(100% - 25px);
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+    background-color:#ECF0F3;
+    padding:0 20px;
+    //padding-top: 8px;
+    box-shadow: 0 10px 14px 0 rgba(152,169,180,0.50);
+    z-index: 1;
+    opacity: .99;
+    cursor: pointer;
+    & > .check {
+      @include flexRow;
+      width: 25px;
+      height: 25px;
+      box-sizing: border-box;
+      background-color: white;
+      position: relative;
+      cursor: pointer;
+      & > img {
+        width: 29px;
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        cursor: pointer;
+      }
+    }
+    & > .part1  {
+      @include flexColumn;
+      width: calc(100% - 425px);
+      box-sizing: border-box;
+      cursor: pointer;
+      & > label:nth-of-type(1) {
+        font-size: 14px;
+        color: #3369B1;
+        font-weight: 500;
+        cursor: pointer;
+      }
+      & > label:nth-of-type(2) {
+        font-size: 12px;
+        color: #37B34A;
+        font-weight: 500;
+        margin-top: 3px;
+        cursor: pointer;
+      }
+    }
+    & > .part2 {
+      @include flexRow;
+      width: 350px;
+      box-sizing: border-box;
+      justify-content:space-between;
+      align-items: center;
+      cursor: pointer;
+      //align-items: flex-end;
+      //height: 15px;
+      & > .newEvent{
+        @include flexColumn;
+        height: 35px;
+        justify-content: space-around;
+        min-width: 200px;
+        box-sizing: border-box;
+        cursor: pointer;
+        & > label:nth-of-type(1) {
+          @include flexColumn;
+          font-size: 12px;
+          color: #3B8EDE;
+          font-family:'Roboto Cn';
+          justify-content: flex-end;
+          cursor: pointer;
+        }
+        & > label:nth-of-type(2) {
+          @include flexColumn;
+          font-size: 12px;
+          color: #37B34A;
+          font-family:'Roboto Cn';
+          justify-content: flex-end;
+          cursor: pointer;
+        }
+      }
+      & > label {
+        @include flexColumn;
+        height: 18px;
+        font-size: 12px;
+        color: #3B8EDE;
+        justify-content: flex-end;
+        cursor: pointer;
+      }
+      & > input {
+        width: 35px;
+        padding-bottom: 1px;
+      }
+      & > .droplist{
+        width: 75px;
+        margin-bottom:1px;
+      }
+      & > img {
+        margin-left: 10px;
+        cursor: pointer;
+      }
+      & > label:nth-of-type(2) {
+        color: #37B34A;
+        cursor: pointer;
+      }
+    }
+    & > .disablePart {
+      & > input {
+        color: #FFF;
+        border-bottom: solid 0.75px #FFF;
+      }
+      & > label {
+        color: #FFF !important;
+      }
+    }
+  }
+
+}
+
+
+input{
+  width: 100%;
+  border-right: none;
+  border-left: none;
+  border-top: none;
+  border-bottom: solid 0.75px $grisLinea;
+  outline: none;
+  display: inline-block;
+  font-size: 14px;
+  color:$gnAzulMedio;
+  background-color: transparent;
+  padding-bottom: 1px;
+}
+
+
+.open{
+  transform: rotate(180deg);
+
+  -webkit-transform: rotate(180deg);
+
+  -moz-transform: rotate(180deg);
+
+  -o-transform: rotate(180deg);
+}
+
+.close{
+  transform: rotate(0deg);
+
+  -webkit-transform: rotate(0deg);
+
+  -moz-transform: rotate(0deg);
+
+  -o-transform: rotate(0deg);
+}
+
+
+
+.boton-wizard{
+  @include flexRow;
+  @include absoluteCenter;
+  justify-content: space-between;
+  width: 100%;
+  //margin-top: 16px;
+  box-sizing: border-box;
+  margin-top:30px;
+  margin-bottom: 20px;
+  & > .btnCancelar{
+    margin-top: 10px;
+    @include pfButton(320px, 30px, $gnAzulMedio, rgba(51,105,177,0.75), $gnAzulMedio, 0px);
+    @include flexRow;
+    @include absoluteCenter;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: normal;
+    color:$gnBlanco;
+    box-sizing: border-box;
+  }
+
+  & > .btnGuardar{
+    margin-top: 10px;
+    @include pfButton(320px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+    @include flexRow;
+    @include absoluteCenter;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: normal;
+    color:$gnBlanco;
+    box-sizing: border-box;
+  }
+
+  & > .btnGuardarInactivo{
+    margin-top: 10px;
+    @include pfButton(320px, 30px, #D5DEE2, #D5DEE2, #D5DEE2, 0px);
+    @include flexRow;
+    @include absoluteCenter;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 900;
+    color:$gnBlanco;
+    box-sizing: border-box;
+    pointer-events: none;
+  }
+}
+
+
+
+
+.body-itemE{
+  @include flexColumn;
+  width: calc( 100% - 25px);
+  box-sizing: border-box;
+  background-color: rgb(248, 249, 250);
+  max-height: 500px;
+  transition: 0.5s;
+  //overflow: hidden;
+  margin-left: 25px;
+  & > .ev1{
+    @include flexRow;
+    //min-height: 210px;
+    width: 740px;
+    box-sizing: border-box;
+    padding: 20px 15px;
+    & > form{
+      @include flexRowWrap;
+      width: 100%;
+      box-sizing: border-box;
+      justify-content: space-between;
+      & > div{
+        @include flexColumn;
+        height: 35px;
+        box-sizing: border-box;
+        margin: 0 0 30px 0;
+        & > label{
+          font-size: 12px;
+          color: #98A9B4;
+          margin-bottom: 3px;
+        }
+        & > a{
+          @include flexRow;
+
+          $colorHover:  rgba(6, 188, 82, 0.2);
+          @include pfButton(100px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+          @include flexRow;
+          @include absoluteCenter;
+          cursor: pointer;
+          font-size: 14px;
+          color: #37B34A;
+          font-weight: 500;
+        }
+        & > div{
+          @include flexRow;
+          justify-content: space-between;
+          align-items: flex-end;
+        }
+
+      }
+      & > .options{
+        @include flexRowWrap;
+        @include absoluteCenter;
+        justify-content: flex-start;
+        font-size: 12px;
+        color: #818192;
+        font-style: italic;
+        box-sizing: border-box;
+        border-bottom: 1px dashed #D5DEE2;
+        padding:10px 0 20px 0;
+        margin: 0 !important;
+        & > .item-options{
+          @include flexRow;
+          height: 20px;
+          background-color: rgba(129, 129, 146, 0.15);
+          padding:3px 5px;
+          justify-content: space-between;
+          align-items: center;
+          box-sizing: border-box;
+          margin-right: 8px;
+          margin-top: 3px;
+          & > p{
+            margin-right: 10px;
+            box-sizing: border-box;
+          }
+          & > img {
+            width: 8px;
+          }
+        }
+      }
+    }
+  }
+  & > .ev2{
+    @include flexRow;
+    max-width: 740px;
+    //min-height: 130px;
+    box-sizing: border-box;
+    padding: 0px 15px 10px 15px;
+    & > form{
+      @include flexRowWrap;
+      width: 100%;
+      box-sizing: border-box;
+      justify-content: space-between;
+      & > div{
+        @include flexColumn;
+        height: 35px;
+        box-sizing: border-box;
+        margin: 0 0 30px 0;
+        & > label{
+          font-size: 12px;
+          color: #98A9B4;
+        }
+        & > a{
+          @include flexRow;
+
+          $colorHover:  rgba(6, 188, 82, 0.2);
+          @include pfButton(100px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+          @include flexRow;
+          @include absoluteCenter;
+          cursor: pointer;
+          font-size: 14px;
+          color: #37B34A;
+          font-weight: 500;
+        }
+
+      }
+      & > .options{
+        @include flexRowWrap;
+        @include absoluteCenter;
+        justify-content: flex-start;
+        font-size: 12px;
+        color: #818192;
+        font-style: italic;
+        box-sizing: border-box;
+        padding:10px 0 20px 0;
+        margin: 0 !important;
+        & > .item-options{
+          @include flexRow;
+          height: 20px;
+          background-color: rgba(129, 129, 146, 0.15);
+          padding:3px 5px;
+          justify-content: space-between;
+          align-items: center;
+          box-sizing: border-box;
+          margin-right: 8px;
+          margin-top: 3px;
+          & > p{
+            margin-right: 10px;
+            box-sizing: border-box;
+          }
+          & > img {
+            width: 8px;
+          }
+        }
+      }
+    }
+  }
+  & > .ev3{
+    @include flexRow;
+    width: 100%;
+    height: 30px;
+    box-sizing: border-box;
+    background-color: #E2C913;
+    justify-content: center;
+    align-items: center;
+
+    & > label{
+      color:white;
+      font-size: 14px;
+    }
+  }
+}
+
+.body-itemE-close{
+  @include flexColumn;
+  width: calc( 100% - 25px);
+  box-sizing: border-box;
+  background-color: rgb(248, 249, 250);
+  max-height: 0;
+  overflow: hidden;
+  transition: 0.5s;
+  margin-left: 25px;
+  & > .ev1{
+    @include flexRow;
+    //min-height: 210px;
+    width: 740px;
+    box-sizing: border-box;
+    padding: 20px 15px;
+    & > form{
+      @include flexRowWrap;
+      width: 100%;
+      box-sizing: border-box;
+      justify-content: space-between;
+      & > div{
+        @include flexColumn;
+        height: 35px;
+        box-sizing: border-box;
+        margin: 0 0 30px 0;
+        & > label{
+          font-size: 12px;
+          color: #98A9B4;
+          margin-bottom: 3px;
+        }
+        & > a{
+          @include flexRow;
+
+          $colorHover:  rgba(6, 188, 82, 0.2);
+          @include pfButton(100px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+          @include flexRow;
+          @include absoluteCenter;
+          cursor: pointer;
+          font-size: 14px;
+          color: #37B34A;
+          font-weight: 500;
+        }
+        & > div{
+          @include flexRow;
+          justify-content: space-between;
+          align-items: flex-end;
+        }
+
+      }
+      & > .options{
+        @include flexRowWrap;
+        @include absoluteCenter;
+        justify-content: flex-start;
+        font-size: 12px;
+        color: #818192;
+        font-style: italic;
+        box-sizing: border-box;
+        border-bottom: 1px dashed #D5DEE2;
+        padding:10px 0 20px 0;
+        margin: 0 !important;
+        & > .item-options{
+          @include flexRow;
+          height: 20px;
+          background-color: rgba(129, 129, 146, 0.15);
+          padding:3px 5px;
+          justify-content: space-between;
+          align-items: center;
+          box-sizing: border-box;
+          margin-right: 8px;
+          margin-top: 3px;
+          & > p{
+            margin-right: 10px;
+            box-sizing: border-box;
+          }
+          & > img {
+            width: 8px;
+          }
+        }
+      }
+    }
+  }
+  & > .ev2{
+    @include flexRow;
+    max-width: 740px;
+    //min-height: 130px;
+    box-sizing: border-box;
+    padding: 0px 15px 10px 15px;
+    & > form{
+      @include flexRowWrap;
+      width: 100%;
+      box-sizing: border-box;
+      justify-content: space-between;
+      & > div{
+        @include flexColumn;
+        height: 35px;
+        box-sizing: border-box;
+        margin: 0 0 30px 0;
+        & > label{
+          font-size: 12px;
+          color: #98A9B4;
+        }
+        & > a{
+          @include flexRow;
+
+          $colorHover:  rgba(6, 188, 82, 0.2);
+          @include pfButton(100px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+          @include flexRow;
+          @include absoluteCenter;
+          cursor: pointer;
+          font-size: 14px;
+          color: #37B34A;
+          font-weight: 500;
+        }
+
+      }
+      & > .options{
+        @include flexRowWrap;
+        @include absoluteCenter;
+        justify-content: flex-start;
+        font-size: 12px;
+        color: #818192;
+        font-style: italic;
+        box-sizing: border-box;
+        padding:10px 0 20px 0;
+        margin: 0 !important;
+        & > .item-options{
+          @include flexRow;
+          height: 20px;
+          background-color: rgba(129, 129, 146, 0.15);
+          padding:3px 5px;
+          justify-content: space-between;
+          align-items: center;
+          box-sizing: border-box;
+          margin-right: 8px;
+          margin-top: 3px;
+          & > p{
+            margin-right: 10px;
+            box-sizing: border-box;
+          }
+          & > img {
+            width: 8px;
+          }
+        }
+      }
+    }
+  }
+  & > .ev3{
+    @include flexRow;
+    width: 100%;
+    height: 30px;
+    box-sizing: border-box;
+    background-color: #E2C913;
+    justify-content: center;
+    align-items: center;
+    & > label{
+      color:white;
+      font-size: 14px;
+    }
+  }
+}
+
+
+
+#totalEventos{
+  @include flexRow;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 13px;
+  color: #3369B1;
+  font-weight: 600;
+  justify-content: center;
+  height: 30px;
+  align-items: center;
+}
+
+
+.title-prorroga{
+  @include flexRow;
+  width:100%;
+  box-sizing: border-box;
+  height: 55px;
+  padding: 0 25px;
+  background: #37B34A;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  & > .part1{
+    @include flexRow;
+    width: 50%;
+    //justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    cursor: pointer;
+    & > .check {
+      @include flexRow;
+      width: 25px;
+      height: 25px;
+      margin-right: 15px;
+      box-sizing: border-box;
+      background-color: white;
+      position: relative;
+      cursor: pointer;
+      & > img{
+        width: 29px;
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        cursor: pointer;
+      }
+    }
+    & > p{
+      @include flexColumn;
+      width: calc(100% - 25px);
+      box-sizing: border-box;
+      cursor: pointer;
+      & > label:nth-of-type(1){
+        color: #FFFFFF;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+      }
+      & > label:nth-of-type(2){
+        color: #FFFFFF;
+        font-size: 12px;
+        font-weight: 500;
+        margin-top: 3px;
+        cursor: pointer;
+      }
+    }
+  }
+  & > .part2{
+    @include flexRow;
+    width: 350px;
+    box-sizing: border-box;
+    justify-content:space-between;
+    align-items: center;
+    cursor: pointer;
+    //height: 15px;
+    & > label{
+      @include flexColumn;
+      justify-content: flex-end;
+      font-size: 12px;
+      color: white;
+      height: 18px;
+      cursor: pointer;
+    }
+    & > input{
+      width: 35px;
+      padding-bottom: 1px;
+    }
+    & > .droplist{
+      width: 75px;
+      margin-bottom:1px;
+    }
+    & > img{
+      margin-left: 10px;
+      cursor: pointer;
+    }
+    & > label:nth-of-type(2){
+      color:white;
+      cursor: pointer;
+    }
+  }
+  &:hover{
+    box-shadow: 0 10px 14px 0 rgba(152,169,180,0.50);
+  }
+}
+
+.title-prorroga-open{
+  @include flexRow;
+  width:100%;
+  box-sizing: border-box;
+  height: 55px;
+  padding: 0 25px;
+  background: #37B34A;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 10px 14px 0 rgba(152,169,180,0.50);
+  z-index: 2;
+  cursor: pointer;
+  opacity: .99;
+  & > .part1{
+    @include flexRow;
+    width: 50%;
+    //justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    cursor: pointer;
+    & > .check{
+      @include flexRow;
+      width: 25px;
+      height: 25px;
+      margin-right: 15px;
+      box-sizing: border-box;
+      background-color: white;
+      position: relative;
+      cursor: pointer;
+      & > img{
+        width: 29px;
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        cursor: pointer;
+      }
+    }
+    & > p{
+      @include flexColumn;
+      width: calc(100% - 25px);
+      box-sizing: border-box;
+      cursor: pointer;
+      & > label:nth-of-type(1){
+        color: #FFFFFF;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+      }
+      & > label:nth-of-type(2){
+        color: #FFFFFF;
+        font-size: 12px;
+        font-weight: 500;
+        margin-top: 3px;
+        cursor: pointer;
+      }
+    }
+  }
+  & > .part2{
+    @include flexRow;
+    width: 350px;
+    box-sizing: border-box;
+    justify-content:space-between;
+    align-items: center;
+    cursor: pointer;
+    //height: 15px;
+    & > label{
+      @include flexColumn;
+      justify-content: flex-end;
+      font-size: 12px;
+      color: white;
+      height: 18px;
+      cursor: pointer;
+    }
+    & > input{
+      width: 35px;
+      padding-bottom: 1px;
+    }
+    & > .droplist{
+      width: 75px;
+      margin-bottom:1px;
+    }
+    & > img{
+      margin-left: 10px;
+      cursor: pointer;
+    }
+    & > label:nth-of-type(2){
+      color:white;
+      cursor: pointer;
+    }
+  }
+}
+
+.body-prorroga{
+  @include flexColumn;
+  width: 100%;
+  box-sizing: border-box;
+  //background-color: #F5FBF6;
+  max-height: 500px;
+  transition: 0.5s;
+  //overflow: hidden;
+  //margin-left: 25px;
+  & > .ev1{
+    @include flexRow;
+    //min-height: 210px;
+    width: 740px;
+    box-sizing: border-box;
+    padding: 20px 15px;
+    & > form{
+      @include flexRowWrap;
+      width: 100%;
+      box-sizing: border-box;
+      justify-content: space-between;
+      & > div{
+        @include flexColumn;
+        height: 35px;
+        box-sizing: border-box;
+        margin: 0 0 30px 0;
+        & > label{
+          font-size: 12px;
+          color: #98A9B4;
+          margin-bottom: 3px;
+        }
+        & > a{
+          @include flexRow;
+
+          $colorHover:  rgba(6, 188, 82, 0.2);
+          @include pfButton(100px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+          @include flexRow;
+          @include absoluteCenter;
+          cursor: pointer;
+          font-size: 14px;
+          color: #37B34A;
+          font-weight: 500;
+        }
+        & > div{
+          @include flexRow;
+          justify-content: space-between;
+          align-items: flex-end;
+        }
+
+      }
+      & > .options{
+        @include flexRowWrap;
+        @include absoluteCenter;
+        justify-content: flex-start;
+        font-size: 12px;
+        color: #818192;
+        font-style: italic;
+        box-sizing: border-box;
+        border-bottom: 1px dashed #D5DEE2;
+        padding:10px 0 20px 0;
+        margin: 0 !important;
+        & > .item-options{
+          @include flexRow;
+          height: 20px;
+          background-color: rgba(129, 129, 146, 0.15);
+          padding:3px 5px;
+          justify-content: space-between;
+          align-items: center;
+          box-sizing: border-box;
+          margin-right: 8px;
+          margin-top: 3px;
+          & > p{
+            margin-right: 10px;
+            box-sizing: border-box;
+          }
+          & > img {
+            width: 8px;
+          }
+        }
+      }
+    }
+  }
+  & > .ev2{
+    @include flexRow;
+    max-width: 740px;
+    //min-height: 130px;
+    box-sizing: border-box;
+    padding: 0px 15px 10px 15px;
+    & > form{
+      @include flexRowWrap;
+      width: 100%;
+      box-sizing: border-box;
+      justify-content: space-between;
+      & > div{
+        @include flexColumn;
+        height: 35px;
+        box-sizing: border-box;
+        margin: 0 0 30px 0;
+        & > label{
+          font-size: 12px;
+          color: #98A9B4;
+        }
+        & > a{
+          @include flexRow;
+
+          $colorHover:  rgba(6, 188, 82, 0.2);
+          @include pfButton(100px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+          @include flexRow;
+          @include absoluteCenter;
+          cursor: pointer;
+          font-size: 14px;
+          color: #37B34A;
+          font-weight: 500;
+        }
+
+      }
+      & > .options{
+        @include flexRowWrap;
+        @include absoluteCenter;
+        justify-content: flex-start;
+        font-size: 12px;
+        color: #818192;
+        font-style: italic;
+        box-sizing: border-box;
+        padding:10px 0 20px 0;
+        margin: 0 !important;
+        & > .item-options{
+          @include flexRow;
+          height: 20px;
+          background-color: rgba(129, 129, 146, 0.15);
+          padding:3px 5px;
+          justify-content: space-between;
+          align-items: center;
+          box-sizing: border-box;
+          margin-right: 8px;
+          margin-top: 3px;
+          & > p{
+            margin-right: 10px;
+            box-sizing: border-box;
+          }
+          & > img {
+            width: 8px;
+          }
+        }
+      }
+    }
+  }
+  & > .ev3{
+    @include flexRow;
+    width: 100%;
+    height: 30px;
+    box-sizing: border-box;
+    background-color: #E2C913;
+    justify-content: center;
+    align-items: center;
+    & > label{
+      color:white;
+      font-size: 14px;
+    }
+  }
+}
+
+.body-prorroga-close{
+  @include flexColumn;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #F5FBF6;
+  max-height: 0;
+  transition: 0.5s;
+  overflow: hidden;
+  //margin-left: 25px;
+  & > .ev1{
+    @include flexRow;
+    //min-height: 210px;
+    width: 740px;
+    box-sizing: border-box;
+    padding: 20px 15px;
+    & > form{
+      @include flexRowWrap;
+      width: 100%;
+      box-sizing: border-box;
+      justify-content: space-between;
+      & > div{
+        @include flexColumn;
+        height: 35px;
+        box-sizing: border-box;
+        margin: 0 0 30px 0;
+        & > label{
+          font-size: 12px;
+          color: #98A9B4;
+          margin-bottom: 3px;
+        }
+        & > a{
+          @include flexRow;
+
+          $colorHover:  rgba(6, 188, 82, 0.2);
+          @include pfButton(100px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+          @include flexRow;
+          @include absoluteCenter;
+          cursor: pointer;
+          font-size: 14px;
+          color: #37B34A;
+          font-weight: 500;
+        }
+        & > div{
+          @include flexRow;
+          justify-content: space-between;
+          align-items: flex-end;
+        }
+
+      }
+      & > .options{
+        @include flexRowWrap;
+        @include absoluteCenter;
+        justify-content: flex-start;
+        font-size: 12px;
+        color: #818192;
+        font-style: italic;
+        box-sizing: border-box;
+        border-bottom: 1px dashed #D5DEE2;
+        padding:10px 0 20px 0;
+        margin: 0 !important;
+        & > .item-options{
+          @include flexRow;
+          height: 20px;
+          background-color: rgba(129, 129, 146, 0.15);
+          padding:3px 5px;
+          justify-content: space-between;
+          align-items: center;
+          box-sizing: border-box;
+          margin-right: 8px;
+          margin-top: 3px;
+          & > p{
+            margin-right: 10px;
+            box-sizing: border-box;
+          }
+          & > img {
+            width: 8px;
+          }
+        }
+      }
+    }
+  }
+  & > .ev2{
+    @include flexRow;
+    max-width: 740px;
+    //min-height: 130px;
+    box-sizing: border-box;
+    padding: 0px 15px 10px 15px;
+    & > form{
+      @include flexRowWrap;
+      width: 100%;
+      box-sizing: border-box;
+      justify-content: space-between;
+      & > div{
+        @include flexColumn;
+        height: 35px;
+        box-sizing: border-box;
+        margin: 0 0 30px 0;
+        & > label{
+          font-size: 12px;
+          color: #98A9B4;
+        }
+        & > a{
+          @include flexRow;
+
+          $colorHover:  rgba(6, 188, 82, 0.2);
+          @include pfButton(100px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+          @include flexRow;
+          @include absoluteCenter;
+          cursor: pointer;
+          font-size: 14px;
+          color: #37B34A;
+          font-weight: 500;
+        }
+
+      }
+      & > .options{
+        @include flexRowWrap;
+        @include absoluteCenter;
+        justify-content: flex-start;
+        font-size: 12px;
+        color: #818192;
+        font-style: italic;
+        box-sizing: border-box;
+        padding:10px 0 20px 0;
+        margin: 0 !important;
+        & > .item-options{
+          @include flexRow;
+          height: 20px;
+          background-color: rgba(129, 129, 146, 0.15);
+          padding:3px 5px;
+          justify-content: space-between;
+          align-items: center;
+          box-sizing: border-box;
+          margin-right: 8px;
+          margin-top: 3px;
+          & > p{
+            margin-right: 10px;
+            box-sizing: border-box;
+          }
+          & > img {
+            width: 8px;
+          }
+        }
+      }
+    }
+  }
+  & > .ev3{
+    @include flexRow;
+    width: 100%;
+    height: 30px;
+    box-sizing: border-box;
+    background-color: #E2C913;
+    justify-content: center;
+    align-items: center;
+    & > label{
+      color:white;
+      font-size: 14px;
+    }
+  }
+}
+
+
+
+.modal{
+  @include flexColumn;
+  @include absoluteCenter;
+  justify-content: flex-start;
+  padding: 25px;
+  height: 450px;
+  font-size: 9pt;
+  box-sizing: border-box;
+  & > .title{
+    @include flexRow;
+    @include absoluteCenter;
+    justify-content: space-between;
+    width: 100%;
+    height: 30px;
+    color: $gnAzulBajo;
+    font-weight: 500;
+    font-size: 21px;
+    align-items: flex-start;
+    box-sizing: border-box;
+    & > p{
+      margin-top: 2px;
+    }
+    & > img{
+      cursor: pointer;
+    }
+  }
+  & > .header{
+    @include flexRow;
+    width: 100%;
+    height: 35px;
+    box-sizing: border-box;
+    margin-top: 20px;
+    margin-bottom: 35px;
+    & .img{
+      @include flexRow;
+      width: 40px;
+      margin-right: 15px;
+      justify-content: center;
+      align-items: center;
+      & > img{
+        width: 38px;
+        height: 36px;
+      }
+    }
+    & > .label{
+      @include flexColumn;
+      width: calc(100% - 40px);
+      justify-content: space-around;
+      //border-bottom: 1px solid #98A9B4;;
+      & > label:nth-of-type(1){
+        font-size: 12px;
+        color: #98A9B4;
+      }
+      & > label:nth-of-type(2){
+        font-size: 14px;
+        color: #3369B1;
+        font-weight: 600;
+      }
+    }
+  }
+  & > .body{
+    @include flexRow;
+    box-sizing: border-box;
+    width: 100%;
+    & > form{
+      @include flexRowWrap;
+      box-sizing: border-box;
+      width: 100%;
+      & > .cForm{
+        @include flexColumn;
+        width: 50%;
+        box-sizing: border-box;
+        & > label{
+          @include flexRow;
+          font-size: 12px;
+          color: #98A9B4;
+          margin-bottom: 5px;
+        }
+        & > .fecha{
+
+        }
+        & > .droplist{
+
+        }
+        & > textarea{
+          @include flexRow;
+          width: 100%;
+          height: 115px;
+          box-sizing: border-box;
+          outline: none;
+          resize: none;
+          border: 1px solid #98A9B4;
+          font-size: 14px;
+          color: #3369B1;
+          padding:10px;
+        }
+      }
+    }
+  }
+
+
+  & > .footer{
+    @include flexRow;
+    width: 100%;
+    box-sizing: border-box;
+    height: 40px;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    & > .cancelar{
+      @include pfButton(145px, 30px, $gnAzulMedio, rgba(51,105,177,0.75), $gnAzulMedio, 0px);
+      @include flexRow;
+      @include absoluteCenter;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: normal;
+      color:$gnBlanco;
+      box-sizing: border-box;
+    }
+    & > .guardar{
+      @include pfButton(145px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+      @include flexRow;
+      @include absoluteCenter;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: normal;
+      color:$gnBlanco;
+      box-sizing: border-box;
+    }
+    & > .guardarInactivo{
+      @include pfButton(145px, 30px, #D5DEE2, #e1e7e9, #D5DEE2, 0px);
+      @include flexRow;
+      @include absoluteCenter;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: normal;
+      color:$gnBlanco;
+      box-sizing: border-box;
+      pointer-events: none;
+    }
+  }
+
+}
+
+
+
+.modalConfirm{
+  @include flexColumn;
+  height: 225px;
+  padding: 20px;
+  $color-primary: $gnAzulBajo ;
+  $color-secondary: $verdeBoton ;
+  $color-darkAccent: $gnDorado ;
+  $color-lightAccent: $gnAzulMedio;
+  $background: #222222;
+  $duration: 1.5s;
+  box-sizing: border-box;
+  & > .salir{
+    @include flexRow;
+    justify-content: flex-end;
+    & > img{
+      cursor: pointer;
+    }
+  }
+  & > .body{
+    @include flexRow;
+    width: 100%;
+    height: 80px;
+    box-sizing: border-box;
+    & > .img{
+      @include flexColumn;
+      width: 100px;
+      box-sizing: border-box;
+      align-items: center;
+      justify-content: center;
+      & > img{
+        width: 63px;
+      }
+    }
+    & > .title{
+      @include flexColumn;
+      width:calc(100% - 100px);
+      box-sizing: border-box;
+      justify-content: center;
+      & > label:nth-of-type(1){
+        font-size: 22px;
+        color: #3369B1;
+        font-weight: 600;
+      }
+      & > label:nth-of-type(2){
+        font-size: 19px;
+        color: #3B8EDE;
+        margin-top: 10px;
+      }
+    }
+  }
+  & > .boton{
+    @include flexRow;
+    justify-content: space-between;
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    margin-top: 40px;
+    & > a:nth-of-type(1){
+      @include flexRow;
+      @include absoluteCenter;
+      @include pfButton(145px, 30px, $gnAzulMedio, rgba(51,105,177,0.75), $gnAzulMedio, 0px);
+      cursor: pointer;
+      font-size: 14px;
+      color: #FFFFFF;
+      font-weight: 500;
+    }
+    & > a:nth-of-type(2){
+      @include flexRow;
+      @include absoluteCenter;
+      @include pfButton(145px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+      cursor: pointer;
+      font-size: 14px;
+      color: #FFFFFF;
+      font-weight: 500;
+    }
+  }
+}
+
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  padding-bottom: 1px;
+}
+
+input[type=number] { -moz-appearance:textfield; }
+
+
+
+.inactivo{
+  background-color: #D5DEE2;
+  &:hover{
+    background-color: #e1e7e9;
+  }
+}
+
+
+input::-webkit-input-placeholder {
+  font-size: 14px;
+  color: #3369B1;
+}
+input:-moz-placeholder {
+  font-size: 14px;
+  color: #3369B1;
+}
+input:-ms-input-placeholder {
+  font-size: 14px;
+  color: #3369B1;
+}
+
+
+#inputPro::-webkit-input-placeholder {
+  font-size: 14px;
+  color: #37b34a;
+}
+
+#inputPro:-moz-placeholder {
+  font-size: 14px;
+  color: #37b34a;
+}
+#inputPro:-ms-input-placeholder {
+  font-size: 14px;
+  color: #37b34a;
+}
+
+virtual-scroll, #scrollLoad {
+  display: block;
+  width: 100%;
+  height: calc(100vh - 450px);
+  min-height: 475px;
+}
+
+virtual-scroller, #scrollLoad {
+  display: block;
+  width: 100%;
+  height: calc(100vh - 450px);
+  min-height: 475px;
+}
+
+.item{
+  @include flexRow;
+  width: 100%;
+  height: 90px;
+  box-sizing: border-box;
+  //border: 1px solid #ECF0F3;
+  margin-bottom: 5px;
+  overflow: hidden;
+  background: #ECF0F3;
+  cursor: pointer;
+  & > .img{
+    @include flexRow;
+    min-width: 120px;
+    transition: .4s ease-in-out;
+    background: white;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ECF0F3;
+    & > #img1{
+      width: 57px;
+      height: 55px;
+    }
+    & > #img2{
+      width: 57px;
+      height: 55px;
+      display: none;
+    }
+  }
+  & > .bodyItem{
+    @include flexRow;
+    min-width:calc(100% - 120px);
+    box-sizing: border-box;
+    background: #ECF0F3;
+    padding: 25px 40px 25px 25px;
+    align-items: center;
+    & > .part1{
+      @include flexColumn;
+      width: 100%;
+      box-sizing: border-box;
+      & > p:nth-of-type(1){
+        //@include flexRow;
+        width: 100%;
+        font-size: 14px;
+        box-sizing: border-box;
+        & > .span{
+          font-size: 14px;
+          color: #3369B1;
+        }
+        & > label:nth-of-type(1){
+          color: #3369B1;
+          font-weight: 600;
+        }
+        & > label:nth-of-type(2){
+          color: #3369B1;
+        }
+      }
+      & > p:nth-of-type(2){
+        @include flexRow;
+        width: 100%;
+        font-size: 13px;
+        box-sizing: border-box;
+        margin-top:5px;
+        & > .labelGreen{
+          color:#37B34A;
+        }
+        & > .labelOrange{
+          color:#F7931E ;
+        }
+      }
+    }
+    & > .part2{
+      @include flexRow;
+      min-width: 100px;
+      box-sizing: border-box;
+      text-align: right;
+      & > p{
+        @include flexColumn;
+        width: 100%;
+        font-size: 13px;
+        box-sizing: border-box;
+        //color: #E2C913;
+        & > label:nth-of-type(1){
+          color: #818192;
+        }
+        & > label:nth-of-type(2){
+          color: #E2C913;
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+}
+.item:hover{
+  @include flexRow;
+  width: 100%;
+  height: 90px;
+  box-sizing: border-box;
+  //border: 1px solid #ECF0F3;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  & > .img{
+    @include flexRow;
+    min-width: 100px;
+    border: 1px solid #ECF0F3;
+    & > #img1{
+      display: none;
+    }
+    & > #img2{
+      display: inherit;
+    }
+  }
+  & > .bodyItem{
+    @include flexRow;
+    min-width: calc(100% - 100px);
+    box-sizing: border-box;
+    background: #3369B1;
+    padding: 25px 40px 25px 25px;
+    align-items: center;
+    & > .part1{
+      @include flexColumn;
+      width:100%;
+      box-sizing: border-box;
+      & > p:nth-of-type(1){
+        //@include flexRow;
+        width: 100%;
+        font-size: 14px;
+        box-sizing: border-box;
+        & > .span{
+          font-size: 14px;
+          color: white;
+        }
+        & > label:nth-of-type(1){
+          color: #E2C913;
+          font-weight: 600;
+        }
+        & > label:nth-of-type(2){
+          color: white;
+          font-weight: 600;
+        }
+      }
+      & > p:nth-of-type(2){
+        @include flexRow;
+        width: 100%;
+        font-size: 13px;
+        box-sizing: border-box;
+        margin-top:5px;
+        & > label:nth-of-type(1){
+          color:#E2C913;
+        }
+      }
+    }
+    & > .part2{
+      @include flexRow;
+      min-width: 100px;
+      box-sizing: border-box;
+      text-align: right;
+      & > p{
+        @include flexColumn;
+        width: 100%;
+        font-size: 13px;
+        box-sizing: border-box;
+        //color:white;
+
+        & > label:nth-of-type(1){
+          color: white;
+        }
+        & > label:nth-of-type(2){
+          color: #E2C913;
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+}
+.itemSelected{
+  @include flexRow;
+  width: 100%;
+  height: 90px;
+  box-sizing: border-box;
+  //border: 1px solid #ECF0F3;
+  margin-bottom: 5px;
+  overflow: hidden;
+  background: #ECF0F3;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  & > .img{
+    @include flexRow;
+    min-width: 100px;
+    transition: .3s ease-in-out;
+    background: white;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ECF0F3;
+    & > #img1{
+      display: none;
+    }
+    & > #img2{
+      width: 57px;
+      height: 55px;
+      display: inherit;
+    }
+  }
+  & > .bodyItem{
+    @include flexRow;
+    min-width: calc(100% - 100px);
+    box-sizing: border-box;
+    background: #3369B1;
+    padding: 25px 40px 25px 25px;
+    align-items: center;
+    & > .part1{
+      @include flexColumn;
+      width:100%;
+      box-sizing: border-box;
+      & > p:nth-of-type(1){
+        //@include flexRow;
+        width: 100%;
+        font-size: 14px;
+        box-sizing: border-box;
+        & > .span{
+          font-size: 14px;
+          color: white;
+        }
+        & > label:nth-of-type(1){
+          color: #E2C913;
+          font-weight: 600;
+        }
+        & > label:nth-of-type(2){
+          color: white;
+          font-weight: 600;
+        }
+      }
+      & > p:nth-of-type(2){
+        @include flexRow;
+        width: 100%;
+        font-size: 13px;
+        box-sizing: border-box;
+        margin-top:5px;
+        & > label:nth-of-type(1){
+          color:#E2C913;
+        }
+      }
+    }
+    & > .part2{
+      @include flexRow;
+      min-width: 100px;
+      box-sizing: border-box;
+      text-align: right;
+      & > p{
+        @include flexColumn;
+        width: 100%;
+        font-size: 13px;
+        box-sizing: border-box;
+        //color:white;
+
+        & > label:nth-of-type(1){
+          color: white;
+        }
+        & > label:nth-of-type(2){
+          color: #E2C913;
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+.item1{
+  @include flexColumn;
+  width:225px;
+  min-width:225px;
+  height: 225px;
+  box-sizing: border-box;
+  //border: 1px solid #ECF0F3;
+  //transition: .3s ease-in-out;
+  margin: 2.5px;
+  overflow: hidden;
+  background: #ECF0F3;
+  cursor: pointer;
+  & > .img{
+    @include flexRow;
+    width:225px;
+    min-height: 100px;
+    box-sizing: border-box;
+    transition: .4s ease-in-out;
+    background: white;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ECF0F3;
+    & > #img1{
+      width: 57px;
+      height: 55px;
+    }
+    & > #img2{
+      width: 57px;
+      height: 55px;
+      display: none;
+    }
+  }
+  & > .bodyItem{
+    @include flexColumn;
+    width:225px;
+    min-height: 125px;
+    box-sizing: border-box;
+    background: #ECF0F3;
+    justify-content: space-around;
+    padding: 10px 5px 0 5px;
+    //transition: .3s Linear;
+    & > p{
+      //@include flexRow;
+      justify-content: center;
+      text-align: center;
+      //width: 100%;
+    }
+    & > p:nth-of-type(1){
+      color:#3369B1;
+      & > label{
+        color:#3369B1;
+      }
+    }
+    & > p:nth-of-type(2){
+      & > .labelGreen{
+        color:#37B34A;
+      }
+      & > .labelOrange{
+        color:#F7931E ;
+      }
+    }
+    & > p:nth-of-type(3){
+      //@include flexRow;
+      justify-content: center;
+      text-align: center;
+      //width: 100%;
+      & > label:nth-of-type(1){
+        color:#E2C913;
+      }
+      & > label:nth-of-type(2){
+        color:#818192;
+      }
+    }
+  }
+
+}
+.item1:hover{
+  @include flexColumn;
+  width:225px;
+  min-width:225px;
+  height: 225px;
+  box-sizing: border-box;
+  //border: 0.5px solid #ECF0F3;
+  //border:1px solid #ECF0F3;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  & > .img{
+    @include flexRow;
+    width:225px;
+    min-height: 90px !important;
+    box-sizing: border-box;
+    border: 1px solid #ECF0F3;
+    & > #img1{
+      display: none;
+    }
+    & > #img2{
+      display: inherit;
+    }
+  }
+  & > .bodyItem{
+    @include flexColumn;
+    width:225px;
+    min-height: 135px;
+    box-sizing: border-box;
+    background: #3369B1;
+    //justify-content: space-around;
+    padding: 10px 5px 10px 5px;
+    & > p{
+      //@include flexRow;
+      justify-content: center;
+      text-align: center;
+      //width: 100%;
+    }
+    & > p:nth-of-type(1){
+      color:white;
+      & > label{
+        color:#E2C913;
+      }
+    }
+    & > p:nth-of-type(2){
+      & > label:nth-of-type(1){
+        color:#E2C913;
+      }
+    }
+    & > p:nth-of-type(3){
+      //@include flexRow;
+      justify-content: center;
+      text-align: center;
+      //width: 100%;
+      & > label:nth-of-type(1){
+        color:#E2C913;
+      }
+      & > label:nth-of-type(2){
+        color:white;
+      }
+    }
+  }
+
+}
+.itemSelected1{
+  @include flexColumn;
+  width:225px;
+  min-width:225px;
+  height: 225px;
+  box-sizing: border-box;
+  //border: 0.5px solid #ECF0F3;
+  //border:1px solid #ECF0F3;
+  margin: 2.5px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  & > .img{
+    @include flexRow;
+    width:225px;
+    min-height: 90px !important;
+    box-sizing: border-box;
+    transition: .4s ease-in-out;
+    background: white;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ECF0F3;
+    & > #img1{
+      display: none;
+    }
+    & > #img2{
+      width: 57px;
+      height: 55px;
+      display: inherit;
+    }
+  }
+  & > .bodyItem{
+    @include flexColumn;
+    width:225px;
+    min-height: 135px;
+    box-sizing: border-box;
+    background: #3369B1;
+    justify-content: space-around;
+
+    padding: 10px 5px 10px 5px;
+    & > p{
+      //@include flexRow;
+      justify-content: center;
+      text-align: center;
+      //width: 100%;
+    }
+    & > p:nth-of-type(1){
+      color:white;
+      & > label{
+        color:#E2C913;
+      }
+    }
+    & > p:nth-of-type(2){
+      & > label:nth-of-type(1){
+        color:#E2C913;
+      }
+    }
+    & > p:nth-of-type(3){
+      //@include flexRow;
+      justify-content: center;
+      text-align: center;
+      //width: 100%;
+      & > label:nth-of-type(1){
+        color:#E2C913;
+      }
+      & > label:nth-of-type(2){
+        color:white;
+      }
+    }
+  }
+
+}
+
+
+/* :host ::ng-deep .scrollable-content{
+        display: flex;
+        flex-flow: row wrap;
+        flex-direction: row;
+    } */
+
+#inicio{
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  position: absolute;
+  background-color: rgba(51,105,177,0.80);
+  border-radius: 50px;
+  bottom: 40px;
+  right: 25px;
+  cursor: pointer;
+  & > img{
+    transform: rotate(-180deg);
+  }
+}
+
+/* .loader{
+        width: 100%;
+    } */
+
+
+.container-loader{
+  @include flexRow;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  height: 65px;
+  //margin-bottom: 30px;
+  & > .loader {
+
+    $color-primary: $gnAzulBajo ;
+    $color-secondary: $verdeBoton ;
+    $color-darkAccent: $gnDorado ;
+    $color-lightAccent: $gnAzulMedio;
+    $background: #222222;
+    $duration: 1.5s;
+
+    display: block;
+    position: relative;
+    height: 20px;
+    width: 86px;
+    //width: 86px;
+    //margin-top: 64px;
+    .loading-square {
+      position: absolute;
+      height: 20px;
+      width: 20px;
+      top: 0;
+    }
+    .loading-square:nth-child(1) {
+      left: 0;
+      animation: square1 $duration linear forwards infinite;
+    }
+
+    .loading-square:nth-child(2) {
+      left: 22px;
+      animation: square2 $duration linear forwards infinite;
+    }
+
+    .loading-square:nth-child(3) {
+      left: 44px;
+      animation: square3 $duration linear forwards infinite;
+    }
+
+    .loading-square:nth-child(4) {
+      left: 66px;
+      animation: square4 $duration linear forwards infinite;
+    }
+
+    @keyframes square1 {
+      0% {
+        background-color: $color-primary;
+        transform: translate(0, 0);
+      }
+      9.09091% {
+        transform: translate(0, calc(-100% - 2px));
+        background-color: $color-primary;
+      }
+      18.18182% {
+        transform: translate(calc(100% + 2px), calc(-100% - 2px));
+        background-color: $color-secondary;
+      }
+      27.27273% {
+        transform: translate(calc(100% + 2px), 0);
+      }
+      100% {
+        background-color: $color-secondary;
+        transform: translate(calc(100% + 2px), 0);
+      }
+    }
+    @keyframes square2 {
+      0% {
+        background-color: $color-secondary;
+        transform: translate(0, 0);
+      }
+      18.18182% {
+        transform: translate(0, 0);
+      }
+      27.27273% {
+        transform: translate(0, calc(100% + 2px));
+        background-color: $color-secondary;
+      }
+      36.36364% {
+        transform: translate(calc(100% + 2px), calc(100% + 2px));
+        background-color: $color-darkAccent;
+      }
+      45.45455% {
+        transform: translate(calc(100% + 2px), 0);
+      }
+      100% {
+        background-color: $color-darkAccent;
+        transform: translate(calc(100% + 2px), 0);
+      }
+    }
+    @keyframes square3 {
+      0% {
+        background-color: $color-darkAccent;
+        transform: translate(0, 0);
+      }
+      36.36364% {
+        transform: translate(0, 0);
+      }
+      45.45455% {
+        transform: translate(0, calc(-100% - 2px));
+        background-color: $color-darkAccent;
+      }
+      54.54545% {
+        transform: translate(calc(100% + 2px), calc(-100% - 2px));
+        background-color: $color-lightAccent;
+      }
+      63.63636% {
+        transform: translate(calc(100% + 2px), 0);
+      }
+      100% {
+        background-color: $color-lightAccent;
+        transform: translate(calc(100% + 2px), 0);
+      }
+    }
+    @keyframes square4 {
+      0% {
+        transform: translate(0, 0);
+        background-color: $color-lightAccent;
+      }
+      54.54545% {
+        transform: translate(0, 0);
+      }
+      63.63636% {
+        transform: translate(0, calc(100% + 2px));
+        background-color: $color-lightAccent;
+      }
+      72.72727% {
+        background-color: $color-darkAccent;
+      }
+      81.81818% {
+        background-color: $color-secondary;
+      }
+      90.90909% {
+        transform: translate(calc(-300% - 6px), calc(100% + 2px));
+        background-color: $color-primary;
+      }
+      100% {
+        transform: translate(calc(-300% - 6px), 0);
+        background-color: $color-primary;
+      }
+    }
+  }
+}
+
+.tramiteCofeprisEvento {
+  @include flexRow;
+  box-sizing: border-box;
+  width: 100%;
+  height: 40px;
+  background-color: #EAF4EA;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  & img {
+    width: 20px;
+    height: 20px;
+  }
+  & > p {
+    font-size: 14px;
+    color: #37B34A;
+    font-weight: 600;
+    margin-left: 10px;
+  }
+}
+
+.invalid_notification {
+  width: 100%;
+  margin-top: 30px;
+  & > .title {
+    @include flexRow;
+    @include absoluteCenter;
+    width: 100%;
+    height: auto !important;
+    background-color: #C1272D;
+    opacity: 0.7;
+    padding: 10px 0;
+    & > p {
+      color: #FFFFFF;
+      font-size: 19px;
+      font-weight: 600;
+    }
+  }
+  & > .detail {
+    width: calc(100% - 30px);
+    margin-top: 15px;
+    padding: 0 15px;
+    & > div:nth-of-type(1) {
+      width: 100%;
+      margin-bottom: 10px;
+      & > p {
+        color: #3369B1;
+        font-size: 16px;
+        font-weight: 500;
+      }
+    }
+    & > div:nth-of-type(2) {
+      @include flexRowWrap;
+      width: 100%;
+      & > div {
+        background-color: rgba(193, 39, 45, 0.15);
+        font-size: 13px;
+        font-style: italic;
+        margin: 0 5px 8px;
+        padding: 7px 8px;
+        & > div:nth-of-type(1) {
+          & > p {
+            & > span:nth-of-type(1) {
+              color: #818192;
+            }
+            & > span:nth-of-type(2) {
+              color: rgba(193, 39, 45, 0.6);
+              margin: 0 4px;
+            }
+            & > span:nth-of-type(3) {
+              color: rgba(193, 39, 45, 0.6);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.invalidDate {
+  color: #C1272D !important;
+}
+
+.validDate {
+  color: #37B34A !important;
+}
+
+.inValidBorderBottom {
+  border-bottom: solid 0.75px #C1272D !important;
+}
+
+.inValidBorder {
+  border: solid 0.75px #C1272D !important;
+}
+
+.fecha_realizacion {
+  @include flexRow;
+  flex-direction: row !important;
+  align-items: flex-end;
+  align-content: flex-end;
+  width: 80px;
+  margin: 0 !important;
+}
+
+.fecha_inicio_notificacion {
+  width: 115px;
+  align-items: flex-end;
+  align-content: flex-end;
+  flex-direction: row !important;
+  flex-wrap: wrap;
+  margin-top: 30px;
+  & > label {
+    width: 100%;
+    text-align: center;
+  }
+  & > label:nth-of-type(1) {
+    margin-bottom: 8px;
+  }
+}
+
+.form-control.ng-invalid.ng-touched { border-bottom: solid 0.75px #C1272D !important; }
+.form-control.ng-invalid.ng-touched.area { border: solid 0.75px #C1272D !important; }
+
+.modalUpload {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(34, 46, 67, 0.9);
+  display: table;
+  transition: opacity .3s ease;
+  z-index: 1000;
+  &-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  &-container {
+    @include flexRowWrap;
+    width: 100%;
+    max-width: 500px;
+    height: 100%;
+    max-height: 482px;
+    align-content: flex-start;
+    align-items: flex-start;
+    background-color: #FFFFFF;
+    border-radius: 2px;
+    box-shadow: 1px 4px 8px 2px rgba(152, 169, 180, 0.70);
+    box-sizing: border-box;
+    transition: all .3s ease;
+    margin: 0 auto;
+    padding: 25px;
+    & > .content {
+      @include flexRowWrap;
+      width: 100%;
+      height: calc(100% - 335px);
+      align-items: flex-start;
+      align-content: flex-start;
+      overflow: auto;
+      padding-bottom: 20px;
+    }
+  }
+  &-title {
+    @include flexRow;
+    @include absoluteCenter;
+    width: 100%;
+    justify-content: space-between;
+    position: relative;
+    & > p:nth-of-type(1) {
+      @include fontFormat(21px, 600, #3B8EDE);
+    }
+    & > img:nth-of-type(1) {
+      width: 100%;
+      max-width: 25px;
+      position: absolute;
+      right: 0;
+      top: 0;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  &-button {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 20px 0 10px;
+    .without-files {
+      @include flexRow;
+      @include absoluteCenter;
+      width: 100%;
+      height: 35px;
+      background-color: #37B34A;
+      &:hover {
+        background-color: rgba(55, 179, 74, 0.75);
+      }
+      & > label:nth-of-type(1) {
+        @include flexRow;
+        @include absoluteCenter;
+        width: 100%;
+        height: 100%;
+        @include fontFormat(14px, 600, #FFFFFF);
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+    .with-files {
+      @include flexRow;
+      @include absoluteCenter;
+      width: 100%;
+      height: 35px;
+      background-color: #37B34A;
+      &:hover {
+        background-color: rgba(55, 179, 74, 0.75);
+      }
+      & > label:nth-of-type(1) {
+        @include flexRow;
+        @include absoluteCenter;
+        width: calc(100% - 50px);
+        height: 100%;
+        @include fontFormat(14px, 600, #FFFFFF);
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      & > label:nth-of-type(2) {
+        @include flexRow;
+        @include absoluteCenter;
+        width: 25px;
+        height: 100%;
+        & > img:nth-of-type(1) {
+          width: 100%;
+          max-width: 13px;
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+      & > label:nth-of-type(3) {
+        @include flexRow;
+        @include absoluteCenter;
+        width: 25px;
+        height: 100%;
+        & > img:nth-of-type(1) {
+          width: 100%;
+          max-width: 10px;
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    & > input:nth-of-type(1) {
+      display: none;
+    }
+  }
+  &-description {
+    width: 100%;
+    & > label:nth-of-type(1) {
+      @include fontFormat(12px, 300, #98A9B4);
+    }
+    & > textarea {
+      @include flexRow;
+      display: flex;
+      width: 100%;
+      height: 35px;
+      border: 1px solid #98A9B4;
+      box-sizing: border-box;
+      color: #3369B1;
+      font-size: 12px;
+      margin-top: 10px;
+      outline: none;
+      resize: none;
+      padding: 5px;
+      overflow-y: auto;
+    }
+  }
+  &-add {
+    @include flexRow;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: none;
+    justify-content: flex-end;
+    margin: 5px 0;
+    & > .active {
+      @include flexRow;
+      @include absoluteCenter;
+      @include pfButton(95px, 30px, transparent, rgba(6, 188, 82, 0.2), #FFFFFF);
+      @include fontFormat(14px, 500, #37B34A);
+      border-radius: 0;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    & > .inactive {
+      @include flexRow;
+      @include absoluteCenter;
+      @include pfButton(95px, 30px, transparent, rgba(6, 188, 82, 0.2), #FFFFFF);
+      @include fontFormat(14px, 500, #D5DEE2);
+      border-radius: 0;
+      pointer-events: none;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  &-list {
+    @include flexColumn;
+    width: 100%;
+    height: 205px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    & > div {
+      @include flexRowWrap;
+      width: 100%;
+      min-height: 62px;
+      align-content: flex-start;
+      align-items: flex-start;
+      background-color: #ECF0F3;
+      box-sizing: border-box;
+      margin-bottom: 6px;
+      padding: 10px 15px;
+      overflow: hidden;
+      & > div:nth-of-type(1) {
+        @include flexRow;
+        width: 100%;
+        align-content: flex-start;
+        align-items: flex-start;
+        margin-bottom: 5px;
+        & > div:nth-of-type(1) {
+          @include flexRow;
+          width: calc(100% - 15px);
+          align-content: center;
+          align-items: center;
+          & > p {
+            @include fontFormat(13px, 500, #3369B1);
+          }
+          & > img:nth-of-type(1) {
+            width: 15px;
+            margin: 0 5px;
+          }
+        }
+        & > div:nth-of-type(2) {
+          @include flexRow;
+          width: 15px;
+          justify-content: flex-end;
+          & > img:nth-of-type(1) {
+            width: 10px;
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+      }
+      & > div:nth-of-type(2) {
+        @include flexRow;
+        width: 100%;
+        & > p:nth-of-type(1) {
+          @include fontFormat(13px, 300, #818192);
+          line-height: 18px;
+        }
+      }
+    }
+  }
+  &-empty {
+    @include flexRow;
+    @include absoluteCenter;
+    width: 100%;
+    height: 205px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    & > p:nth-of-type(1) {
+      @include fontFormat(35px, 700, #3369B1);
+      margin-bottom: 30px;
+      opacity: 0.3;
+    }
+  }
+  &-buttons {
+    @include flexRow;
+    @include absoluteCenter;
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    justify-content: space-between;
+    & > button:nth-of-type(1) {
+      @include flexRow;
+      @include absoluteCenter;
+      @include button(145px, 30px, $gnAzulMedio, rgba(51,105,177,0.75), $gnAzulMedio);
+      border-radius: 2px;
+      color: #FFFFFF;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    & > button:nth-of-type(2) {
+      @include flexRow;
+      @include absoluteCenter;
+      border-radius: 2px;
+      color: #FFFFFF;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    & > .enable {
+      @include button(145px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado);
+      pointer-events: auto;
+    }
+    & > .disable {
+      @include button(145px, 30px, #D5DEE2, #D5DEE2, #D5DEE2);
+      pointer-events: none;
+    }
+  }
+}

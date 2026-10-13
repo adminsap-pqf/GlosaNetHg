@@ -1,0 +1,25 @@
+<aside [ngClass]="[navSize, browserAnimationClass]" [style.opacity]="initNav ? '1' : '0'">
+  <nav>
+      <div [ngClass]="logoClass">
+          <a (click)="goHome()">
+              <img src="{{logoGlosanet}}" alt="Glosanet">
+              <span [ngClass]="classTxtLogo"><img src="./assets/images/logo_glosaLogin.svg" alt="Glosanet"></span>
+          </a>
+      </div>
+      <ul (mouseenter)="changeNavSize(1)" (mouseleave)="changeNavSize()" (click)="changeNavSize(1)">
+          <gn-nav-item *ngFor="let item of navItems" [active]="item.key===activeOption.key ? true : false" [item]="item" [navSize]="navSize" [section]="item.section"
+              (onItemSelected)="changeAuxBarState($event)" (click)="changeAuxBarComponent(item)"></gn-nav-item>
+      </ul>
+  </nav>
+  <section [ngClass]="auxBarSize">
+      <span #target></span>
+  </section>
+
+  <!-- <div class="sizeSwitch" >
+      <img src="./assets/images/sidenav_chevron.svg" alt="Chance nav bar size">
+  </div> -->
+</aside>
+
+<div *ngIf="block" [ngStyle]="{'background-color':'rgba(34, 46, 67, 0.9)', 'z-index':'3', 'position':'fixed', 'top':'0', 'width':'61px', 'height':'100vh'}">
+
+</div>

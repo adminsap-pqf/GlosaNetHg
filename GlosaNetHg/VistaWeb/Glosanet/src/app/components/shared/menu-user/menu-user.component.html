@@ -1,0 +1,56 @@
+<div>
+  <div>
+    <div>
+      <p >{{user.usuario}} | {{user.rfc[0]}} <img src="./assets/images/drop_list.svg" alt="" (click)="open = !open"></p>
+    </div>
+    <p>{{numDataStage}} DataStages | Información disponible del {{finicioDataStage | dateFormatSlash}} al {{ffinDataStage | dateFormatSlash}}</p>
+    <p>Última Actualización DOF: {{user.dof | dateFormatSlash }}</p>
+  </div>
+  <div>
+    <img src="{{urlImagen}}" alt="">
+  </div>
+</div>
+<div class="container" *ngIf="open">
+  <div class="triangulo">
+
+  </div>
+  <div class="triangulo2">
+
+  </div>
+
+  <div class="encabezado">
+    <img src="./assets/images/usuario.svg" alt="" >
+    <div>
+      <p>{{user.nombre}}</p>
+      <p>{{user.rol}}</p>
+    </div>
+  </div>
+
+  <div class="rfc">
+    <div *ngIf="user.rfc.length === 1? true: false" class="unique">
+      <p>RFC {{user.rfc[0]}}</p>
+    </div>
+    <div *ngIf="user.rfc.length > 1? true: false" class="list">
+      <gn-radio-button
+      [subFijo]="'RFC '"
+      [hover]="'blueHover'"
+      [fontWeight]= "'bold'"
+      [colorTextSelected]= "'#3369b1'"
+      [colorTextHover]= "'#3369b1'"
+      [widthTotal]= "'188px'"
+      [borderBottom]= "true"
+      [lstItems]= "user.rfc"
+      [disble]= "true"
+      [direction]= "'column'"
+      [imgSize]= "'15px'"
+      ></gn-radio-button>
+    </div>
+  </div>
+
+  <a class="btnConfig" (click)="irConfiguraciones()">
+    <p>CONFIGURACIÓN</p>
+  </a>
+  <a class="btnlogOut" (click)="closeSession()">
+    <p>CERRAR SESIÓN</p>
+  </a>
+</div>

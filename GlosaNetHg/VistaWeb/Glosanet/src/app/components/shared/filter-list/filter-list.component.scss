@@ -1,0 +1,112 @@
+@import "../../../../variables.scss";
+@import "../../../../mixins.scss";
+@import "../../../../colors.scss";
+
+:host{
+    @include absoluteCenter;
+    font-size: $globalFont;
+
+    $grayColor:$gnGrisRata;
+    $blueColor:$gnAzulMedio;
+    & > img{
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    & > .container{
+        @include flexRowWrap;
+        width: 150px;
+        max-height: 170px; 
+        min-height: 30px; 
+        position: absolute;
+        box-shadow: 0px 3px 28px -7px rgba(0,0,0,0.25);
+        box-sizing: border-box;
+        right: 0;
+        top: 35px;
+        position: absolute;
+        border:1px solid $gnInactivo;
+        background-color: $gnBlanco;
+        z-index: 2;
+        & > .triangulo{
+            width:0px;
+            height:0px;
+            border-left:8px solid transparent; /* izquierda flecha */
+            border-right:8px solid transparent; /* derecha flecha */
+            border-bottom:8px solid $gnInactivo; /* base flecha y color*/
+            font-size:0px;
+            line-height:0px;
+            position: absolute;
+            right: 5px;
+            top:-8px;
+        }
+        & > .triangulo2{
+            width:0px;
+            height:0px;
+            border-left:8px solid transparent; /* izquierda flecha */
+            border-right:8px solid transparent; /* derecha flecha */
+            border-bottom:8px solid white; /* base flecha y color*/
+            font-size:0px;
+            line-height:0px;
+            position: absolute;
+            right: 12px;
+            top: 0px;
+            margin: -7px;
+        }
+        & > label{
+            @include flexRow;
+            align-items: center;
+            width: 100%;
+            color:$grayColor;
+            height:20px;
+            padding: 0 20px;
+        }
+        & > .listItems{
+            @include flexColumn;
+            @include windowsScrollbars('none');
+            width: 100%;
+            max-height: 120px;
+            //margin:5px 20px 10px 20px;
+            overflow-y: scroll;
+            box-sizing: border-box;
+            & > .items{
+                @include flexRow;
+                width: 100%;
+                
+                height:30px;
+                min-height: 30px;
+                align-items: center;
+                transition: .5s all;
+                padding: 0 20px;
+                box-sizing: border-box;
+                & > p{
+                    @include flexRow;
+                    box-sizing: border-box;
+                    & > label{
+                        padding-left: 5px;
+                        color:$grayColor;
+                    }
+                }
+            }
+            & > .itemsActive{
+                @include flexRow;
+                width: 100%;
+                
+                height:30px;
+                min-height: 30px;
+                align-items: center;
+                transition: .5s all;
+                padding: 0 20px;
+                box-sizing: border-box;
+                & > p{
+                    @include flexRow;
+                    box-sizing: border-box;
+                    & > label{
+                        padding-left: 5px;
+                        color:$blueColor;
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+    }
+}

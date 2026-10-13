@@ -1,0 +1,12 @@
+<div class="title">
+  <!-- <img src="{{titleIcon}}" alt=""> -->
+  <p>{{title}}</p>
+</div>
+
+
+<!-- <div *ngIf="isVendedor" class="btn" (click)="addRequirment()">
+  <a>
+    <p>Requerimiento</p>
+  </a>
+</div> -->
+<gn-sub-menu-item *ngFor="let item of subMenuItems" [item]="item"></gn-sub-menu-item>

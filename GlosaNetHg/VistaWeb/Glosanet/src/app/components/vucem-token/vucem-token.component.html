@@ -1,0 +1,90 @@
+<div class="vucemTokenContainer">
+    <div class="head">
+        <div>
+            <img src="./assets/images/token/key_blue.svg" />
+            <h3>Administración de Token</h3>
+        </div>
+        <div>
+            <a *ngIf="!withToken" (click)="openModalAddToken('add')">NUEVO TOKEN</a>
+        </div>
+    </div>
+    <div class="content">
+        <div *ngIf="!withToken" class="withoutToken">
+            <p>No haz agregado token</p>
+        </div>
+        <div *ngIf="withToken" class="card" (click)="openModalAddToken('edit')">
+            <div>
+                <img src="./assets/images/token/key_gray.svg" />
+                <img src="./assets/images/token/key_blue.svg" />
+            </div>
+            <div>
+                <div>
+                    <p>Token VUCEM</p>
+                    <p>{{currentToken.token | FormatToken}}</p>
+                    <p>Registro: {{currentToken.lastUpdateDate | dateFormatCustom}}</p>
+                    <p [ngClass]="currentToken.activo? 'current':'expired'">{{currentToken.activo? 'Vigente':'Expirado'}}</p>
+                </div>
+                <div>
+                    <img (click)="openModalDeleteToken($event)" src="./assets/images/token/delete_red.svg" />
+                    <img (click)="openModalDeleteToken($event)" src="./assets/images/token/delete_white.svg" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div #modalAddToken>
+    <div class="modalAdd" *ngIf="modalIsOpenAdd" [@fadeInOut]>
+        <div class="modalAdd-wrapper">
+            <div class="modalAdd-container">
+                <div class="modalAdd-title">
+                    <p>{{mode === 'add' ? 'Nuevo Token' : 'Editar Token'}}</p>
+                    <img (click)="closeModalAddToken()" src="./assets/images/cerrar_azul.svg" />
+                </div>
+                <div class="modalAdd-content">
+                    <div>
+                        <label>Token VUCEM</label>
+                        <div>
+                            <input [placeholder]="mode === 'add' ? placeholder : (placeholder | FormatToken)"
+                                   [(ngModel)]="inputToken"
+                                   maxlength="64"
+                                   (ngModelChange)="handleInput($event)"/>
+                        </div>
+                        <span>*64 caracteres.</span>
+                    </div>
+                </div>
+                <div class="modalAdd-buttons">
+                    <button (click)="closeModalAddToken()">Cancelar</button>
+                    <button [ngClass]="inputToken && inputToken.length === 64 ? 'enable' : 'disable'" (click)="mode === 'add' ? handleSave() : handleUpdate()">
+                        GUARDAR
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div #modalDeleteToken>
+    <div class="modalDelete" *ngIf="modalIsOpenDelete" [@fadeInOut]>
+        <div class="modalDelete-wrapper">
+            <div class="modalDelete-container">
+                <div class="modalDelete-title">
+                    <img (click)="closeModalDeleteToken()" src="./assets/images/cerrar_azul.svg" />
+                </div>
+                <div class="modalDelete-content">
+                    <div>
+                        <img src="./assets/images/token/delete_blue.svg" />
+                    </div>
+                    <div>
+                        <p>Estas seguro que deseas eliminar</p>
+                        <p>Token Vucem · {{ (currentToken.token.substr(currentToken.token.length - 20)) | FormatToken}}</p>
+                    </div>
+                </div>
+                <div class="modalDelete-buttons">
+                    <button (click)="closeModalDeleteToken()">Cancelar</button>
+                    <button class="enable" (click)="handeleDelete()">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

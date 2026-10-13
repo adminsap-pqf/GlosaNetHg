@@ -1,0 +1,39 @@
+/*
+ * Typography
+ * ========================================================================== */
+
+
+/*
+ * Media queries breakpoints
+ * ========================================================================== */
+
+ $breakpoints: ( 'extraSmall': (min-width: 35em), 'small': (min-width: 50em), 'medium': (min-width: 64em), 'mid': (min-width: 75em), 'large': (min-width: 80em), 'detailBar': (min-width: 86em)  ,'extraLarge': (min-width: 92em));
+
+ /* ------------------------------------- */
+
+
+ /* -----Manejo de tamaño de fuentes----- */
+
+
+ /* ------------------------------------- */
+
+ // body font size
+ $browser-context: 16;
+ $fontBreakpoints: ( 'extraSmall': 35em, 'small': 50em, 'medium': 64em, 'mid':75em, 'large': 80em, 'extraLarge': 92em, 'peek_nav': 60px);
+
+ /*
+  * Components
+  * ========================================================================== */
+
+ /* - Barra de navegación - */
+ $baseNavBarSize: 220px;
+ $basePeekNavSize: 60px;
+ //$basePeekNavSize: 75px;
+ //$baseAuxBarSize: 175px;
+ $baseAuxBarSize: 270px;
+ $navBarSize: 220px;
+ $auxBarSize: 0px;
+
+
+ /* Variable base global para el tamaño de fuente: 9pt*/
+ $globalFont: 9pt;

@@ -1,0 +1,88 @@
+@import "../../../../variables.scss";
+@import "../../../../mixins.scss";
+@import "../../../../colors.scss";
+
+.container{
+    @include flexRowWrap;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px 10px;
+    @include absoluteCenter;
+}
+
+.item{
+    @include flexRow;
+    box-sizing: border-box;
+    margin: 10px 15px;
+    & > label{
+        @include flexRow;
+        box-sizing: border-box;
+        margin: 0 5px 0 0;
+        color:#5578C2;
+        font-size: 12px;
+        text-align: right;
+        line-height: 15px;
+    }
+    & > .info{
+        @include flexColumn;
+        box-sizing: border-box;
+        & > .default{
+            @include flexRow;
+            box-sizing: border-box;
+            margin: 0 0 8px 0; 
+            & > .color{
+                @include flexRow;
+                box-sizing: border-box;
+                width: 13px;
+                height: 13px;
+                margin:0 5px 0 0;
+            }
+            & > .name{
+                @include flexRow;
+                box-sizing: border-box;
+                text-align: left;
+                margin:0 5px 0 0;
+                font-family: Helvetica;
+                font-size: 12px;
+                color: #818192;
+            }
+            & > .data{
+                @include flexRow;
+                box-sizing: border-box;
+                text-align: left;
+                font-family: Helvetica;
+                font-size: 12px;
+                color: #818192;
+            }
+        }
+        & > .double{
+            @include flexRow;
+            box-sizing: border-box;
+            margin: 0 0 8px 0; 
+            & > .color{
+                @include flexRow;
+                box-sizing: border-box;
+                width: 13px;
+                height: 13px;
+                margin:0 5px 0 0;
+            }
+            & > .name{
+                @include flexRow;
+                box-sizing: border-box;
+                text-align: left;
+                margin:0 5px 0 0;
+                font-family: Helvetica;
+                font-size: 12px;
+                color: #818192;
+            }
+            & > .data{
+                @include flexRow;
+                box-sizing: border-box;
+                text-align: left;
+                font-family: Helvetica;
+                font-size: 12px;
+                color: #818192;
+            }
+        }
+    }
+}

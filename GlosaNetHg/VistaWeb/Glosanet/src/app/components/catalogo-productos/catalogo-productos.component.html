@@ -1,0 +1,342 @@
+<div id="gn-catalogoProductos" class="fadeIn animated">
+  <div>
+    <div>
+      <span>Catálogo de Productos</span>
+    </div>
+    <div>
+      <div onclick="setTimeout(function(){document.getElementById('id03').style.display = 'block'}, 198)">
+        <a >NUEVO PRODUCTO</a>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div>
+      <gn-search-bar [searchValue]="searchTerm" [placeholder]="placeholder" [reset]="resetSearch" (searchTermChanged)="searchTermChanged($event)" ></gn-search-bar>
+      <img *ngIf="cuadricula" (click)="cuadricula = true" src="./assets/images/vista_cuadricula_azul.svg" alt="">
+      <img *ngIf="!cuadricula" (click)="cuadricula = true" src="./assets/images/vista_cuadricula_gris.svg" alt="">
+      <img *ngIf="!cuadricula" (click)="cuadricula = false" src="./assets/images/vista_lista_azul.svg" alt="">
+      <img *ngIf="cuadricula" (click)="cuadricula = false" src="./assets/images/vista_lista_gris.svg" alt="">
+    </div>
+  </div>
+
+  <div class="gridProducts" *ngIf="cuadricula">
+    <div [ngClass]="classItem[i]" *ngFor='let product of productsToShow; let i = index' (click)="selectItem(i)">
+      <div class="img">
+        <img id="img1" src="./assets/images/producto_catalogo.svg" alt="">
+        <img id="img2" src="./assets/images/producto_azul_hover.svg" alt="">
+      </div>
+      <div class="bodyItem">
+        <p [ngStyle]="{'font-size':'14px'}">
+          <label [ngStyle]="{'font-weight':'700'}">#{{product.codigo}} &nbsp;</label> {{product.nombre}}</p>
+        <p [ngStyle]="{'font-size':'13px'}">
+          <label>{{product.permisos}} Permisos &nbsp;</label>
+        </p>
+        <p [ngStyle]="{'font-size':'12px'}">
+          <label>Origen:</label>
+          <label>{{product.origen}}</label>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="listProducts" *ngIf="!cuadricula">
+    <div [ngClass]="classItem[i]" *ngFor='let product of productsToShow; let i = index' (click)="selectItem(i)">
+      <div class="img">
+        <img id="img1" src="./assets/images/producto_catalogo.svg" alt="">
+        <img id="img2" src="./assets/images/producto_azul_hover.svg" alt="">
+      </div>
+      <div class="bodyItem">
+        <div class="part1">
+          <p>
+            <label>#{{product.codigo}} &nbsp;</label>
+            <label>{{product.nombre}}</label>
+          </p>
+          <p>
+            <label>{{product.permisos}} Permisos</label>
+          </p>
+        </div>
+        <div class="part2">
+          <p>
+            <label>{{product.origen}}</label>
+            <label>Origen</label>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+<!-- Registrar Producto  -->
+  <div id="id03" class="w3-modal">
+    <div [ngClass]="'w3-modal-content ' + classAnimation + ' w3-card-4'" [style.height]="'450px'">
+        <div class="modal2">
+            <div class="title2">
+                <p>
+                    <label>Nuevo Producto</label>
+                </p>
+                <img  src="./assets/images/cerrar_azul.svg" alt="" onclick="setTimeout(function(){document.getElementById('id03').style.display='none'}, 198)">
+            </div>
+            <div class="header2">
+                <div class="img">
+                    <img src="./assets/images/producto_lightbox.svg" alt="">
+                </div>
+                <div class="label">
+                  <label>Nombre de Producto *</label>
+                  <input type="text" [ngStyle]="{'font-size':'12px', 'font-weight':'600', 'padding-bottom': '2px', 'color': '#3369B1'}" class="producto"
+                  id ="nombre" name="nombre">
+                </div>
+            </div>
+            <div class="body2">
+                  <form [formGroup]="cform">
+                    <div class="cForm" [ngStyle]="{'width':'38%','justify-content': 'space-between'}">
+                        <label [ngStyle]="{'margin-bottom':'6px', 'width': '170px'}">Código Producto *</label>
+                        <div class="fecha" [ngStyle]="{'width':'90px'}">
+                            <input [ngStyle]="{'font-size':'12px', 'padding-bottom': '2px', 'width': '120px', 'color': '#3369B1'}"  type="text"
+                            name="codigo" formControlName="codigo" id="codigo">
+                        </div>
+                      </div>
+                      <div class="cForm" [ngStyle]="{'align-items': 'flex-end', 'width': '22%'}">
+                          <label [ngStyle]="{'margin-bottom':'6px', 'width': '112%'}">Tipo Producto *</label>
+                          <div class="droplist" [ngStyle]="{'width':'110px'}">
+                              <gn-drop-list (valueDropList)="tipoProducto($event)" [items]="itemsDropList2" [isSearch]="false" [isCategory]="true" [align]="'left'"
+                              [itemSelect]="unidadSelected" [fontSize]="'12px'" name="unidad"></gn-drop-list>
+                          </div>
+                        </div>
+                    <div class="cForm" [ngStyle]="{'align-items': 'flex-end','width': '40%'}">
+                        <label [ngStyle]="{'margin-bottom':'6px', 'width': '119px'}">Origen *</label>
+                        <div class="droplist" [ngStyle]="{'width':'120px'}">
+                            <gn-drop-list (valueDropList)="dropListOrigen($event)" [items]="arrayPaises" [isSearch]="true" [isCategory]="true" [align]="'left'"
+                            [itemSelect]="unidadSelected" [fontSize]="'12px'" name="unidad"></gn-drop-list>
+                        </div>
+                      </div>
+
+                      <div class="cForm" [ngStyle]="{'align-items': 'flex-end', 'width': '38%', 'margin-top': '20px'}">
+                          <label [ngStyle]="{'margin-bottom':'6px', 'width': '100%'}">Permiso de Importacion *</label>
+                          <div class="droplist" [ngStyle]="{'width':'218px', 'width' : '170px'}">
+                              <gn-drop-list (valueDropList)="dropListPermiso($event)" [items]="arrayPermisos" [isSearch]="false" [isCategory]="true" [align]="'left'"
+                              [itemSelect]="unidadSelected" [fontSize]="'12px'" name="unidad"></gn-drop-list>
+                          </div>
+                        </div>
+                        <div class="cForm" [ngStyle]="{'align-items': 'flex-end', 'width':'61%', 'margin-top':'20px'}">
+                            <label [ngStyle]="{'margin-bottom':'6px', 'width': '60%'}" >Vigencia de Permiso *</label>
+                            <div class="droplist" [ngStyle]="{'width':'170px'}">
+                              <gn-date-picker [style.width]="'100px'" [style.margin-left]="'5px'" [class]="'prueba'" [(date)]="date" dateFormat="YYYYMMDD"
+                                              [sizeInput]="'14px'" (fecha)="getFechaImpl($event)">
+                              </gn-date-picker>
+                            </div>
+                          </div>
+                      <div class="cForm" [ngStyle]="{'width':'100%', 'margin-top': '30px'}">
+                          <label>Descripción *</label>
+                          <textarea [ngStyle]="{ 'height':'60px', 'font-size':'12px'}" name="descripcion" formControlName="descripcion" (focus)="datosVaciosRegistroProducto()"  min="0" id="descripcion" ></textarea>
+                        </div>
+
+                        <label [ngStyle]="{'position':'absolute', 'bottom':'75px','right': '25px', 'color':'#98A9B4', 'font-size':'10px'}">Campos Obligatorios *</label>
+                  </form>
+            </div>
+            <div class="footer2">
+              <a class="cancelar" onclick="setTimeout(function(){document.getElementById('id03').style.display='none'}, 198)" (click)="limpiarModal()">CANCELAR</a>
+              <a class="guardar" (click)="registrarProducto(cform.value)" >GUARDAR</a>
+            </div>
+        </div>
+    </div>
+  </div>
+
+
+  <!-- Actualizar un Producto -->
+  <div id="id04" class="w3-modal">
+    <div [ngClass]="'w3-modal-content ' + classAnimation + ' w3-card-4'" [style.height]="'450px'">
+        <div class="modal2">
+            <div class="title2">
+                <p>
+                    <label>Producto Seleccionado</label>
+                </p>
+                <img src="./assets/images/cerrar_azul.svg" alt="" onclick="setTimeout(function(){document.getElementById('id04').style.display='none'}, 198)">
+            </div>
+            <div class="header2">
+                <div class="img">
+                    <img src="./assets/images/producto_lightbox.svg" alt="">
+                </div>
+                <div class="label">
+                  <label>Nombre de Producto *</label>
+                  <input type="text" [ngStyle]="{'font-size':'12px', 'font-weight':'600', 'padding-bottom': '2px'}" class="producto" [attr.disabled]="isAvailable">
+                </div>
+            </div>
+
+            <div class="body2">
+                <form >
+                  <div class="cForm" [ngStyle]="{'width':'38%','justify-content': 'space-between'}">
+                      <label [ngStyle]="{'margin-bottom':'6px', 'width': '170px'}">Código Producto *</label>
+                      <div class="fecha" [ngStyle]="{'width':'90px'}">
+                          <input [ngStyle]="{'font-size':'12px', 'padding-bottom': '2px', 'width': '120px'}"  type="text">
+                      </div>
+                    </div>
+                    <div class="cForm" [ngStyle]="{'align-items': 'flex-end', 'width': '22%'}">
+                        <label [ngStyle]="{'margin-bottom':'6px', 'width': '109%'}">Tipo Producto *</label>
+                        <div class="droplist" [ngStyle]="{'width':'107px'}">
+                            <gn-drop-list (valueDropList)="dropListControlado($event)" [items]="itemsDropList2" [isSearch]="false" [isCategory]="true" [align]="'left'"
+                            [itemSelect]="unidadSelected" [fontSize]="'12px'" name="unidad"></gn-drop-list>
+                        </div>
+                      </div>
+                  <div class="cForm" [ngStyle]="{'align-items': 'flex-end','width': '39%'}">
+                      <label [ngStyle]="{'margin-bottom':'6px', 'width': '120px'}">Origen *</label>
+                      <div class="droplist" [ngStyle]="{'width':'120px'}">
+                          <gn-drop-list (valueDropList)="dropList($event)" [items]="itemsDropList" [isSearch]="false" [isCategory]="true" [align]="'left'"
+                          [itemSelect]="unidadSelected" [fontSize]="'12px'" name="unidad"></gn-drop-list>
+                      </div>
+                    </div>
+                      <div class="cForm" [ngStyle]="{'align-items': 'flex-end', 'width': '48%', 'margin-top': '20px'}">
+                          <label [ngStyle]="{'margin-bottom':'6px', 'width': '100%'}">Permiso de Importacion *</label>
+                          <div class="droplist" [ngStyle]="{'width':'218px', 'width' : '217px'}">
+                              <gn-drop-list (valueDropList)="dropList($event)" [items]="itemsDropList" [isSearch]="false" [isCategory]="true" [align]="'left'"
+                              [itemSelect]="unidadSelected" [fontSize]="'12px'" name="unidad"></gn-drop-list>
+                          </div>
+                        </div>
+                        <div class="cForm" [ngStyle]="{'align-items': 'flex-end', 'width':'50%', 'margin-top':'20px'}">
+                            <label [ngStyle]="{'margin-bottom':'6px', 'width': '73%'}" >Vigencia de Permiso *</label>
+                            <div class="droplist" [ngStyle]="{'width':'170px'}">
+                              <gn-date-picker [style.width]="'100px'" [style.margin-left]="'5px'" [class]="'prueba'" [(date)]="date" dateFormat="YYYYMMDD"
+                                [sizeInput]="'14px'" (fecha)="getFechaImpl($event)">
+                              </gn-date-picker>
+                            </div>
+                          </div>
+                      <div class="cForm" [ngStyle]="{'width':'100%', 'margin-top': '17px'}">
+                          <label>Descripción *</label>
+                          <textarea [ngStyle]="{ 'height':'60px', 'font-size':'12px'}"  ></textarea>
+                        </div>
+
+                        <label [ngStyle]="{'position':'absolute', 'bottom':'95px','right': '25px', 'color':'#98A9B4', 'font-size':'10px'}">Campos Obligatorios *</label>
+                        <label [ngStyle]="{'position':'absolute', 'bottom':'75px','right': '384px', 'color':'#98A9B4', 'font-size':'12px', 'text-decoration-line': 'underline'}" (click)="crearPermiso()"
+                            onclick="setTimeout(function(){document.getElementById('id02').style.display = 'block'}, 198)">Agregar Permiso</label>
+                        <label [ngStyle]="{'position':'absolute', 'bottom':'75px','right': '28px', 'color':'#98A9B4', 'font-size':'12px', 'text-decoration-line': 'underline'}"
+                        onclick="setTimeout(function(){document.getElementById('id01').style.display = 'block'}, 198)">Agregar Importacion</label>
+                </form>
+            </div>
+            <div class="footer2">
+              <a class="cancelar" onclick="setTimeout(function(){document.getElementById('id04').style.display='none'}, 198)">CANCELAR</a>
+              <a class="guardar" (click)="saveProducto(1)" >GUARDAR</a>
+            </div>
+        </div>
+    </div>
+  </div>
+
+
+
+
+<!-- Modal Agregar Importacion -->
+  <div id="id01" class="w3-modal" >
+    <div [ngClass]="'w3-modal-content ' + classAnimation + ' w3-card-4'" [style.height]="'360px'">
+        <div class="modal">
+            <div class="title">
+                <p>
+                    <label>Agregar Importacion</label>
+                </p>
+                <img  src="./assets/images/cerrar_azul.svg" alt="" onclick="setTimeout(function(){document.getElementById('id01').style.display='none'}, 198)" [ngStyle]="{'margin-right':' 0px'}">
+            </div>
+            <div class="header">
+              <div class="img">
+                  <img src="./assets/images/producto_lightbox.svg" alt="">
+              </div>
+              <div class="label">
+                <label>Nombre de Producto </label>
+                <input type="text" [ngStyle]="{'font-size':'12px', 'font-weight':'600', 'padding-bottom' : '2px'}" [attr.disabled]="isAvailable" >
+              </div>
+            </div>
+            <div class="body" >
+                <form [formGroup]="cform">
+                  <div class="cForm" [ngStyle]="{'width':'100%', 'margin-top': '0px'}">
+                    <label [ngStyle]="{'margin-bottom':'6px', 'width': '80px', 'margin-top':'10px'}">Permiso *</label>
+                    <div class="droplist" [ngStyle]="{'width': '450px'}">
+                        <gn-drop-list (valueDropList)="dropPermiso($event)" [items]="arrayPermisos" [isSearch]="false" [isCategory]="true" [align]="'left'"
+                        [itemSelect]="permisosSelected" [fontSize]="'12px'"  (focus)="datosVaciosImportacion()" (blur)="datosVaciosImportacion()"></gn-drop-list>
+                    </div>
+                  </div>
+                    <div class="cForm" [ngStyle]="{'width':'50%', 'margin-top':'13px'}">
+                      <label>Cantidad *</label>
+                      <input class="texto" type="number" [ngStyle]="{'height': '22px'}" (keyup)="validarCantidad2Dossier = validarCantidad(cantidad1Dossier)"
+                      name="cantidad" formControlName="cantidad" (focus)="datosVaciosImportacion()" (blur)="datosVaciosImportacion()" min="0" >
+                    </div>
+                    <div class="cForm" [ngStyle]="{'align-items': 'flex-end', 'width':'50%', 'margin-top':'11px'}">
+                      <label [ngStyle]="{'margin-bottom':'6px', 'width': '200px', 'margin-top':'10px'}">Unidad *</label>
+                      <div class="droplist" [ngStyle]="{'width': '200px', 'height': '27px'}">
+                          <gn-drop-list (valueDropList)="dropList($event)" [items]="itemsDropList" [isSearch]="false" [isCategory]="true" [align]="'left'"
+                          [itemSelect]="unidadSelected" [fontSize]="'12px'" name="unidad"  (focus)="datosVaciosImportacion()" (blur)="datosVaciosImportacion()"></gn-drop-list>
+                      </div>
+                    </div>
+                    <label [ngStyle]="{'position':'absolute', 'bottom':'75px','right': '25px', 'color':'#98A9B4', 'font-size':'10px'}">Campos Obligatorios *</label>
+                </form>
+            </div>
+            <div class="footer">
+              <a class="cancelar" (click)="limpiarModal()"  onclick="setTimeout(function(){document.getElementById('id01').style.display='none'}, 198)">CANCELAR</a>
+              <a class="guardar" (click)="agregarImportacion(cform.value)" [style.pointer-events]="agregarPrevProduct ? 'auto':'none'"
+                 [style.background-color]="agregarPrevProduct ? '':'#D5DEE2'">AGREGAR</a>
+            </div>
+        </div>
+    </div>
+  </div>
+
+<!-- Modal agregar Permisos -->
+  <div id="id02" class="w3-modal">
+    <div [ngClass]="'w3-modal-content ' + classAnimation + ' w3-card-4'"  [style.height]="'360px'">
+        <div class="modal">
+            <div class="title">
+                <p>
+                    <label>Agregar Permiso de Importación</label>
+                </p>
+                <img  src="./assets/images/cerrar_azul.svg" alt="" onclick="setTimeout(function(){document.getElementById('id02').style.display='none'}, 198)" [ngStyle]="{'margin-right':'0px'}">
+            </div>
+            <div class="header">
+              <div class="img">
+                  <img src="./assets/images/producto_lightbox.svg" alt="">
+              </div>
+              <div class="label">
+                <label>Nombre de Producto </label>
+                <input type="text" [ngStyle]="{'font-size':'12px', 'font-weight':'600', 'padding-bottom' : '2px'}"  [attr.disabled]="isAvailable">
+              </div>
+            </div>
+            <div class="body" >
+                <form [formGroup]="cform">
+                  <div class="cForm" [ngStyle]="{'width':'100%', 'margin-top': '0px'}">
+                    <label [ngStyle]="{'margin-bottom':'6px'}">Número de Permiso *</label>
+                      <input class="texto2" type="text" name="permiso" formControlName="permiso" [ngStyle]="{'height': '22px'}" name="permiso" formControlName="permiso" (focus)="datosVaciosPermisos()" (blur)="datosVaciosPermisos()" >
+                  </div>
+                    <div class="cForm" [ngStyle]="{'width':'50%', 'margin-top':'13px'}">
+                      <label>Vigencia *</label>
+                          <gn-date-picker [style.width]="'100px'" [style.margin-left]="'5px'" [class]="'prueba'" [(date)]="date" dateFormat="YYYYMMDD"
+                                          [sizeInput]="'14px'" (fecha)="getFechaImpl($event)" >
+                          </gn-date-picker>
+                    </div>
+                    <label [ngStyle]="{'position':'absolute', 'bottom':'75px','right': '25px', 'color':'#98A9B4', 'font-size':'10px'}">Campos Obligatorios *</label>
+                </form>
+            </div>
+            <div class="footer">
+              <a class="cancelar" (click)="limpiarModal()" onclick="setTimeout(function(){document.getElementById('id02').style.display='none'}, 198)"  >CANCELAR</a>
+              <a class="guardar" (click)="agregarPermiso(cform.value)" [style.pointer-events]="agregarPrevProduct ? 'auto':'none'" [style.background-color]="agregarPrevProduct ? '':'#D5DEE2'"
+              onclick="setTimeout(function(){document.getElementById('id02').style.display='none'}, 198)" onclick="">AGREGAR</a>
+            </div>
+        </div>
+    </div>
+  </div>
+
+<!-- modal registro correcto -->
+  <div id="idConfirm" class="w3-modal">
+    <div [ngClass]="'w3-modal-content ' + classAnimation3 + ' w3-card-4'">
+      <div class="modalConfirm">
+        <div class="salir">
+          <img src="./assets/images/cerrar_azul.svg" alt="" onclick="setTimeout(function(){document.getElementById('idConfirm').style.display='none'}, 198)">
+        </div>
+        <div class="body">
+          <div class="img">
+            <img src="./assets/images/like.svg" alt="">
+          </div>
+          <div class="title">
+            <label>¡Has guardado <span>Exitosamente!</span></label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

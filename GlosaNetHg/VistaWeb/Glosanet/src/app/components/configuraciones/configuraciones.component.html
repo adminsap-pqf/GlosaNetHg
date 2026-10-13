@@ -1,0 +1,484 @@
+<div class="header">
+  <div class="product">
+    <div class="item-producto">
+      <div class="img">
+        <img id="img1" src="./assets/images/configuraciones.svg" alt="">
+      </div>
+      <div class="text">
+        <p>
+          Configuraciones
+        </p>
+      </div>
+    </div>
+    <div class="boton">
+      <a (click)="irInicio()">IR A INICIO</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="triangulo">
+
+  </div>
+  <div class="section">
+
+    <div class="user">
+
+      <div class="title">
+        <p>Datos de Usuario</p>
+        <div class="boton" *ngIf="!editD">
+          <a (click)="editD = true">EDITAR</a>
+        </div>
+
+        <div class="botonEdit" *ngIf="editD">
+            <div class="boton" >
+              <a (click)="editD = false; resetUser()">CANCELAR</a>
+            </div>
+            <div class="boton">
+              <a (click)="updateUsuario()" [style.color]="password !== '' || passwordConfirm !== '' ? user.nombre !== '' && user.apellido !== '' && user.email !== '' && password !== '' && passwordConfirm !== '' && password == passwordConfirm  ? null : '#D5DEE2' : user.nombre !== '' && user.apellido !== '' && user.email !== '' ? null : '#D5DEE2'" [style.pointer-events]="user.nombre !== '' && user.apellido !== '' && user.email !== '' ? 'auto' : 'none'">GUARDAR</a>
+            </div>
+          </div>
+      </div>
+
+      <div class="card">      <!-- ************************************* Usuario ************************************* -->
+        <div class="img">
+          <img id="img1" src="./assets/images/usuarioConf.svg" alt="">
+        </div>
+        <div class="infoCard" *ngIf="!editD">
+          <p>{{ user.nombre }} {{ user.apellido }}</p>
+          <p>{{ user.permiso }}</p>
+        </div>
+
+        <div class="infoCardEdit" *ngIf="editD">
+          <div [ngStyle]="{'margin-right':'45px', 'margin-left':'10px'}">
+            <input type="text" [style.border-bottom]="user.nombre == '' ? '1px solid #C1272D': null" [(ngModel)]="user.nombre" [ngStyle]="{'margin-bottom': '3px', 'width':'175px', 'font-size':'17px', 'font-weight':'600'}">
+            <p >Nombre</p>
+          </div>
+          <div>
+            <input type="text" [style.border-bottom]="user.apellido == '' ? '1px solid #C1272D': null" [(ngModel)]="user.apellido" [ngStyle]="{'margin-bottom': '3px', 'width':'210px', 'font-size':'17px', 'font-weight':'600'}">
+            <p>Apellidos</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="foot" *ngIf="!editD">
+        <div class="correo">
+          <p>{{user.email}}</p>
+          <p>Correo Electrónico</p>
+        </div>
+        <div class="fecha">
+          <p>{{user.fcreacion | dateFormatSlashFull}}</p>
+          <p>Usuario desde</p>
+        </div>
+      </div>
+
+      <div class="footEdit" *ngIf="editD">
+        <div >
+          <input type="text" [style.border-bottom]="user.email == '' ? '1px solid #C1272D': null" [(ngModel)]="user.email" [ngStyle]="{'margin-bottom': '3px', 'width':'215px', 'font-size':'13px'}">
+          <p>Correo Electrónico</p>
+        </div>
+        <div >
+          <input type="password" [style.border-bottom]="password !== '' || passwordConfirm !== '' ? password == '' || password !== passwordConfirm ? '1px solid #C1272D': null : null" [(ngModel)]="password" [ngStyle]="{'margin-bottom': '3px', 'width':'155px', 'font-size':'13px'}">
+          <p>Contraseña de Usuario</p>
+        </div>
+        <div >
+          <input type="password" [style.border-bottom]="password !== '' || passwordConfirm !== '' ? passwordConfirm == '' || password !== passwordConfirm  ? '1px solid #C1272D': null : null" [(ngModel)]="passwordConfirm" [ngStyle]="{'margin-bottom': '3px', 'width':'155px', 'font-size':'13px'}">
+          <p>Confirmar Contraseña</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="separacion" >
+
+    </div>
+
+    <div class="datosGenerales">
+      <div class="title" *ngIf="user.permiso == 'Administrador'">
+        <p>Datos Generales</p>   <!-- ************************************* Datos Generales ************************************* -->
+        <div class="boton" *ngIf="!editDG">
+          <a (click)="editDG = true; resetDroplistUsoCFDI()">EDITAR</a>
+        </div>
+
+        <div class="botonEdit" *ngIf="editDG">
+          <div class="boton" >
+            <a (click)="editDG = false; resetClient()">CANCELAR</a>
+          </div>
+          <div class="boton">
+            <a (click)="updateCliente()">GUARDAR</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contentDiv" *ngIf="user.permiso == 'Administrador'" [style.width]="'100%'">
+        <div class="card">
+          <div class="img">
+            <img id="img1" src="./assets/images/empresa_datos_generales.svg" alt="">
+          </div>
+          <div class="infoCard">
+            <p>{{cliente.nombre}}</p>
+            <p [ngStyle]="{'color':'#3B8EDE'}">{{cliente.rfc}}</p>
+          </div>
+        </div>
+
+        <div class="info" *ngIf="!editDG"> <!--  mostrar -->
+          <div>
+            <p>{{ cliente.representante }}</p>
+            <p>Contacto</p>
+          </div>
+          <div>
+            <p>{{ cliente.telefono }}</p>
+            <p>Teléfono</p>
+          </div>
+          <div>
+            <p>{{ cliente.fcreacion | dateFormatSlashFull}}</p>
+            <p>Miembro Desde</p>
+          </div>
+          <div>
+            <p>{{cliente.fauditable | dateFormatSlashFull}}</p>
+            <p>Auditable desde </p>
+          </div>
+        </div>
+
+        <div class="info" *ngIf="editDG"> <!-- editar -->
+            <div>
+              <input type="text" [(ngModel)]="cliente.representante" [ngStyle]="{'margin-bottom': '3px', 'width':'165px'}">
+              <p [ngStyle]="{'font-size': '12px', 'color': '#818192'}">Contacto</p>
+            </div>
+            <div>
+              <input type="text" [(ngModel)]="cliente.telefono" [ngStyle]="{'margin-bottom': '3px', 'width':'165px'}">
+              <p [ngStyle]="{'font-size': '12px', 'color': '#818192'}">Teléfono</p>
+            </div>
+            <div>
+              <p>{{ cliente.fcreacion | dateFormatSlashFull}}</p>
+              <p>Miembro Desde</p>
+            </div>
+            <div>
+              <p>{{cliente.fauditable | dateFormatSlashFull}}</p>
+              <p>Auditable desde </p>
+            </div>
+          </div>
+
+        <div class="paquete">
+          <div class="logo">
+              <img *ngIf="cliente.paquete.idPaquete == 1" id="img1" src="./assets/images/basico.svg" alt="">
+              <img *ngIf="cliente.paquete.idPaquete == 4" id="img1" src="./assets/images/corporativo.svg" alt="">
+              <img *ngIf="cliente.paquete.idPaquete == 2" id="img1" src="./assets/images/intermedio.svg" alt="">
+              <img *ngIf="cliente.paquete.idPaquete == 3" id="img1" src="./assets/images/premium.svg" alt="">
+          </div>
+          <div class="infoProducto">
+            <div class="part1">
+              <p [style.color]="cliente.paquete.idPaquete == 1 ? '#3B8EDE' : cliente.paquete.idPaquete == 2 ? '#3369B1' : cliente.paquete.idPaquete == 3 ? '#37B34A':'#E2C913' ">{{cliente.paquete.idPaquete == 1 ? 'Paquete Básico' : cliente.paquete.idPaquete == 2 ? 'Paquete Intermedio' : cliente.paquete.idPaquete == 3 ? 'Paquete Premium' : 'Paquete Corporativo' }}</p>
+              <p>Pedimentos al Año: <span>{{cliente.numeroPedimentos}} de {{cliente.paquete.pedimentos}}</span> </p>
+            </div>
+            <div class="part2">
+              <p *ngIf="cliente.paquete.idPaquete != 4">{{administrador.length}} de {{cliente.paquete.usuarios}}</p>
+              <p *ngIf="cliente.paquete.idPaquete == 4">Ilimitado</p>
+              <p [style.color]="cliente.paquete.idPaquete == 1 ? '#3B8EDE' : cliente.paquete.idPaquete == 2 ? '#3369B1' : cliente.paquete.idPaquete == 3 ? '#37B34A':'#E2C913' ">Usuarios</p>
+            </div>
+          </div>
+        </div>
+
+        <label class="subtitle">Datos Fiscales</label>
+
+        <div class="info" *ngIf="!editDG">   <!-- mostrar -->
+          <div [ngStyle]="{'width':'230px'}">
+            <p>{{cliente.razonSocial}} </p>
+            <p>Razón Social</p>
+          </div>
+          <div [ngStyle]="{'width':'220px'}">
+            <p>{{cliente.regimenFiscal}}</p>
+            <p>Tipo de Régimen Fiscal</p>
+          </div>
+          <div [ngStyle]="{'width':'125px'}">
+            <p>{{cliente.rfc}}</p>
+            <p>RFC</p>
+          </div>
+        </div>
+
+        <div class="info" *ngIf="editDG">   <!-- editar -->
+            <div>
+              <input type="text" [(ngModel)]="cliente.razonSocial" [ngStyle]="{'margin-bottom': '3px', 'width':'230px'}">
+              <p [ngStyle]="{'font-size': '12px', 'color': '#818192'}">Razón Social</p>
+            </div>
+            <div>
+              <div class="droplist" [ngStyle]="{'margin-bottom': '3px','width':'215px'}">
+                <gn-drop-list (valueDropList)="cliente.regimenFiscal = $event.nombre" [items]="lstRegimenFiscal" [isSearch]="false" [isCategory]="true" [align]="'left'"
+                [lineaColor]="'0.75px solid #98A9B4'" [widthContent]="'215px'" [itemSelect]="selectedRegimenFiscal" [fontSize]="'13px'"></gn-drop-list>
+              </div>
+              <p [ngStyle]="{'font-size': '12px', 'color': '#818192'}">Tipo de Régimen Fiscal</p>
+            </div>
+            <div>
+                <input type="text" [(ngModel)]="cliente.rfc" [ngStyle]="{'margin-bottom': '3px', 'width':'125px'}">
+              <p [ngStyle]="{'font-size': '12px', 'color': '#818192'}">RFC</p>
+            </div>
+          </div>
+
+        <div class="info" *ngIf="!editDG">    <!-- mostrar -->
+          <div [ngStyle]="{'width':'290px'}">
+            <p>{{cliente.usoCFDI}} </p>
+            <p>Uso de CFDI</p>
+          </div>
+          <div [ngStyle]="{'width':'280px'}">
+            <p>{{cliente.claveProducto == '81111500' ? cliente.claveProducto + ' - Ingeniería de software o hardware': cliente.claveProducto}} </p>
+            <p>Clave Producto</p>
+          </div>
+        </div>
+
+        <div class="info" *ngIf="editDG">    <!-- editar -->
+          <div>
+            <div class="droplist" [ngStyle]="{'margin-bottom': '3px','width':'300px'}">
+              <gn-drop-list (valueDropList)="cliente.usoCFDI = $event.nombre" [items]="lstUsoCFDI" [isSearch]="false" [isCategory]="true" [align]="'left'"
+              [lineaColor]="'0.75px solid #98A9B4'" [widthContent]="'300px'" [itemSelect]="selectedUsoCFDI" [fontSize]="'13px'"></gn-drop-list>
+            </div>
+            <p [ngStyle]="{'font-size': '12px', 'color': '#818192'}">Uso de CFDI</p>
+          </div>
+          <div [ngStyle]="{'width':'280px'}">
+            <p>{{cliente.claveProducto == '81111500' ? cliente.claveProducto + ' - Ingeniería de software o hardware': cliente.claveProducto}} </p>
+            <p>Clave Producto</p>
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <div class="separacion" [ngStyle]="{'margin-top':'40px', 'margin-bottom':'30px'}" *ngIf="user.permiso == 'Administrador'">
+
+      </div>
+
+      <div class="title" *ngIf="user.permiso == 'Administrador'">      <!-- ************************************* Empresas ************************************* -->
+        <p>Empresas</p>
+        <div class="boton" *ngIf="!editE">
+          <a (click)="editE = true; openEmpresa()">EDITAR</a>
+        </div>
+
+        <div class="botonEdit" *ngIf="editE">
+            <div class="boton" >
+              <a (click)="editE = false; closeEmpresa(); resetEmpresas()">CANCELAR</a>
+            </div>
+            <div class="boton">
+              <a (click)="updateEmpresa()">GUARDAR</a>
+            </div>
+          </div>
+      </div>
+
+      <div class="contentDiv" *ngIf="user.permiso == 'Administrador'" [style.width]="'100%'">
+        <div class="itemEmpresa" *ngFor="let item of empresas; let i = index">
+          <div [ngClass]="open[i] ? 'cardEmpresa activeCardEmpresa' : 'cardEmpresa'" (click)="open[i] = !open[i]" [ngStyle]="{'cursor':'pointer'}" >
+              <div class="img" (click)="$event.stopPropagation()">
+                <img src="{{arraylogos[i]}}" alt="">
+                <a *ngIf="editE"  >
+                  <label for="file10" >Editar</label>
+                </a>
+                <input type="file" id="file10" (change)="fileChange2($event, item.idEmpresa)" accept=".jpg" class="upload">
+              </div>
+              <div class="infoCard" [style.border-bottom]="open[i] ? 'none': '1px dashed #D5DEE2'">
+                <p>{{item.razonSocial}}</p>
+                <p [ngStyle]="{'color':'#3B8EDE'}">{{item.rfc}}</p>
+              </div>
+
+              <img [ngClass]="open[i] ? 'open': 'close'" [style.transition]="'0.5s'" src="./assets/images/flecha_azul.svg" alt="">
+            </div>
+
+            <div class="contentCard" [style.max-height]="open[i] ? '500px': '0'" [ngStyle]="{'transition':'0.5s'}" [style.overflow]="open[i] ? 'visible': 'hidden'">
+              <div class="p1">
+                <div class="img">
+                    <img id="img1" src="./assets/images/matriz.svg" alt="">
+                </div>
+                <div class="infoP1">
+                  <p>Matríz de Seguridad</p>
+                  <p>La matrÍz de seguridad es el conjunto de caracteres alfanuméricos que funcionan como contraseñas dinámicas para la autentificación del contribuyente.</p>
+                  <div>
+                    <a (click)="openModal(item.rfc, item.razonSocial, item.imagenEmpresa)">VISUALIZAR</a>
+                    <a (click)="downloadMatriz(item.rfc)">DESCARGAR</a>
+                  </div>
+                </div>
+              </div>
+              <div class="p2" *ngIf="!editE">
+                <p>Del {{item.vigenciaMatriz | dateFormatSlashFull}} al {{item.vigenciaMatrizFin | dateFormatSlashFull}}</p>
+                <p>Vigencia</p>
+              </div>
+
+              <div class="p2Edit" *ngIf="editE">
+
+                <div class="fechas">
+                  <div>
+                      <div class="datePicker">
+                          <gn-date-picker [(date)]="item.vigenciaMatriz"
+                                          dateFormat="YYYYMMDD"
+                                          [sizeInput]="'13px'"></gn-date-picker>
+                      </div>
+                      <p>Fecha Inicio</p>
+                  </div>
+                  <div>
+                      <div class="datePicker">
+                          <gn-date-picker [(date)]="item.vigenciaMatrizFin"
+                                          dateFormat="YYYYMMDD"
+                                          [sizeInput]="'13px'"></gn-date-picker>
+                      </div>
+                      <p>Fecha Fin</p>
+                  </div>
+                </div>
+
+                <div class="botonEdit">
+                    <a >
+                      <label for="fileInput">CARGAR MATRIZ</label>
+                    </a>
+                    <input #fileInput type="file" id="fileInput" (change)="fileChange($event, item.rfc)" accept=".pdf" class="upload">
+                  </div>
+
+              </div>
+            </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="separacion" [ngStyle]="{'margin-top':'60px', 'margin-bottom':'30px'}" *ngIf="user.permiso == 'Administrador'">
+
+        </div>
+
+
+        <div class="title">     <!-- ************************************* Tabla ************************************* -->
+            <p>Usuarios</p>
+            <div class="boton" *ngIf="!editUser && user.permiso == 'Administrador'">
+              <a (click)="editUser = true">EDITAR</a>
+            </div>
+
+            <div class="botonEdit" *ngIf="editUser">
+                <div class="boton" >
+                  <a (click)="editUser = false; resetPermisosMatriz()">CANCELAR</a>
+                </div>
+                <div class="boton">
+                  <a (click)="updatePermisos()">GUARDAR</a>
+                </div>
+              </div>
+          </div>
+
+          <div class="tabla" *ngIf="!editUser">
+            <div class="headTabla">
+              <div class="nombre"></div>
+              <div class="element"> <span>Cargar</span><span>DataStage</span>  </div>
+              <div class="element"> <span>Descargar</span><span>DataStage</span> </div>
+              <div class="element"> <span>Librería</span><span>DataStage</span> </div>
+              <div class="element">Tableros</div>
+              <div class="element"> <span>Reportes</span><span>Prediseñados</span> </div>
+              <div class="element"> <span>Agente</span><span>Aduanal</span> </div>
+              <div class="element"> <span>Reportes</span><span>Personalizados</span> </div>
+              <div class="element">Glosario</div>
+              <div class="element"> <span>Reportes</span><span>a Medida</span> </div>
+              <div class="element"> Registros</div>
+              <div class="element">Permisos</div>
+              <div class="element">Vucem</div>
+            </div>
+
+            <div class="bodyTabla" *ngFor="let items of administrador; let i = index">
+                <div class="tooltip" [style.opacity]="tooltipV[i] == true ? '1': '0'" [style.pointer-events]="'none'" [style.transition]="'0.5s'">
+                    <label>{{items.nombre + " " + items.apellido}}</label>
+                </div>
+                <div class="nombre"><p (mouseenter)="tooltipV[i] = true" (mouseleave)="tooltipV[i] = false">{{items.usuario}}</p><p>{{items.permiso}}</p></div>
+                <div class="element"><img id="img1" *ngIf="listPermisos[i][0].activo" src="./assets/images/check1.svg" alt=""></div>
+                <div class="element"><img id="img1" *ngIf="listPermisos[i][1].activo" src="./assets/images/check1.svg" alt=""></div>
+                <div class="element"><img id="img1" *ngIf="listPermisos[i][2].activo" src="./assets/images/check1.svg" alt=""></div>
+                <div class="element"><img id="img1" *ngIf="listPermisos[i][3].activo" src="./assets/images/check1.svg" alt=""></div>
+                <div class="element"><img id="img1" *ngIf="listPermisos[i][4].activo" src="./assets/images/check1.svg" alt=""></div>
+                <div class="element"><img id="img1" *ngIf="listPermisos[i][5].activo" src="./assets/images/check1.svg" alt=""></div>
+                <div class="element"><img id="img1" *ngIf="listPermisos[i][6].activo" src="./assets/images/check1.svg" alt=""></div>
+                <div class="element"><img id="img1" *ngIf="listPermisos[i][7].activo" src="./assets/images/check1.svg" alt=""></div>
+                <div class="element"><img id="img1" *ngIf="listPermisos[i][8].activo" src="./assets/images/check1.svg" alt=""></div>
+                <div class="element"><img id="img1" *ngIf="listPermisos[i][9].activo" src="./assets/images/check1.svg" alt=""></div>
+                <div class="element"><img id="img1" *ngIf="listPermisos[i][10].activo" src="./assets/images/check1.svg" alt=""></div>
+                <div class="element"><img id="img1" *ngIf="listPermisos[i][11].activo" src="./assets/images/check1.svg" alt=""></div>
+            </div>
+
+          </div>
+
+          <div class="tabla" *ngIf="editUser">
+              <div class="headTabla">
+                <div class="nombre"></div>
+                <div class="element"> <span>Cargar</span><span>DataStage</span>  </div>
+                <div class="element"> <span>Descargar</span><span>DataStage</span> </div>
+                <div class="element"> <span>Librería</span><span>DataStage</span> </div>
+                <div class="element">Tableros</div>
+                <div class="element"> <span>Reportes</span><span>Prediseñados</span> </div>
+                <div class="element"> <span>Agente</span><span>Aduanal</span> </div>
+                <div class="element"> <span>Reportes</span><span>Personalizados</span> </div>
+                <div class="element">Glosario</div>
+                <div class="element"> <span>Reportes</span><span>a Medida</span> </div>
+                <div class="element"> Registros</div>
+                <div class="element">Permisos</div>
+                <div class="element">Vucem</div>
+              </div>
+
+              <div class="bodyTabla" *ngFor="let items of administrador; let i = index">
+                  <div class="tooltip" [style.opacity]="tooltipV[i] == true ? '1': '0'" [style.pointer-events]="'none'" [style.transition]="'0.5s'">
+                      <label>{{items.nombre + " " + items.apellido}}</label>
+                    </div>
+                  <div class="nombre"><p (mouseenter)="tooltipV[i] = true" (mouseleave)="tooltipV[i] = false">{{items.usuario}}</p><p>{{items.permiso}}</p>
+                    </div>
+                  <div class="element"><img id="img1" *ngIf="listPermisos[i][0].activo && user.idUsuario == items.idUsuario" src="./assets/images/check1.svg" alt="">  <img (click)="listPermisos[i][0].activo = false" *ngIf="listPermisos[i][0].activo && user.idUsuario != items.idUsuario" id="img1" src="./assets/images/check3.svg" alt=""><img (click)="listPermisos[i][0].activo = true" *ngIf="!listPermisos[i][0].activo && user.idUsuario != items.idUsuario" id="img2" src="./assets/images/check2.svg" alt=""></div>
+                  <div class="element"><img id="img1" *ngIf="listPermisos[i][1].activo && user.idUsuario == items.idUsuario" src="./assets/images/check1.svg" alt="">  <img (click)="listPermisos[i][1].activo = false" *ngIf="listPermisos[i][1].activo && user.idUsuario != items.idUsuario" id="img1" src="./assets/images/check3.svg" alt=""><img (click)="listPermisos[i][1].activo = true" *ngIf="!listPermisos[i][1].activo && user.idUsuario != items.idUsuario" id="img2" src="./assets/images/check2.svg" alt=""></div>
+                  <div class="element"><img id="img1" *ngIf="listPermisos[i][2].activo && user.idUsuario == items.idUsuario" src="./assets/images/check1.svg" alt="">  <img (click)="listPermisos[i][2].activo = false" *ngIf="listPermisos[i][2].activo && user.idUsuario != items.idUsuario" id="img1" src="./assets/images/check3.svg" alt=""><img (click)="listPermisos[i][2].activo = true" *ngIf="!listPermisos[i][2].activo && user.idUsuario != items.idUsuario" id="img2" src="./assets/images/check2.svg" alt=""></div>
+                  <div class="element"><img id="img1" *ngIf="listPermisos[i][3].activo && user.idUsuario == items.idUsuario" src="./assets/images/check1.svg" alt="">  <img (click)="listPermisos[i][3].activo = false" *ngIf="listPermisos[i][3].activo && user.idUsuario != items.idUsuario" id="img1" src="./assets/images/check3.svg" alt=""><img (click)="listPermisos[i][3].activo = true" *ngIf="!listPermisos[i][3].activo && user.idUsuario != items.idUsuario" id="img2" src="./assets/images/check2.svg" alt=""></div>
+                  <div class="element"><img id="img1" *ngIf="listPermisos[i][4].activo && user.idUsuario == items.idUsuario" src="./assets/images/check1.svg" alt="">  <img (click)="listPermisos[i][4].activo = false" *ngIf="listPermisos[i][4].activo && user.idUsuario != items.idUsuario" id="img1" src="./assets/images/check3.svg" alt=""><img (click)="listPermisos[i][4].activo = true" *ngIf="!listPermisos[i][4].activo && user.idUsuario != items.idUsuario" id="img2" src="./assets/images/check2.svg" alt=""></div>
+                  <div class="element"><img id="img1" *ngIf="listPermisos[i][5].activo && user.idUsuario == items.idUsuario" src="./assets/images/check1.svg" alt="">  <img (click)="listPermisos[i][5].activo = false" *ngIf="listPermisos[i][5].activo && user.idUsuario != items.idUsuario" id="img1" src="./assets/images/check3.svg" alt=""><img (click)="listPermisos[i][5].activo = true" *ngIf="!listPermisos[i][5].activo && user.idUsuario != items.idUsuario" id="img2" src="./assets/images/check2.svg" alt=""></div>
+                  <div class="element"><img id="img1" *ngIf="listPermisos[i][6].activo && user.idUsuario == items.idUsuario" src="./assets/images/check1.svg" alt="">  <img (click)="listPermisos[i][6].activo = false" *ngIf="listPermisos[i][6].activo && user.idUsuario != items.idUsuario" id="img1" src="./assets/images/check3.svg" alt=""><img (click)="listPermisos[i][6].activo = true" *ngIf="!listPermisos[i][6].activo && user.idUsuario != items.idUsuario" id="img2" src="./assets/images/check2.svg" alt=""></div>
+                  <div class="element"><img id="img1" *ngIf="listPermisos[i][7].activo && user.idUsuario == items.idUsuario" src="./assets/images/check1.svg" alt="">  <img (click)="listPermisos[i][7].activo = false" *ngIf="listPermisos[i][7].activo && user.idUsuario != items.idUsuario" id="img1" src="./assets/images/check3.svg" alt=""><img (click)="listPermisos[i][7].activo = true" *ngIf="!listPermisos[i][7].activo && user.idUsuario != items.idUsuario" id="img2" src="./assets/images/check2.svg" alt=""></div>
+                  <div class="element"><img id="img1" *ngIf="listPermisos[i][8].activo && user.idUsuario == items.idUsuario" src="./assets/images/check1.svg" alt="">  <img (click)="listPermisos[i][8].activo = false" *ngIf="listPermisos[i][8].activo && user.idUsuario != items.idUsuario" id="img1" src="./assets/images/check3.svg" alt=""><img (click)="listPermisos[i][8].activo = true" *ngIf="!listPermisos[i][8].activo && user.idUsuario != items.idUsuario" id="img2" src="./assets/images/check2.svg" alt=""></div>
+                  <div class="element"><img id="img1" *ngIf="listPermisos[i][9].activo && user.idUsuario == items.idUsuario" src="./assets/images/check1.svg" alt="">  <img (click)="listPermisos[i][9].activo = false" *ngIf="listPermisos[i][9].activo && user.idUsuario != items.idUsuario" id="img1" src="./assets/images/check3.svg" alt=""><img (click)="listPermisos[i][9].activo = true" *ngIf="!listPermisos[i][9].activo && user.idUsuario != items.idUsuario" id="img2" src="./assets/images/check2.svg" alt=""></div>
+                  <div class="element"><img id="img1" *ngIf="listPermisos[i][10].activo && user.idUsuario == items.idUsuario" src="./assets/images/check1.svg" alt="">  <img (click)="listPermisos[i][10].activo = false" *ngIf="listPermisos[i][10].activo && user.idUsuario != items.idUsuario" id="img1" src="./assets/images/check3.svg" alt=""><img (click)="listPermisos[i][10].activo = true" *ngIf="!listPermisos[i][10].activo && user.idUsuario != items.idUsuario" id="img2" src="./assets/images/check2.svg" alt=""></div>
+                  <div class="element"><img id="img1" *ngIf="listPermisos[i][11].activo && user.idUsuario == items.idUsuario" src="./assets/images/check1.svg" alt="">  <img (click)="listPermisos[i][11].activo = false" *ngIf="listPermisos[i][11].activo && user.idUsuario != items.idUsuario" id="img1" src="./assets/images/check3.svg" alt=""><img (click)="listPermisos[i][11].activo = true" *ngIf="!listPermisos[i][11].activo && user.idUsuario != items.idUsuario" id="img2" src="./assets/images/check2.svg" alt=""></div>
+                </div>
+          </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+
+<div id="id01" class="w3-modal">
+    <div [ngClass]="'w3-modal-content ' + classAnimation + ' w3-card-4'" [style.height]="'517px'">
+        <div class="modal">
+            <div class="title">
+                <p>
+                    <label>Visualizar Matríz de Seguridad</label>
+                </p>
+                <img (click)="closeModal()" src="./assets/images/cerrar_azul.svg" alt="" onclick="setTimeout(function(){document.getElementById('id01').style.display='none'}, 198)">
+            </div>
+
+            <div [ngClass]="'cardModal'" >
+                <div class="img">
+                  <img id="img1" *ngIf="imgEmpresaModal !== ''" src="{{rutaGlosaDocs}}/{{imgEmpresaModal}}" alt="">
+                </div>
+                <div class="infoCard">
+                  <p>{{razonSocialModal}}</p>
+                  <p [ngStyle]="{'color':'#3B8EDE'}">{{rfcModal}}</p>
+                </div>
+
+
+              </div>
+
+
+              <div class="pdfview" >
+                <div id="preview">
+
+                </div>
+              </div>
+
+
+              <div class="footer">
+                  <a class="cancelar" onclick="setTimeout(function(){document.getElementById('id01').style.display='none'}, 198)">CANCELAR</a>
+                  <a [ngClass]= "'guardar'"  onclick="setTimeout(function(){document.getElementById('id01').style.display='none'}, 198)">ACEPTAR</a>
+                  <!-- <a [ngClass]= "'guardar':'guardarInactivo'" (click)="" onclick="setTimeout(function(){document.getElementById('id01').style.display='none'}, 198)">ACEPTAR</a> -->
+                </div>
+
+
+        </div>
+    </div>
+  </div>

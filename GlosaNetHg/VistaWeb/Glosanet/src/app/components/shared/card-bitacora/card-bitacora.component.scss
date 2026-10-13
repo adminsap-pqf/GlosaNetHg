@@ -1,0 +1,89 @@
+@import "../../../../mixins";
+@import "../../../../colors";
+@import "../../../../variables";
+
+:host {
+  /* font-size: $globalFont;
+  @include flexRow;
+  border-bottom: 1.5pt dashed $gnInactivo;
+  justify-content: space-between; */
+
+  & > a{
+    font-size: $globalFont;
+    @include flexRow;
+    border-bottom: 1.5pt dashed $gnInactivo;
+    justify-content: space-between;
+    text-decoration: none;
+    cursor: pointer;
+  
+
+    & > div:nth-of-type(1){
+      @include flexRow;
+  
+      & > img{
+        width: 35px;
+        margin: 15px 15px 15px 5px;
+      }
+  
+      & > div{
+        @include flexColumn;
+        @include absoluteCenter;
+        align-items: flex-start !important;
+  
+        & > p:nth-of-type(1){
+          font-size: 1.2em;
+          color: $gnAzulMedio;
+          font-weight: 900;
+          font-style: normal;
+          & > span:nth-of-type(1){
+            color: $gnGrisRata;
+            font-weight: normal;
+          }
+          & > span:nth-of-type(2){
+            color: $gnDorado;
+            font-weight: normal;
+          }
+        }
+  
+        & > p:nth-of-type(2){
+          color: $gnAzulBajo !important;
+          font-size: 1em;
+          font-weight: 300;
+          font-style: normal;
+        }
+      }
+  
+  
+    }
+  
+    & > div:nth-of-type(2){
+      @include flexColumn;
+      @include absoluteCenter;
+  
+      & > p:nth-of-type(1){
+        font-size: 1.2em;
+        color: $gnAzulMedio;
+      }
+  
+      & > p:nth-of-type(2){
+        font-size: 1em;
+        color: $gnGrisRata;
+      }
+    }
+  
+    & > a{
+      & > img{
+        @include flexColumn;
+        @include absoluteCenter;
+        width: 30px;
+        height: 20px;
+        margin: 20px 5px 0px;
+        cursor: pointer;
+      }
+    }
+
+
+  
+  }
+
+}

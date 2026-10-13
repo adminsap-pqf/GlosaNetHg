@@ -1,0 +1,156 @@
+<div id="newForecastView">
+
+  <div>
+    <div>
+      <div>
+        <p>Aviso de Previsión {{year}}</p>
+      </div>
+      <div>
+        <p>
+          <strong>Fecha límite de Entrega: </strong>
+          <strong>{{deadline}}</strong>
+          <strong>·</strong>
+          <strong>{{remainingDays}}</strong>
+        </p>
+      </div>
+    </div>
+    <div>
+      <a>PUBLICAR Y SOMETER</a>
+    </div>
+  </div>
+
+  <div>
+    <div><p>Agregar Productos a la Previsión</p></div>
+    <div><a (click)="saveForecast()" [style.pointer-events]="!change() ? 'none' : 'auto'" [style.background-color]="!change() ? '#D5DEE2' : ''">GUARDAR Y CERRAR</a></div>
+  </div>
+
+  <div>
+    <form class="searchBarForm" autocomplete="off" [formGroup]="searchBarForm">
+      <div>
+        <div>
+          <div>
+            <label for="">Producto</label>
+            <gn-drop-list (valueDropList)="handlerListProduct($event)" [items]="dataProducts" [isSearch]="true" [isCategory]="true" [align]="'left'"
+                          [itemSelect]="productSelected" name="nameSearchBar"></gn-drop-list>
+          </div>
+        </div>
+        <div>
+          <div>
+            <label>Cantidad</label>
+            <input [ngStyle]="{'text-align':'left', 'border-bottom': '1px solid #3369B1'}" type="number" name="quantitySearchBar"
+                   formControlName="quantitySearchBar" (focus)="isEmptyData()" (blur)="isEmptyData()" min="0"
+                    [value]="quantitySelected">
+          </div>
+          <div class="cForm2">
+            <label [ngStyle]="{'margin-bottom':'6px', 'width': '80px'}">Unidad</label>
+            <div class="droplist" [ngStyle]="{'width': '80px'}">
+              <gn-drop-list (valueDropList)="handlerListUnity($event, true)" [items]="itemsDropList" [isSearch]="false" [isCategory]="true" [align]="'center'"
+                            [itemSelect]="unitySelected" [fontSize]="'12px'" name="unitySearchBar"></gn-drop-list>
+            </div>
+          </div>
+          <div (click)="addProducts(searchBarForm.value)" [style.pointer-events]="isValidAddProduct ? 'auto':'none'" [style.background-color]="isValidAddProduct ? '':'#D5DEE2'">
+            <a>Agregar</a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div>
+    <div>
+      <p>Productos Previstos</p>
+    </div>
+  </div>
+
+  <div>
+    <div><p>#</p></div>
+    <div><p>Producto</p></div>
+    <div><p>Cantidad</p></div>
+  </div>
+
+  <div>
+    <div *ngFor="let item of dataForecast; let i = index">
+      <div><p>{{i+1}}</p></div>
+      <div><p>{{item.nombre}}</p></div>
+      <div>
+        <p>{{item.cantidad + ' ' + item.unidad}}</p>
+        <div (click)="updateItem($event, i, item)" onclick="document.getElementById('modalUpdateForecast').style.display='block'">
+          <img src="../../../assets/images/editar.svg" />
+        </div>
+      </div>
+      <div>
+        <img (click)="deleteProduct(i)" src="../../../assets/images/eliminar.svg" />
+      </div>
+    </div>
+  </div>
+
+  <div><p>{{dataForecast.length > 1 ?  dataForecast.length + ' productos' :  dataForecast.length + ' producto' }}</p></div>
+
+</div>
+
+
+
+<div id="modalUpdateForecast" class="w3-modal">
+  <div [ngClass]="'w3-modal-content ' + classAnimation + ' w3-card-4'">
+    <div>
+      <div>
+
+        <div>
+          <p>
+            <label>Editar Previsión</label>
+          </p>
+          <img (click)="closeModal()" src="../../../assets/images/cerrar_azul.svg" alt="" onclick="setTimeout(function(){document.getElementById('modalUpdateForecast').style.display='none'}, 200)">
+        </div>
+
+        <div class="datosGenerales">
+          <form [formGroup]="updateForecastForm" autocomplete="off">
+            <div>
+              <p>Producto </p>
+              <input type="text" formControlName="nameForecast" name="nameForecast" [attr.disabled]="true">
+            </div>
+            <div>
+              <p>Cantidad </p>
+              <input type="text" formControlName="quantityForecast" name="quantityForecast" (focus)="isEmptyForecastForm()" (blur)="isEmptyForecastForm()" >
+            </div>
+            <div>
+              <p>Unidad </p>
+              <gn-drop-list (valueDropList)="handlerListUnity($event, false)" [items]="itemsDropList" [isSearch]="false" [isCategory]="true" [align]="'center'" [ngStyle]="{'height':'20px'}"
+                            [itemSelect]="unityForecast" name="unityForecast"></gn-drop-list>
+            </div>
+            <div>
+            </div>
+          </form>
+        </div>
+
+      </div>
+
+
+      <div>
+        <a class="btnCancelar" (click)="closeModal()" onclick="setTimeout(function(){document.getElementById('modalUpdateForecast').style.display='none'}, 198)">
+          <p>CANCELAR</p>
+        </a>
+        <a [style.background-color]="isValidFormForecast ? '':'#D5DEE2'" [style.pointer-events]="isValidFormForecast ? 'auto':'none'" class="btnGuardar" (click)="updateForecast(updateForecastForm.value)" onclick="setTimeout(function(){document.getElementById('modalUpdateForecast').style.display='none'}, 198)">
+          <p>ACEPTAR</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="confirmForecastSave" class="w3-modal">
+  <div [ngClass]="'w3-modal-content ' + classAnimation + ' w3-card-4'">
+    <div>
+      <div>
+        <img src="../../../assets/images/cerrar_azul.svg" alt="" onclick="setTimeout(function(){document.getElementById('confirmForecastSave').style.display='none'}, 198)">
+      </div>
+      <div>
+        <div>
+          <img src="../../../assets/images/like.svg" alt="">
+        </div>
+        <div>
+          <label>¡Has guardado <span>Exitosamente!</span></label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

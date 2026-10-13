@@ -1,0 +1,39 @@
+@import "../../../../variables.scss";
+@import "../../../../mixins.scss";
+@import "../../../../colors.scss";
+
+:host{
+  font-size: $globalFont;
+  width: 100%;
+  height: 100%;
+  .navs{
+    @include flexRowWrap;
+    font-size: '1.2em';
+    color: $gnGrisRata;
+    font-weight: normal;
+    height: 100%;
+    & > div{
+      @include flexRow;
+      align-items: center;
+      margin: 5px 5px;
+      width: 120px;
+      height: 30px;
+      cursor: pointer;
+      & > img{
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
+.borderBottom{
+  border-bottom: solid 0.75px $gnGrisRata !important;
+}
+
+.blueHover{
+  :hover{
+    color:$gnAzulMedio !important;
+  }
+}
+
+

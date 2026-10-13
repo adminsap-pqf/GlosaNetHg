@@ -1,0 +1,7 @@
+<div class='gridContainer'>
+  <div class='grid'>
+    <div class='cardContainer' *ngFor='let data of lstData; let i = index'>
+      <gn-calendar [(date)]="lstData[i]" [lstData]="lstDataStage[i]" [rfc]="rfc" [idCliente]="idCliente"></gn-calendar>
+    </div>
+  </div>
+</div>

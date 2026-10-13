@@ -1,0 +1,68 @@
+<div id="forecastNoticeView">
+
+  <div>
+    <div>
+      <div>
+        <p>Aviso de Previsión {{year}}</p>
+      </div>
+      <div>
+        <p>
+          <strong>Fecha límite de Entrega: </strong>
+          <strong>{{deadline}}</strong>
+          <strong>·</strong>
+          <strong>{{remainingDays}}</strong>
+        </p>
+      </div>
+    </div>
+    <div>
+      <a>PUBLICAR Y SOMETER</a>
+    </div>
+  </div>
+
+  <div>
+    <div>
+      <p>1,440</p>
+      <p>Productos Previstos</p>
+    </div>
+    <div>
+      <p>1,200,000</p>
+      <p>Kg Previstos</p>
+    </div>
+    <div>
+      <p>12,236</p>
+      <p>Piezas Previstas</p>
+    </div>
+    <div>
+      <p>36%</p>
+      <p>Previsión Completada</p>
+    </div>
+  </div>
+
+  <div>
+    <div>
+      <p>Productos Previstos</p>
+    </div>
+    <div>
+      <a (click)="redirectToNewForecast()">Configurar Previsión</a>
+    </div>
+  </div>
+
+  <div>
+    <div><p>#</p></div>
+    <div><p>Producto</p></div>
+    <div><p>Cantidad</p></div>
+  </div>
+
+  <div>
+    <div *ngFor="let item of dataForecast; let i = index">
+      <div><p>{{i+1}}</p></div>
+      <div><p>{{item.nombre}}</p></div>
+      <div><p>{{item.cantidad + ' ' + item.unidad}}</p></div>
+    </div>
+  </div>
+
+  <div><p>{{dataForecast.length > 1 ?  dataForecast.length + ' productos' :  dataForecast.length + ' producto' }}</p></div>
+
+
+
+</div>

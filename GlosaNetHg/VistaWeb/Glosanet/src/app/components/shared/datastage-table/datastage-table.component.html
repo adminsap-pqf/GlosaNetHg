@@ -1,0 +1,128 @@
+<div class="datastageTableContainer">
+    <div class="content">
+        <div [style.max-width]="maxWidth" *ngIf="buffer.length > 0">
+            <div [style.min-width]="minWidth">
+                <div class="head">
+                    <div>
+                        <div *ngFor="let item of tableHead; let i = index"
+                             [style.width]="settings[i].width"
+                             [style.justify-content]="settings[i].align"
+                             [style.padding-left]="settings[i].align === 'flex-start' ? '15px' : '0'"
+                             [style.padding-right]=" settings.length > i ? settings[i].align === 'flex-end' ? '15px' : '0' : '0'">
+                            <p *ngIf="item.label !== 'none'">{{item.label}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="body">
+                    <virtual-scroller #scroll *ngIf="buffer.length > 0" [items]="buffer" (vsUpdate)="scrollItems = $event" (vsEnd)="fetchMore($event)">
+                        <div  class="row" *ngFor="let row of scrollItems;">
+                            <div *ngFor="let item of row; let i = index"
+                                 [style.width]="settings.length > i ? settings[i].width : 'auto'"
+                                 [style.justify-content]="settings.length > i ? settings[i].align : 'center'"
+                                 [style.padding-left]=" settings.length > i ? settings[i].align === 'flex-start' ? '15px' : '0' : '0'"
+                                 [style.padding-right]=" settings.length > i ? settings[i].align === 'flex-end' ? '15px' : '0' : '0'">
+                                <p *ngIf="!item.activeIco"
+                                   (click)="item.isLink ? onLink(item) : item.isStatus && item.status === RABBITMQ_JOB_STATE_SUCCESS ? handleDownload(item) :null"
+                                   (mouseenter)="item.isComment ? (item.activeTooltip = true) : item.isDescription ? (item.activeTooltip = true) : item.isStatus && item.status === RABBITMQ_JOB_STATE_FAILURE ? (item.activeTooltipError = true) : null"
+                                   (mouseleave)="item.isComment ? (item.activeTooltip = false) : item.isDescription ? (item.activeTooltip = false): item.isStatus && item.status === RABBITMQ_JOB_STATE_FAILURE ? (item.activeTooltipError = false) : null"
+                                   [ngClass]="{
+                                    'link': item.isLink,
+                                    'status_none': item.isStatus && item.status === RABBITMQ_JOB_STATE_NONE,
+                                    'status_0': item.status === RABBITMQ_JOB_STATE_RECEIVED,
+                                    'status_1': item.status === RABBITMQ_JOB_STATE_PROCESSING,
+                                    'status_2': item.status === RABBITMQ_JOB_STATE_FAILURE,
+                                    'status_3': item.status === RABBITMQ_JOB_STATE_SUCCESS,
+                                    'comment': item.isComment
+                                    }">
+                                    {{
+                                        !item.isDate
+                                            ? !item.isMoney
+                                                ? item.label
+                                                : (lodash.parseInt(item.label) | acFormatNumber2decimal) + ' USD'
+                                            : (item.label | dateFormatNumber)
+                                    }}
+                                </p>
+                                <img *ngIf="item.isStatus && (item.status === RABBITMQ_JOB_STATE_NONE || item.status === RABBITMQ_JOB_STATE_FAILURE)" src="./assets/images/descargar_default.svg" />
+                                <img *ngIf="item.isStatus && (item.status === RABBITMQ_JOB_STATE_NONE || item.status === RABBITMQ_JOB_STATE_FAILURE)" src="./assets/images/descargar_azul.svg"
+                                     [style.cursor]="'pointer'"
+                                     (mouseenter)="item.isStatus && (item.status === RABBITMQ_JOB_STATE_NONE || item.status === RABBITMQ_JOB_STATE_FAILURE) ? (item.activeTooltip = true) : null"
+                                     (mouseleave)="item.isStatus && (item.status === RABBITMQ_JOB_STATE_NONE || item.status === RABBITMQ_JOB_STATE_FAILURE) ? (item.activeTooltip = false) : null"
+                                     (click)="openModal(item)" />
+                                <p *ngIf="item.isGroup">{{item.subLabel}}</p>
+                                <img *ngIf="item.activeIco" src="./assets/images/pedido_default.svg" />
+                                <img *ngIf="item.activeIco" src="./assets/images/pedido_hover.svg" />
+                                <div class="tooltip_comment" *ngIf="item.isComment" [style.opacity]="item.activeTooltip ? '1': '0'">
+                                    <p><span>Comentarios</span>{{item.comment}}</p>
+                                </div>
+                                <div class="tooltip_download" *ngIf="item.isStatus && item.activeTooltip" [style.opacity]="item.activeTooltip || item.activeTooltipError ? '1': '0'">
+                                    <p>Descargar</p>
+                                </div>
+                                <div class="tooltip_download customWidth" [ngClass]="{'customWidth': item.activeTooltipError}" *ngIf="item.isStatus && activeTooltipError" [style.opacity]="item.activeTooltip || item.activeTooltipError ? '1': '0'">
+                                    <p>{{item.errorMessage}}</p>
+                                </div>
+                                <div class="tooltip_download tooltip_description" *ngIf="item.isDescription" [style.opacity]="item.activeTooltip ? '1': '0'">
+                                    <p>{{item.label}}</p>
+                                </div>
+                                <div class="load-circle" *ngIf="item.isStatus && (item.linkType === LINK_TYPE_ACUSE_EDOC || item.linkType === LINK_TYPE_FACTURA) && (item.status === RABBITMQ_JOB_STATE_RECEIVED || item.status === RABBITMQ_JOB_STATE_PROCESSING)">
+                                    <div class="line"></div>
+                                    <div class="line"></div>
+                                    <div class="line"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="buffer.length > 0 && loading"  class="containerLoader" [style.height]="buffer.length == 0 ? '100%': null">
+                            <div class='loader'>
+                                <div class='loading-square'></div>
+                                <div class='loading-square'></div>
+                                <div class='loading-square'></div>
+                                <div class='loading-square'></div>
+                            </div>
+                        </div>
+                    </virtual-scroller>
+                    <div class="scrollStart" (click)="scrollTo()">
+                        <img src="./assets/images/flecha_blanca.svg"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="withoutResults" *ngIf="buffer.length === 0">
+        <p *ngIf="!loading">{{withoutMessage}}</p>
+        <div *ngIf="loading"  class="containerLoader" [style.height]="buffer.length == 0 ? '100%' : null">
+            <div class='loader'>
+                <div class='loading-square'></div>
+                <div class='loading-square'></div>
+                <div class='loading-square'></div>
+                <div class='loading-square'></div>
+            </div>
+        </div>
+    </div>
+    <div class="tableFoot" *ngIf="showTotal">
+        <p>{{grandTotal === 1 ? '# ' + (grandTotal | acFormatNumber) + ' ' + footerTitle : '# ' + (grandTotal | acFormatNumber) + ' ' + footerTitle + 's'}}</p>
+    </div>
+</div>
+
+<div #modalDownload>
+    <div class="modalDelete" *ngIf="modalIsOpenDownload" [@fadeInOut]>
+        <div class="modalDelete-wrapper">
+            <div class="modalDelete-container">
+                <div class="modalDelete-title">
+                    <img (click)="closeModal()" src="./assets/images/cerrar_azul.svg" />
+                </div>
+                <div class="modalDelete-content">
+                    <div>
+                        <img src="./assets/images/error.svg" />
+                    </div>
+                    <div>
+                        <p>{{title}}</p>
+                        <p>{{subtitle}}</p>
+                    </div>
+                </div>
+                <div class="modalDelete-buttons">
+                    <button (click)="closeModal()">CANCELAR</button>
+                    <button class="enable" (click)="handleDownload(selectedItem)">{{vucemTokenActive == 1 ? 'DESCARGAR' : 'AGREGAR TOKEN' }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

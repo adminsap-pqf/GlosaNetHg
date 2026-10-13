@@ -1,0 +1,1337 @@
+<div class="container">
+  <div class="title">
+    <div>
+      <p>
+        <img>
+        <label>Nuevo Registro</label>
+      </p>
+      <label>Responsable de Gestión:  {{registro.usuario.email !== undefined ? registro.usuario.email  : ''}}</label>
+    </div>
+    <a (click)="confirm(true, 0)">IR A LIBRERÍA</a>
+  </div>
+
+  <div>
+    <gn-wizard [lstItems]="lstItems" [pWizard]="pWizard" [check]="true" [tabs]="false"></gn-wizard>
+  </div>
+
+  <div class="section1" *ngIf="pWizard == 0">
+    <div class="search">
+      <label>Catálogo de Productos</label>
+      <div class="searchBar">
+        <gn-search-bar [searchValue]="searchTerm" (searchTermChanged)="handleKeySearch($event)" [placeholder]="placeholder" [reset]="resetSearch"></gn-search-bar>
+      </div>
+      <img (click)="isList = false"
+           [src]="isList ? './assets/images/vista_cuadricula_gris.svg' : './assets/images/vista_cuadricula_azul.svg'"
+           alt="control" />
+      <img (click)="isList = true"
+           [src]="isList ? './assets/images/vista_lista_azul.svg' : './assets/images/vista_lista_gris.svg'"
+           alt="control" />
+    </div>
+    <div class="options">
+
+      <div class="dropList">
+        <label>Ordenar Por:</label>
+        <div class="drop">
+          <gn-drop-list (valueDropList)="dropListFiltro($event)"
+                        [items]="itemsFiltros"
+                        [isSearch]="false"
+                        [isCategory]="true"
+                        [align]="'left'"
+                        [itemSelect]="defaultSelectedFiltros"></gn-drop-list>
+        </div>
+      </div>
+      <a (click)="nuevoProducto()" onclick="document.getElementById('id01').style.display='block'">NUEVO PRODUCTO</a>
+    </div>
+
+
+    <div id="scrollLoad" class="body1" *ngIf="false"><!--cuadricula-->
+
+      <virtual-scroller #scroll [items]="buffer" (vsUpdate)="scrollItems = $event" (vsEnd)="fetchMore($event)">
+
+        <div [ngClass]="classItem1[i]" *ngFor='let item of scrollItems; let i = index' (click)="selectItem(i, item)">
+          <div class="img">
+            <img id="img1" src="./assets/images/icono_gris_tarjeta.svg" alt="">
+            <img id="img2" src="./assets/images/icono_azul_tarjeta.svg" alt="">
+          </div>
+          <div class="bodyItem">
+            <p [ngStyle]="{'font-size':'14px'}"> <span [style.font-weight]="'600'">{{"# "+ item.index}}</span>
+              <label [ngStyle]="{'font-weight':'700'}">{{"· "+item.codigo}}&nbsp;</label> {{item.nombre}}</p>
+            <p [ngStyle]="{'font-size':'13px'}">
+              <label [ngClass]="item.numRegistros == 0 ? 'labelOrange': 'labelGreen'">{{item.numRegistros == 0 ? 'Registros N/D' : 'Registros '+ item.numRegistros}}&nbsp;</label>
+            </p>
+            <p [ngStyle]="{'font-size':'12px'}">
+              <label>Origen:</label>
+              <label>{{item.origen}}</label>
+            </p>
+          </div>
+        </div>
+
+        <!-- <div  class="loader">Loading...</div> -->
+        <div *ngIf="loading"  class="container-loader" [style.height]="buffer.length == 0 ? '100%': null">
+          <div class='loader'>
+            <div class='loading-square'></div>
+            <div class='loading-square'></div>
+            <div class='loading-square'></div>
+            <div class='loading-square'></div>
+          </div>
+        </div>
+
+      </virtual-scroller>
+
+      <div id="inicio" (click)="scrollTo()">
+        <img src="./assets/images/flecha_blanca.svg" alt="">
+      </div>
+    </div>
+
+    <div #body1 class="body2" *ngIf="false"> <!-- !cuadricula -->
+      <virtual-scroller #scroll [items]="buffer" (vsUpdate)="scrollItems = $event" (vsEnd)="fetchMore($event)">
+
+        <div [ngClass]="classItem[i]" *ngFor='let item of scrollItems; let i = index' (click)="selectItem(i, item)">
+          <div class="img">
+            <img id="img1" src="./assets/images/icono_gris_tarjeta.svg" alt="">
+            <img id="img2" src="./assets/images/icono_azul_tarjeta.svg" alt="">
+          </div>
+          <div class="bodyItem">
+            <div class="part1">
+              <p>
+                <span class="span" [style.font-weight]="'600'">{{"# "+ item.index}}</span>
+                <label>{{"· "+item.codigo}}&nbsp;</label>
+                <label>{{item.nombre}}</label>
+              </p>
+              <p>
+                <label [ngClass]="item.numRegistros == 0 ? 'labelOrange': 'labelGreen'">{{item.numRegistros == 0 ? 'Registros N/D' : 'Registros '+ item.numRegistros}}</label>
+              </p>
+            </div>
+            <div class="part2">
+              <p>
+                <label>{{item.origen}}</label>
+                <label>Origen</label>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="loading"  class="container-loader" [style.height]="buffer.length == 0 ? '100%': null">
+          <div  class='loader'>
+            <div class='loading-square'></div>
+            <div class='loading-square'></div>
+            <div class='loading-square'></div>
+            <div class='loading-square'></div>
+          </div>
+        </div>
+      </virtual-scroller>
+
+      <div id="inicio" (click)="scrollTo()">
+        <img src="./assets/images/flecha_blanca.svg" alt="">
+      </div>
+    </div>
+
+    <div class="foot" *ngIf="false">
+      <label>{{arrayAux.length == 1 ? "# " + (arrayAux.length | acFormatNumber) + " Producto" : "# " + (arrayAux.length | acFormatNumber) + " Productos"}}</label>
+    </div>
+
+    <div class="productsList">
+      <gn-product-list [buffer]="buffer"
+                       [firstItem]="firstItem"
+                       [grandTotal]="grandTotal"
+                       [currentTotal]="currentTotal"
+                       [currentPage]="currentPage"
+                       [loading]="loading"
+                       [isList]="isList"
+                       [getData]="getData"
+                       (emitCurrentPage)="handleCurrentPage($event)"
+                       (emitLoading)="handleLoading($event)"
+                       (emitSelectItem)="selectItem($event)"></gn-product-list>
+    </div>
+
+  </div>
+
+
+
+  <div class="section2" *ngIf="pWizard == 1">
+
+    <div class="producto-publicar">
+      <label>Producto</label>
+      <label>Producto Seleccionado</label>
+
+      <div class="cardProducto" *ngIf="!productoSelect">
+        <div class="img">
+          <img src="./assets/images/icono_azul_tarjeta.svg" alt="">
+        </div>
+        <div class="body">
+          <div class="part1">
+            <p [ngStyle]="{'font-weight':'700'}">
+              <label [ngStyle]="{'color':'#E2C913', 'font-size':'15px'}">{{producto.codigo}} ·</label>
+              <label [ngStyle]="{'color':'white', 'font-size':'15px', 'margin-left': '4px'}">{{producto.nombre}}</label>
+            </p>
+            <p [ngStyle]="{'color':'#E2C913', 'font-size':'12px'}">Fecha Límite de Registro: {{registro.ffin | dateFormatSlash}} · Trámite Cofepris {{registro.tramiteCofepris == '' ? 'N/D' : registro.tramiteCofepris}}</p>
+            <p [ngStyle]="{'color':'white', 'font-size':'11px'}">{{producto.origen}}</p>
+          </div>
+          <div class="part2">
+            <p [ngStyle]="{'color':'#E2C913', 'font-size':'12px', 'cursor':'pointer', 'user-select': 'none'}" (mouseenter)="ttProducto = 1" (mouseleave)="ttProducto = 0" (touchstart)="ttProducto = 1" (touchend)="ttProducto = 0">Descripción</p>
+
+            <div class="tooltip-producto" [style.opacity]="ttProducto" [style.transition]="'0.5s'">
+              <!-- <div class="triangulo">
+              </div> -->
+              <p> <label>Descripción: </label>{{registro.descripcion}} </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cardProducto" *ngIf="productoSelect" [style.height]="'85px'">
+        <div class="img">
+          <img src="./assets/images/producto_azul_hover.svg" alt="">
+        </div>
+        <div class="body">
+          <div class="part1">
+            <p [ngStyle]="{'font-weight':'700'}">
+              <label [ngStyle]="{'color':'#E2C913', 'font-size':'15px'}">{{producto.codigo}} ·</label>
+              <label [ngStyle]="{'color':'white', 'font-size':'15px', 'margin-left': '4px'}">{{producto.nombre}}</label>
+            </p>
+            <p [ngStyle]="{'color':'#E2C913', 'font-size':'12px'}">Fecha Inicio: {{registro.finicio | dateFormatSlash}} ·  Fecha Fin: {{registro.ffin | dateFormatSlash}}</p>
+            <p [ngStyle]="{'color':'white', 'font-size':'11px'}">Trámite Cofepris {{registro.tramiteCofepris}} · Folio de Registro {{registro.folioRegistro}}</p>
+            <p [ngStyle]="{'color':'#E2C913', 'font-size':'10px'}">{{producto.origen}}</p>
+          </div>
+          <div class="part2">
+            <p [ngStyle]="{'color':'#E2C913', 'font-size':'12px', 'cursor':'pointer', 'user-select': 'none'}" (mouseenter)="ttProducto = 1" (mouseleave)="ttProducto = 0" (touchstart)="ttProducto = 1" (touchend)="ttProducto = 0">Descripción</p>
+            <div class="tooltip-producto" [style.opacity]="ttProducto" [style.transition]="'0.5s'">
+              <!-- <div class="triangulo">
+
+              </div> -->
+              <p> <label>Descripción: </label>{{registro.descripcion}} </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="uploadFiles">
+        <div class="uploadHead" [ngClass]="contentIsOpenUpload ? 'uploadHeadOpen' : 'uploadHeadClose'" (click)="handleOpenContent()">
+          <div><p>Cargar Archivos a producto</p></div>
+          <div>
+            <div>
+              <img src="./assets/images/upload-file/archivo_blanco.svg" />
+              <p>{{ listFiles.length === 1 ? listFiles.length + ' Archivo' : listFiles.length + ' Archivos' }}</p>
+            </div>
+            <div>
+              <img [ngClass]="contentIsOpenUpload ? 'arrowDirectionUp': 'arrowDirectionDown'" src="./assets/images/flecha_blanca.svg" />
+            </div>
+          </div>
+        </div>
+        <div class="uploadContent" [ngClass]="contentIsOpenUpload ? 'openContent': 'closeContent'">
+          <div>
+            <button (click)="openModalUpload()">Carga de Archivos</button>
+          </div>
+          <div>
+            <div *ngFor='let file of listFiles; let i = index'>
+              <div>
+                <div>
+                  <p>#{{i+1}}</p>
+                  <img src="./assets/images/documento.svg" />
+                  <p (click)="getPDF(file.preview, file.fileName)">{{file.fileName}} <span>-</span></p>
+                  <p>{{file.date | dateFormatDot2}}</p>
+                </div>
+                <div>
+                  <img (click)="deleteFile(i)" src="./assets/images/eliminar_doc_comments_rojo.svg" />
+                </div>
+              </div>
+              <div>
+                <p>{{file.description}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="eventos-publicar">
+      <label>Eventos</label>
+
+      <div [ngClass]="generarEventEffect == 'body-generarE' ? 'title-generarE-open':'title-generarE'" (click)="generarEventEffect == 'body-generarE' ? generarEventEffect = 'body-generarE-close' : generarEventEffect = 'body-generarE'">
+        <label>Generar Eventos</label>
+        <img [style.transition]="'0.5s'" [ngClass]="generarEventEffect == 'body-generarE' ? 'open': 'close'"  src="./assets/images/evento_mas.svg" alt="">
+      </div>
+      <div [ngClass]="generarEventEffect">
+        <div class="ev1">
+          <form [formGroup]="gEventosForm1" autocomplete="off" [ngStyle]="{'position':'relative'}">
+
+            <label class="linea" [ngStyle]="{'position':'absolute', 'width': '100%', 'top': '60px', 'color':'#3B8EDE', 'font-weight':'600', 'font-size':'13px'}">
+              Generar Notificaciones
+            </label>
+
+            <div [ngStyle]="{'min-width':'300px'}">
+              <label>Nombre</label>
+              <input placeholder="Escribe Aquí el nombre del evento"[ngStyle]="{'font-weight':'700'}" type="text" formControlName="nombreEvent"
+                     name="nombreEvent" [style.border-bottom]="evento.nombre !== '' ? '': '1px solid #C1272D'" (blur)="evento.nombre = gEventosForm1.controls.nombreEvent.value">
+            </div>
+            <div [ngStyle]="{'min-width':'170px'}">
+              <label>Realización:</label>
+              <div>
+                <input placeholder="0"
+                       [style.border-bottom]="validarDias1Nuevo ? '':'1px solid #C1272D'"
+                       [ngStyle]="{'width':'50px', 'font-weight':'700', 'text-align':'center'}"
+                       type="text" formControlName="dias1"
+                       name="dias1"
+                       (blur)="evento.cantPeriodo = gEventosForm1.controls.dias1.value; evento.frealizacion = calculateFRealizacionNuevo(evento.tipoPeriodo, evento.cantPeriodo, true)"
+                       (keyup)="validarDias1Nuevo = validarDias(gEventosForm1.controls.dias1.value)">
+                <div class="droplist" [ngStyle]="{'width':'105px'}">
+                  <gn-drop-list (valueDropList)="droplistNuevo(1, $event)"
+                                [items]="dropListPeriodoTiempo"
+                                [isSearch]="false" [isCategory]="true"
+                                [align]="'left'"
+                                [lineaColor]="'0.75px solid #98A9B4'"
+                                [widthContent]="'110px'"
+                                [marginLeftContent]="'-2.5px'"
+                                [itemSelect]="resetNuevo[0]"
+                                [fontWeight]="'600'"
+                                [activeFirst]="true"
+                                [activeValidData]="true"></gn-drop-list>
+                </div>
+              </div>
+            </div>
+            <div class="fecha_realizacion">
+              <label [style.width]="'80px'" [ngClass]="registro.finicio.getTime() < evento.frealizacion.getTime() ? 'validDate': 'invalidDate'" *ngIf="evento.frealizacion != null">{{evento.frealizacion | dateFormatSlash}}</label>
+            </div>
+            <div [ngStyle]="{'min-width':'170px', 'margin-top': '30px'}">
+              <label>Período de Tiempo</label>
+              <div>
+                <input placeholder="0"
+                       [style.border-bottom]="validarDias2Nuevo ? '':'1px solid #C1272D'"
+                       [ngStyle]="{'width':'50px', 'text-align':'center'}"
+                       type="number"
+                       min="0"
+                       formControlName="dias2"
+                       name="dias2"
+                       (keyup)="validarDias2Nuevo = validarDias(gEventosForm1.controls.dias2.value)">
+                <div class="droplist" [ngStyle]="{'width':'105px'}">
+                  <gn-drop-list (valueDropList)="droplistNuevo(2, $event)" [items]="dropListPeriodoTiempo" [isSearch]="false" [isCategory]="true"
+                                [align]="'left'" [lineaColor]="'0.75px solid #98A9B4'" [widthContent]="'110px'" [marginLeftContent]="'-2.5px'" [itemSelect]="resetNuevo[1]"
+                                [activeFirst]="true" [activeValidData]="true"></gn-drop-list>
+                </div>
+              </div>
+            </div>
+            <div [ngStyle]="{'min-width':'150px', 'margin-top': '30px'}">
+              <label>Notificar</label>
+              <div class="droplist" [ngStyle]="{'width':'155px'}">
+                <gn-drop-list (valueDropList)="droplistNuevo(3, $event)" [items]="dropListNotificacion" [isSearch]="false" [isCategory]="true"
+                              [align]="'left'" [lineaColor]="'0.75px solid #98A9B4'" [itemSelect]="resetNuevo[2]"
+                              [activeFirst]="true" [activeValidData]="true"></gn-drop-list>
+              </div>
+            </div>
+
+            <div [ngStyle]="{'min-width':'150px', 'margin-top': '30px'}">
+              <a (click)="agregarNuevoNotificacion()"
+                 [style.pointer-events]="validarDias2Nuevo && notificaciones.tipoPeriodo && notificaciones.recurrencia ? 'auto':'none'"
+                 [style.color]="validarDias2Nuevo && notificaciones.tipoPeriodo && notificaciones.recurrencia ? '':'#D5DEE2'">
+                AGREGAR
+              </a>
+            </div>
+
+            <div class="options" [ngStyle]="{'min-width':'100%'}" [style.height]="(listNotificacionesNuevo.length/4) * 28 + 'px'" [style.padding]="listNotificacionesNuevo.length == 0 ? '0 0 0 0':'10px 0px 30px 0'">
+              <div class="item-options" *ngFor='let item of listNotificacionesNuevo; let i = index'>
+                <p>
+                  {{item.cantPeriodo}} {{item.tipoPeriodo}} antes / {{item.recurrencia}}
+                  <span [style.color]="registro.finicio.getTime() < item.startDate.getTime() ? '#37B34A' : 'rgba(193, 39, 45, 0.6)'"> · {{item.startDateText}}</span>
+                </p>
+                <img (click)="borrarNuevoNotificacion(i)" [ngStyle]="{'cursor':'pointer-'}" src="./assets/images/eliminar_tag.svg" alt="">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="ev2" [ngStyle]="{'flex-direction':'column'}">
+          <form [formGroup]="gEventosForm2" autocomplete="off">
+            <div [ngStyle]="{'min-width':'395px'}">
+              <label>Correo de Notificación</label>
+              <input placeholder="Escribe Aquí" [style.border-bottom]="validEmailNuevo ? '':'1px solid #C1272D'" [ngStyle]="{'height':'20px'}" type="text" formControlName="correoN" name="correoN" (keyup)="validEmailNuevo = validarCorrreo(gEventosForm2.controls.correoN.value)">
+            </div>
+            <div [ngStyle]="{'min-width':'150px'}">
+              <a (click)="agregarNuevoCorreo()" [style.pointer-events]="validEmailNuevo ? 'auto':'none'" [style.color]="validEmailNuevo ? '': '#D5DEE2'">AGREGAR</a>
+            </div>
+
+            <div class="options" [ngStyle]="{'min-width':'100%'}" [style.height]="(listCorreosNuevo.length/4) * 28 + 'px'" [style.padding]="listCorreosNuevo.length == 0 ? '0 0 0 0':'10px 0px 30px 0'">
+              <div class="item-options" *ngFor='let item of listCorreosNuevo; let i = index'>
+                <p> {{item.correo}}</p>
+                <img (click)="borrarNuevoCorreo(i)" [ngStyle]="{'cursor':'pointer'}" src="./assets/images/eliminar_tag.svg" alt="">
+              </div>
+            </div>
+          </form>
+
+
+          <div class="tramiteCofeprisEvento" [style.background-color]="evento.tramite ? null : 'transparent'">
+            <img (click)="evento.tramite = true" *ngIf="!evento.tramite" [ngStyle]="{'cursor':'pointer'}" src="./assets/images/check_verde_1.svg" alt="">
+            <img (click)="evento.tramite = false" *ngIf="evento.tramite" [ngStyle]="{'cursor':'pointer'}" src="./assets/images/check_verde_2.svg" alt="">
+            <p [style.font-weigth]="evento.tramite ? '600' : '400'">Agregar Trámite de COFEPRIS</p>
+          </div>
+        </div>
+        <div class="ev3">
+          <a (click)="generarNuevoEvento()" [style.background-color]="evento.cantPeriodo !== 0 && evento.nombre !== '' && evento.tipoPeriodo !== '' && listNotificacionesNuevo.length > 0 && listCorreosNuevo.length > 0 && validarDias1Nuevo && evento.frealizacion.getTime() > registro.finicio.getTime() && !isNewEventInvalid() ? '' : '#D5DEE2'"
+             [style.pointer-events]="evento.cantPeriodo !== 0 && evento.nombre !== '' && evento.tipoPeriodo !== '' && listNotificacionesNuevo.length > 0 && listCorreosNuevo.length > 0 && validarDias1Nuevo && evento.frealizacion.getTime() > registro.finicio.getTime() && !isNewEventInvalid() ? 'auto' : 'none'">GENERAR </a>
+        </div>
+      </div>
+
+      <!--  ************************************************  Dossier  ************************************************ -->
+      <div class="item-eventos" (click)="itemEventEffect[0] == 'body-itemE' ? itemEventEffect[0] = 'body-itemE-close' : itemEventEffect[0] = 'body-itemE'">
+        <div class="number">
+          <label># 1</label>
+        </div>
+        <div [ngClass]="itemEventEffect[0] == 'body-itemE' ? 'body-item-eventos-open' : 'body-item-eventos'" [style.background-color]="enableDossier ? '' : 'rgba(152, 169, 180, 0.7)'">
+          <div class="check" (click)="handlerEvents($event, 'enableDossier')">
+            <img (click)="handlerEvents($event, 'enableDossier')" *ngIf="enableDossier" src="./assets/images/check_blanco.svg" alt="">
+          </div>
+          <div class="part1" [ngClass]="!enableDossier ? 'disablePart': ''">
+            <label>Dossier</label>
+            <label> {{ listNotificacionesDossier.length == 1 ?  listNotificacionesDossier.length+ " Notificación" : listNotificacionesDossier.length+ " Notificaciones"  }}  · {{ listCorreosDossier.length == 1 ? listCorreosDossier.length+ " Correo de Notificación": listCorreosDossier.length+ " Correos de Notificación"  }}</label>
+          </div>
+          <div class="part2" [ngClass]="!enableDossier ? 'disablePart': ''">
+            <label>Realización:</label>
+            <input type="number"
+                   [style.pointer-events]="enableDossier ? 'auto': 'none'"
+                   [ngStyle]="{'text-align':'center'}"
+                   [style.border-bottom]="enableDossier ? dossier.cantPeriodo > 0 ? '' : '1px solid #C1272D' : '1px solid #FFFFFF'"
+                   [(ngModel)]="dossier.cantPeriodo"
+                   [ngModelOptions]="{standalone: true}"
+                   (blur)="calculateFRealizacion(1)"
+                   (click)="$event.stopPropagation()">
+            <div class="droplist" [style.pointer-events]="enableDossier ? 'auto': 'none'">
+              <gn-drop-list (valueDropList)="dropListDossier($event, 1)"
+                            [items]="dropListPeriodoTiempo"
+                            [isSearch]="false"
+                            [isCategory]="true"
+                            [align]="'left'"
+                            [lineaColor]="enableDossier ? '0.75px solid #98A9B4' : '0.75px solid #FFFFFF'"
+                            [color]="enableDossier ? '#3369B1' : '#FFFFFF'"
+                            [widthContent]="'110px'"
+                            [marginLeftContent]="'-2.5px'"
+                            [itemSelect]="resetDossier[0]"
+                            [activeFirst]="true"
+                            [activeValidData]="enableDossier"
+                            [fontSize]="'14px'"></gn-drop-list>
+            </div>
+            <label [style.width]="'80px'" [ngClass]="registro.finicio.getTime() < dossier.frealizacion.getTime() ? '': 'invalidDate'" *ngIf="dossier.frealizacion != null">{{dossier.frealizacion | dateFormatSlash}}</label>
+            <label [style.width]="'80px'" *ngIf="dossier.frealizacion == null">N/D</label>
+            <img [ngClass]="itemEventEffect[0] == 'body-itemE' ? 'open': 'close'" *ngIf="enableDossier" [style.transition]="'0.5s'" src="./assets/images/flecha_azul.svg" alt="">
+            <img [ngClass]="itemEventEffect[0] == 'body-itemE' ? 'open': 'close'" *ngIf="!enableDossier" [style.transition]="'0.5s'" src="./assets/images/flecha_blanca.svg" alt="">
+          </div>
+        </div>
+      </div>
+
+      <div [ngClass]="itemEventEffect[0]" [style.pointer-events]="enableDossier ? 'auto': 'none'">
+
+        <div class="ev1" [ngClass]="!enableDossier ? 'disableEvent1': ''">
+          <form >
+
+            <div [ngStyle]="{'min-width':'170px'}">
+              <label>Período de Tiempo</label>
+              <div>
+                <input [ngStyle]="{'width':'50px','text-align':'center'}"
+                       [style.border-bottom]="validarDias2Dossier ? '' : enableDossier ? '1px solid #C1272D' : ''"
+                       [style.color]="enableDossier ? '#3369B1': '#D5DEE2'"
+                       type="number"
+                       min="0"
+                       #inputDossier (click)="inputDossier.select()"
+                       [(ngModel)]="dia1Dossier"
+                       [ngModelOptions]="{standalone: true}"
+                       (keyup)="validarDias2Dossier = validarDias(dia1Dossier)">
+                <div class="droplist" [ngStyle]="{'width':'105px'}">
+                  <gn-drop-list (valueDropList)="dropListDossier($event, 2)" [items]="dropListPeriodoTiempo" [isSearch]="false" [isCategory]="true" [align]="'left'"
+                                [lineaColor]="'0.75px solid #98A9B4'" [color]="enableDossier ? '#37B34A': '#D5DEE2'" [widthContent]="'110px'" [marginLeftContent]="'-2.5px'" [itemSelect]="resetDossier[1]"
+                                [activeFirst]="true" [activeValidData]="enableDossier"></gn-drop-list>
+                </div>
+              </div>
+            </div>
+
+            <div [ngStyle]="{'min-width':'150px'}">
+              <label>Notificar</label>
+              <div class="droplist" [ngStyle]="{'width':'155px'}">
+                <gn-drop-list (valueDropList)="dropListDossier($event, 3)" [items]="dropListNotificacion" [isSearch]="false" [isCategory]="true" [align]="'left'"
+                              [lineaColor]="'0.75px solid #98A9B4'" [color]="enableDossier ? '#37B34A': '#D5DEE2'"  [itemSelect]="resetDossier[2]"
+                              [activeFirst]="true" [activeValidData]="enableDossier"></gn-drop-list>
+              </div>
+            </div>
+
+            <div [ngStyle]="{'min-width':'150px'}">
+              <a (click)="agregarNotificacionDossier()" [style.pointer-events]="validarDias2Dossier ? 'auto':'none'" [style.color]="enableDossier ? validarDias2Dossier ? '' : '#D5DEE2' : '#D5DEE2'">AGREGAR</a>
+            </div>
+
+            <div class="options" [ngStyle]="{'min-width':'100%'}" [style.height]="(listNotificacionesDossier.length/4) * 28 + 'px'" [style.padding]="listNotificacionesDossier.length == 0 ? '0 0 0 0':'10px 0px 30px 0'">
+              <div class="item-options" *ngFor='let item of listNotificacionesDossier; let l = index'>
+                <p>
+                  {{item.cantPeriodo}} {{item.tipoPeriodo}} antes / {{item.recurrencia}}
+                  <span [style.color]="registro.finicio.getTime() < item.startDate.getTime() ? '#37B34A' : 'rgba(193, 39, 45, 0.6)'"> · {{item.startDateText}}</span>
+                </p>
+                <img (click)="borrarDossierNotificacion(l)" [ngStyle]="{'cursor':'pointer'}" src="./assets/images/eliminar_tag.svg" alt="">
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="ev2" [ngClass]="!enableDossier ? 'disableEvent2': ''">
+          <form >
+            <div [ngStyle]="{'min-width':'395px'}">
+              <label>Correo de Notificación</label>
+              <input [placeholder]="enableDossier ? 'Escribe Aquí' : ''"
+                     [style.border-bottom]="validEmailDossier ? '': enableDossier ? '1px solid #C1272D' : ''"
+                     [style.color]="enableDossier ? '#3369B1': '#D5DEE2'"
+                     [ngStyle]="{'height':'20px'}"
+                     type="text"
+                     [(ngModel)]="correoDossier"
+                     [ngModelOptions]="{standalone: true}"
+                     (keyup)="validEmailDossier = validarCorrreo(correoDossier)">
+            </div>
+            <div [ngStyle]="{'min-width':'150px'}">
+              <a (click)="agregarDossierCorreo()" [style.pointer-events]="validEmailDossier ? 'auto':'none'" [style.color]="enableDossier ? validEmailDossier ? '': '#D5DEE2' : '#D5DEE2'">AGREGAR</a>
+            </div>
+
+            <div class="options" [ngStyle]="{'min-width':'100%'}" [style.height]="(listCorreosDossier.length/4) * 28 + 'px'" [style.padding]="listCorreosDossier.length == 0 ? '0 0 0 0':'10px 0px 30px 0'">
+              <div class="item-options" *ngFor='let item of listCorreosDossier; let j = index'>
+                <p> {{item.correo}}</p>
+                <img (click)="borrarDossierCorreo(j)" [ngStyle]="{'cursor':'pointer'}" src="./assets/images/eliminar_tag.svg" alt="">
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </div>
+
+      <!--  ************************************************  Tecnovigilancia  ************************************************ -->
+
+      <div class="item-eventos" (click)="itemEventEffect[1] == 'body-itemE' ? itemEventEffect[1] = 'body-itemE-close' : itemEventEffect[1] = 'body-itemE'">
+        <div class="number">
+          <label># 2</label>
+        </div>
+        <div [ngClass]="itemEventEffect[1] == 'body-itemE' ? 'body-item-eventos-open' : 'body-item-eventos'" [style.background-color]="enableTecnovigilancia ? '' : 'rgba(152, 169, 180, 0.7)'">
+          <div class="check" (click)="handlerEvents($event, 'enableTecnovigilancia')">
+            <img (click)="handlerEvents($event, 'enableTecnovigilancia')" *ngIf="enableTecnovigilancia" src="./assets/images/check_blanco.svg" alt="">
+          </div>
+          <div class="part1" [ngClass]="!enableTecnovigilancia ? 'disablePart': ''">
+            <label>Tecnovigilancia</label>
+            <label>{{ listNotificacionesTecno.length == 1 ?  listNotificacionesTecno.length+ " Notificación" : listNotificacionesTecno.length+ " Notificaciones"  }}  · {{ listCorreosTecno.length == 1 ? listCorreosTecno.length+ " Correo de Notificación": listCorreosTecno.length+ " Correos de Notificación"  }}</label>
+          </div>
+          <div class="part2" [ngClass]="!enableTecnovigilancia ? 'disablePart': ''">
+            <label>Realización:</label>
+            <input type="number"
+                   [style.pointer-events]="enableTecnovigilancia ? 'auto': 'none'"
+                   [ngStyle]="{'text-align':'center'}"
+                   [style.border-bottom]="enableTecnovigilancia ? tecnovigilancia.cantPeriodo > 0 ? '':'1px solid #C1272D' : '1px solid #FFFFFF'"
+                   [(ngModel)]="tecnovigilancia.cantPeriodo"
+                   [ngModelOptions]="{standalone: true}"
+                   (blur)="calculateFRealizacion(2)" (click)="$event.stopPropagation()">
+            <div class="droplist" [style.pointer-events]="enableTecnovigilancia ? 'auto': 'none'">
+              <gn-drop-list (valueDropList)="dropListTecno($event, 1)"
+                            [items]="dropListPeriodoTiempo"
+                            [isSearch]="false"
+                            [isCategory]="true"
+                            [align]="'left'"
+                            [lineaColor]="enableTecnovigilancia ? '0.75px solid #98A9B4' : '0.75px solid #FFFFFF'"
+                            [color]="enableTecnovigilancia ? '#3369B1' : '#FFFFFF'"
+                            [widthContent]="'110px'"
+                            [marginLeftContent]="'-2.5px'"
+                            [itemSelect]="resetTecno[0]"
+                            [fontSize]="'14px'"
+                            [activeFirst]="true"
+                            [activeValidData]="enableTecnovigilancia"></gn-drop-list>
+            </div>
+            <label [style.width]="'80px'" *ngIf="tecnovigilancia.frealizacion != null" [ngClass]="registro.finicio.getTime() < tecnovigilancia.frealizacion.getTime() ? '': 'invalidDate'">{{tecnovigilancia.frealizacion | dateFormatSlash}}</label>
+            <label [style.width]="'80px'" *ngIf="tecnovigilancia.frealizacion == null">N/D</label>
+            <img [ngClass]="itemEventEffect[1] == 'body-itemE' ? 'open': 'close'" *ngIf="enableTecnovigilancia" [style.transition]="'0.5s'" src="./assets/images/flecha_azul.svg" alt="">
+            <img [ngClass]="itemEventEffect[1] == 'body-itemE' ? 'open': 'close'" *ngIf="!enableTecnovigilancia" [style.transition]="'0.5s'" src="./assets/images/flecha_blanca.svg" alt="">
+          </div>
+        </div>
+      </div>
+
+      <div [ngClass]="itemEventEffect[1]" [style.pointer-events]="enableTecnovigilancia ? 'auto': 'none'">
+        <div class="ev1" [ngClass]="!enableTecnovigilancia ? 'disableEvent1': ''">
+          <form>
+
+            <div [ngStyle]="{'min-width':'170px'}">
+              <label>Período de Tiempo</label>
+              <div>
+                <input [ngStyle]="{'width':'50px','text-align':'center'}"
+                       [style.color]="enableTecnovigilancia ? '#3369B1': '#D5DEE2'"
+                       [style.border-bottom]="validarDias2Tecno ? '' : enableTecnovigilancia ? '1px solid #C1272D' : ''"
+                       type="number"
+                       min="0"
+                       #inputTecno (click)="inputTecno.select()"
+                       [(ngModel)]="dia1Tecno"
+                       [ngModelOptions]="{standalone: true}"
+                       (keyup)="validarDias2Tecno = validarDias(dia1Tecno)">
+                <div class="droplist" [ngStyle]="{'width':'105px'}">
+                  <gn-drop-list (valueDropList)="dropListTecno($event, 2)" [items]="dropListPeriodoTiempo" [isSearch]="false" [isCategory]="true" [align]="'left'"
+                                [lineaColor]="'0.75px solid #98A9B4'" [color]="enableTecnovigilancia ? '#37B34A': '#D5DEE2'" [widthContent]="'110px'" [marginLeftContent]="'-2.5px'" [itemSelect]="resetTecno[1]"
+                                [activeFirst]="true" [activeValidData]="enableTecnovigilancia"></gn-drop-list>
+                </div>
+              </div>
+            </div>
+
+            <div [ngStyle]="{'min-width':'150px'}">
+              <label>Notificar</label>
+              <div class="droplist" [ngStyle]="{'width':'155px'}">
+                <gn-drop-list (valueDropList)="dropListTecno($event, 3)" [items]="dropListNotificacion" [isSearch]="false" [isCategory]="true" [align]="'left'"
+                              [lineaColor]="'0.75px solid #98A9B4'" [color]="enableTecnovigilancia ? '#37B34A': '#D5DEE2'" [itemSelect]="resetTecno[2]"
+                              [activeFirst]="true" [activeValidData]="enableTecnovigilancia"></gn-drop-list>
+              </div>
+            </div>
+
+            <div [ngStyle]="{'min-width':'150px'}">
+              <a (click)="agregarNotificacionTecno()" [style.pointer-events]="validarDias2Tecno ? 'auto':'none'" [style.color]="enableTecnovigilancia ? validarDias2Tecno ? '' : '#D5DEE2' : '#D5DEE2'">AGREGAR</a>
+            </div>
+
+            <div class="options" [ngStyle]="{'min-width':'100%'}" [style.height]="(listNotificacionesTecno.length/4) * 28 + 'px'" [style.padding]="listNotificacionesTecno.length == 0 ? '0 0 0 0':'10px 0px 30px 0'">
+              <div class="item-options" *ngFor='let item of listNotificacionesTecno; let l = index'>
+                <p>
+                  {{item.cantPeriodo}} {{item.tipoPeriodo}} antes / {{item.recurrencia}}
+                  <span [style.color]="registro.finicio.getTime() < item.startDate.getTime() ? '#37B34A' : 'rgba(193, 39, 45, 0.6)'"> · {{item.startDateText}}</span>
+                </p>
+                <img (click)="borrarTecnoNotificacion(l)" [ngStyle]="{'cursor':'pointer-'}" src="./assets/images/eliminar_tag.svg" alt="">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="ev2" [ngClass]="!enableTecnovigilancia ? 'disableEvent2': ''">
+          <form >
+            <div [ngStyle]="{'min-width':'395px'}">
+              <label>Correo de Notificación</label>
+              <input [placeholder]="enableTecnovigilancia ? 'Escribe Aquí' : ''"
+                     [style.border-bottom]="validEmailTecno ? '' : enableTecnovigilancia ? '1px solid #C1272D' : ''"
+                     [style.color]="enableTecnovigilancia ? '#3369B1': '#D5DEE2'"
+                     [ngStyle]="{'height':'20px'}"
+                     type="text"
+                     [(ngModel)]="correoTecno"
+                     [ngModelOptions]="{standalone: true}"
+                     (keyup)="validEmailTecno = validarCorrreo(correoTecno)">
+            </div>
+            <div [ngStyle]="{'min-width':'150px'}">
+              <a (click)="agregarTecnoCorreo()" [style.pointer-events]="validEmailTecno ? 'auto':'none'" [style.color]="enableTecnovigilancia ? validEmailTecno ? '': '#D5DEE2' : '#D5DEE2'">AGREGAR</a>
+            </div>
+
+            <div class="options" [ngStyle]="{'min-width':'100%'}" [style.height]="(listCorreosTecno.length/4) * 28 + 'px'" [style.padding]="listCorreosTecno.length == 0 ? '0 0 0 0':'10px 0px 30px 0'">
+              <div class="item-options" *ngFor='let item of listCorreosTecno; let j = index'>
+                <p> {{item.correo}}</p>
+                <img (click)="borrarTecnoCorreo(j)" [ngStyle]="{'cursor':'pointer'}" src="./assets/images/eliminar_tag.svg" alt="">
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </div>
+
+      <!--  ************************************************  Sometimiento  ************************************************ -->
+      <div class="item-eventos" (click)="itemEventEffect[2] == 'body-itemE' ? itemEventEffect[2] = 'body-itemE-close' : itemEventEffect[2] = 'body-itemE'">
+        <div class="number">
+          <label># 3</label>
+        </div>
+        <div [ngClass]="itemEventEffect[2] == 'body-itemE' ? 'body-item-eventos-open' : 'body-item-eventos'" [style.background-color]="enableSometimiento ? '' : 'rgba(152, 169, 180, 0.7)'">
+          <div class="check" (click)="handlerEvents($event, 'enableSometimiento')">
+            <img (click)="handlerEvents($event, 'enableSometimiento')" *ngIf="enableSometimiento" src="./assets/images/check_blanco.svg" alt="">
+          </div>
+          <div class="part1" [ngClass]="!enableSometimiento ? 'disablePart': ''">
+            <label>Sometimiento</label>
+            <label>{{ listNotificacionesSom.length == 1 ?  listNotificacionesSom.length+ " Notificación" : listNotificacionesSom.length+ " Notificaciones"  }}  · {{ listCorreosSom.length == 1 ? listCorreosSom.length+ " Correo de Notificación": listCorreosSom.length+ " Correos de Notificación"  }}</label>
+          </div>
+          <div class="part2" [ngClass]="!enableSometimiento ? 'disablePart': ''">
+            <label>Realización:</label>
+            <input type="number"
+                   min="0"
+                   [style.pointer-events]="enableSometimiento ? 'auto': 'none'"
+                   [ngStyle]="{'text-align':'center'}"
+                   [style.border-bottom]="enableSometimiento ? sometimiento.cantPeriodo > 0 ? '':'1px solid #C1272D' : '1px solid #FFFFFF'"
+                   [(ngModel)]="sometimiento.cantPeriodo"
+                   [ngModelOptions]="{standalone: true}"
+                   (blur)="calculateFRealizacion(3)"
+                   (click)="$event.stopPropagation()">
+            <div class="droplist" [style.pointer-events]="enableSometimiento ? 'auto': 'none'">
+              <gn-drop-list (valueDropList)="dropListSom($event, 1)"
+                            [items]="dropListPeriodoTiempo"
+                            [isSearch]="false"
+                            [isCategory]="true"
+                            [align]="'left'"
+                            [lineaColor]="enableSometimiento ? '0.75px solid #98A9B4' : '0.75px solid #FFFFFF'"
+                            [color]="enableSometimiento ? '#3369B1' : '#FFFFFF'"
+                            [widthContent]="'110px'"
+                            [marginLeftContent]="'-2.5px'"
+                            [itemSelect]="resetSom[0]"
+                            [fontSize]="'14px'"
+                            [activeFirst]="true"
+                            [activeValidData]="enableSometimiento"></gn-drop-list>
+            </div>
+            <label [style.width]="'80px'" *ngIf="sometimiento.frealizacion != null" [ngClass]="registro.finicio.getTime() < sometimiento.frealizacion.getTime() ? '': 'invalidDate'">{{sometimiento.frealizacion | dateFormatSlash}}</label>
+            <label [style.width]="'80px'" *ngIf="sometimiento.frealizacion == null">N/D</label>
+            <img [ngClass]="itemEventEffect[2] == 'body-itemE' ? 'open': 'close'" *ngIf="enableSometimiento" [style.transition]="'0.5s'" src="./assets/images/flecha_azul.svg" alt="">
+            <img [ngClass]="itemEventEffect[2] == 'body-itemE' ? 'open': 'close'" *ngIf="!enableSometimiento" [style.transition]="'0.5s'" src="./assets/images/flecha_blanca.svg" alt="">
+          </div>
+        </div>
+      </div>
+
+      <div [ngClass]="itemEventEffect[2]" [style.pointer-events]="enableSometimiento ? 'auto': 'none'">
+        <div class="ev1" [ngClass]="!enableSometimiento ? 'disableEvent1': ''">
+          <form >
+
+            <div [ngStyle]="{'min-width':'170px'}">
+              <label>Período de Tiempo</label>
+              <div>
+                <input [ngStyle]="{'width':'50px','text-align':'center'}"
+                       [style.border-bottom]="validarDias2Som ? '' : enableSometimiento ? '1px solid #C1272D' : ''"
+                       [style.color]="enableSometimiento ? '#3369B1': '#D5DEE2'"
+                       type="number"
+                       min="0"
+                       #inputSome (click)="inputSome.select()"
+                       [(ngModel)]="dia1Som"
+                       [ngModelOptions]="{standalone: true}"
+                       (keyup)="validarDias2Som = validarDias(dia1Som)">
+                <div class="droplist" [ngStyle]="{'width':'105px'}">
+                  <gn-drop-list (valueDropList)="dropListSom($event, 2)" [items]="dropListPeriodoTiempo" [isSearch]="false" [isCategory]="true" [align]="'left'"
+                                [lineaColor]="'0.75px solid #98A9B4'" [color]="enableSometimiento ? '#37B34A': '#D5DEE2'" [widthContent]="'110px'" [marginLeftContent]="'-2.5px'" [itemSelect]="resetSom[1]"
+                                [activeFirst]="true" [activeValidData]="enableSometimiento"></gn-drop-list>
+                </div>
+              </div>
+            </div>
+
+            <div [ngStyle]="{'min-width':'150px'}">
+              <label>Notificar</label>
+              <div class="droplist" [ngStyle]="{'width':'155px'}">
+                <gn-drop-list (valueDropList)="dropListSom($event, 3)" [items]="dropListNotificacion" [isSearch]="false" [isCategory]="true" [align]="'left'"
+                              [lineaColor]="'0.75px solid #98A9B4'" [color]="enableSometimiento ? '#37B34A': '#D5DEE2'" [itemSelect]="resetSom[2]"
+                              [activeFirst]="true" [activeValidData]="enableSometimiento"></gn-drop-list>
+              </div>
+            </div>
+
+            <div [ngStyle]="{'min-width':'150px'}">
+              <a (click)="agregarNotificacionSom()" [style.pointer-events]="validarDias2Som ? 'auto':'none'" [style.color]="enableSometimiento ? validarDias2Som ? '' : '#D5DEE2' : '#D5DEE2'">AGREGAR</a>
+            </div>
+
+            <div class="options" [ngStyle]="{'min-width':'100%'}" [style.height]="(listNotificacionesSom.length/4) * 28 + 'px'" [style.padding]="listNotificacionesSom.length == 0 ? '0 0 0 0':'10px 0px 30px 0'">
+              <div class="item-options" *ngFor='let item of listNotificacionesSom; let l = index'>
+                <p>
+                  {{item.cantPeriodo}} {{item.tipoPeriodo}} antes / {{item.recurrencia}}
+                  <span [style.color]="registro.finicio.getTime() < item.startDate.getTime() ? '#37B34A' : 'rgba(193, 39, 45, 0.6)'"> · {{item.startDateText}}</span>
+                </p>
+                <img (click)="borrarSomNotificacion(l)" [ngStyle]="{'cursor':'pointer-'}" src="./assets/images/eliminar_tag.svg" alt="">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="ev2" [ngClass]="!enableSometimiento ? 'disableEvent2': ''">
+          <form >
+            <div [ngStyle]="{'min-width':'395px'}">
+              <label>Correo de Notificación</label>
+              <input [placeholder]="enableSometimiento ? 'Escribe Aquí' : ''"
+                     [style.border-bottom]="validEmailSom ? '': enableSometimiento ? '1px solid #C1272D' : ''"
+                     [style.color]="enableSometimiento ? '#3369B1': '#D5DEE2'"
+                     [ngStyle]="{'height':'20px'}"
+                     type="text"
+                     [(ngModel)]="correoSom"
+                     [ngModelOptions]="{standalone: true}"
+                     (keyup)="validEmailSom = validarCorrreo(correoSom)">
+            </div>
+            <div [ngStyle]="{'min-width':'150px'}">
+              <a (click)="agregarSomCorreo()" [style.pointer-events]="validEmailSom ? 'auto':'none'" [style.color]="enableSometimiento ? validEmailSom ? '': '#D5DEE2' : '#D5DEE2'">AGREGAR</a>
+            </div>
+
+            <div class="options" [ngStyle]="{'min-width':'100%'}" [style.height]="(listCorreosSom.length/4) * 28 + 'px'" [style.padding]="listCorreosSom.length == 0 ? '0 0 0 0':'10px 0px 30px 0'">
+              <div class="item-options" *ngFor='let item of listCorreosSom; let j = index'>
+                <p> {{item.correo}}</p>
+                <img (click)="borrarSomCorreo(j)" [ngStyle]="{'cursor':'pointer'}" src="./assets/images/eliminar_tag.svg" alt="">
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </div>
+
+      <div *ngFor='let item of listEventos; let i = index'>
+
+        <div class="item-eventos" (click)="itemNewEventEffect[i] == 'body-itemE' ? itemNewEventEffect[i] = 'body-itemE-close' : itemNewEventEffect[i] = 'body-itemE'">
+          <div class="number">
+            <label>{{"# "+ (i+4)}}</label>
+          </div>
+          <div [ngClass]="itemNewEventEffect[i] == 'body-itemE' ? 'body-item-eventos-open' : 'body-item-eventos'">
+            <div class="part1">
+              <label>{{item.nombre}}</label>
+              <label>{{ item.notificaciones.length == 1 ?  item.notificaciones.length+ " Notificación" : item.notificaciones.length+ " Notificaciones"  }}  · {{ item.correos.length == 1 ? item.correos.length+ " Correo de Notificación": item.correos.length+ " Correos de Notificación"  }}</label>
+            </div>
+
+            <!-- <div class="part2">
+              <div class="newEvent">
+                <label>Realización: {{item.cantPeriodo + " " + item.tipoPeriodo + " antes"}}</label>
+                <label>{{item.frealizacion | dateFormatSlash}}</label>
+              </div>
+
+              <img [ngClass]="itemNewEventEffect[i] == 'body-itemE' ? 'open': 'close'" [style.transition]="'1s'" src="./assets/images/flecha_azul.svg" alt="">
+            </div> -->
+
+            <div class="part2" *ngIf="!item.terminado">
+
+              <label>Realización:</label>
+              <input type="number"
+                     min="0"
+                     [ngStyle]="{'text-align':'center'}"
+                     [style.border-bottom]="item.cantPeriodo > 0 ? '':'1px solid #C1272D'"
+                     [(ngModel)]="item.cantPeriodo"
+                     [ngModelOptions]="{standalone: true}"
+                     (click)="$event.stopPropagation()"
+                     (blur)="calculateFRealizacionEvento(i)">
+              <div class="droplist">
+                <gn-drop-list (valueDropList)="dropListTiempoR($event, i)"
+                              [items]="dropListPeriodoTiempo"
+                              [isSearch]="false"
+                              [isCategory]="true"
+                              [align]="'left'"
+                              [lineaColor]="'0.75px solid #98A9B4'"
+                              [widthContent]="'110px'"
+                              [marginLeftContent]="'-2.5px'"
+                              [itemSelect]="{'nombre': item.tipoPeriodo}"
+                              [fontSize]="'14px'"></gn-drop-list>
+              </div>
+              <label [style.width]="'80px'" *ngIf="item.frealizacion != null" [ngClass]="registro.finicio.getTime() < item.frealizacion.getTime() ? '': 'invalidDate'">{{item.frealizacion | dateFormatSlash}}</label>
+              <label [style.width]="'80px'" *ngIf="item.frealizacion == null">N/D</label>
+              <img (click)="confirmarEliminar(i, item.nombre); $event.stopPropagation()" [ngStyle]="{cursor:'pointer', width:'15px'}" src="./assets/images/eliminar_evento_2.svg" alt="">
+              <img [ngClass]="itemNewEventEffect[i] == 'body-itemE' ? 'open': 'close'" [style.transition]="'0.5s'" src="./assets/images/flecha_azul.svg" alt="">
+            </div>
+
+          </div>
+        </div>
+
+        <div [ngClass]="itemNewEventEffect[i]">
+          <div class="ev1">
+            <form >
+
+              <div [ngStyle]="{'min-width':'170px'}">
+                <label>Período de Tiempo</label>
+                <div>
+                  <input [ngStyle]="{'width':'50px','text-align':'center'}"
+                         [style.border-bottom]="arrayValidDias2[i] ? '':'1px solid #C1272D'"
+                         type="number"
+                         min="0"
+                         [(ngModel)]="diasInput[i]"
+                         [ngModelOptions]="{standalone: true}"
+                         (keyup)="arrayValidDias2[i] = validarDias(diasInput[i])">
+                  <div class="droplist" [ngStyle]="{'width':'105px'}">
+                    <gn-drop-list (valueDropList)="dropListPeriodo($event, i)" [items]="dropListPeriodoTiempo" [isSearch]="false" [isCategory]="true" [align]="'left'"
+                                  [lineaColor]="'0.75px solid #98A9B4'" [widthContent]="'110px'" [marginLeftContent]="'-2.5px'" [itemSelect]="dropListTipoPeriodo[i]"
+                                  [activeFirst]="true" [activeValidData]="true"></gn-drop-list>
+                  </div>
+                </div>
+              </div>
+
+              <div [ngStyle]="{'min-width':'150px'}">
+                <label>Notificar</label>
+                <div class="droplist" [ngStyle]="{'width':'155px'}">
+                  <gn-drop-list (valueDropList)="dropListRecu($event, i)" [items]="dropListNotificacion" [isSearch]="false" [isCategory]="true" [align]="'left'"
+                                [lineaColor]="'0.75px solid #98A9B4'" [itemSelect]="dropListRecurrencia[i]"
+                                [activeFirst]="true" [activeValidData]="true"></gn-drop-list>
+                </div>
+              </div>
+
+              <div [ngStyle]="{'min-width':'150px'}">
+                <a (click)="agregarNotificacion(i)"
+                   [style.pointer-events]="arrayValidDias2[i] && dropListTipoPeriodo[i].nombre !== '' && dropListRecurrencia[i].nombre !== '' ? 'auto':'none'"
+                   [style.color]="arrayValidDias2[i] && diasInput[i] !== 0 && dropListTipoPeriodo[i].nombre !== '' && dropListRecurrencia[i].nombre !== '' ? '':'#D5DEE2'">AGREGAR</a>
+              </div>
+
+              <div class="options" [ngStyle]="{'min-width':'100%'}" [style.height]="(item.notificaciones.length/4) * 28 + 'px'" [style.padding]="item.notificaciones.length == 0 ? '0 0 0 0':'10px 0px 30px 0'">
+                <div class="item-options" *ngFor='let items of item.notificaciones; let j = index'>
+                  <p>
+                    {{items.cantPeriodo}} {{items.tipoPeriodo}} antes / {{items.recurrencia}}
+                    <span [style.color]="registro.finicio.getTime() < items.startDate.getTime() ? '#37B34A' : 'rgba(193, 39, 45, 0.6)'"> · {{items.startDateText}}</span>
+                  </p>
+                  <img (click)="borrarNotificacion(i, j)" [ngStyle]="{'cursor':'pointer'}" src="./assets/images/eliminar_tag.svg" alt="">
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="ev2">
+            <form >
+              <div [ngStyle]="{'min-width':'395px'}">
+                <label>Correo de Notificación</label>
+                <input placeholder="Escribe Aquí" [style.border-bottom]="arrayValidEmail[i] ? '':'1px solid #C1272D'" [ngStyle]="{'height':'20px'}" type="text"  [(ngModel)]="correoInput[i]" [ngModelOptions]="{standalone: true}" (keyup)="$event.keyCode == 13 ? agregarCorreo(i) : null" (keyup)="arrayValidEmail[i] = validarCorrreo(correoInput[i])">
+              </div>
+              <div [ngStyle]="{'min-width':'150px'}">
+                <a (click)="agregarCorreo(i)" [style.pointer-events]="arrayValidEmail[i] ? 'auto':'none'" [style.color]="arrayValidEmail[i] ? '': '#D5DEE2'">AGREGAR</a>
+              </div>
+
+              <div class="options" [ngStyle]="{'min-width':'100%'}" [style.height]="(item.correos.length/4) * 28 + 'px'" [style.padding]="item.correos.length == 0 ? '0 0 0 0':'10px 0px 30px 0'">
+                <div class="item-options" *ngFor='let items of item.correos; let l = index'>
+                  <p> {{items.correo}}</p>
+                  <img (click)="borrarCorreo(i, l)" [ngStyle]="{'cursor':'pointer'}" src="./assets/images/eliminar_tag.svg" alt="">
+                </div>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <label id="totalEventos">{{(listEventos.length + 3) + " Eventos" }} &nbsp; · &nbsp; {{listCorreoT.length == 1 ? listCorreoT.length + " Correo de Notificación" : listCorreoT.length + " Correos de Notificación"}}</label>
+
+    <!-- **************************************************************** Prorroga **************************************************************** -->
+
+    <div>
+      <div [ngClass]="classProrroga == 'body-prorroga' ? 'title-prorroga-open': 'title-prorroga'" [style.background-color]="check ? '' : 'rgba(152, 169, 180, 0.7)'" (click)="classProrroga == 'body-prorroga' ? classProrroga = 'body-prorroga-close' : classProrroga = 'body-prorroga'" [style.z-index]="classProrroga == 'body-prorroga' ? '1':'0'">
+        <div class="part1">
+          <div class="check" (click)="checkF($event)">
+            <img (click)="checkF($event)" *ngIf="check" src="./assets/images/check_blanco.svg" alt="">
+          </div>
+          <p>
+            <label>Prorroga · Nombre de la Prorroga</label>
+            <label >{{ listNotificacionesProrro.length == 1 ?  listNotificacionesProrro.length+ " Notificación" : listNotificacionesProrro.length+ " Notificaciones"  }}  · {{ listCorreosProrro.length == 1 ? listCorreosProrro.length+ " Correo de Notificación": listCorreosProrro.length+ " Correos de Notificación"  }}</label>
+          </p>
+        </div>
+        <div class="part2">
+          <label>Realización:</label>
+          <input [style.pointer-events]="check ? 'auto': 'none'"
+                 type="number"
+                 [ngStyle]="{ 'color':'#FFFFFF', 'border-bottom':'0.75px solid #FFFFFF', 'text-align':'center'}"
+                 [style.border-bottom]="check ? prorroga.cantPeriodo > 0 ? '1px solid #FFFFFF':'1px solid #C1272D' : '1px solid #FFFFFF'"
+                 [(ngModel)]="prorroga.cantPeriodo"
+                 [ngModelOptions]="{standalone: true}"
+                 (blur)="calculateFRealizacion(4)"
+                 (click)="$event.stopPropagation()">
+          <div class="droplist" [style.pointer-events]="check ? 'auto': 'none'">
+            <gn-drop-list (valueDropList)="dropListProrro($event, 1)"
+                          [items]="dropListPeriodoTiempo"
+                          [isSearch]="false"
+                          [isCategory]="true"
+                          [align]="'left'"
+                          [lineaColor]="'0.75px solid #FFFFFF'"
+                          [color]="'#FFFFFF'"
+                          [widthContent]="'110px'"
+                          [marginLeftContent]="'-2.5px'"
+                          [itemSelect]="resetProrro[0]"
+                          [fontSize]="'14px'"
+                          [activeFirst]="true"
+                          [activeValidData]="check"></gn-drop-list>
+          </div>
+          <label [style.width]="'80px'" *ngIf="prorroga.frealizacion != null" [ngClass]="check ? registro.finicio.getTime() < prorroga.frealizacion.getTime() ? '': 'invalidDate' : ''">{{prorroga.frealizacion | dateFormatSlash}}</label>
+          <label [style.width]="'80px'" *ngIf="prorroga.frealizacion == null">N/D</label>
+          <img [ngClass]="classProrroga == 'body-prorroga' ? 'open': 'close'" [style.transition]="'0.5s'" src="./assets/images/flecha_blanca.svg" alt="">
+        </div>
+      </div>
+
+
+      <div [ngClass]="classProrroga" [style.pointer-events]="check ? 'auto': 'none'" [style.background-color]="check ? '#F5FBF6': 'rgba(236, 240, 243, 0.3)'" [style.z-index]="classProrroga == 'body-prorroga' ? '0':'0'">
+        <div class="ev1">
+          <form>
+
+            <div [ngStyle]="{'min-width':'170px'}">
+              <label>Período de Tiempo</label>
+              <div>
+                <input [style.color]="check ? '#37B34A': '#D5DEE2'"
+                       [style.border-bottom]="validarDias2Pro ? '': check ? '1px solid #C1272D': ''"
+                       [ngStyle]="{'width':'50px', 'text-align':'center'}"
+                       type="number"
+                       min="0"
+                       #inputProrro (click)="inputProrro.select()"
+                       [(ngModel)]="dia1Prorro"
+                       [ngModelOptions]="{standalone: true}"
+                       (keyup)="validarDias2Pro = validarDias(dia1Prorro)">
+                <div class="droplist" [ngStyle]="{'width':'105px'}">
+                  <gn-drop-list (valueDropList)="dropListProrro($event, 2)" [items]="dropListPeriodoTiempo" [isSearch]="false" [isCategory]="true" [align]="'left'"
+                                [lineaColor]="'0.75px solid #98A9B4'" [color]="check ? '#37B34A': '#D5DEE2'" [fontSize]="'14px'" [widthContent]="'110px'" [marginLeftContent]="'-2.5px'" [itemSelect]="resetProrro[1]"
+                                [activeFirst]="true" [activeValidData]="check"></gn-drop-list>
+                </div>
+              </div>
+            </div>
+
+
+            <div [ngStyle]="{'min-width':'150px'}">
+              <label>Notificar</label>
+              <div class="droplist" [ngStyle]="{'width':'155px'}">
+                <gn-drop-list (valueDropList)="dropListProrro($event, 3)" [items]="dropListNotificacion" [isSearch]="false" [isCategory]="true" [align]="'left'"
+                              [lineaColor]="'0.75px solid #98A9B4'" [color]="check ? '#37B34A': '#D5DEE2'" [fontSize]="'14px'" [itemSelect]="resetProrro[2]"
+                              [activeFirst]="true" [activeValidData]="check"> </gn-drop-list>
+              </div>
+            </div>
+
+            <div [ngStyle]="{'min-width':'150px'}">
+              <a (click)="agregarNotificacionProrro()" [style.pointer-events]="validarDias2Pro ? 'auto':'none'" [style.color]="check ? validarDias2Pro ? '':'#D5DEE2': '#D5DEE2'" >AGREGAR</a>
+            </div>
+
+            <div class="options" [ngStyle]="{'min-width':'100%'}" [style.height]="(listNotificacionesProrro.length/4) * 28 + 'px'" [style.padding]="listNotificacionesProrro.length == 0 ? '0 0 0 0':'10px 0px 30px 0'">
+              <div class="item-options" *ngFor='let item of listNotificacionesProrro; let l = index'>
+                <p>
+                  {{item.cantPeriodo}} {{item.tipoPeriodo}} antes / {{item.recurrencia}}
+                  <span [style.color]="registro.finicio.getTime() < item.startDate.getTime() ? '#37B34A' : 'rgba(193, 39, 45, 0.6)'"> · {{item.startDateText}}</span>
+                </p>
+                <img (click)="borrarProrroNotificacion(l)" [ngStyle]="{'cursor':'pointer-'}" src="./assets/images/eliminar_tag.svg" alt="">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="ev2">
+          <form >
+            <div [ngStyle]="{'min-width':'395px'}">
+              <label>Correo de Notificación</label>
+              <input id="inputPro" [placeholder]="check ? 'Escribe Aquí' : ''" [style.border-bottom]="validEmailPro ? '':check ? '1px solid #C1272D' : ''" [style.color]="check ? '#37B34A': '#D5DEE2'" [ngStyle]="{ 'height':'20px'}"  type="text" [(ngModel)]="correoProrro" [ngModelOptions]="{standalone: true}" (keyup)="validEmailPro = validarCorrreo(correoProrro)">
+            </div>
+            <div [ngStyle]="{'min-width':'150px'}">
+              <a (click)="agregarProrroCorreo()" [style.pointer-events]="validEmailPro ? 'auto':'none'" [style.color]="check ? validEmailPro ? '': '#D5DEE2': '#D5DEE2'" >AGREGAR</a>
+            </div>
+
+            <div class="options" [ngStyle]="{'min-width':'100%'}" [style.height]="(listCorreosProrro.length/4) * 28 + 'px'" [style.padding]="listCorreosProrro.length == 0 ? '0 0 0 0':'10px 0px 30px 0'">
+              <div class="item-options" *ngFor='let item of listCorreosProrro; let j = index'>
+                <p> {{item.correo}}</p>
+                <img (click)="borrarProrroCorreo(j)" [ngStyle]="{'cursor':'pointer'}" src="./assets/images/eliminar_tag.svg" alt="">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="invalid_notification" *ngIf="listNotificationError.length > 0">
+    <div class="title">
+      <p>Notificaciones fuera de tiempo:</p>
+    </div>
+    <div class="detail" *ngFor='let data of listNotificationError;'>
+      <div>
+        <p>{{data.name}}</p>
+      </div>
+      <div>
+        <div *ngFor='let notification of data.notifications;'>
+          <div>
+            <p>
+              <span>{{notification.recurrence}}</span>
+              <span>·</span>
+              <span>{{notification.date}}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="pWizard == 1" class="boton-wizard">
+    <!-- <a *ngIf="pWizard == 0" class="btnCancelar" (click)="irLibreriaRegistros()">
+            <p>SALIR</p>
+        </a> -->
+    <!-- <a *ngIf="pWizard == 0  " class ="btnGuardar" (click)="next()" >
+            <p>SIGUIENTE</p>
+        </a> -->
+    <a *ngIf="pWizard == 1" class="btnCancelar" (click)="confirm(true, 1)">
+      <p>ANTERIOR</p>
+    </a>
+    <a *ngIf="pWizard == 1" [ngClass]="pWizard == 1 && fullData ? 'btnGuardar': 'btnGuardarInactivo'" (click)="guardarRegistro()">
+      <p>PUBLICAR</p>
+    </a>
+  </div>
+</div>
+
+
+<div id="id01" class="w3-modal">
+  <div [ngClass]="'w3-modal-content ' + classAnimation + ' w3-card-4'" [style.height]="'450px'">
+    <div class="modal">
+      <div class="title">
+        <p>
+          <label>Nuevo Producto</label>
+        </p>
+        <img (click)="cerrarProducto(true)" src="./assets/images/cerrar_azul.svg" alt="" onclick="setTimeout(function(){document.getElementById('id01').style.display='none'}, 198)">
+      </div>
+      <div class="header">
+        <div class="img">
+          <img src="./assets/images/icono_gris_tarjeta.svg" alt="">
+        </div>
+        <div class="label">
+          <label>Nombre de Producto *</label>
+          <input type="text"
+                 [ngClass]="activeInvalidData.name ? 'inValidBorderBottom' : '' "
+                 (blur)="producto.nombre !== '' ? activeInvalidData.name = false : activeInvalidData.name = true; producto.nombre = producto.nombre.trim()"
+                 [ngStyle]="{'font-size':'12px', 'font-weight':'600', 'padding-bottom': '2px'}"
+                 [style.border-bottom]="producto.nombre !== '' ? '1px solid #b4c8e2': '1px solid #d9dfe3'"
+                 [(ngModel)]="producto.nombre"
+                 [ngModelOptions]="{standalone: true}">
+        </div>
+      </div>
+
+      <div class="body" >
+        <form >
+          <div class="cForm" [ngStyle]="{'width':'25%', 'justify-content': 'space-between'}">
+            <label>Código Producto *</label>
+            <div class="fecha" [ngStyle]="{'width':'90px'}">
+              <input type="text"
+                     [ngClass]="activeInvalidData.codeProduct ? 'inValidBorderBottom' : '' "
+                     (blur)="producto.codigo !== '' ? activeInvalidData.codeProduct = false : activeInvalidData.codeProduct = true; producto.codigo = producto.codigo.trim()"
+                     [ngStyle]="{'font-size':'12px', 'padding-bottom': '2px'}"
+                     [style.border-bottom]="producto.codigo !== '' ? '1px solid #b4c8e2': '1px solid #d9dfe3'"
+                     [(ngModel)]="producto.codigo"
+                     [ngModelOptions]="{standalone: true}">
+            </div>
+          </div>
+          <div class="cForm" [ngStyle]="{'width':'32%'}">
+            <label>Fecha Límite de Registro *</label>
+            <div class="fecha" [ngStyle]="{'width':'140px'}">
+              <gn-date-picker [(date)]="registro.ffin" dateFormat="YYYYMMDD" [sizeInput]="'12px'"
+                              (fecha)="getFechaImpl($event)" [lineColor]="registro.ffin ? '#b4c8e2' : activeInvalidData.endDate ? '#C1272D' : '#d9dfe3'"
+                              [activeValidData]="true" [resetValidate]="resetValidate">
+              </gn-date-picker>
+            </div>
+          </div>
+          <div class="cForm" [ngStyle]="{'align-items': 'flex-end', 'width':'42%'}">
+            <label [ngStyle]="{'margin-bottom':'6px', 'width':'170px'}">Origen *</label>
+            <div class="droplist" [ngStyle]="{'width':'170px'}">
+              <gn-drop-list (valueDropList)="producto.origen = $event.nombre" [items]="paises" [isSearch]="true" [isCategory]="true" [align]="'left'"
+                            [itemSelect]="defaultOrigen" [fontSize]="'12px'" [lineaColor]="producto.origen ? '1px solid #b4c8e2' : activeInvalidData.origin ? '0.75px solid #C1272D' : '1px solid #d9dfe3'"
+                            [activeValidData]="true" [clear]="clear" [resetValidate]="resetValidate"></gn-drop-list>
+            </div>
+          </div>
+
+          <div class="cForm" [ngStyle]="{'align-items': 'flex-end', 'width':'100%', 'margin-top': '20px', 'margin-right': '5px'}">
+            <label [ngStyle]="{'margin-bottom':'6px', 'width':'100%'}">Responsable de Gestión *</label>
+            <div class="droplist" [ngStyle]="{'width':'100%'}">
+              <gn-drop-list  (valueDropList)="registro.usuario = $event.user" [items]="users" [isSearch]="false" [isCategory]="true" [align]="'left'"
+                             [fontSize]="'12px'" [lineaColor]="registro.usuario.idUsuario ? '1px solid #b4c8e2' : activeInvalidData.user ? '0.75px solid #C1272D' : '1px solid #d9dfe3'"
+                             [activeValidData]="true" [clear]="clear" [resetValidate]="resetValidate"></gn-drop-list>
+            </div>
+          </div>
+
+          <div class="cForm" [ngStyle]="{'width':'100%', 'margin-top': '30px'}">
+            <label>Descripción *</label>
+            <textarea [ngClass]="activeInvalidData.description ? 'inValidBorder' : '' "
+                      (blur)="registro.descripcion !== '' ? activeInvalidData.description = false : activeInvalidData.description = true; registro.descripcion = registro.descripcion.trim()"
+                      [ngStyle]="{ 'height':'60px','font-size':'12px'}"
+                      [style.border]="registro.descripcion !== '' ? '1px solid #b4c8e2': '1px solid #d9dfe3'"
+                      [(ngModel)]="registro.descripcion"
+                      [ngModelOptions]="{standalone: true}"></textarea>
+          </div>
+
+          <label [ngStyle]="{'position':'absolute', 'bottom':'75px','right': '25px', 'color':'#98A9B4', 'font-size':'10px'}">Campos Obligatorios *</label>
+
+        </form>
+
+      </div>
+
+      <div class="footer">
+        <a class="cancelar" (click)="cerrarProducto(true)" onclick="setTimeout(function(){document.getElementById('id01').style.display='none'}, 198)">CANCELAR</a>
+        <a [ngClass]="registro.usuario !== null && producto.nombre.trim() !== '' && producto.codigo.trim() !== '' && registro.ffin !== null && producto.origen !== '' && registro.descripcion.trim() !== '' ? 'guardar' : 'guardarInactivo'"
+           (click)="saveProducto(1)" [style.pointer-events]="'auto'">GUARDAR</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div id="id02" class="w3-modal">
+  <div [ngClass]="'w3-modal-content ' + classAnimation2 + ' w3-card-4'" [style.height]="'517px'">
+    <div class="modal" [style.height]="'517px'">
+      <div class="title">
+        <p>
+          <label>Producto Seleccionado</label>
+        </p>
+        <img (click)="cerrarSeleccionarProducto(true)" src="./assets/images/cerrar_azul.svg" alt="" onclick="setTimeout(function(){document.getElementById('id02').style.display='none'}, 198)">
+      </div>
+      <div class="header">
+        <div class="img">
+          <img src="./assets/images/icono_gris_tarjeta.svg" alt="">
+        </div>
+        <div class="label">
+          <label>Nombre de Producto *</label>
+          <input type="text"
+                 [ngClass]="activeInvalidData.name ? 'inValidBorderBottom' : '' "
+                 (blur)="producto.nombre !== '' ? activeInvalidData.name = false : activeInvalidData.name = true; producto.nombre = producto.nombre.trim()"
+                 [ngStyle]="{'font-size':'12px', 'font-weight':'600', 'padding-bottom': '2px'}"
+                 [style.border-bottom]="producto.nombre !== '' ? '1px solid #b4c8e2': '1px solid #d9dfe3'"
+                 [(ngModel)]="producto.nombre" [ngModelOptions]="{standalone: true}">
+        </div>
+      </div>
+
+      <div class="body" >
+        <form >
+          <div class="cForm" [ngStyle]="{'width':'33%'}">
+            <label>Fecha Inicio *</label>
+            <div class="fecha" [ngStyle]="{'width':'120px'}">
+              <gn-date-picker [(date)]="registro.finicio" dateFormat="YYYYMMDD" [sizeInput]="'12px'" (onSelect)="handleOfDaySelected($event, 'startDate')"
+                              (fecha)="getFechaImpl($event)" [lineColor]="registro.finicio ? '#b4c8e2' : activeInvalidData.startDate ? '#C1272D' : '#d9dfe3'"
+                              [activeValidData]="true" [resetValidate]="resetValidate">
+              </gn-date-picker>
+            </div>
+          </div>
+          <div class="cForm" [ngStyle]="{'width':'33%', 'align-items': 'flex-start'}">
+            <label>Fecha Fin *</label>
+            <div class="fecha" [ngStyle]="{'width':'120px'}">
+              <gn-date-picker [(date)]="registro.ffin" dateFormat="YYYYMMDD" [sizeInput]="'12px'" (onSelect)="handleOfDaySelected($event, 'endDate')"
+                              (fecha)="getFechaImpl($event)" [lineColor]="registro.ffin ? activeInvalidData.endDate ? '#C1272D' : '#b4c8e2' : activeInvalidData.endDate ? '#C1272D' : '#d9dfe3'"
+                              [activeValidData]="true" [resetValidate]="resetValidate">
+              </gn-date-picker>
+            </div>
+          </div>
+          <div class="cForm" [ngStyle]="{'width':'33%', 'justify-content': 'space-between'}">
+            <label>Trámite de Cofepris *</label>
+            <div class="fecha" [ngStyle]="{'width':'100%'}">
+              <input type="text"
+                     [ngClass]="activeInvalidData.tramiteCofepris ? 'inValidBorderBottom' : '' "
+                     (blur)="registro.tramiteCofepris !== '' ? activeInvalidData.tramiteCofepris = false : activeInvalidData.tramiteCofepris = true; registro.tramiteCofepris = registro.tramiteCofepris.trim()"
+                     [ngStyle]="{'font-size':'12px', 'padding-bottom': '2px'}"
+                     [style.border-bottom]="registro.tramiteCofepris !== '' ? '1px solid #b4c8e2': '1px solid #d9dfe3'"
+                     [(ngModel)]="registro.tramiteCofepris"
+                     [ngModelOptions]="{standalone: true}">
+            </div>
+          </div>
+          <div class="cForm" [ngStyle]="{'margin-top': '20px', 'justify-content': 'space-between'}">
+            <label>Folio de Registro *</label>
+            <div class="fecha" [ngStyle]="{'width':'195px'}">
+              <input type="text"
+                     [ngClass]="activeInvalidData.folioRegistro ? 'inValidBorderBottom' : '' "
+                     (blur)="registro.folioRegistro !== '' ? activeInvalidData.folioRegistro = false : activeInvalidData.folioRegistro = true; registro.folioRegistro = registro.folioRegistro.trim()"
+                     [ngStyle]="{'font-size':'12px', 'padding-bottom': '2px'}"
+                     [style.border-bottom]="registro.folioRegistro !== '' ? '1px solid #b4c8e2': '1px solid #d9dfe3'"
+                     [(ngModel)]="registro.folioRegistro"
+                     [ngModelOptions]="{standalone: true}">
+            </div>
+          </div>
+          <div class="cForm" [ngStyle]="{'align-items': 'flex-end', 'margin-top': '20px'}">
+            <label [ngStyle]="{'margin-bottom':'6px', 'width':'195px'}">Origen *</label>
+            <div class="droplist" [ngStyle]="{'width':'195px'}">
+              <gn-drop-list (valueDropList)="producto.origen = $event.nombre" [items]="paises" [isCategory]="true" [align]="'left'"
+                            [activeValidData]="true" [itemSelect]="defaultOrigen" [fontSize]="'12px'" [lineaColor]="producto.origen !== '' ? '1px solid #b4c8e2' : '1px solid #d9dfe3'" [clear]="clear" [resetValidate]="resetValidate">
+              </gn-drop-list>
+            </div>
+          </div>
+
+
+          <div class="cForm" [ngStyle]="{'align-items': 'flex-end', 'width':'100%', 'margin-top': '20px', 'margin-right': '5px'}">
+            <label [ngStyle]="{'margin-bottom':'6px', 'width':'100%'}">Responsable de Gestión *</label>
+            <div class="droplist" [ngStyle]="{'width':'100%'}">
+              <gn-drop-list (valueDropList)="registro.usuario = $event.user" [items]="users" [isSearch]="false" [isCategory]="true" [align]="'left'"
+                            [activeValidData]="true" [fontSize]="'12px'" [lineaColor]="registro.usuario.idUsuario ? '1px solid #b4c8e2' : activeInvalidData.user ? '0.75px solid #C1272D' : '1px solid #d9dfe3'" [clear]="clear" [resetValidate]="resetValidate"></gn-drop-list>
+            </div>
+          </div>
+
+          <div class="cForm" [ngStyle]="{'width':'100%', 'margin-top': '15px'}">
+            <label>Descripción *</label>
+            <textarea [ngClass]="activeInvalidData.description ? 'inValidBorder' : '' "
+                      (blur)="registro.descripcion !== '' ? activeInvalidData.description = false : activeInvalidData.description = true; registro.descripcion = registro.descripcion.trim()"
+                      [ngStyle]="{'height':'80px', 'font-size':'12px'}"
+                      [style.border]="registro.descripcion !== '' ? '1px solid #b4c8e2': '1px solid #d9dfe3'"
+                      [(ngModel)]="registro.descripcion"
+                      [ngModelOptions]="{standalone: true}"></textarea>
+          </div>
+
+          <label [ngStyle]="{'position':'absolute', 'bottom':'75px','right': '25px', 'color':'#98A9B4', 'font-size':'10px'}">Campos Obligatorios *</label>
+
+        </form>
+
+      </div>
+
+      <div class="footer" [ngStyle]="{'margin-top':'40px'}">
+        <a class="cancelar" (click)="cerrarSeleccionarProducto(true)" onclick="setTimeout(function(){document.getElementById('id02').style.display='none'}, 198)">CANCELAR</a>
+        <a [ngClass]= "!lodash.isEmpty(registro.usuario) && producto.nombre.trim() !== '' && registro.finicio !== null && registro.tramiteCofepris.trim() !== '' && registro.folioRegistro.trim() !== '' && registro.ffin !== null && producto.origen !== '' && registro.descripcion.trim() !== '' && registro.finicio.getTime()  < registro.ffin.getTime() ? 'guardar' : 'guardarInactivo'"
+           (click)="saveProducto(2)" [style.pointer-events]="'auto'">GUARDAR</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div id="idConfirm" class="w3-modal">
+  <div [ngClass]="'w3-modal-content ' + classAnimation3 + ' w3-card-4'">
+    <div class="modalConfirm">
+      <div class="salir">
+        <img src="./assets/images/cerrar_azul.svg" alt="" onclick="setTimeout(function(){document.getElementById('idConfirm').style.display='none'}, 198)">
+      </div>
+      <div class="body">
+        <div class="img">
+          <img src="./assets/images/stop.svg" alt="">
+        </div>
+        <div class="title">
+          <label>¿Estas seguro que deseas salir</label>
+          <label>Sin guardar los cambios efectuados?</label>
+        </div>
+      </div>
+      <div class="boton">
+        <a (click)="confirm(false)">CANCELAR</a>
+        <a (click)="indexModal == 0 ? irLibreriaRegistros() : back()"> SALIR</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="idEliminarEv" class="w3-modal">
+  <div [ngClass]="'w3-modal-content ' + classAnimation4 + ' w3-card-4'">
+    <div class="modalConfirm">
+      <div class="salir">
+        <img src="./assets/images/cerrar_azul.svg" alt="" onclick="setTimeout(function(){document.getElementById('idEliminarEv').style.display='none'}, 198)">
+      </div>
+      <div class="body">
+        <div class="img">
+          <img src="./assets/images/eliminar.svg" alt="">
+        </div>
+        <div class="title">
+          <label>¿Estas seguro que deseas eliminar</label>
+          <label>el evento "{{nombreConfirmEliminar}}"?</label>
+        </div>
+      </div>
+      <div class="boton">
+        <a onclick="setTimeout(function(){ document.getElementById('idEliminarEv').style.display='none' }, 198)" >CANCELAR</a>
+        <a (click)="borrarEvento(indexEventEliminar)"> ELIMINAR</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div #modalUpload>
+  <div class="modalUpload" *ngIf="modalIsOpenUpload">
+    <div class="modalUpload-wrapper">
+      <div class="modalUpload-container">
+        <div class="modalUpload-title">
+          <p>Cargar Archivos a Producto</p>
+          <img (click)="closeModalUpload()" src="./assets/images/cerrar_azul.svg" />
+        </div>
+        <div class="modalUpload-button">
+          <div *ngIf="fileUpload.fileName === ''" class="without-files">
+            <label for="fileInput">CARGAR PDF</label>
+          </div>
+          <div *ngIf="fileUpload.fileName !== ''" class="with-files">
+            <label for="fileInput">{{ fileUpload.fileName }}</label>
+            <label for="fileInput">
+              <img for="file" src="./assets/images/recargar.svg">
+            </label>
+            <label (click)="resetFileUpload()">
+              <img src="./assets/images/cerrar_blanco2.svg">
+            </label>
+          </div>
+          <input #fileInput type="file" id="fileInput" (change)="handleFileUpload($event)" accept=".pdf" class="upload">
+        </div>
+        <div class="modalUpload-description">
+          <label>Descripción</label>
+          <textarea [(ngModel)]="fileUpload.description" [ngModelOptions]="{standalone: true}"></textarea>
+        </div>
+        <div class="modalUpload-add">
+          <a [ngClass]="fileUpload.fileName !== '' && fileUpload.description ? 'active' : 'inactive'" (click)="addFileToList()">AGREGAR</a>
+        </div>
+        <div class="modalUpload-list" *ngIf="listFilesToUpload.length > 0">
+          <div *ngFor='let file of listFilesToUpload; let i = index'>
+            <div>
+              <div>
+                <p>#{{i+1}}</p>
+                <img src="./assets/images/documento.svg" />
+                <p>{{file.fileName}}</p>
+              </div>
+              <div>
+                <img (click)="deleteFileToList(i)" src="./assets/images/eliminar_doc_comments_rojo.svg" />
+              </div>
+            </div>
+            <div>
+              <p>{{file.description}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="modalUpload-empty" *ngIf="listFilesToUpload.length === 0">
+          <p>No has agregado archivos</p>
+        </div>
+        <div class="modalUpload-buttons">
+          <button (click)="closeModalUpload()">Cancelar</button>
+          <button [ngClass]="listFilesToUpload.length > 0 ? 'enable' : 'disable'" (click)="saveFiles()">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

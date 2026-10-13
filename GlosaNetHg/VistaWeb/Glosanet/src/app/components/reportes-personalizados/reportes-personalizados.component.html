@@ -1,0 +1,108 @@
+<div>
+  <img src="./assets/images/reporte_personalizado_icono_nuevo.svg" alt="">
+  <div>
+    <p>Reportes Personalizados</p>
+    <p *ngIf="idReport == undefined || idReport == 0">Nuevo Reporte</p>
+    <p *ngIf="idReport != undefined && idReport != 0">Reporte #{{idReport | code}}</p>
+  </div>
+
+  <div class="boton">
+    <a class="btnIrCatalogo" (click)="irCatalogo()">
+      <p>IR A CATÁLOGO</p>
+    </a>
+  </div>
+</div>
+<div>
+  <div>
+    <p>Documento</p>
+    <div>
+      <gn-drop-list (valueDropList)="dropDocument($event)" [itemSelect]="documentosList[1]" [items]="documentosList" [isSearch]="true" [align]="'left'" [tooltip]="true " ></gn-drop-list>
+    </div>
+  </div>
+  <div>
+    <div>
+      <p>Año:</p>
+      <div><gn-drop-list (valueDropList)="dropYear($event)" [items]="years" [isSearch]="false" [size]="'small'" [itemSelect]="years[indexYear]" [widthContent]="'75px'" [marginLeftContent]="'-7px'"></gn-drop-list></div>
+    </div>
+    <div>
+      <p>Periodo:</p>
+      <div><gn-drop-list (valueDropList)="dropPeriodo($event)" [items]="periodos" [isSearch]="false" [isCategory]="true" [itemSelect]="periodoDefault"></gn-drop-list> </div>
+    </div>
+    <a class="btnExportar" (click)="exportar()">
+      <p>EXPORTAR</p>
+    </a>
+  </div>
+</div>
+<div>
+  <div class='dragAndDrop'>
+    <p>Campos Originales del Documento</p>
+    <div class="list no-drop" dragula="another-bag" [(dragulaModel)]="itemsDD">
+      <div *ngFor="let item of itemsDD" [ngStyle]="{'width':'100%'}"><div  class="item"><img src="./assets/images/Flechas.svg" alt=""><img src="./assets/images/flecha_hover.svg" alt=""><p>{{item. descripcion}}</p></div></div>
+
+    </div>
+  </div>
+  <div class='dragAndDrop2'>
+    <p>Campos a Combinar</p>
+    <div class='list2' dragula="another-bag" [(dragulaModel)]="itemsDD2">
+      <div *ngIf="itemsDD2.length == 0" class="empty" [style.pointer-events]="'none'"><p>Arrastra algún tipo de campo para habilitar esta sección</p></div>
+      <div *ngFor="let item of itemsDD2; let i = index" class="item2"><p>{{item. descripcion}}</p><img (click)="deleteItem(i)" src="./assets/images/cerrar_azul.png" alt=""><img (click)="deleteItem(i)" src="./assets/images/cerrar_blanco.svg" alt=""></div>
+    </div>
+    <div class="boton" *ngIf="itemsDD2.length != 0">
+      <a class="btnGuardar" (click)="guardar()" onclick="document.getElementById('id01').style.display='block'">
+        <p>GUARDAR</p>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div id="id01" class="w3-modal">
+  <div [ngClass]="'w3-modal-content ' + classAnimation + ' w3-card-4'" [style.height]="'440px'">
+    <div class="modal">
+      <div>
+        <p>Guardar Reporte</p>
+        <img (click)="closeModal()" src="./assets/images/cerrar_azul.svg" alt="" onclick="setTimeout(function(){document.getElementById('id01').style.display='none'}, 198)">
+      </div>
+      <div>
+        <gn-filtro-tiempo [reset]="resetTabs" [lstYears]="lstOpciones" (emitYear)="tabOption($event)"></gn-filtro-tiempo>
+      </div>
+      <div class="campos" *ngIf="visibleCampos">
+        <div>
+          <ul>
+            <li *ngFor="let item of itemsDD2; let i = index" class="item2 tooltip tooltip-top" [attr.data-tooltip]="item.tabla.numero + ' - ' + item.tabla.descripcion">
+              <p><span  *ngIf="item.tabla.numero != 0">{{item.tabla.numero}} - </span>{{item.descripcion}}</p>
+              <img (click)="deleteItem(i)" src="./assets/images/cerrar_azul.png" alt="">
+              <img (click)="deleteItem(i)" src="./assets/images/cerrar_blanco.svg" alt="">
+            </li>
+          </ul>
+        </div>
+        <p>#{{itemsDD2.length}}&nbsp;Campos</p>
+      </div>
+      <div class="datosGenerales" *ngIf="!visibleCampos">
+        <p class="titulo1">Autor:</p>
+        <p class="datos">{{nameUser}}</p>
+        <form [formGroup]="rpForm" autocomplete="off">
+          <p class="titulo">Nombre de Reporte:</p>
+          <textarea class="textArea name"
+                    type="text"
+                    formControlName="rpNombre"
+                    name="rpNombre"
+                    [style.border]="rpForm.get('rpNombre').value ? 'solid 1px #98A9B4' : 'solid 0.75px #C1272D'"></textarea>
+          <p class="titulo">Descripción:</p>
+          <textarea class="textArea description"
+                    type="text"
+                    formControlName="rpDescripcion"
+                    name="rpDescripcion"
+                    [style.border]="rpForm.get('rpDescripcion').value ? 'solid 1px #98A9B4' : 'solid 0.75px #C1272D'"></textarea>
+        </form>
+        <div>
+          <a class="btnCancelar" (click)="closeModal()" onclick="setTimeout(function(){document.getElementById('id01').style.display='none'}, 198)">
+            <p>CANCELAR</p>
+          </a>
+          <a class="btnGuardar" [style.background-color]="dataValid == 'validData' ? '': '#D5DEE2'" [style.pointer-events]="dataValid == 'validData' ? 'auto':'none'" (click)="guardarReport()" onclick="setTimeout(function(){document.getElementById('id01').style.display='none'}, 198)">
+            <p>GUARDAR</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

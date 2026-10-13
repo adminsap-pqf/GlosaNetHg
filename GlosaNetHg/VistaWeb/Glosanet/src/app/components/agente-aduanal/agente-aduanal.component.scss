@@ -1,0 +1,703 @@
+@import "../../../variables.scss";
+@import "../../../mixins.scss";
+@import "../../../colors.scss";
+
+.container{
+    @include flexColumn;
+    //width:100%;
+    height:calc(100vh - 106px);
+    padding:0px;
+    font-size: 9pt;
+    box-sizing: border-box;
+
+    & > .head{
+        @include flexRow;
+        width:100%;
+        height: 80px;
+        padding: 0 25px;
+        box-sizing: border-box;
+        & > .title{
+            @include flexRow;
+            @include absoluteCenter;
+            justify-content: flex-start;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            border-bottom: solid 2px rgb(240,242,244);
+            font-size:1.7em;
+            color: $gnAzulBajo;
+            font-weight: 500;
+
+        }
+    }
+
+    & > .body{
+        @include flexRow;
+        width: 100%;
+        height:calc(100% - 80px);
+        padding:35px 25px 25px 0px;
+        box-sizing: border-box;
+        & > .patentes{
+            @include flexColumn;
+            width: 270px;
+            height: 100%;
+            box-sizing: border-box;
+            
+            & > .titlePatentes{
+                @include flexRow;
+                @include absoluteCenter;
+                justify-content: flex-start;
+                width: 100%;
+                height: 40px;
+                color:$gnAzulMedio;
+                font-size: 1.55em;
+                font-weight: 500;
+                box-sizing: border-box;
+                margin-left: 25px;
+            }
+
+            & > .droplist{
+                @include flexRow;
+                //width: 100%;
+                height: 30px;
+                box-sizing: border-box;
+                margin-left: 25px;
+                justify-content: center;
+                align-items: center;
+                padding-right: 20px;
+                border-right: 1.5px dashed #D5DEE2;
+                margin-bottom: 3px;
+                & > label{
+                    width:40%;
+                    color:$gnGrisRata;
+                    font-size: 1.05em;
+                }
+                & > .divDroplist{
+                    width: 60%;
+                }
+            }
+            
+            & > .list{
+                @include flexColumn;
+                width:100%;
+                height: calc(100% - 40px);
+                border-right: 1.5px dashed #D5DEE2;
+                box-sizing: border-box;
+                overflow: scroll;
+                
+                & > .itemsDiv{
+                    @include flexRow;
+                    padding:0 22px 0 0;
+                    box-sizing: border-box;
+                    min-height: 40px;
+                    & > .items{
+                        @include flexRow;
+                        @include absoluteCenter;
+                        justify-content: flex-start;
+                        width:100%;
+                        height:40px ;
+                        min-height: 40px;
+                        border-bottom: 1.5px dashed #D5DEE2;
+                        box-sizing: border-box;
+                        margin-left: 25px;
+                        & > label{
+                            color:$gnGrisRata;
+                            font-size: 1.05em;
+                        }
+                    }
+                    
+                }
+                :hover{
+                    background-color: $gnAzulFondo;
+                    color:$gnAzulMedio;
+                    & > .items{
+
+                        & > label{
+                            font-size: 1.05em;
+                        }
+                        & > label:nth-of-type(1), label:nth-of-type(2){
+                            color:$gnAzulMedio;
+                        }
+                        & > label:nth-of-type(3){
+                            color:$gnAzulMedio;
+                        }
+                    }
+                }
+                & > .itemsDivSelected{
+                    @include flexRow;
+                    padding:0 22px 0 0;
+                    background-color: $gnAzulFondo;
+                    box-sizing: border-box;
+                    min-height: 40px;
+                    & > .items{
+                        @include flexRow;
+                        @include absoluteCenter;
+                        justify-content: flex-start;
+                        width:100%;
+                        height:40px ;
+                        min-height: 40px;
+                        border-bottom: 1.5px dashed #D5DEE2;
+                        box-sizing: border-box;
+                        margin-left: 25px;
+                        & > label{
+                            font-size: 1.05em;
+                        }
+                        & > label:nth-of-type(1), label:nth-of-type(2){
+                            color:$gnDorado;
+                        }
+                        & > label:nth-of-type(3){
+                            color:$gnAzulMedio;
+                        }
+                    }
+                }
+            }
+        }
+        & > .agente{
+            //@include flexColumn;
+            width:calc(100% - 270px);
+            //height: 100%;
+            box-sizing: border-box;
+            padding-left: 20px;
+        
+            & > .agente-aduanal{
+                @include flexColumn;
+                width:100%;
+                box-sizing: border-box;
+                .titleAgente{
+                    @include flexRow;
+                    @include absoluteCenter;
+                    justify-content: space-between;
+                    height: 40px;
+                    min-height: 40px;
+                    border-bottom: 1.5px dashed #D5DEE2;
+                    box-sizing: border-box;
+                    color:$gnAzulMedio;
+                    font-size: 1.55em;
+                    font-weight: 500;
+                    .btnAgregar{
+                        @include flexRow;
+                        $textSize: ('base': convertPts(9, 'px'));
+                        @include escaledFontFormat($textSize, 600,$verdeBoton);
+                        $colorHover:  rgba(6, 188, 82, 0.2);
+                        @include pfButton(150px, 30px, $gnBlanco, $colorHover, $gnBlanco, 0px);
+                        @include flexRow;
+                        @include absoluteCenter;
+                        cursor: pointer;
+                    }
+                }
+                & > .body-agente{
+                    @include flexRow;
+                    @include absoluteCenter;
+                    justify-content: space-between;
+                    width: 100%;
+                    height: 35px;
+                    min-height: 35px;
+                    background-color: $gnAzulFondo;
+                    padding: 0 15px;
+                    margin: 15px 0  0 0;
+                    box-sizing: border-box;
+                    cursor: pointer;
+                    & > label{
+                        color:$gnAzulMedio;
+                        font-size: 1.2em;
+                        font-style: italic;
+                        font-weight: 400;
+                    }
+                    & > div{
+                        
+                    }
+                    
+                }
+                & > .body-agente:hover, .body-agenteActive{
+                    box-shadow: 0 5px 8px 0 rgba(169,177,183,0.50);
+                    opacity: .99;
+                    & > label{
+                        font-weight: 500;
+                    }
+                }
+                
+                & > .content-agente{
+                    @include flexColumn;
+                    width:100%;
+                    max-height: 260px;
+                    //min-height: 230px;
+                    //height: 230px;
+                    box-sizing: border-box;
+                    overflow: hidden;
+                    background-color: rgba(236,240,243, 0.35);
+                    padding-bottom: 15px;
+                    & > .line1{
+                        @include flexRowWrap;
+                        @include absoluteCenter;
+                        justify-content: flex-start;
+                        box-sizing: border-box;
+                        width:100%;
+                        padding: 15px 15px;
+                        div{
+                            @include flexColumn;
+                            box-sizing: border-box;
+                            padding-bottom: 10px;
+                            label{
+                                box-sizing: border-box;
+                                //width:140px;
+                                padding-bottom: 5px;
+                            }
+                        }
+                    }
+                    & > label{
+                        @include flexRow;
+                        box-sizing: border-box;
+                        width:100%;
+                        padding-bottom: 10px;
+                        padding-left: 15px;
+                        color:$gnDorado;
+                        font-size: 1.3em;
+                    }
+                    & > .line2{
+                        @include flexRowWrap;
+                        width:100%;
+                        box-sizing: border-box;
+                        padding: 0 15px;
+                        div{
+                            @include flexColumn;
+                            box-sizing: border-box;
+                            padding-bottom: 10px;
+                            label{
+                                //width:140px;
+                                box-sizing: border-box;
+                                padding-bottom: 5px;
+                            }
+                        }
+                    }
+
+                }
+                & > .content-agenteClose{
+                    @include flexColumn;
+                    width:100%;
+                    max-height:0px;
+                    min-height: 0px;
+                    overflow: hidden;
+                    box-sizing: border-box;
+                    & > .line1{
+                        @include flexRowWrap;
+                        @include absoluteCenter;
+                        justify-content: flex-start;
+                        box-sizing: border-box;
+                        width:100%;
+                        padding: 15px 15px;
+                        div{
+                            @include flexColumn;
+                            box-sizing: border-box;
+                            padding-bottom: 10px;
+                            label{
+                                box-sizing: border-box;
+                                //width:140px;
+                                padding-bottom: 5px;
+                            }
+                        }
+                    }
+                    & > label{
+                        @include flexRow;
+                        box-sizing: border-box;
+                        width:100%;
+                        padding-bottom: 10px;
+                        color:$gnDorado;
+                        font-size: 1.3em;
+                        padding-left: 15px;
+                    }
+                    & > .line2{
+                        @include flexRowWrap;
+                        width:100%;
+                        box-sizing: border-box;
+                        padding-left: 15px;
+                        div{
+                            @include flexColumn;
+                            box-sizing: border-box;
+                            padding-bottom: 10px;
+                            label{
+                                //width:140px;
+                                box-sizing: border-box;
+                                padding-bottom: 5px;
+                            }
+                        }
+                    }
+                }
+            }
+            & > .rfc{
+                margin-top: 20px;
+                & > .rfc-container{
+                    & > .titleRfc{
+                        @include flexRow;
+                        @include absoluteCenter;
+                        justify-content: space-between;
+                        height: 45px;
+                        border-bottom: 1.5px dashed #D5DEE2;
+                        box-sizing: border-box;
+                        color:$gnAzulMedio;
+                        font-size: 1.55em;
+                        font-weight: 500;
+                        margin-bottom: 15px;
+                        .btnAgregar{
+                            @include flexRow;
+                            $textSize: ('base': convertPts(9, 'px'));
+                            @include escaledFontFormat($textSize, 600,$verdeBoton);
+                            $colorHover:  rgba(6, 188, 82, 0.2);
+                            @include pfButton(115px, 30px, $gnBlanco, $colorHover, $gnBlanco, 0px);
+                            @include flexRow;
+                            @include absoluteCenter;
+                            cursor: pointer;
+                        }
+                    }
+                    & > .containerRfc{
+
+                        width: 100%;
+                        margin-bottom: 5px;
+                        cursor: pointer;
+                        & > .body-rfc{
+                            @include flexRow;
+                            @include absoluteCenter;
+                            justify-content: space-between;
+                            width: 100%;
+                            height: 35px;
+                            background-color: $gnAzulFondo;
+                            padding: 0 15px;
+                            //margin: 5px 0  0 0;
+                            box-sizing: border-box;
+                            & > label{
+                                color:$gnAzulMedio;
+                                font-size: 1.2em;
+                                font-style: italic;
+                                font-weight: 400;
+                            }
+                            & > div{
+                            }
+                        }
+                        & > .body-rfc:hover,.body-rfcActive{
+                            box-shadow: 0 5px 8px 0 rgba(169,177,183,0.50);
+                            opacity: .99;
+                            & > label{
+                                font-weight: 500;
+                            }
+                        }
+                        & > .content-rfc{
+                            @include flexColumn;
+                            width:100%;
+                            max-height: 260px;
+                            //min-height: 230px;
+                            //height: 230px;
+                            box-sizing: border-box;
+                            background-color: rgba(236,240,243, 0.35);
+                            overflow: hidden;
+                            & > .line1{
+                                @include flexRowWrap;
+                                @include absoluteCenter;
+                                justify-content: flex-start;
+                                box-sizing: border-box;
+                                width:100%;
+                                padding: 15px 15px;
+                                div{
+                                    @include flexColumn;
+                                    box-sizing: border-box;
+                                    padding-bottom: 10px;
+                                    label{
+                                        box-sizing: border-box;
+                                        //width:140px;
+                                        padding-bottom: 5px;
+                                    }
+                                }
+                            }
+                            & > .line2{
+                                @include flexRowWrap;
+                                width:100%;
+                                box-sizing: border-box;
+                                padding:0 0 15px 15px;
+                                div{
+                                    @include flexColumn;
+                                    box-sizing: border-box;
+                                    padding-bottom: 10px;
+                                    label{
+                                        //width:140px;
+                                        box-sizing: border-box;
+                                        padding-bottom: 5px;
+                                    }
+                                }
+                            }
+                            & > .line3{
+                                @include flexRowWrap;
+                                width:100%;
+                                box-sizing: border-box;
+                                padding-left: 15px;
+                                div{
+                                    @include flexColumn;
+                                    box-sizing: border-box;
+                                    padding-bottom: 10px;
+                                    label{
+                                        //width:140px;
+                                        box-sizing: border-box;
+                                        padding-bottom: 5px;
+                                    }
+                                }
+                            }
+                        }
+                        & > .content-rfcClose{
+                            @include flexColumn;
+                            width:100%;
+                            max-height:0px;
+                            min-height: 0px;
+                            overflow: hidden;
+                            box-sizing: border-box;
+                            overflow: hidden;
+                            background-color: rgba(236,240,243, 0.35);
+                            & > .line1{
+                                @include flexRowWrap;
+                                @include absoluteCenter;
+                                justify-content: flex-start;
+                                box-sizing: border-box;
+                                width:100%;
+                                padding: 15px 15px;
+                                div{
+                                    @include flexColumn;
+                                    box-sizing: border-box;
+                                    padding-bottom: 10px;
+                                    label{
+                                        box-sizing: border-box;
+                                        //width:140px;
+                                        padding-bottom: 5px;
+                                    }
+                                }
+                            }
+                            & > label{
+                                @include flexRow;
+                                box-sizing: border-box;
+                                width:100%;
+                                padding-bottom: 10px;
+                                color:$gnDorado;
+                                font-size: 1.3em;
+                                padding-left: 15px;
+                            }
+                            & > .line2, .line3{
+                                @include flexRowWrap;
+                                width:100%;
+                                box-sizing: border-box;
+                                padding-left:15px;
+                                div{
+                                    @include flexColumn;
+                                    box-sizing: border-box;
+                                    padding-bottom: 10px;
+                                    label{
+                                        //width:140px;
+                                        box-sizing: border-box;
+                                        padding-bottom: 5px;
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+
+    }
+
+}
+
+
+
+
+
+.modal{
+    @include flexColumn;
+    @include absoluteCenter;
+    justify-content: flex-start;
+    padding: 25px;
+    height: 450px;
+    font-size: 9pt;
+    box-sizing: border-box;
+    & > div:nth-of-type(1){
+      @include flexRow;
+      @include absoluteCenter;
+      justify-content: space-between;
+      width: 100%;
+      height: 30px;
+      color: $gnAzulBajo;
+      font-weight: 500;
+      font-size: 21px;
+      align-items: flex-start;
+      box-sizing: border-box;
+      & > p{
+        margin-top: 2px;
+      }
+      & > img{
+        cursor: pointer;
+      }
+    }
+    & > div:nth-of-type(2){
+      width: 100%;
+      height: 60px;
+    }
+    & > .dirFiscal{
+        width: 100%;
+        height: 300px;
+        box-sizing: border-box;
+        & > form{
+            @include flexRowWrap;
+            justify-content: space-between;
+            box-sizing: border-box;
+            height: 275px;
+            & > div{
+                @include flexColumn;
+                @include absoluteCenter;
+                //justify-content: space-around;
+                height: 70px;
+                box-sizing: border-box;
+                & > .titulo{
+                    width: 100%;
+                    color:$grisLinea;
+                    font-size: 1em;
+                    margin-bottom: 5px;
+                }
+                & > input{
+                    width: 100%;
+                    border-right: none;
+                    border-left: none;
+                    border-top: none;
+                    border-bottom: solid 0.75px $grisLinea;
+                    outline: none;
+                    display: inline-block;
+                    font-size: 1.05em;
+                    color:$gnAzulMedio;
+                }
+            }
+      }
+    }
+
+    & > .datosGenerales{
+      width: 100%;
+      height: 300px;
+      box-sizing: border-box;
+      & > form{
+          @include flexRowWrap;
+          justify-content: space-between;
+          box-sizing: border-box;
+          height: 275px;
+          & > div{
+              @include flexColumn;
+              @include absoluteCenter;
+              //justify-content: space-around;
+              height: 70px;
+              box-sizing: border-box;
+              & > .titulo{
+                  width: 100%;
+                  color:$grisLinea;
+                  font-size: 1em;
+                  margin-bottom: 5px;
+              }
+              & > input{
+                  width: 100%;
+                  border-right: none;
+                  border-left: none;
+                  border-top: none;
+                  border-bottom: solid 0.75px $grisLinea;
+                  outline: none;
+                  display: inline-block;
+                  font-size: 1.05em;
+                  color:$gnAzulMedio;
+              }
+          }
+    }
+      
+
+      
+    }
+    & > div{
+        @include flexRow;
+        @include absoluteCenter;
+        justify-content: space-between;
+        width: 100%;
+        //margin-top: 16px;
+        box-sizing: border-box;
+        & > .btnCancelar{
+          margin-top: 10px;
+          @include pfButton(145px, 30px, $gnAzulMedio, rgba(51,105,177,0.75), $gnAzulMedio, 0px);
+          @include flexRow;
+          @include absoluteCenter;
+          cursor: pointer;
+          font-size: 14px;
+          font-weight: normal;
+          color:$gnBlanco;
+          box-sizing: border-box;
+        }
+
+        & > .btnGuardar{
+          margin-top: 10px;
+          @include pfButton(145px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+          @include flexRow;
+          @include absoluteCenter;
+          cursor: pointer;
+          font-size: 14px;
+          font-weight: normal;
+          color:$gnBlanco;
+          box-sizing: border-box;
+        }
+      }
+  }
+
+
+  .open{
+    transform: rotate(180deg);
+ 
+    -webkit-transform: rotate(180deg);
+ 
+    -moz-transform: rotate(180deg);
+ 
+    -o-transform: rotate(180deg);
+  }
+
+  .close{
+    transform: rotate(0deg);
+ 
+    -webkit-transform: rotate(0deg);
+
+    -moz-transform: rotate(0deg);
+
+    -o-transform: rotate(0deg);
+  }
+
+
+  .col1{
+    width: 150px;
+  }
+  .col2{
+    width: 120px;
+  }
+
+  .col3{
+      width: 130px;
+  }
+
+  .col4{
+    width: 130px;
+}
+.col5{
+    width: 120px;
+}
+
+  @include responsive_layout('mid') {
+    .col1{
+        width: 190px;
+      }
+      .col2{
+        width: 180px;
+      }
+    
+      .col3{
+          width: 190px;
+      }
+      .col4{
+        width: 95px;
+    }
+    .col5{
+        width: 90px;
+    }
+  }

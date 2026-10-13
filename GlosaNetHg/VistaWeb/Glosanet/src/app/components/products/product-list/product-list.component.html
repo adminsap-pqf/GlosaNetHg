@@ -1,0 +1,95 @@
+<div class="productListContainer">
+  <div class="content">
+    <div class="gridProducts" *ngIf="!isList && buffer.length > 0">
+      <virtual-scroller [items]="buffer" (vsUpdate)="scrollItems = $event" (vsEnd)="fetchMore($event)">
+        <div [ngClass]="!product.selected ?'item' : 'itemSelected'" *ngFor="let product of scrollItems" (click)="selectItem(product)">
+          <div class="img">
+            <img id="img1" src="./assets/images/icono_gris_tarjeta.svg" alt="">
+            <img id="img2" src="./assets/images/icono_azul_tarjeta.svg" alt="">
+          </div>
+          <div class="bodyItem">
+            <p [ngStyle]="{'font-size':'14px'}">
+              <label [ngStyle]="{'font-weight':'700'}">#{{product.recordIndex + ' · ' + product.codigo}}</label>&nbsp;{{product.nombre}}
+            </p>
+            <p [ngStyle]="{'font-size':'13px'}">
+              <label *ngIf="showPermission">
+                {{product.numPermisos == 0 ? 'Permisos N/D' : 'Permisos ' + product.numPermisos}}
+              </label>
+              <label *ngIf="showRecords" [ngClass]="product.numRegistros == 0 ? 'labelOrange': 'labelGreen'">
+                {{product.numRegistros == 0 ? 'Registros N/D' : 'Registros ' + product.numRegistros}}
+              </label>
+            </p>
+            <p [ngStyle]="{'font-size':'12px'}">
+              <label>Origen:</label>
+              <label>{{product.origen}}</label>
+            </p>
+          </div>
+        </div>
+        <div *ngIf="buffer.length > 0 && loading"  class="containerLoader" [style.height]="buffer.length == 0 ? '100%': null">
+          <div class='loader'>
+            <div class='loading-square'></div>
+            <div class='loading-square'></div>
+            <div class='loading-square'></div>
+            <div class='loading-square'></div>
+          </div>
+        </div>
+      </virtual-scroller>
+    </div>
+
+    <div class="listProducts" *ngIf="isList && buffer.length > 0">
+      <virtual-scroller [items]="buffer" (vsUpdate)="scrollItems = $event" (vsEnd)="fetchMore($event)">
+        <div [ngClass]="!product.selected ?'item' : 'itemSelected'" *ngFor="let product of scrollItems" (click)="selectItem(product)">
+          <div class="img">
+            <img id="img1" src="./assets/images/icono_gris_tarjeta.svg" alt="">
+            <img id="img2" src="./assets/images/icono_azul_tarjeta.svg" alt="">
+          </div>
+          <div class="bodyItem">
+            <div class="part1">
+              <p>
+                <label>#{{product.recordIndex + ' · ' + product.codigo}} &nbsp;</label>
+                <label>{{product.nombre}}</label>
+              </p>
+              <p>
+                <label *ngIf="showPermission">
+                  {{product.numPermisos == 0 ? 'Permisos N/D' : 'Permisos ' + product.numPermisos}}
+                </label>
+                <label *ngIf="showRecords" [ngClass]="product.numRegistros == 0 ? 'labelOrange': 'labelGreen'">
+                  {{product.numRegistros == 0 ? 'Registros N/D' : 'Registros '+ product.numRegistros}}
+                </label>
+              </p>
+            </div>
+            <div class="part2">
+              <p>
+                <label>{{product.origen}}</label>
+                <label>Origen</label>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="buffer.length > 0 && loading"  class="containerLoader" [style.height]="buffer.length == 0 ? '100%': null">
+          <div class='loader'>
+            <div class='loading-square'></div>
+            <div class='loading-square'></div>
+            <div class='loading-square'></div>
+            <div class='loading-square'></div>
+          </div>
+        </div>
+      </virtual-scroller>
+    </div>
+  </div>
+  <div class="withoutResults" *ngIf="buffer.length === 0">
+    <p *ngIf="!loading">{{withoutMessage}}</p>
+    <div *ngIf="loading"  class="containerLoader" [style.height]="buffer.length == 0 ? '100%' : null">
+      <div class='loader'>
+        <div class='loading-square'></div>
+        <div class='loading-square'></div>
+        <div class='loading-square'></div>
+        <div class='loading-square'></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="total" *ngIf="showTotal">
+    <p>{{grandTotal === 1 ? '# ' + (grandTotal | acFormatNumber) + ' Producto' : '# ' + (grandTotal | acFormatNumber) + ' Productos'}}</p>
+  </div>
+</div>

@@ -1,0 +1,125 @@
+<div class="historialRegistoContainer">
+  <div class="title">
+    <h2>Historial de Registros</h2>
+  </div>
+  <div class="filters">
+    <div class="filterBy">
+      <label >Ordenar Por:</label>
+      <div class="drop-container">
+        <gn-drop-list #drop (valueDropList)="handleOrderByDate($event)"
+                      [items]="optionsOrderBy"
+                      [itemSelect]="selectedOrderBy"
+                      [isSearch]="false"
+                      [isCategory]="false"
+                      [align]="'left'"
+                      [fontSize]="'14px'"></gn-drop-list>
+      </div>
+    </div>
+
+    <div class="searchBar">
+      <gn-search-bar [placeholder]="'Buscar'" [searchValue]="searchTerm" (searchTermChanged)="handleKeySearch($event)"></gn-search-bar>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="empty" *ngIf="listRecordsProcessToShow.length === 0" [@fadeInOut]>
+      <p *ngIf="!loading">Sin Registros</p>
+      <div *ngIf="loading"  class="container-loader">
+        <div class='loader'>
+          <div class='loading-square'></div>
+          <div class='loading-square'></div>
+          <div class='loading-square'></div>
+          <div class='loading-square'></div>
+        </div>
+      </div>
+    </div>
+    <div class="list" *ngIf="listRecordsProcessToShow.length > 0" [@fadeInOut]>
+      <div *ngFor='let record of listRecordsProcessToShow; let i = index'>
+        <div class="section_1" (click)="record.contentIsOpen = !record.contentIsOpen">
+          <div>
+            <p>#{{i + 1}}</p>
+          </div>
+          <div>
+            <div>
+              <p>{{ 'Registro ' + (record.ffin | dateFormatDot2) + ' · ' + record.producto.codigo }} </p>
+            </div>
+            <div>
+              <p>{{'Fecha de inicio ' + (record.finicio | dateFormatDot2) + ' · ' + 'Fecha Límite ' + (record.ffin | dateFormatDot2) }}</p>
+            </div>
+            <div>
+              <p>{{'Trámite Cofepris '+ record.tramiteCofepris}}</p>
+            </div>
+          </div>
+
+          <div>
+            <p>{{record.eventos.length === 1 ? record.eventos.length + ' Evento' : record.eventos.length + ' Eventos'}}</p>
+          </div>
+          <div>
+            <img [ngClass]="record.contentIsOpen ? 'arrowDirectionUp': 'arrowDirectionDown'" src="./assets/images/flecha_blanca.svg" />
+          </div>
+        </div>
+        <div class="section_2" [ngClass]="record.contentIsOpen ? 'open': 'close'">
+          <div>
+            <div>
+              <p>Responsable de Gestión: <span>{{record.usuario.usuario}}</span></p>
+            </div>
+            <div>
+              <p (click)="record.fileHistoryByRecord = !record.fileHistoryByRecord">{{ (record.archivosProductos.length === 1 ? record.archivosProductos.length + ' Archivo ' : record.archivosProductos.length + ' Archivos '   ) + 'cargados a producto'}}</p>
+              <div *ngIf="record.fileHistoryByRecord" [@fadeInOut]>
+                <div *ngFor="let file of record.archivosProductos; let i = index" >
+                  <p>{{ '#' + (i + 1) + ' · '}}<span (click)="getHistorialProoductoPDF(record, file.nombre)">{{file.nombre}}</span> <span>{{' · ' + file.comentarios}}</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div *ngFor="let event of record.eventos; let i = index">
+              <div>
+                <p>{{'#' + (i + 1) + ' · ' + event.nombre }}</p>
+              </div>
+
+              <div>
+                <div>
+                  <label>Fecha de Realización:</label>
+                  <label>{{event.frealizacion | dateFormatDot2}}</label>
+                  <label *ngIf="event.deadline > 0" [ngStyle]="{'color':'#E2C913'}">· Fuera de Tiempo {{event.deadline === 1 ? event.deadline + " Día" : event.deadline + " Días"}}</label>
+                  <label *ngIf="event.deadline < 1" [ngStyle]="{'color':'#37B34A'}">·  A Tiempo</label>
+                </div>
+                <div>
+                  <p>Responsable de Eventos:<span>{{event.manager}}</span></p>
+                </div>
+              </div>
+
+              <div>
+                <div>
+                  <p>{{event.historialEvento.length + (event.historialEvento.length === 1 ? ' Referencia' : ' Referencias') +  ' · ' + 'Total Notificaciones ' + event.notificaciones.length }}</p>
+                </div>
+                <div>
+                  <div *ngFor='let file of event.historialEvento; let i = index'>
+                    <div>
+                      <div>
+                        <p>{{'#' + (i + 1)}}</p>
+                        <img src="./assets/images/upload-file/archivos_verde.svg" />
+                        <p (click)="getPdf(record, file)">{{'Doc_' + file.idHistorial + '.pdf · ' + (file.fecha | dateFormatDot2)}}</p>
+                      </div>
+                    </div>
+                    <div>
+                      <p>{{file.comentarios}}</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>{{'#' +  (listRecords.length === 1 ? '1 Registro' : listRecords.length + ' Registros'  )   }}</p>
+  </div>
+
+</div>

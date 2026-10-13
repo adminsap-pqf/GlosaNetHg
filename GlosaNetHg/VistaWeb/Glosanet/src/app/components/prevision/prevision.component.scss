@@ -1,0 +1,1396 @@
+@import "../../../variables.scss";
+@import "../../../mixins.scss";
+@import "../../../colors.scss";
+
+.header {
+  @include flexColumn;
+  width: 100%;
+  box-sizing: border-box;
+  height: 150px;
+  & > .title {
+    @include flexRow;
+    width: 100%;
+    height: 30px;
+    box-sizing: border-box;
+    background-color: #3369B1;
+    align-items: center;
+    padding: 0 25px;
+    & > p {
+      @include flexRow;
+      box-sizing: border-box;
+      & > label:nth-of-type(1) {
+        cursor: pointer;
+        color: #FFFFFF;
+        font-size: 12px;
+        font-weight: 500;
+        margin-right: 2px;
+      }
+      & > label:nth-of-type(2) {
+        cursor: default;
+        color: #E2C913 ;
+        font-size: 12px;
+      }
+    }
+  }
+  & > .product {
+    @include flexRow;
+    @include absoluteCenter;
+    width: 100%;
+    height: 120px;
+    box-sizing: border-box;
+    justify-content: space-between;
+    padding: 0 25px;
+    & > .item-producto {
+      @include flexRow;
+      box-sizing: border-box;
+      width: calc(100% - 200px);
+      height: 60px;
+      padding-right: 5px;
+      & > .img {
+        @include flexRow;
+        @include absoluteCenter;
+        box-sizing: border-box;
+        width: 62px;
+        margin-right: 20px;
+        & > img {
+          width: 100%;
+          max-width: 62px;
+        }
+      }
+      & > .text {
+        @include flexColumn;
+        width: calc(100% - 82px);
+        box-sizing: border-box;
+        justify-content: space-between;
+        & > p:nth-of-type(1) {
+          @include flexRow;
+          @include multiLineTextTruncate(1,17px,17px,#FFF);
+          width: 100%;
+          box-sizing: border-box;
+          font-family:'Roboto Cn';
+          word-break: break-all;
+          & > label:nth-of-type(1){
+            font-size: 17px;
+            color: #E2C913;
+            font-weight: 500;
+          }
+          & > label:nth-of-type(2){
+            font-size: 17px;
+            font-weight: 500;
+            color:#3369B1;
+          }
+        }
+        & > p:nth-of-type(2) {
+          @include flexRow;
+          width: 100%;
+          box-sizing: border-box;
+          font-size: 13px;
+          color: #818192;
+
+        }
+        & > p:nth-of-type(3) {
+          @include flexRow;
+          width: 100%;
+          box-sizing: border-box;
+          font-size: 13px;
+          color: #3B8EDE;
+        }
+        & > a {
+          @include flexRow;
+          @include absoluteCenter;
+          $colorHover: rgba(6, 188, 82, 0.2);
+          @include pfButton(145px, 20px, transparent, $colorHover, $gnBlanco, 0px);
+          color: #37B34A;
+          font-size: 13px;
+          font-weight: 300;
+          margin: 3px 0 0 0;
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    & > .boton {
+      @include flexRow;
+      width: 200px;
+      height: 60px;
+      box-sizing: border-box;
+      & > a {
+        @include pfButton(190px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+        @include flexRow;
+        @include absoluteCenter;
+        color:$gnBlanco;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: normal;
+      }
+    }
+  }
+}
+
+.container {
+  @include flexRow;
+  width: 100%;
+  min-height: calc(100vh - 236px);
+  background: #ECF0F3;
+  box-sizing: border-box;
+  padding:35px 25px 40px 25px;
+  position: relative;
+  .triangulo {
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 15px solid #FFF;
+    position: absolute;
+    top: 20px;
+    left: 40px;
+  }
+  .section {
+    @include flexColumn;
+    width: 100%;
+    background-color: #FFFFFF;
+    box-sizing: border-box;
+    justify-content: space-between;
+    padding: 40px 25px 40px 25px;
+    .eventos {
+      @include flexColumn;
+      width: 100%;
+      box-sizing: border-box;
+      padding-bottom: 20px;
+      & > label {
+        width:100%;
+        color: #3B8EDE;
+        font-size: 19px;
+        font-weight: 600;
+      }
+      & > div:nth-of-type(1) {
+        @include flexRow;
+        @include absoluteCenter;
+        width: 100%;
+        height:45px;
+        background-color: #F3F5F7;
+        box-sizing: border-box;
+        padding: 0 15px;
+        margin: 20px 0 5px 0;
+        justify-content: center;
+        & > label:nth-of-type(1) {
+          color: #98A9B4;
+          font-size: 14px;
+          margin-right: 5px
+        }
+        & > div:nth-of-type(1) {
+          width: 300px;
+        }
+      }
+      & > .title-generarE {
+        @include flexRow;
+        width: 100%;
+        height: 40px;
+        box-sizing: border-box;
+        background-color: #3369B1;
+        align-items: center;
+        align-content: center;
+        padding: 0 20px;
+        margin-top:20px;
+        cursor: pointer;
+        &:hover {
+          box-shadow: 0 10px 14px 0 rgba(152,169,180,0.50);
+        }
+        & > label {
+          @include flexRow;
+          width: 100%;
+          cursor: pointer;
+          color:white;
+          font-size: 15px;
+          font-weight: 600;
+        }
+        & > img {
+          cursor: pointer;
+          transition: all 0.5s ease 0s;
+        }
+      }
+      & > .title-generarE-open {
+        @include flexRow;
+        width: 100%;
+        height: 40px;
+        align-items: center;
+        align-content: center;
+        background-color: #3369B1;
+        box-sizing: border-box;
+        box-shadow: 0 10px 14px 0 rgba(152,169,180,0.50);
+        cursor: pointer;
+        margin-top:20px;
+        padding: 0 20px;
+        opacity: .99;
+        z-index:1;
+        &:hover {
+          box-shadow: 0 10px 14px 0 rgba(152,169,180,0.50);
+        }
+        & > label {
+          @include flexRow;
+          width: 100%;
+          color:white;
+          cursor: pointer;
+          font-size: 15px;
+          font-weight: 600;
+        }
+        & > img {
+          cursor: pointer;
+          transition: all 0.5s ease 0s;
+        }
+      }
+      & > .body-generarE {
+        @include flexColumn;
+        width: 100%;
+        background-color: rgb(248, 249, 250);
+        box-sizing: border-box;
+        max-height: 500px;
+        transition: 0.5s;
+        & > .ev1 {
+          @include flexRow;
+          width: 100%;
+          max-width: 740px;
+          box-sizing: border-box;
+          padding: 20px 15px;
+          & > form {
+            @include flexRowWrap;
+            width: 100%;
+            box-sizing: border-box;
+            justify-content: space-between;
+            position: relative;
+            & > div:nth-of-type(1) {
+              width: 100%;
+              box-sizing: border-box;
+              max-width: 430px;
+              padding-right: 15px;
+            }
+            & > div:nth-of-type(2) {
+              min-width: 170px;
+              & > label {
+                margin-bottom: 0 !important;
+              }
+            }
+            & > div:nth-of-type(3) {
+              min-width: 170px;
+              margin-top: 30px;
+            }
+            & > div:nth-of-type(4) {
+              min-width: 150px;
+              margin-top: 30px;
+            }
+            & > div:nth-of-type(5) {
+              min-width: 150px;
+              margin-top: 30px;
+            }
+            & > .form-group {
+              @include flexColumn;
+              height: 35px;
+              box-sizing: border-box;
+              margin: 0 0 30px 0;
+              & > label {
+                font-size: 12px;
+                color: #98A9B4;
+                margin-bottom: 3px;
+              }
+              & > a {
+                @include flexRow;
+                @include absoluteCenter;
+                $colorHover:  rgba(6, 188, 82, 0.2);
+                @include pfButton(100px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+                color: #37B34A;
+                cursor: pointer;
+                font-size: 14px;
+                font-weight: 500;
+              }
+              & > div {
+                @include flexRow;
+                align-items: flex-end;
+                justify-content: space-between;
+              }
+              & > input:nth-of-type(1) {
+                box-sizing: border-box;
+                font-weight: 700;
+              }
+            }
+            & > label {
+              width: 100%;
+              color: #3B8EDE;
+              font-size: 13px;
+              font-weight: 600;
+            }
+            & > .form-options {
+              @include flexRowWrap;
+              @include absoluteCenter;
+              min-width: 100%;
+              justify-content: flex-start;
+              box-sizing: border-box;
+              border-bottom: 1px dashed #D5DEE2;
+              color: #818192;
+              font-size: 12px;
+              font-style: italic;
+              margin: 0 !important;
+              padding:10px 0 20px 0;
+              & > .item-options {
+                @include flexRow;
+                height: 20px;
+                align-items: center;
+                justify-content: space-between;
+                background-color: rgba(129, 129, 146, 0.15);
+                box-sizing: border-box;
+                margin-right: 8px;
+                margin-top: 3px;
+                padding:3px 5px;
+                & > p {
+                  box-sizing: border-box;
+                  margin-right: 10px;
+                }
+                & > img {
+                  width: 8px;
+                }
+              }
+            }
+          }
+        }
+        & > .ev2 {
+          @include flexRow;
+          width: 100%;
+          max-width: 740px;
+          box-sizing: border-box;
+          padding: 0 15px 10px 15px;
+          & > form {
+            @include flexRowWrap;
+            width: 100%;
+            box-sizing: border-box;
+            justify-content: space-between;
+            & > div {
+              @include flexColumn;
+              height: 35px;
+              box-sizing: border-box;
+              margin: 0 0 30px 0;
+              & > label {
+                color: #98A9B4;
+                font-size: 12px;
+              }
+              & > a {
+                @include flexRow;
+                @include absoluteCenter;
+                $colorHover:  rgba(6, 188, 82, 0.2);
+                @include pfButton(100px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+                color: #37B34A;
+                cursor: pointer;
+                font-size: 14px;
+                font-weight: 500;
+              }
+            }
+            & > label {
+              width: 100%;
+              color: #3B8EDE;
+              font-size: 13px;
+              font-weight: 600;
+            }
+            & > .options {
+              @include flexRowWrap;
+              @include absoluteCenter;
+              justify-content: flex-start;
+              box-sizing: border-box;
+              color: #818192;
+              font-size: 12px;
+              font-style: italic;
+              margin: 0 !important;
+              padding: 10px 0 20px 0;
+              & > .item-options {
+                @include flexRow;
+                height: 20px;
+                align-items: center;
+                justify-content: space-between;
+                background-color: rgba(129, 129, 146, 0.15);
+                box-sizing: border-box;
+                margin-right: 8px;
+                margin-top: 3px;
+                padding: 3px 5px;
+                & > p {
+                  box-sizing: border-box;
+                  margin-right: 10px;
+                }
+                & > img {
+                  width: 8px;
+                }
+              }
+            }
+          }
+        }
+        & > .ev3 {
+          @include flexRow;
+          width: 100%;
+          height: 30px;
+          box-sizing: border-box;
+          //background-color: #E2C913;
+          align-items: center;
+          justify-content: center;
+          & > a {
+            @include flexRow;
+            @include absoluteCenter;
+            @include pfButton(100%, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+            box-sizing: border-box;
+            color: $gnBlanco;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: normal;
+          }
+        }
+      }
+      & > .body-generarE-close {
+        @include flexColumn;
+        width: 100%;
+        max-height: 0;
+        background-color: rgb(248, 249, 250);
+        box-sizing: border-box;
+        overflow: hidden;
+        transition: 0.5s;
+        & > .ev1 {
+          @include flexRow;
+          width: 100%;
+          max-width: 740px;
+          box-sizing: border-box;
+          padding: 20px 15px;
+          & > form {
+            @include flexRowWrap;
+            width: 100%;
+            box-sizing: border-box;
+            justify-content: space-between;
+            position: relative;
+            & > div:nth-of-type(1) {
+              width: 100%;
+              box-sizing: border-box;
+              max-width: 430px;
+              padding-right: 15px;
+            }
+            & > div:nth-of-type(2) {
+              min-width: 170px;
+              & > label {
+                margin-bottom: 0 !important;
+              }
+            }
+            & > div:nth-of-type(3) {
+              min-width: 170px;
+              margin-top: 30px;
+            }
+            & > div:nth-of-type(4) {
+              min-width: 150px;
+              margin-top: 30px;
+            }
+            & > div:nth-of-type(5) {
+              min-width: 150px;
+              margin-top: 30px;
+            }
+            & > .form-group {
+              @include flexColumn;
+              height: 35px;
+              box-sizing: border-box;
+              margin: 0 0 30px 0;
+              & > label {
+                font-size: 12px;
+                color: #98A9B4;
+                margin-bottom: 3px;
+              }
+              & > a {
+                @include flexRow;
+                @include absoluteCenter;
+                $colorHover:  rgba(6, 188, 82, 0.2);
+                @include pfButton(100px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+                color: #37B34A;
+                cursor: pointer;
+                font-size: 14px;
+                font-weight: 500;
+              }
+              & > div {
+                @include flexRow;
+                align-items: flex-end;
+                justify-content: space-between;
+              }
+              & > input:nth-of-type(1) {
+                box-sizing: border-box;
+                font-weight: 700;
+              }
+            }
+            & > label {
+              width: 100%;
+              color: #3B8EDE;
+              font-size: 13px;
+              font-weight: 600;
+            }
+            & > .form-options {
+              @include flexRowWrap;
+              @include absoluteCenter;
+              min-width: 100%;
+              justify-content: flex-start;
+              box-sizing: border-box;
+              border-bottom: 1px dashed #D5DEE2;
+              color: #818192;
+              font-size: 12px;
+              font-style: italic;
+              margin: 0 !important;
+              padding:10px 0 20px 0;
+              & > .item-options {
+                @include flexRow;
+                height: 20px;
+                align-items: center;
+                justify-content: space-between;
+                background-color: rgba(129, 129, 146, 0.15);
+                box-sizing: border-box;
+                margin-right: 8px;
+                margin-top: 3px;
+                padding:3px 5px;
+                & > p {
+                  box-sizing: border-box;
+                  margin-right: 10px;
+                }
+                & > img {
+                  width: 8px;
+                }
+              }
+            }
+          }
+        }
+        & > .ev2 {
+          @include flexRow;
+          width: 100%;
+          max-width: 740px;
+          box-sizing: border-box;
+          padding: 0 15px 10px 15px;
+          & > form {
+            @include flexRowWrap;
+            width: 100%;
+            box-sizing: border-box;
+            justify-content: space-between;
+            & > div {
+              @include flexColumn;
+              height: 35px;
+              box-sizing: border-box;
+              margin: 0 0 30px 0;
+              & > label {
+                color: #98A9B4;
+                font-size: 12px;
+              }
+              & > a {
+                @include flexRow;
+                @include absoluteCenter;
+                $colorHover:  rgba(6, 188, 82, 0.2);
+                @include pfButton(100px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+                color: #37B34A;
+                cursor: pointer;
+                font-size: 14px;
+                font-weight: 500;
+              }
+            }
+            & > label {
+              width: 100%;
+              color: #3B8EDE;
+              font-size: 13px;
+              font-weight: 600;
+            }
+            & > .options {
+              @include flexRowWrap;
+              @include absoluteCenter;
+              justify-content: flex-start;
+              box-sizing: border-box;
+              color: #818192;
+              font-size: 12px;
+              font-style: italic;
+              margin: 0 !important;
+              padding: 10px 0 20px 0;
+              & > .item-options {
+                @include flexRow;
+                height: 20px;
+                align-items: center;
+                justify-content: space-between;
+                background-color: rgba(129, 129, 146, 0.15);
+                box-sizing: border-box;
+                margin-right: 8px;
+                margin-top: 3px;
+                padding: 3px 5px;
+                & > p {
+                  box-sizing: border-box;
+                  margin-right: 10px;
+                }
+                & > img {
+                  width: 8px;
+                }
+              }
+            }
+          }
+        }
+        & > .ev3 {
+          @include flexRow;
+          width: 100%;
+          height: 30px;
+          box-sizing: border-box;
+          //background-color: #E2C913;
+          align-items: center;
+          justify-content: center;
+          & > a {
+            @include flexRow;
+            @include absoluteCenter;
+            @include pfButton(100%, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+            box-sizing: border-box;
+            color: $gnBlanco;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: normal;
+          }
+        }
+      }
+    }
+  }
+}
+
+input {
+  width: 100%;
+  border-right: none;
+  border-left: none;
+  border-top: none;
+  border-bottom: solid 0.75px $grisLinea;
+  outline: none;
+  display: inline-block;
+  font-size: 14px;
+  color:$gnAzulMedio;
+  background-color: transparent;
+  padding-bottom: 1px;
+}
+
+
+.open {
+  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+}
+
+.close {
+  transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+}
+
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  padding-bottom: 1px;
+}
+
+input[type=number] {
+  -moz-appearance:textfield;
+}
+
+.item-eventos {
+  @include flexRow;
+  width: 100%;
+  height: 45px;
+  box-sizing: border-box;
+  margin:10px 0 0 0;
+  & > .number {
+    @include flexRow;
+    width: 25px;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    & > label {
+      font-size: 12px;
+      color: #3369B1;
+      font-weight: 700;
+      font-style: italic;
+    }
+  }
+  & > .body-item-eventos {
+    @include flexRow;
+    width: calc(100% - 25px);
+    background-color:#ECF0F3;
+    box-sizing: border-box;
+    cursor: pointer;
+    align-items: center;
+    justify-content: space-between;
+    padding:0 20px;
+    &:hover {
+      box-shadow: 0 10px 14px 0 rgba(152,169,180,0.50);
+    }
+    //padding-top: 8px;
+    //z-index: 2;
+    & > .part1 {
+      @include flexColumn;
+      width: calc(100% - 250px);
+      box-sizing: border-box;
+      cursor: pointer;
+      & > label:nth-of-type(1) {
+        color: #3369B1;
+        cursor: pointer;
+        font-family: 'Roboto Cn';
+        font-size: 14px;
+        font-weight: 500;
+      }
+      & > label:nth-of-type(2) {
+        color: #37B34A;
+        cursor: pointer;
+        font-family: 'Roboto Cn';
+        font-size: 12px;
+        font-weight: 500;
+        margin-top: 3px;
+      }
+    }
+    & > .part2 {
+      @include flexRow;
+      width: 250px;
+      box-sizing: border-box;
+      justify-content:flex-end;
+      align-items: center;
+      cursor: pointer;
+      //align-items: flex-end;
+      //height: 15px;
+      & > img {
+        cursor: pointer;
+        margin-left: 20px;
+      }
+      & > label {
+        font-family: 'Roboto Cn';
+        font-size: 12px;
+      }
+    }
+  }
+  & > .body-item-eventos-open {
+    @include flexRow;
+    width: calc(100% - 25px);
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+    background-color:#ECF0F3;
+    cursor: pointer;
+    padding:0 20px;
+    //padding-top: 8px;
+    box-shadow: 0 10px 14px 0 rgba(152,169,180,0.50);
+    opacity: .99;
+    z-index: 1;
+    & > .part1 {
+      @include flexColumn;
+      width: calc(100% - 250px);
+      box-sizing: border-box;
+      cursor: pointer;
+      & > label:nth-of-type(1) {
+        font-size: 14px;
+        color: #3369B1;
+        font-weight: 500;
+        cursor: pointer;
+        font-family: 'Roboto Cn';
+      }
+      & > label:nth-of-type(2) {
+        font-size: 12px;
+        color: #37B34A;
+        font-weight: 500;
+        margin-top: 3px;
+        cursor: pointer;
+        font-family: 'Roboto Cn';
+      }
+    }
+    & > .part2 {
+      @include flexRow;
+      width: 250px;
+      box-sizing: border-box;
+      justify-content:flex-end;
+      align-items: center;
+      cursor: pointer;
+      //align-items: flex-end;
+      //height: 15px;
+      & > img {
+        margin-left: 20px;
+        cursor: pointer;
+      }
+      & > label {
+        font-size: 12px;
+        font-family: 'Roboto Cn';
+      }
+    }
+  }
+
+}
+
+
+.body-itemE {
+  @include flexColumn;
+  width: calc( 100% - 25px);
+  box-sizing: border-box;
+  background-color: rgb(248, 249, 250);
+  max-height: 600px;
+  transition: 0.5s;
+  //overflow: hidden;
+  margin-left: 25px;
+  & > .ev1 {
+    @include flexRow;
+    //min-height: 210px;
+    width: 100%;
+    max-width: 740px;
+    box-sizing: border-box;
+    padding: 20px 15px;
+    & > form {
+      @include flexRowWrap;
+      width: 100%;
+      box-sizing: border-box;
+      justify-content: space-between;
+      & > div {
+        @include flexColumn;
+        height: 35px;
+        box-sizing: border-box;
+        margin: 0 0 30px 0;
+        & > label {
+          font-size: 12px;
+          color: #98A9B4;
+          margin-bottom: 3px;
+        }
+        & > a {
+          @include flexRow;
+          @include absoluteCenter;
+          $colorHover:  rgba(6, 188, 82, 0.2);
+          @include pfButton(100px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+          cursor: pointer;
+          font-size: 14px;
+          color: #37B34A;
+          font-weight: 500;
+        }
+        & > div {
+          @include flexRow;
+          justify-content: space-between;
+          align-items: flex-end;
+        }
+      }
+      & > .options {
+        @include flexRowWrap;
+        @include absoluteCenter;
+        justify-content: flex-start;
+        font-size: 12px;
+        color: #818192;
+        font-style: italic;
+        box-sizing: border-box;
+        border-bottom: 1px dashed #D5DEE2;
+        padding:10px 0 20px 0;
+        margin: 0 !important;
+        & > .item-options {
+          @include flexRow;
+          height: 20px;
+          background-color: rgba(129, 129, 146, 0.15);
+          padding:3px 5px;
+          justify-content: space-between;
+          align-items: center;
+          box-sizing: border-box;
+          margin-right: 8px;
+          margin-top: 3px;
+          & > p {
+            margin-right: 10px;
+            box-sizing: border-box;
+          }
+          & > img {
+            width: 8px;
+          }
+        }
+      }
+    }
+  }
+  & > .ev2 {
+    @include flexRow;
+    width: 1000%;
+    max-width: 740px;
+    //min-height: 130px;
+    box-sizing: border-box;
+    padding: 0px 15px 10px 15px;
+    & > form {
+      @include flexRowWrap;
+      width: 100%;
+      box-sizing: border-box;
+      justify-content: space-between;
+      & > div {
+        @include flexColumn;
+        height: 35px;
+        box-sizing: border-box;
+        margin: 0 0 30px 0;
+        & > label {
+          font-size: 12px;
+          color: #98A9B4;
+        }
+        & > a {
+          @include flexRow;
+          @include absoluteCenter;
+          $colorHover:  rgba(6, 188, 82, 0.2);
+          @include pfButton(100px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+          cursor: pointer;
+          font-size: 14px;
+          color: #37B34A;
+          font-weight: 500;
+        }
+      }
+      & > .options {
+        @include flexRowWrap;
+        @include absoluteCenter;
+        justify-content: flex-start;
+        font-size: 12px;
+        color: #818192;
+        font-style: italic;
+        box-sizing: border-box;
+        padding:10px 0 20px 0;
+        margin: 0 !important;
+        & > .item-options {
+          @include flexRow;
+          height: 20px;
+          background-color: rgba(129, 129, 146, 0.15);
+          padding:3px 5px;
+          justify-content: space-between;
+          align-items: center;
+          box-sizing: border-box;
+          margin-right: 8px;
+          margin-top: 3px;
+          & > p {
+            margin-right: 10px;
+            box-sizing: border-box;
+          }
+          & > img {
+            width: 8px;
+          }
+        }
+      }
+    }
+  }
+  & > .ev3 {
+    @include flexRow;
+    width: 100%;
+    height: 30px;
+    box-sizing: border-box;
+    background-color: #E2C913;
+    justify-content: center;
+    align-items: center;
+    & > label{
+      color:white;
+      font-size: 14px;
+    }
+  }
+}
+
+.body-itemE-close {
+  @include flexColumn;
+  width: calc( 100% - 25px);
+  box-sizing: border-box;
+  background-color: rgb(248, 249, 250);
+  max-height: 0;
+  overflow: hidden;
+  transition: 0.5s;
+  margin-left: 25px;
+  & > .ev1 {
+    @include flexRow;
+    //min-height: 210px;
+    width: 100%;
+    max-width: 740px;
+    box-sizing: border-box;
+    padding: 20px 15px;
+    & > form {
+      @include flexRowWrap;
+      width: 100%;
+      box-sizing: border-box;
+      justify-content: space-between;
+      & > div {
+        @include flexColumn;
+        height: 35px;
+        box-sizing: border-box;
+        margin: 0 0 30px 0;
+        & > label {
+          font-size: 12px;
+          color: #98A9B4;
+          margin-bottom: 3px;
+        }
+        & > a {
+          @include flexRow;
+
+          $colorHover:  rgba(6, 188, 82, 0.2);
+          @include pfButton(100px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+          @include flexRow;
+          @include absoluteCenter;
+          cursor: pointer;
+          font-size: 14px;
+          color: #37B34A;
+          font-weight: 500;
+        }
+        & > div {
+          @include flexRow;
+          justify-content: space-between;
+          align-items: flex-end;
+        }
+
+      }
+      & > .options {
+        @include flexRowWrap;
+        @include absoluteCenter;
+        justify-content: flex-start;
+        font-size: 12px;
+        color: #818192;
+        font-style: italic;
+        box-sizing: border-box;
+        border-bottom: 1px dashed #D5DEE2;
+        padding:10px 0 20px 0;
+        margin: 0 !important;
+        & > .item-options {
+          @include flexRow;
+          height: 20px;
+          background-color: rgba(129, 129, 146, 0.15);
+          padding:3px 5px;
+          justify-content: space-between;
+          align-items: center;
+          box-sizing: border-box;
+          margin-right: 8px;
+          margin-top: 3px;
+          & > p {
+            margin-right: 10px;
+            box-sizing: border-box;
+          }
+          & > img {
+            width: 8px;
+          }
+        }
+      }
+    }
+  }
+  & > .ev2 {
+    @include flexRow;
+    width: 100%;
+    max-width: 740px;
+    //min-height: 130px;
+    box-sizing: border-box;
+    padding: 0px 15px 10px 15px;
+    & > form {
+      @include flexRowWrap;
+      width: 100%;
+      box-sizing: border-box;
+      justify-content: space-between;
+      & > div {
+        @include flexColumn;
+        height: 35px;
+        box-sizing: border-box;
+        margin: 0 0 30px 0;
+        & > label {
+          font-size: 12px;
+          color: #98A9B4;
+        }
+        & > a {
+          @include flexRow;
+
+          $colorHover:  rgba(6, 188, 82, 0.2);
+          @include pfButton(100px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+          @include flexRow;
+          @include absoluteCenter;
+          cursor: pointer;
+          font-size: 14px;
+          color: #37B34A;
+          font-weight: 500;
+        }
+
+      }
+      & > .options {
+        @include flexRowWrap;
+        @include absoluteCenter;
+        justify-content: flex-start;
+        font-size: 12px;
+        color: #818192;
+        font-style: italic;
+        box-sizing: border-box;
+        padding:10px 0 20px 0;
+        margin: 0 !important;
+        & > .item-options {
+          @include flexRow;
+          height: 20px;
+          background-color: rgba(129, 129, 146, 0.15);
+          padding:3px 5px;
+          justify-content: space-between;
+          align-items: center;
+          box-sizing: border-box;
+          margin-right: 8px;
+          margin-top: 3px;
+          & > p {
+            margin-right: 10px;
+            box-sizing: border-box;
+          }
+          & > img {
+            width: 8px;
+          }
+        }
+      }
+    }
+  }
+  & > .ev3 {
+    @include flexRow;
+    width: 100%;
+    height: 30px;
+    box-sizing: border-box;
+    background-color: #E2C913;
+    justify-content: center;
+    align-items: center;
+    & > label {
+      color:white;
+      font-size: 14px;
+    }
+  }
+}
+
+
+
+
+.title-prorroga {
+  @include flexRow;
+  width:100%;
+  box-sizing: border-box;
+  height: 55px;
+  padding: 0 25px;
+  background: #37B34A;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  margin-top: 20px;
+  & > .part1 {
+    @include flexRow;
+    width: 50%;
+    //justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    cursor: pointer;
+    & > .check {
+      @include flexRow;
+      width: 25px;
+      height: 25px;
+      margin-right: 15px;
+      box-sizing: border-box;
+      background-color: white;
+      position: relative;
+      cursor: pointer;
+      & > img {
+        width: 29px;
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        cursor: pointer;
+      }
+    }
+    & > p {
+      @include flexColumn;
+      width: calc(100% - 25px);
+      box-sizing: border-box;
+      cursor: pointer;
+      & > label:nth-of-type(1) {
+        color: #FFFFFF;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+      }
+    }
+  }
+  & > .part2 {
+    @include flexRow;
+    width: 350px;
+    box-sizing: border-box;
+    justify-content:space-between;
+    align-items: center;
+    cursor: pointer;
+    //height: 15px;
+  }
+}
+
+.invalid_notification {
+  width: 100%;
+  margin-top: 30px;
+  & > .title {
+    @include flexRow;
+    @include absoluteCenter;
+    width: 100%;
+    height: auto !important;
+    background-color: #C1272D;
+    opacity: 0.7;
+    padding: 10px 0;
+    & > p {
+      color: #FFFFFF;
+      font-size: 19px;
+      font-weight: 600;
+    }
+  }
+  & > .detail {
+    width: calc(100% - 30px);
+    margin-top: 15px;
+    padding: 0 15px;
+    & > div:nth-of-type(1) {
+      width: 100%;
+      margin-bottom: 10px;
+      & > p {
+        color: #3369B1;
+        font-size: 16px;
+        font-weight: 500;
+      }
+    }
+    & > div:nth-of-type(2) {
+      @include flexRowWrap;
+      width: 100%;
+      & > div {
+        background-color: rgba(193, 39, 45, 0.15);
+        font-size: 13px;
+        font-style: italic;
+        margin: 0 5px 8px;
+        padding: 7px 8px;
+        & > div:nth-of-type(1) {
+          & > p {
+            & > span:nth-of-type(1) {
+              color: #818192;
+            }
+            & > span:nth-of-type(2) {
+              color: rgba(193, 39, 45, 0.6);
+              margin: 0 4px;
+            }
+            & > span:nth-of-type(3) {
+              color: rgba(193, 39, 45, 0.6);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.boton-wizard {
+  @include flexRow;
+  @include absoluteCenter;
+  justify-content: space-between;
+  width: 100%;
+  //margin-top: 16px;
+  box-sizing: border-box;
+  & > .btnCancelar {
+    margin-top: 10px;
+    @include pfButton(320px, 30px, $gnAzulMedio, rgba(51,105,177,0.75), $gnAzulMedio, 0px);
+    @include flexRow;
+    @include absoluteCenter;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: normal;
+    color:$gnBlanco;
+    box-sizing: border-box;
+  }
+
+  & > .btnGuardar {
+    margin-top: 10px;
+    @include pfButton(320px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+    @include flexRow;
+    @include absoluteCenter;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: normal;
+    color:$gnBlanco;
+    box-sizing: border-box;
+  }
+
+  & > .btnGuardarInactivo {
+    margin-top: 10px;
+    @include pfButton(320px, 30px, #D5DEE2, #D5DEE2, #D5DEE2, 0px);
+    @include flexRow;
+    @include absoluteCenter;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 900;
+    color:$gnBlanco;
+    box-sizing: border-box;
+    pointer-events: none;
+  }
+}
+
+
+
+
+
+.cita {
+  @include flexRow;
+  box-sizing: border-box;
+  padding: 25px 20px;
+  justify-content: center;
+  align-items: flex-end;
+  & > label {
+    font-size: 14px;
+    color: #3369B1;
+    font-weight: 600;
+    margin-right: 10px;
+  }
+  & > .citaFecha {
+    width: 135px;
+  }
+}
+
+
+
+.modalConfirm {
+  @include flexColumn;
+  height: 225px;
+  padding: 20px;
+  box-sizing: border-box;
+  & > .salir {
+    @include flexRow;
+    justify-content: flex-end;
+    & > img {
+      cursor: pointer;
+    }
+  }
+  & > .body {
+    @include flexRow;
+    width: 100%;
+    height: 80px;
+    box-sizing: border-box;
+    & > .img {
+      @include flexColumn;
+      @include absoluteCenter;
+      width: 100px;
+      box-sizing: border-box;
+      & > img {
+        width: 63px;
+      }
+    }
+    & > .title {
+      @include flexColumn;
+      width:calc(100% - 100px);
+      box-sizing: border-box;
+      justify-content: center;
+      & > label:nth-of-type(1) {
+        color: #3369B1;
+        font-size: 22px;
+        font-weight: 600;
+      }
+      & > label:nth-of-type(2) {
+        font-size: 19px;
+        color: #3B8EDE;
+        margin-top: 10px;
+      }
+    }
+  }
+  & > .boton {
+    @include flexRow;
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    justify-content: space-between;
+    margin-top: 40px;
+    & > a:nth-of-type(1) {
+      @include flexRow;
+      @include absoluteCenter;
+      @include pfButton(145px, 30px, $gnAzulMedio, rgba(51,105,177,0.75), $gnAzulMedio, 0px);
+      color: #FFFFFF;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    & > a:nth-of-type(2) {
+      @include flexRow;
+      @include absoluteCenter;
+      @include pfButton(145px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+      color: #FFFFFF;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
+}

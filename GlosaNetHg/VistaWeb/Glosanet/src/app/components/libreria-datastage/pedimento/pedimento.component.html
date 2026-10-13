@@ -1,0 +1,124 @@
+<div class="pedimentoContainer">
+    <div class="header">
+        <div class="topBar">
+            <p>
+                <label (click)="redirectTo('datastagelibrary')">Librería de Registros ></label>
+                <label>{{'DataStage ' + dataStageFolio}}</label>
+            </p>
+        </div>
+        <div class="title">
+            <div>
+                <div>
+                    <img src="./assets/images/libreria_gris_tarjeta.svg" />
+                </div>
+                <div>
+                    <p>
+                        <label>{{'#' + dataStageFolio}} · &nbsp;</label>
+                        <label>{{'DataStage'}}</label>
+                    </p>
+                    <p>{{'Del ' + (dataStageStartDate | dateFormatDot) + ' al ' + (dataStageEndDate | dateFormatDot)}}</p>
+                    <p>{{'Valor Total $' + dataStageTotalValue}}</p>
+                </div>
+            </div>
+            <div>
+                <a (click)="redirectTo('datastagelibrary')">REGRESAR</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="separator"></div>
+        <div class="content">
+
+            <div class="title">
+                <label>Pedimentos</label>
+            </div>
+
+            <div class="filters">
+                <div class="filterBy">
+                    <label>Tipo Operación:</label>
+                    <div class="drop-container">
+                        <gn-drop-list (valueDropList)="handleFilterByTipoOperacion($event)"
+                                      [items]="optionsTipoOperacion"
+                                      [itemSelect]="selectedTipoOperacion"
+                                      [isSearch]="false"
+                                      [isCategory]="false"
+                                      [align]="'left'"
+                                      [fontSize]="'14px'"></gn-drop-list>
+                    </div>
+                </div>
+
+                <div class="filterBy">
+                    <label>Tipo Pedimento:</label>
+                    <div class="drop-container">
+                        <gn-drop-list (valueDropList)="handleFilterByTipoPedimento($event)"
+                                      [items]="optionsTipoPedimento"
+                                      [itemSelect]="selectedTipoPedimento"
+                                      [isSearch]="false"
+                                      [isCategory]="false"
+                                      [align]="'left'"
+                                      [fontSize]="'14px'"></gn-drop-list>
+                    </div>
+                </div>
+
+                <div class="filterByDate">
+                    <label>Recepción desde:</label>
+                    <div>
+                        <gn-date-picker [(date)]="startDate" dateFormat="YYYYMMDD" [sizeInput]="'14px'"
+                                        (onSelect)="handleStartDate($event)"
+                                        [lineColor]="invalidStartDate ? '#C1272D' : '#98A9B4'" [colorDate]="'#3369B1'"
+                                        [fontFamily]="'Roboto Cn'" [weightInput]="'600'"
+                                        [paddingInput]="'0px'" [textAlignInput]="'center'" [fontFamily]="'Roboto Cn'"
+                                        (dateChange)="validateDates(startDate, 1)">
+                        </gn-date-picker>
+                        <img (click)="resetStartDate()" *ngIf="startDate" src="./assets/images/cerrar_azul.png">
+                    </div>
+                </div>
+
+                <div class="filterByDate">
+                    <label>Hasta</label>
+                    <div>
+                        <gn-date-picker [(date)]="endDate" dateFormat="YYYYMMDD" [sizeInput]="'14px'"
+                                        (onSelect)="handleEndDate($event)"
+                                        [lineColor]="invalidEndDate ? '#C1272D' : '#98A9B4'" [colorDate]="'#3369B1'"
+                                        [fontFamily]="'Roboto Cn'" [weightInput]="'600'"
+                                        [paddingInput]="'0px'" [textAlignInput]="'center'" [fontFamily]="'Roboto Cn'"
+                                        (dateChange)="validateDates(endDate, 2)">
+                        </gn-date-picker>
+                        <img (click)="resetEndDate()" *ngIf="endDate" src="./assets/images/cerrar_azul.png">
+                    </div>
+                </div>
+
+                <div class="apply">
+                    <a (click)="updateData()">ACTUALIZAR</a>
+                </div>
+
+            </div>
+
+            <div class="searchBar">
+                <gn-search-bar [placeholder]="'Buscar # Pedimento, Patente, Fracción'"
+                               [searchValue]="searchTerm"
+                               (searchTermChanged)="handleKeySearch($event)"></gn-search-bar>
+            </div>
+
+            <div class="table">
+                <gn-datastage-table [buffer]="buffer"
+                                    [firstItem]="firstItem"
+                                    [grandTotal]="grandTotal"
+                                    [currentTotal]="currentTotal"
+                                    [currentPage]="currentPage"
+                                    [loading]="loading"
+                                    [getData]="getData"
+                                    [tableHead]="tableHead"
+                                    [maxWidth]="'100%'"
+                                    [minWidth]="'1120px'"
+                                    [settings]="settings"
+                                    (emitCurrentPage)="handleCurrentPage($event)"
+                                    (emitLoading)="handleLoading($event)"
+                                    (emitLink)="redirectToDetail($event)"></gn-datastage-table>
+            </div>
+
+        </div>
+
+    </div>
+</div>

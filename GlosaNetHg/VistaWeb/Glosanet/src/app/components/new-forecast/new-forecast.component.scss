@@ -1,0 +1,537 @@
+@import "../../../variables.scss";
+@import "../../../mixins.scss";
+@import "../../../colors.scss";
+
+#newForecastView {
+  @include flexRowWrap;
+  width: calc(100vw - 110px);
+  min-width: 690px;
+  justify-content: center;
+  padding: 30px 25px 0;
+  & > div:nth-of-type(1) {
+    @include flexRow;
+    @include absoluteCenter;
+    width: 100%;
+    justify-content: space-between !important;
+    border-bottom: 0.5px solid $gnInactivo;
+    padding-bottom: 5px;
+
+    & > div:nth-of-type(1) {
+
+      & > div:nth-of-type(1) {
+        margin-bottom: 5px;
+        & > p:nth-of-type(1) {
+          font-weight: 900;
+          font-size: 22px;
+          color: $gnAzulBajo;
+        }
+
+      }
+
+      & > div:nth-of-type(2) {
+        & > p:nth-of-type(1) {
+          font-size: 15px;
+          & > strong:nth-of-type(1) {
+            font-weight: 500;
+            color: $gnGrisRata;
+          }
+
+          & > strong:nth-of-type(2) {
+            font-weight: bold;
+            color: $gnGrisRata;
+          }
+
+          & > strong:nth-of-type(3) {
+            font-weight: 500;
+            color: $gnGrisRata;
+          }
+
+          & > strong:nth-of-type(4) {
+            font-weight: 500;
+            color:  $verdeBoton;
+          }
+
+        }
+      }
+
+    }
+
+    & > div:nth-of-type(2) {
+      & > a:nth-of-type(1) {
+        @include flexRow;
+        @include absoluteCenter;
+        $textSize: ('base': 14px);
+        @include escaledFontFormat($textSize, 600, $gnBlanco);
+        @include pfButton(180px, 30px, $verdeBoton, rgba(55, 179, 74, 0.75), $verdeBoton, 0px);
+        cursor: pointer;
+        outline: none;
+      }
+    }
+  }
+
+  & > div:nth-of-type(2) {
+    @include flexRow;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 20px;
+    & > div:nth-of-type(1) {
+      @include flexRow;
+      justify-content: flex-start;
+      & > p:nth-of-type(1) {
+        width: 100%;
+        font-weight: 500;
+        font-size: 18px;
+        color: $gnAzulMedio;
+      }
+    }
+    & > div:nth-of-type(2) {
+      @include flexRow;
+      justify-content: flex-end;
+      & > a:nth-of-type(1) {
+        @include flexRow;
+        @include absoluteCenter;
+        $textSize: ('base': 14px);
+        @include escaledFontFormat($textSize, 600, $gnBlanco);
+        @include pfButton(180px, 30px, $verdeBoton, rgba(55, 179, 74, 0.75), $verdeBoton, 0px);
+        cursor: pointer;
+        outline: none;
+      }
+    }
+  }
+
+  & > div:nth-of-type(3) {
+    @include flexRow;
+    width: 100%;
+    margin-top: 20px;
+    & > form:nth-of-type(1) {
+      @include flexRow;
+      width: 100%;
+      align-items: center;
+      align-content: center;
+      justify-content: space-between;
+      & > div:nth-of-type(1) {
+        @include flexRow;
+        width: 100%;
+        & > div:nth-of-type(1) {
+          @include flexRow;
+          width: 60%;
+          & > div:nth-of-type(1) {
+            @include flexRow;
+            width: 100%;
+            margin-right: 10px;
+            flex-direction: column !important;
+            & > label:nth-of-type(1){
+              box-sizing: border-box;
+              font-size: 13px;
+              color: #818192;
+              text-align: left;
+            }
+            & > gn-drop-list{
+              height: 28px;
+            }
+          }
+        }
+        & > div:nth-of-type(2) {
+          @include flexRow;
+          width: 40%;
+          align-items: center;
+          align-content: center;
+          justify-content: space-between;
+          & > div:nth-of-type(1) {
+            @include flexColumn;
+            box-sizing: border-box;
+            width: calc(100% - 210px);
+            margin: 0 5px;;
+            & > label{
+              @include flexRow;
+              font-size: 13px;
+              color: #98A9B4;
+            }
+            & > input{
+              box-sizing: border-box;
+              padding: 9px 5px 1px;
+              width: 100%;
+              font-size: 14px;
+              border-width: 0;
+              outline: 0;
+              color: #3369B1;
+            }
+            input[type=number]::-webkit-inner-spin-button,
+            input[type=number]::-webkit-outer-spin-button {
+              -webkit-appearance: none;
+              margin: 0;
+            }
+            input[type=number] { -moz-appearance:textfield; }
+          }
+          & > div:nth-of-type(2) {
+            @include flexColumn;
+            width: 100px;
+            box-sizing: border-box;
+            margin: 0 5px;
+            & > label{
+              @include flexRow;
+              font-size: 13px;
+              color: #98A9B4;
+            }
+            & > input{
+              box-sizing: border-box;
+              padding: 5px;
+              width: 100%;
+              height: 30px;
+              border: 1px solid #3369B1;
+              font-size: 14px;
+            }
+          }
+          & > div:nth-of-type(3) {
+            width: 100px;
+            background: #E2C913;
+            transition: all 0.4s;
+            font-size: 14px;
+            color: #FFFFFF;
+            font-family: "Roboto Cn";
+            font-weight: 500;
+            height: 30px;
+            //margin: 0 auto;
+            @include flexRow;
+            @include absoluteCenter;
+            &:hover {
+              background-color: rgba(226, 201, 19, 0.75);
+              cursor: pointer;
+            }
+          }
+
+        }
+      }
+    }
+  }
+
+  & > div:nth-of-type(4) {
+    @include flexRow;
+    width: 100%;
+    align-items: flex-end;
+    align-content: flex-end;
+    justify-content: flex-start;
+    margin-top: 15px;
+    & > div:nth-of-type(1) {
+      & > p:nth-of-type(1) {
+        font-weight: 900;
+        font-size: 22px;
+        color: $gnAzulBajo;
+      }
+    }
+  }
+
+  & > div:nth-of-type(5) {
+    @include flexRow;
+    width: 100%;
+    margin-top: 15px;
+    padding-bottom: 5px;
+    border-bottom: 0.5px solid $gnHeadreTable;
+
+    & > div:nth-of-type(1) {
+      @include flexRow;
+      width: 50px;
+      justify-content: flex-start;
+      & > p:nth-of-type(1) {
+        font-weight: 400;
+        font-size: 14px;
+        color: $grisLinea;
+      }
+    }
+    & > div:nth-of-type(2) {
+      @include flexRow;
+      width: calc(100% - 240px);
+      justify-content: flex-start;
+      & > p:nth-of-type(1) {
+        font-weight: 400;
+        font-size: 14px;
+        color: $grisLinea;
+      }
+    }
+    & > div:nth-of-type(3) {
+      @include flexRow;
+      width: 190px;
+      justify-content: flex-end;
+      & > p:nth-of-type(1) {
+        font-weight: 400;
+        font-size: 14px;
+        color: $grisLinea;
+      }
+    }
+  }
+
+  & > div:nth-of-type(6) {
+    @include flexRowWrap;
+    width: 100%;
+
+    & > div {
+      @include flexRow;
+      width: 100%;
+      min-height: 50px;
+      align-items: center;
+      align-content: center;
+      border-bottom: 0.5px solid $gnInactivo;
+
+      & > div:nth-of-type(1) {
+        @include flexRow;
+        width: 50px;
+        justify-content: flex-start;
+        & > p:nth-of-type(1) {
+          font-weight: 400;
+          font-size: 14px;
+          color: $gnAzulObscuro;
+        }
+      }
+
+      & > div:nth-of-type(2) {
+        @include flexRow;
+        width: calc(100% - 350px);
+        justify-content: flex-start;
+        & > p:nth-of-type(1) {
+          font-weight: 400;
+          font-size: 14px;
+          color: $gnAzulObscuro;
+        }
+      }
+
+      & > div:nth-of-type(3) {
+        @include flexRow;
+        width: 180px;
+        justify-content: flex-end;
+        & > p:nth-of-type(1) {
+          @include flexRow;
+          @include absoluteCenter;
+          font-weight: 400;
+          font-size: 14px;
+          color: $gnAzulObscuro;
+        }
+        & > div:nth-of-type(1) {
+          & > img:nth-of-type(1) {
+            margin-left: 5px;
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+      }
+
+      & > div:nth-of-type(4) {
+        @include flexRow;
+        width: 120px;
+        justify-content: flex-end;
+        & > img:nth-of-type(1) {
+          width: 18px;
+          height: 30px;
+          margin-right: 5px;
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+
+
+    }
+  }
+
+  & > div:nth-of-type(7) {
+    @include flexRow;
+    width: 100%;
+    justify-content: flex-start;
+    margin-top: 10px;
+    & > p:nth-of-type(1) {
+      font-weight: 900;
+      font-size: 16px;
+      color: $gnAzulMedio;
+    }
+  }
+
+}
+
+#modalUpdateForecast {
+
+  & > div:nth-of-type(1) {
+    width: 500px;
+    height: 380px;
+
+    & > div:nth-of-type(1) {
+      @include flexRowWrap;
+      @include absoluteCenter;
+      width: calc(100% - 40px);
+      height: calc(100% - 40px);
+      padding: 20px;
+
+      & > div:nth-of-type(1) {
+        @include flexRowWrap;
+        width: 100%;
+        height: calc(100% - 40px);
+        align-content: flex-start;
+        align-items: flex-start;
+
+        & > div:nth-of-type(1) {
+          @include flexRow;
+          width: 100%;
+          height: 30px;
+          align-content: flex-start;
+          align-items: flex-start;
+          justify-content: space-between;
+          & > p:nth-of-type(1) {
+            color: $gnAzulBajo;
+            font-weight: 500;
+            font-size: 21px;
+          }
+          & > img:nth-of-type(1) {;
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+
+        & > div:nth-of-type(2) {
+          @include flexRowWrap;
+          width: 100%;
+          margin-top: 25px;
+          & > form:nth-of-type(1) {
+            @include flexRowWrap;
+            width: 100%;
+            justify-content: space-between;
+            & > div {
+              @include flexRowWrap;
+              @include absoluteCenter;
+              & > p:nth-of-type(1) {
+                width: 100%;
+                color:$grisLinea;
+                font-size: 14px;
+                margin-bottom: 5px;
+              }
+              & > input:nth-of-type(1) {
+                width: 100%;
+                border: none;
+                border-bottom: solid 0.75px $grisLinea;
+                outline: none;
+                display: inline-block;
+                font-size: 14px;
+                color:$gnAzulMedio;
+                background-color: $gnBlanco;
+              }
+            }
+            & > div:nth-of-type(1) {
+              width: 100%;
+            }
+            & > div:nth-of-type(2) {
+              width: 280px;
+              margin-top: 40px;
+            }
+            & > div:nth-of-type(3) {
+              width: 150px;
+              margin-top: 40px;
+            }
+          }
+        }
+      }
+
+      & > div:nth-of-type(2) {
+        @include flexRow;
+        width: 100%;
+        height: 40px;
+        align-items: center;
+        align-content: center;
+        justify-content: space-between;
+        & > a:nth-of-type(1) {
+          @include flexRow;
+          @include absoluteCenter;
+          @include pfButton(145px, 30px, $gnAzulMedio, rgba(51,105,177,0.75), $gnAzulMedio, 0px);
+          margin-top: 10px;
+          font-size: 14px;
+          font-weight: normal;
+          color:$gnBlanco;
+          box-sizing: border-box;
+          &:hover {
+            cursor: pointer;
+          }
+        }
+
+        & > a:nth-of-type(2) {
+          @include flexRow;
+          @include absoluteCenter;
+          @include pfButton(145px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+          margin-top: 10px;
+          font-size: 14px;
+          font-weight: normal;
+          color: $gnBlanco;
+          box-sizing: border-box;
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+
+    }
+
+  }
+
+}
+
+#confirmForecastSave {
+
+  & > div:nth-of-type(1) {
+    width: 500px;
+    height: 225px;
+
+    & > div:nth-of-type(1) {
+      @include flexRowWrap;
+      @include absoluteCenter;
+      width: calc(100% - 40px);
+      height: calc(100% - 40px);
+      padding: 20px;
+      & > div:nth-of-type(1) {
+        @include flexRow;
+        width: 100%;
+        height: 20px;
+        justify-content: flex-end;
+        & > img {
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+      & > div:nth-of-type(2) {
+        @include flexRow;
+        width: 100%;
+        height: calc(100% - 20px);
+        box-sizing: border-box;
+        & > div:nth-of-type(1) {
+          @include flexColumn;
+          width: 100px;
+          box-sizing: border-box;
+          align-items: center;
+          justify-content: center;
+          & > img{
+            width: 63px;
+          }
+        }
+        & > div:nth-of-type(2) {
+          @include flexColumn;
+          width:calc(100% - 100px);
+          box-sizing: border-box;
+          justify-content: center;
+          & > label:nth-of-type(1) {
+            font-size: 22px;
+            color: #3369B1;
+            font-weight: 600;
+            & > span {
+              font-size: 21px;
+              color: #3B8EDE;
+              font-weight: 400;
+            }
+          }
+          & > label:nth-of-type(2) {
+            font-size: 19px;
+            color: #3B8EDE;
+            margin-top: 10px;
+          }
+        }
+      }
+    }
+  }
+
+}

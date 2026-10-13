@@ -1,0 +1,68 @@
+#!/bin/bash
+
+# CONFIGURATION
+cwd=$(pwd)"/VistaWeb/Glosanet/"
+sshServer="172.24.24.10"
+sshUsername="glosa"
+sshPassword="xia9ro"
+publishPath="/home/glosa/latest/webapps/"
+srcPath=$cwd"dist"
+commonFile="src/app/util/common.protocols.ts"
+appVersionNumberLabel="APP_VERSION_NUMBER"
+
+# CONFIRM EXECUTION DATA
+echo -e "\n= PUBLICACIÓN DE GLOSANET WEB =\n"
+echo "$srcPath"
+read -p "Nombre de la rama a publicar: " branchName
+numRevision=$(hg identify --num --rev $branchName)
+versionText="Versión: 2.0.$numRevision.0"
+
+[ ! -f "`which brew`" ] && printf "\e[81;5;20mImportante: Se instalará Homebrew\e[0m\n"
+[ ! -f "`which lftp`" ] && printf "\e[81;5;20mImportante: Se instalará LFTP\e[0m\n"
+
+echo -e "\nServidor: $sshServer
+Ruta de código fuente: $cwd
+Ruta de publicación: $publishPath
+Rama a publicar: $branchName
+Número de revisión: $numRevision
+$versionText
+\nEstá a punto de compilar una versión productiva de front y publicarlo en el servidor remoto."
+
+read -r -p "¿Está usted seguro? [y/N] " response
+case "$response" in
+    [yY][eE][sS]|[yY]) 
+
+        # REPLACING VERSION IN TS FILE
+        while IFS= read -r line; do
+        if [[ $line == *$appVersionNumberLabel* ]] ; then
+            orig="$line"
+            repl="${line%%=*}= '$versionText';"
+        fi
+        done < "$cwd$commonFile"
+        sed -i "" "s/$orig/$repl/g" "$cwd$commonFile"
+        echo "Se reemplazó la versión del archivo common.protocols.ts"
+
+        # REMOVE DIST FOLDER
+        rm -rf $cwd"dist"
+        rm -rf $cwd"Glosanet"
+        echo "La carpeta dist se ha limpiado"
+
+        # COMPILE IN PRODUCTION MODE
+        echo "Inicia compilación en modo productivo"
+        (cd $cwd; ng build --prod --build-optimizer=false --aot=false --base-href=/)
+        mv $cwd"dist" $srcPath
+
+        # CHECK IF BREW IS INSTALLED
+        if [[ $(command -v brew) == "" ]]; then
+            echo "Instalando Hombrew"
+            /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        fi
+
+        echo -e "\nCompilación correcta en la ruta $srcPath"
+        # rm -rf $cwd"Glosanet"
+        ;;
+    *)
+        echo "Bye"
+        exit;
+        ;;
+esac

@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="commons:war" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="411a8267-0795-4ddd-bff2-5b21596bef8a" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="false" />
+    <option name="FILTER_DEBUG" value="false" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2CDby85G3CQjqIxYi3nagrj3X3W" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JPA.DatabaseSchemaImportDialog&quot;: &quot;1e7cddb0-a9b4-4f1d-b8bd-d9b2e134f4cb&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Fernando Betanzos/Documents/GlosaNetHg/ServicioWeb/Glosanet/commons/src/main/webapp&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.poratu.idea.plugins.tomcat.setting.TomcatSettingConfigurable&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;adf53a42f31ef03f40fb961ac32b744f&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;,
+      &quot;sqlserver&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Fernando Betanzos\Documents\GlosaNetHg\ServicioWeb\Glosanet\commons\src\main\java\org\mx\modelo" />
+    </key>
+    <key name="ImportMappingsDialog.RecentPackages">
+      <recent name="org.mx.modelo.cargas_adicionales" />
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Smart Tomcat.Tomcat 9.0">
+    <configuration name="EdocRequestMsgBrokerMessageImplIT" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="commons" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.mx.test.servicio.datastage.impl.integration.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.mx.test.servicio.datastage.impl.integration" />
+      <option name="MAIN_CLASS_NAME" value="org.mx.test.servicio.datastage.impl.integration.EdocRequestMsgBrokerMessageImplIT" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NotifyImplIT.borrarDocumentoCargasAdicionales" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="commons" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.mx.test.servicio.notification.impl.unitary.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.mx.test.servicio.notification.impl.unitary" />
+      <option name="MAIN_CLASS_NAME" value="org.mx.test.servicio.notification.impl.unitary.NotifyImplIT" />
+      <option name="METHOD_NAME" value="borrarDocumentoCargasAdicionales" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NotifyImplIT.comprimeAdicionalesZipDataStage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="commons" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.mx.test.servicio.notification.impl.unitary.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.mx.test.servicio.notification.impl.unitary" />
+      <option name="MAIN_CLASS_NAME" value="org.mx.test.servicio.notification.impl.unitary.NotifyImplIT" />
+      <option name="METHOD_NAME" value="comprimeAdicionalesZipDataStage" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NotifyImplIT.downloadFile" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="commons" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.mx.test.servicio.notification.impl.unitary.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.mx.test.servicio.notification.impl.unitary" />
+      <option name="MAIN_CLASS_NAME" value="org.mx.test.servicio.notification.impl.unitary.NotifyImplIT" />
+      <option name="METHOD_NAME" value="downloadFile" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NotifyImplIT.saveFile" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="commons" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.mx.test.servicio.notification.impl.unitary.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.mx.test.servicio.notification.impl.unitary" />
+      <option name="MAIN_CLASS_NAME" value="org.mx.test.servicio.notification.impl.unitary.NotifyImplIT" />
+      <option name="METHOD_NAME" value="saveFile" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Unnamed" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Phase1DataStageConsumerApp" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="phase1datastageconsumer" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="ryndem.mx.glosanet.phase1.datastageconsumer.Phase1DataStageConsumerApp" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tomcat 9.0" type="com.poratu.idea.plugins.tomcat" show_console_on_std_err="true" show_console_on_std_out="true">
+      <predefined_log_file enabled="true" id="Tomcat Localhost Log" />
+      <predefined_log_file enabled="true" id="Tomcat Access Log" />
+      <predefined_log_file id="Tomcat Catalina Log" />
+      <predefined_log_file id="Tomcat Manager Log" />
+      <predefined_log_file id="Tomcat Host Manager Log" />
+      <option name="contextPath" value="/GlosaNet" />
+      <option name="docBase" value="C:\Users\Fernando Betanzos\Documents\GlosaNetHg\ServicioWeb\Glosanet\commons\src\main\webapp" />
+      <option name="port" value="8181" />
+      <option name="tomcatInfo">
+        <TomcatInfo>
+          <option name="name" value="Apache Tomcat/9.0.65" />
+          <option name="path" value="C:\Program Files (x86)\apache-tomcat-9.0.65" />
+          <option name="version" value="9.0.65.0" />
+        </TomcatInfo>
+      </option>
+      <option name="vmOptions" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="JUnit.Unnamed" />
+      <item itemvalue="JUnit.EdocRequestMsgBrokerMessageImplIT" />
+      <item itemvalue="JUnit.NotifyImplIT.borrarDocumentoCargasAdicionales" />
+      <item itemvalue="JUnit.NotifyImplIT.saveFile" />
+      <item itemvalue="JUnit.NotifyImplIT.comprimeAdicionalesZipDataStage" />
+      <item itemvalue="JUnit.NotifyImplIT.downloadFile" />
+      <item itemvalue="Smart Tomcat.Tomcat 9.0" />
+      <item itemvalue="Spring Boot.Phase1DataStageConsumerApp" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.EdocRequestMsgBrokerMessageImplIT" />
+        <item itemvalue="JUnit.NotifyImplIT.comprimeAdicionalesZipDataStage" />
+        <item itemvalue="JUnit.NotifyImplIT.borrarDocumentoCargasAdicionales" />
+        <item itemvalue="JUnit.NotifyImplIT.saveFile" />
+        <item itemvalue="JUnit.NotifyImplIT.downloadFile" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-63390994e64e-intellij.indexing.shared.core-IU-262.8665.337" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="411a8267-0795-4ddd-bff2-5b21596bef8a" name="Changes" comment="" />
+      <created>1658340354699</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1658340354699</updated>
+      <workItem from="1658340355956" duration="1927000" />
+      <workItem from="1658357842139" duration="1106000" />
+      <workItem from="1658505149871" duration="3711000" />
+      <workItem from="1658509843795" duration="9467000" />
+      <workItem from="1658530119120" duration="1904000" />
+      <workItem from="1658772009517" duration="19250000" />
+      <workItem from="1658843594099" duration="9920000" />
+      <workItem from="1658937595098" duration="10874000" />
+      <workItem from="1659022102694" duration="635000" />
+      <workItem from="1659377950364" duration="8723000" />
+      <workItem from="1659471701864" duration="1710000" />
+      <workItem from="1659549553045" duration="3788000" />
+      <workItem from="1659619115380" duration="7298000" />
+      <workItem from="1659637646969" duration="8070000" />
+      <workItem from="1659742158750" duration="809000" />
+      <workItem from="1659963953188" duration="27596000" />
+      <workItem from="1660226538363" duration="27399000" />
+      <workItem from="1660663802986" duration="3405000" />
+      <workItem from="1660745333083" duration="2880000" />
+      <workItem from="1660914671634" duration="15087000" />
+      <workItem from="1661263126703" duration="10533000" />
+      <workItem from="1661347879451" duration="20062000" />
+      <workItem from="1661558344484" duration="226000" />
+      <workItem from="1661810406997" duration="4508000" />
+      <workItem from="1661883240142" duration="7049000" />
+      <workItem from="1661952664625" duration="20983000" />
+      <workItem from="1662038851056" duration="15023000" />
+      <workItem from="1662143486415" duration="8579000" />
+      <workItem from="1662410325076" duration="4632000" />
+      <workItem from="1662417041931" duration="7179000" />
+      <workItem from="1662501438537" duration="7732000" />
+      <workItem from="1662575933756" duration="15075000" />
+      <workItem from="1662647189022" duration="21433000" />
+      <workItem from="1662737351202" duration="1811000" />
+      <workItem from="1663003391265" duration="15373000" />
+      <workItem from="1663092920288" duration="6083000" />
+      <workItem from="1664461459063" duration="4831000" />
+      <workItem from="1665772202820" duration="827000" />
+      <workItem from="1666109286595" duration="1625000" />
+      <workItem from="1666704991613" duration="1601000" />
+      <workItem from="1667504500993" duration="266000" />
+      <workItem from="1670355974414" duration="602000" />
+      <workItem from="1672356444401" duration="1131000" />
+      <workItem from="1676571786412" duration="1349000" />
+      <workItem from="1678390037076" duration="1273000" />
+      <workItem from="1679672558654" duration="2295000" />
+      <workItem from="1688072810056" duration="2793000" />
+      <workItem from="1698264039672" duration="55493000" />
+      <workItem from="1698862617892" duration="1220000" />
+      <workItem from="1720817728445" duration="1019000" />
+      <workItem from="1721667247280" duration="2230000" />
+      <workItem from="1721838494643" duration="16902000" />
+      <workItem from="1722880412672" duration="12828000" />
+      <workItem from="1722902046526" duration="94000" />
+      <workItem from="1722967583084" duration="13539000" />
+      <workItem from="1723656001453" duration="2286000" />
+      <workItem from="1724255552699" duration="674000" />
+      <workItem from="1724340390063" duration="20350000" />
+      <workItem from="1728513270953" duration="604000" />
+      <workItem from="1749061785426" duration="1399000" />
+      <workItem from="1749508779169" duration="18000" />
+      <workItem from="1749848466473" duration="600000" />
+      <workItem from="1750085565178" duration="16000" />
+      <workItem from="1752698520185" duration="1232000" />
+      <workItem from="1752699807163" duration="2194000" />
+      <workItem from="1752772049051" duration="125000" />
+      <workItem from="1755542303170" duration="1318000" />
+      <workItem from="1759351693549" duration="2879000" />
+      <workItem from="1759499832528" duration="7000" />
+      <workItem from="1783530410311" duration="415000" />
+      <workItem from="1783609769709" duration="35000" />
+      <workItem from="1783964495646" duration="8000" />
+      <workItem from="1784040751510" duration="678000" />
+      <workItem from="1786991948331" duration="218000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/commons/src/main/java/org/mx/persistencia/reporte/builder/BuilderResumenReporte.java</url>
+          <line>737</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/commons/src/main/java/org/mx/resource/ReportePersonalizadoResource.java</url>
+          <line>167</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/commons/src/main/java/org/mx/servicio/automatico/impl/AutomaticoServiceImpl.java</url>
+          <line>372</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/commons/src/main/java/org/mx/servicio/comun/impl/UsuarioServiceImpl.java</url>
+          <line>96</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/commons/src/main/java/org/mx/persistencia/reporte/impl/AmedidaDAOImpl.java</url>
+          <line>26</line>
+          <properties class="org.mx.persistencia.reporte.impl.AmedidaDAOImpl" method="findReporteMedidaMensualDICIPA_565">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="javax.persistence.TransactionRequiredException" package="javax.persistence" />
+          <option name="timeStamp" value="19" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="com.poratu.idea.plugins.tomcat">
+        <watch expression="i" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+  <component name="hg4idea.settings">
+    <option name="RECENT_HG_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+</project>

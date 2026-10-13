@@ -1,0 +1,19 @@
+<gn-nav-bar (navBarStatusChanged)="listenNavBarChanges($event)" [navItems]="navItems"></gn-nav-bar>
+
+  <div id="components" [ngClass]="componentTranslateAnimation">
+    <gn-user-bar></gn-user-bar>
+    <!-- <div class="routerOutlet" #scrollMe id="scrollPage" [style.transition]="'1s'" detect-scroll (onScroll)="handleScroll($event)"> -->
+        <div class="routerOutlet" #scrollMe id="scrollPage" [style.transition]="'1s'">
+      <router-outlet ></router-outlet>
+    </div>
+    <gn-footer></gn-footer>
+  </div>
+
+<div class="container" *ngIf="showWarningModal">
+  <div class="message">
+    <!--<i class="fa fa-hourglass-end" aria-hidden="true"></i>-->
+    <p>{{message}}</p>
+    <a (click)="closeSession()">Ir al Inicio ({{minutes}}:{{seconds}})</a>
+  </div>
+</div>
+

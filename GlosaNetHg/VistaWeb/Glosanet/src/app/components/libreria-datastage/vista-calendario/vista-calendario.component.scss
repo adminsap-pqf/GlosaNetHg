@@ -1,0 +1,125 @@
+@import "../../../../variables.scss";
+@import "../../../../mixins.scss";
+@import "../../../../colors.scss";
+
+:host {
+  font-size: $globalFont;
+  & > div:nth-of-type(1){
+    @include flexRow;
+    margin: 0px 25px 17px 25px;
+    border-bottom: 2px solid rgb(240,242,244);
+    & > img{
+      margin: 25px 10px 25px 0px;
+    }
+    & > p{
+      @include flexRow;
+      @include absoluteCenter;
+      width: 100%;
+      color: $gnAzulBajo;
+      font-weight: 500;
+      font-size: 1.7em;
+      justify-content: space-between;
+    }
+
+    & > .boton{
+      @include flexRow;
+      @include absoluteCenter;
+      justify-content: space-between;
+      align-items: center;
+      & > .btnCalendario{
+        @include pfButton(155px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+        @include flexRow;
+        @include absoluteCenter;
+        cursor: pointer;
+        font-size: 1.2em;
+        margin-top: 10px;
+        font-weight: normal;
+        color:$gnBlanco;
+      }
+    }
+
+  }
+
+  & > div:nth-of-type(2){
+    @include flexColumn;
+    margin: 0px 25px 0px 25px;
+    border-bottom:2px solid rgb(240,242,244);
+    & > div:nth-of-type(1){
+      @include flexRow;
+      @include absoluteCenter;
+    }
+  }
+
+  & > #nomen{
+    @include flexRow;
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 48px;
+    box-sizing: border-box;
+    justify-content: space-around;
+    padding: 0 40px;
+    & > p{
+      @include flexRow;
+      box-sizing: border-box;
+      font-size: 12px;
+      font-weight: 300;
+      color:#818192;
+      justify-content: center;
+      align-items:center;
+      margin:0 5px;
+      & span{
+        width: 12px;
+        height: 12px;
+        border-radius: 100px;
+        margin-right: 3px;
+      }
+    }
+  }
+
+  & > div:nth-of-type(4){
+    @include flexColumn;
+    margin: 10px 0px 30px 0px;
+    & > p{
+      font-size: 1.55em;
+      color: $gnAzulMedio;
+      font-weight: bold;
+      border-bottom: 1.5pt dashed $gnInactivo;
+      padding-bottom: 12px;
+      margin-left: 25px;
+      margin-right: 25px;
+      & :hover{
+        background-color: #ECF0F3;
+      }
+    }
+
+    & > div{
+      
+      & > .hover{
+        padding:0 25px;
+        
+      }
+      & :hover{
+        background-color: #ECF0F3;
+      }
+      
+    }
+
+    & > .withoutResults {
+      @include flexRow;
+      @include absoluteCenter;
+      width: 100%;
+      min-height: 300px;
+      & > p {
+        opacity: 0.3;
+        font-family: 'Roboto Cn';
+        font-size: 35px;
+        font-weight: bold;
+        color: #3369B1;
+        text-align: center;
+      }
+    }
+
+    
+  }
+
+}

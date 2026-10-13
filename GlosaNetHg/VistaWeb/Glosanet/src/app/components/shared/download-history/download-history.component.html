@@ -1,0 +1,22 @@
+<div class="descargas" (click)="openClose()">
+  <img src="./assets/images/descargas.svg" alt="">
+  <div *ngIf="items.length > 0">{{items.length}}</div>
+</div>
+<div class="container" *ngIf="open.visible && items.length > 0">
+  <div class="triangulo"></div>
+  <div class="triangulo2"></div>
+
+  <div class="contenedor" >
+    <div *ngFor="let item of items">
+      <div>
+        <p>{{item.fileName}}</p>
+      </div>
+      <div>
+        <div>
+          <div [style.width]="item.porcentaje" [ngClass]="item.class"></div>
+        </div>
+      </div>
+      <div><p>{{item.subText}}</p></div>
+    </div>
+  </div>
+</div>

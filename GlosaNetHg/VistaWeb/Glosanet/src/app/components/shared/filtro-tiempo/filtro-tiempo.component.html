@@ -1,0 +1,7 @@
+<div class="navs">
+ <!--  <div class="items2" [style.width]="'30% !important'" (click)="activeItem(rewind)"><i class="fa fa-angle-left" aria-hidden="true"></i></div> -->
+  <div *ngFor="let item of lstYears; let i = index;" class="items" (click)="activeItem(i)">
+    <p [ngClass]="lstEstados[i]? 'itemSelected':'itemGray'">{{item}}</p>
+  </div>
+ <!--  <div class="items2" [style.width]="'30% !important'" (click)="activeItem(fastForward)"><i class="fa fa-angle-right" aria-hidden="true"></i></div> -->
+</div>

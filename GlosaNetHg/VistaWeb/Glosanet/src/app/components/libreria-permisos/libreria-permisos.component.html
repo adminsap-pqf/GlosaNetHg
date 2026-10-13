@@ -1,0 +1,146 @@
+
+<div class="container" >
+  <div class="title">
+    <div>
+      <div>
+        <img src="./assets/images/permiso_header_azul.svg" alt="">
+        <div>Librería de Permisos
+          <p>
+            <span>Previsión {{yearActual}} </span>
+            <span>· Folio </span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <a (click)="irNuevoPermiso()">NUEVO PERMISO</a>
+  </div>
+
+
+
+ <!--  <div class="filter-container">
+    <div class="wizard">
+      <gn-wizard #wizard [lstItems]="lstItems" [pWizard]="pWizard" [check]="false" [tabs]="true" (tabSelected)="tab($event)"></gn-wizard>
+    </div>
+
+    <div class="filtros">
+      <div class="drop-filtros" [ngStyle]="{'padding':'0 8px 0 0'}">
+        <label >Filtrar:</label>
+        <div class="drop-container">
+          <gn-drop-list #drop (valueDropList)="dropFiltrar($event)" [items]="itemsFiltrar" [isSearch]="false" [isCategory]="true" [align]="'left'"
+          [itemSelect]="defaultFiltrar" [radio]="true" [fontSize]="'14px'"></gn-drop-list>
+        </div>
+      </div>
+      <div class="drop-filtros" [ngStyle]="{'padding':'0 8px'}">
+        <label >Registros:</label>
+        <div class="drop-container">
+          <gn-drop-list (valueDropList)="dropRegistros($event)" [items]="itemsRegistros" [isSearch]="false" [isCategory]="true" [align]="'left'"
+          [itemSelect]="defaultRegistros" [fontWeight]="'600'" [fontSize]="'14px'"></gn-drop-list>
+          </div>
+      </div>
+      <div class="drop-filtros" [ngStyle]="{'padding':'0 0 0 8px'}">
+          <label >Responsables:</label>
+          <div class="drop-container">
+            <gn-drop-list (valueDropList)="dropResponsables($event)" [items]="itemsResponsables" [isSearch]="true" [isCategory]="true" [align]="'left'"
+            [itemSelect]="defaultResponsables" [fontWeight]="'600'" [fontSize]="'14px'"></gn-drop-list>
+            </div>
+      </div>
+    </div>
+  </div> -->
+
+
+  <div class="filter-container">
+      <div class="wizard">
+        <!-- <gn-wizard #wizard [lstItems]="lstItems" [pWizard]="pWizard" [check]="false" [tabs]="true" (tabSelected)="tab($event)"></gn-wizard> -->
+        <gn-filtro-tiempo #wizard id="tiempo" [lstYears]="lstItems" (emitYear)="tab($event)"></gn-filtro-tiempo>
+      </div>
+  </div>
+
+
+
+  <div class="search">
+    <div class="searchBar">
+        <gn-search-bar [searchValue]="searchTerm" (searchTermChanged)="changeSearchTerm($event)" [placeholder]="placeholder" [reset]="resetSearch"></gn-search-bar>
+    </div>
+
+    <!-- <a (click)="actualizar()">ACTUALIZAR</a> -->
+
+
+    <img *ngIf="cuadricula" (click)="cuadricula = true" src="./assets/images/vista_cuadricula_azul.svg" alt="">
+    <img *ngIf="!cuadricula" (click)="cuadricula = true" src="./assets/images/vista_cuadricula_gris.svg" alt="">
+    <img *ngIf="!cuadricula" (click)="cuadricula = false" src="./assets/images/vista_lista_azul.svg" alt="">
+    <img *ngIf="cuadricula" (click)="cuadricula = false" src="./assets/images/vista_lista_gris.svg" alt="">
+  </div>
+  <!-- <div class="options"> -->
+    <!-- <div class="dropList">
+      <label>Ordenar Por:</label>
+      <div class="drop">
+          <gn-drop-list (valueDropList)="dropListFiltro($event)" [items]="itemsFiltros" [isSearch]="false" [isCategory]="true" [align]="'left'"
+          [itemSelect]="defaultSelectedFiltros"></gn-drop-list>
+      </div>
+    </div> -->
+
+  <!-- </div> -->
+
+  <!-- <div [ngStyle]="{'width':'100%', 'display':'flex', 'justify-content':'flex-end', 'height':'30px'}">
+    <label [ngStyle]="{'font-size': '12px', 'color': '#3369B1', 'font-weight':'600', 'display': 'flex', 'align-items': 'center'}">Actualización COFEPRIS {{today | dateFormatSlashFull}}</label>
+  </div> -->
+
+  <div class="body1" *ngIf="cuadricula">
+      <div class="item" *ngFor='let item of arrayAux; let i = index' (click)="irMonitoreoPermisos()" [style.position]="'relative'">
+          <img [ngStyle]="{'position': 'absolute', 'left': '20px'}" *ngIf="item.estadoCofepris == 'Trámite disponible.' && item.eventoActual == 'Sometimiento'" id="flag" src="./assets/images/bandera_azul.svg" alt="">
+          <img [ngStyle]="{'position': 'absolute', 'left': '20px'}" *ngIf="item.estadoCofepris == 'Trámite en evaluación.' && item.eventoActual == 'Sometimiento'" id="flag" src="./assets/images/bandera_naranja.svg" alt="">
+          <img [ngStyle]="{'position': 'absolute', 'left': '20px'}" *ngIf="item.estadoCofepris == 'Trámite entregado.' && item.eventoActual == 'Sometimiento'" id="flag" src="./assets/images/bandera_verde.svg" alt="">
+          <img [ngStyle]="{'position': 'absolute', 'left': '20px'}" *ngIf="item.estadoCofepris == 'Trámite No Encontrado' && (item.eventoActual == 'Sometimiento' || item.eventoActual == 'Tecnovigilancia' || item.eventoActual == 'Prorroga')" id="flag" src="./assets/images/etiqueta_roja.svg" alt="">
+      <div class="img">
+        <img id="img1" src="./assets/images/permiso_gris_.svg" alt="">
+        <img id="img2" src="./assets/images/permiso_azul_.svg" alt="">
+      </div>
+      <div class="bodyItem" [ngStyle]="{'position':'relative'}">
+        <p [ngStyle]="{'font-size':'14px'}"> <label [ngStyle]="{'font-weight':'700'}">&nbsp;</label>  {{item.producto.nombre}}</p>
+        <p [ngStyle]="{'font-size':'13px'}"> <label>Etapa {{item.cerrados}}/{{item.numEventos}} {{item.eventoActual}} ·&nbsp;</label><label>{{item.numEventos == 1 ? item.numEventos + " Evento" : item.numEventos + " Eventos"}}</label>  </p>
+        <label [ngStyle]="{'font-size':'12px'}" (mouseenter)="tooltipV[i] = true" (mouseleave)="tooltipV[i] = false">Ver Vigencia</label>
+        <div class="tooltipVigencia" [style.opacity]="tooltipV[i] == true ? '1': '0'" [style.pointer-events]="'none'" [style.transition]="'0.5s'">
+          <label>Vigencia de Folio</label>
+          <label>{{ item.finicio | dateFormatSlash }} - {{ item.ffin | dateFormatSlash }}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="body2" *ngIf="!cuadricula" >
+    <div class="item" *ngFor='let item of arrayAux; let i = index' (click)="irMonitoreoPermisos(item.idpermiso)">
+        <img *ngIf="item.estadoCofepris == 'Trámite disponible.' && item.eventoActual == 'Sometimiento'" id="flag" src="./assets/images/bandera_azul.svg" alt="">
+        <img *ngIf="item.estadoCofepris == 'Trámite en evaluación.' && item.eventoActual == 'Sometimiento'" id="flag" src="./assets/images/bandera_naranja.svg" alt="">
+        <img *ngIf="item.estadoCofepris == 'Trámite entregado.' && item.eventoActual == 'Sometimiento'" id="flag" src="./assets/images/bandera_verde.svg" alt="">
+        <img *ngIf="item.estadoCofepris == 'Trámite No Encontrado' && (item.eventoActual == 'Sometimiento' || item.eventoActual == 'Tecnovigilancia' || item.eventoActual == 'Prorroga')" id="flag" src="./assets/images/etiqueta_roja.svg" alt="">
+
+      <div class="img">
+        <img id="img1" src="./assets/images/permiso_gris_.svg" alt="">
+        <img id="img2" src="./assets/images/permiso_azul_.svg" alt="">
+        <label *ngIf="item.eventoActual == 'Elaboración' || item.eventoActual == 'Sometimiento'" >{{item.eventoActual}}</label>
+        <label *ngIf="item.eventoActual == 'Sometimiento' && item.estadoCofepris !== undefined" [ngStyle]="{'font-size':'11px'}">COFEPRIS</label>
+      </div>
+      <div class="bodyItem">
+        <div class="part1">
+          <p> <!-- <label>FO-9876 ·&nbsp;</label> --><label># {{i+1}}  · </label>  <label></label>   <label>{{item.producto.nombre}}</label> </p>
+          <p> <label>Vigencia de Folio: {{ item.finicio | dateFormatSlash }} - {{ item.ffin | dateFormatSlash }} ·&nbsp;</label> <label>{{item.numEventos == 1 ? item.numEventos + " Evento" : item.numEventos + " Eventos"}}</label> </p>
+        </div>
+        <div class="part2">
+          <p>Etapa {{item.cerrados}}/{{item.numEventos}}</p>
+          <!-- <p [style.margin-top]="'5px'"></p> -->
+          <p *ngIf="item.eventoActual == 'Sometimiento' && item.estadoCofepris !== undefined" [style.color]="item.estadoCofepris == 'Trámite disponible.' ? '#3B8EDE': item.estadoCofepris == 'Trámite en evaluación.' ? '#F7931E': item.estadoCofepris == 'Trámite entregado.' ? '#37B34A': '#000000'">{{item.estadoCofepris !== undefined && item.eventoActual === 'Sometimiento' ? item.estadoCofepris : ''}}</p>
+          <p *ngIf="item.eventoActual == 'Sometimiento' && item.estadoCofepris !== undefined">Última Actualización {{item.fecha | dateFormatNumberFull}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div id="inicio" (click)="top()">
+      <img src="./assets/images/flecha_blanca.svg" alt="">
+  </div> -->
+
+  <div class="foot">
+    <label>{{arrayAux.length == 1 ? "# " + arrayAux.length + " Permiso" : "# " +arrayAux.length + " Permisos"}}</label>
+  </div>
+</div>

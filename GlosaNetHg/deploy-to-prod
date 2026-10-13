@@ -1,0 +1,144 @@
+#!/bin/bash
+cwd=$(pwd)
+DEFAULT="\033[37m"
+PINK="\033[35m"
+GREEN="\033[0;32m"
+RED='\033[0;31m'
+ORANGE="\033[33m"
+TILT="\033[81;5;20m"
+NC='\033[0m'
+
+if [[ ! -f "`which hg`" ]]; then
+    printf "\e[81;5;20m${RED}Operación abortada:${NC} No está instalado Mercurial\e[0m\n"
+    exit;
+fi
+if [[ ! `hg branch 2> /dev/null` ]]; then
+    printf "\e[81;5;20m${RED}Operación abortada:${NC} No está en un repositorio de Mercurial valido\e[0m\n"
+    exit;
+fi
+
+# Server Config
+sshServer="172.24.24.10"
+sshUsername="glosa"
+sshPassword="xia9ro"
+
+# Paths
+srcFrontendPath=$cwd"/VistaWeb/Glosanet/"
+srcBackendPath=$cwd"/ServicioWeb/Glosanet/"
+remoteTomcatPath="/home/glosa/latest/"
+remoteWebappPath=$remoteTomcatPath"webapps/"
+remoteDeployFrontendPath=$remoteTomcatPath"deploy/"
+backendFolderName="GlosaNet"
+frontendFolderName="dist"
+distFrontendPath=$srcFrontendPath$frontendFolderName
+remoteFrontendPath=$remoteDeployFrontendPath$frontendFolderName
+
+# Versioning
+versionFile="src/app/util/common.protocols.ts"
+appVersionNumberLabel="APP_VERSION_NUMBER"
+branchName=$(hg branch)
+numRevision=$(hg identify --num --rev $branchName)
+versionText="Versión: 2.0.$numRevision.0"
+
+###############################################
+# Warning: Please do not edit below this line #
+###############################################
+
+check_dependencies() {
+    # INSTALL LFTP AND BREW IF THEY AREN'T INSTALLED YET
+    echo "Verificando dependencias"
+    if [[ $(command -v brew) == "" ]]; then
+        echo "Instalando Hombrew"
+        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    fi
+    if [[ $(command -v lftp) == "" ]]; then
+        echo "Instalando LFTP"
+        brew install lftp
+    fi
+    return 0
+}
+
+deploy_front() {
+    # REPLACING VERSION IN TS FILE
+    while IFS= read -r line; do
+    if [[ $line == *$appVersionNumberLabel* ]] ; then
+        orig="$line"
+        repl="${line%%=*}= '$versionText';"
+    fi
+    done < "$srcFrontendPath$versionFile"
+    sed -i "" "s/$orig/$repl/g" "$srcFrontendPath$versionFile"
+    echo -e "${GREEN}Se reemplazó la versión del archivo $versionFile ${NC}"
+
+    # REMOVE DIST FOLDER
+    echo -e "${PINK}Depurando carpetas temporales${NC}"
+    rm -rf $srcFrontendPath"dist"
+    rm -rf $srcFrontendPath"Glosanet"
+
+    # COMPILE IN PRODUCTION MODE
+    echo -e "${PINK}Compilando frontend en modo productivo${NC}"
+    (cd $srcFrontendPath; ng build --prod --build-optimizer=false --aot=false --base-href=/)
+
+    # MIRROWING IN SERVER SIDE
+    echo -e "${PINK}Limpiando la carpeta $remoteFrontendPath...${NC}"
+    echo -e "${PINK}Publicando en $remoteDeployFrontendPath...${NC}"
+    # lftp -u $sshUsername,$sshPassword "sftp://$sshServer" -c "rm -r $publishPath"
+    lftp -c "open -u $sshUsername,$sshPassword sftp://$sshServer; rm -r $remoteFrontendPath; mirror -R $distFrontendPath $remoteDeployFrontendPath" 
+
+    rm -rf $distFrontendPath
+    #ssh -l ${sshUsername} ${sshServer} "!sudo systemctl restart tomcat"
+    return 0
+}
+
+deploy_back() {
+    echo -e "Publicación de Backend: No está implmentado aún"
+    return -1
+}
+
+transac() {
+    if [ $1 -eq 0 ]; then
+        echo -e "\nSe publicó esta versión exitosamente"
+    else
+        echo -e "ERROR! La operación no finalizó correctamente"
+        exit;
+    fi
+}
+
+echo -e "${GREEN} _____ _                            _    ______              _ ${NC}";
+echo -e "${GREEN}|  __ \ |                          | |   | ___ \            | |${NC}";
+echo -e "${GREEN}| |  \/ | ___  ___  __ _ _ __   ___| |_  | |_/ / __ ___   __| |${NC}";
+echo -e "${GREEN}| | __| |/ _ \/ __|/ _\` | '_ \ / _ \ __| |  __/ '__/ _ \ / _\` |${NC}";
+echo -e "${GREEN}| |_\ \ | (_) \__ \ (_| | | | |  __/ |_  | |  | | | (_) | (_| |${NC}";
+echo -e "${GREEN} \____/_|\___/|___/\__,_|_| |_|\___|\__| \_|  |_|  \___/ \__,_|${NC}";
+echo -e "${GREEN}                                                               ${NC}";
+
+[ ! -f "`which brew`" ] && printf "\e[81;5;20m${RED}Dependencia faltante:${NC} Se instalará Homebrew\e[0m\n"
+[ ! -f "`which lftp`" ] && printf "\e[81;5;20m${RED}Dependencia faltante:${NC} Se instalará LFTP\e[0m\n"
+
+printf "\n  ${ORANGE}Servidor: $sshServer ${NC}
+  ${DEFAULT}Ruta de código fuente Frontend: $srcFrontendPath
+  Ruta de código fuente Backend: $srcBackendPath
+  Ruta de publicación de Frontend: $remoteFrontendPath
+  Ruta de publicación de Backend: $remoteWebappPath ${NC}
+  ${ORANGE}Rama a publicar: $branchName ${NC}
+  ${DEFAULT}Número de revisión: $numRevision
+  $versionText ${NC}\n\n"
+
+echo -e "${PINK}¿Desea publicar backend y frontend, o solo backend, o solo frontend?${NC}"
+read -r -p "All [a/A] Back [b/B] Front [f/F] Cancel [c/C] " response
+check_dependencies
+case "$response" in
+[aA][lL][lL]|[aA])
+        deploy_front
+        deploy_back
+    ;;
+[bB][aA][cC][kK]|[bB])
+        deploy_back
+    ;;
+[fF][rR][oO][nN][tT]|[fF])
+        deploy_front
+    ;;
+*)
+    echo "Bye"
+    exit;
+    ;;
+esac

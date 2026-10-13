@@ -1,0 +1,927 @@
+@import "../../../variables.scss";
+@import "../../../mixins.scss";
+@import "../../../colors.scss";
+
+
+.header{
+    @include flexColumn;
+    width: 100%;
+    box-sizing: border-box;
+    height: 150px;
+    & > .title{
+        @include flexRow;
+        width: 100%;
+        height: 30px;
+        box-sizing: border-box;
+        background-color: #3369B1;
+        align-items: center;
+        padding: 0 25px;
+        & > p{
+            //@include flexRow;
+            box-sizing: border-box;
+            & > label:nth-of-type(1){
+                font-size: 12px;
+                color: #FFFFFF;
+                font-weight: 500;
+            }
+            & > label:nth-of-type(2){
+                font-size: 12px;
+                color: #E2C913 ;
+            }
+        }
+    }
+    & > .product{
+        @include flexRow;
+        width: 100%;
+        
+        box-sizing: border-box;
+        height: 120px;
+        padding: 0 25px;
+        justify-content: space-between;
+        align-items: center;
+        & > .item-producto{
+            @include flexRow;
+            box-sizing: border-box;
+            width: calc(100% - 200px);
+            height: 80px;
+            padding-right: 5px;
+            & > .img{
+                @include flexRow;
+                box-sizing: border-box;
+                width: 58px;
+                margin-right: 20px;
+                align-items: flex-start;
+                padding-top: 5px;
+            }
+            & > .text{
+                @include flexColumn;
+                box-sizing: border-box;
+                width: calc(100% - 78px);
+                justify-content: space-between;
+                & > p:nth-of-type(1){
+                    //@include flexRow;
+                    width: 100%;
+                    box-sizing: border-box;
+                    font-family:'Roboto Cn';
+                    @include multiLineTextTruncate(1,17px,17px,#FFF);
+                    word-break: break-all;
+                    & > label:nth-of-type(1){
+                        font-size: 17px;
+                        color: #E2C913;
+                        font-weight: 500;
+                    }
+                    & > label:nth-of-type(2){
+                        font-size: 17px;
+                        font-weight: 500;
+                        color:#3369B1;
+                        
+                    }
+                }
+                & > p:nth-of-type(2){
+                    @include flexRow;
+                    width: 100%;
+                    box-sizing: border-box;
+                    font-size: 13px;
+                    color: #818192;
+                    
+                }
+                & > p:nth-of-type(3){
+                    @include flexRow;
+                    width: 100%;
+                    box-sizing: border-box;
+                    font-size: 13px;
+                    color: #3B8EDE; 
+                }
+                & > a{
+                  @include flexRow;
+                              
+                  $colorHover:  rgba(6, 188, 82, 0.2);
+                  @include pfButton(145px, 20px, transparent, $colorHover, $gnBlanco, 0px);
+                  @include flexRow;
+                  @include absoluteCenter;
+                  cursor: pointer;
+                  font-size: 13px;
+                  color: #37B34A;
+                  font-weight: 300;
+                  margin: 3px 0 0 0;
+              }
+  
+                
+            }
+        }
+        & > .boton{
+            @include flexRow;
+            width: 200px;
+            box-sizing: border-box;
+            height: 80px;
+            & > a{
+                @include pfButton(190px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+                @include flexRow;
+                @include absoluteCenter;
+                cursor: pointer;
+                font-size: 14px;
+                font-weight: normal;
+                color:$gnBlanco;
+                
+            }
+        }
+    }
+  }
+
+
+
+  .container{
+    @include flexRow;
+    width: 100%;
+    background: #ECF0F3;
+    box-sizing: border-box;
+    padding:35px 25px 40px 25px;
+    position: relative;
+    min-height: calc(100vh - 236px);
+  }
+  
+  .triangulo{
+    width: 0px;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 15px solid #FFF;
+    position: absolute;
+    top: 20px;
+    left: 40px;
+  }
+  
+  .section, .section2{
+    @include flexColumn;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 40px 25px 50px 25px; 
+    background-color: white;
+    //@include absoluteCenter;
+  }
+  
+  .separacion{
+    width: calc(100% + 50px);
+    height: 15px;
+    box-sizing: border-box;
+    background-color: #ECF0F3;
+    margin: 0 -25px;
+  }
+
+
+
+  .listado{
+    @include flexColumn;
+    box-sizing: border-box;
+    width: 100%;  
+    & > .title{
+        @include flexRow;
+        width: 100%;
+        box-sizing: border-box;
+        justify-content: space-between;
+        align-content: center;
+        & > label{
+            font-size: 19px;
+            color: #3B8EDE;
+            font-weight: 600;
+        }
+        & > a{
+            @include flexRow;
+                        
+            $colorHover:  rgba(6, 188, 82, 0.2);
+            @include pfButton(170px, 30px, transparent, $colorHover, $gnBlanco, 0px);
+            @include flexRow;
+            @include absoluteCenter;
+            cursor: pointer;
+            font-size: 14px;
+            color: #37B34A;
+            font-weight: 500;
+        }
+    }
+    & > .resumen{
+        @include flexRow;
+        width: 100%;
+        height: 80px;
+        background-color: #f2f4f6;
+        margin: 20px 0;
+        justify-content: center;
+        & > .col{
+            @include flexColumn;
+            width: calc(100% / 3);
+            justify-content: center;
+            align-items: center;
+            & > p:nth-of-type(1){
+                font-size: 20px;
+                color: #3369B1;
+                font-weight: 700;
+                margin-bottom: 5px;
+            }
+            & > p:nth-of-type(2){
+                font-size: 12px;
+                color: #818192;
+            }
+        }
+    }
+    & > .searchBar{
+        width: 100%;
+        height: 30px;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+    }
+    & > .productos{
+        .body2{
+            @include flexColumn;
+            width: 100%;
+            //min-height: calc(100vh - 390px );
+            border-bottom: 1px dashed #D5DEE2;
+            padding-bottom: 20px;
+            position: relative;
+            
+        }
+    }
+}
+
+
+
+.item{
+    @include flexRow;
+    width: 100%;
+    height: 55px;
+    box-sizing: border-box;
+    //border: 1px solid #ECF0F3;
+    //margin-bottom: 5px;
+    overflow: hidden;
+    background: #FFFFFF;
+    cursor: pointer;
+    border-bottom: 1px dashed #D5DEE2;
+    & > div{
+        @include flexRow;
+        box-sizing: border-box;
+        font-size: 13px;
+        align-items: center;
+    }
+
+    & > div:nth-of-type(1){
+        width: 8%;
+        color: #3369B1;
+        justify-content: center;
+    }
+    & > div:nth-of-type(2){
+        width: 46%;
+        & > .img{
+            @include flexRow;
+            transition: .4s ease-in-out;
+            justify-content: center;
+            align-items: center;
+            margin-right: 5px;
+            & > #img1{
+                width: 30px;
+                height: 28px;
+              }
+            & > #img2{
+                width: 30px;
+                height: 28px;
+                display: none;
+              }
+        }
+        & > p{
+            line-height: 16px;
+            & > label:nth-of-type(1){
+                color: #E2C913;
+            }
+            & > label:nth-of-type(2){
+                color: #3369B1;
+            }
+        }
+    }
+    & > div:nth-of-type(3){
+        width: 17%;
+        color: #818192;
+        justify-content: center;
+    }
+    & > div:nth-of-type(4){
+        width: 17%;
+        color: #3369B1;
+        justify-content: center;
+    }
+    & > div:nth-of-type(5){
+        width: 6%;
+        justify-content: center;
+    }
+    & > div:nth-of-type(6){
+        width: 6%;
+        justify-content: center;
+    }
+
+
+}
+.item:hover{
+    @include flexRow;
+    width: 100%;
+    height: 55px;
+    box-sizing: border-box;
+    //border: 1px solid #ECF0F3;
+    background-color: #ECF0F3;
+    & > div{
+        @include flexRow;
+        box-sizing: border-box;
+        font-size: 13px;
+        font-weight: 600;
+        align-items: center;
+    }
+
+    & > div:nth-of-type(1){
+        width: 8%;
+        color: #3369B1;
+        justify-content: center;
+    }
+    & > div:nth-of-type(2){
+        width: 46%;
+        & > .img{
+            @include flexRow;
+            transition: .4s ease-in-out;
+            justify-content: center;
+            align-items: center;
+            margin-right: 5px;
+            & > #img1{
+                display: none;
+              }
+            & > #img2{
+                width: 30px;
+                height: 28px;
+                display: inherit;
+              }
+        }
+        & > p{
+            line-height: 16px;
+            & > label:nth-of-type(1){
+                color: #E2C913;
+            }
+            & > label:nth-of-type(2){
+                color: #3369B1;
+            }
+        }
+    }
+    & > div:nth-of-type(3){
+        width: 17%;
+        color: #818192;
+        justify-content: center;
+    }
+    & > div:nth-of-type(4){
+        width: 17%;
+        color: #3369B1;
+        justify-content: center;
+    }
+    & > div:nth-of-type(5){
+        width: 6%;
+        justify-content: center;
+    }
+    & > div:nth-of-type(6){
+        width: 6%;
+        justify-content: center;
+    }
+}
+.itemSelected{
+    @include flexRow;
+    width: 100%;
+    height: 90px;
+    box-sizing: border-box;
+    //border: 1px solid #ECF0F3;
+    margin-bottom: 5px;
+    overflow: hidden;
+    background: #ECF0F3;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    & > .img{
+        @include flexRow;
+        min-width: 100px;
+        transition: .3s ease-in-out;
+        background: white;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #ECF0F3;
+        & > #img1{
+            display: none;
+          }
+        & > #img2{
+            width: 57px;
+            height: 55px;
+            display: inherit;
+          }
+    }
+    & > .bodyItem{
+        @include flexRow;
+        min-width: calc(100% - 100px);
+        box-sizing: border-box;
+        background: #3369B1;
+        padding: 25px 40px 25px 25px;
+        align-items: center;
+        & > .part1{
+            @include flexColumn;
+            width:100%;
+            box-sizing: border-box;
+            & > p:nth-of-type(1){
+                //@include flexRow;
+                width: 100%;
+                font-size: 14px;
+                box-sizing: border-box;
+                & > .span{
+                    font-size: 14px;
+                    color: white;
+                }
+                & > label:nth-of-type(1){
+                    color: #E2C913;
+                    font-weight: 600;
+                }  
+                & > label:nth-of-type(2){
+                    color: white;
+                    font-weight: 600;
+                } 
+            }
+            & > p:nth-of-type(2){
+                @include flexRow;
+                width: 100%;
+                font-size: 13px;
+                box-sizing: border-box;
+                margin-top:5px;
+                & > label:nth-of-type(1){
+                    color:#E2C913;
+                }
+            }
+        }
+        & > .part2{
+            @include flexRow;
+            min-width: 100px;
+            box-sizing: border-box;
+            text-align: right;
+            & > p{
+                @include flexColumn;
+                width: 100%;
+                font-size: 13px;
+                box-sizing: border-box;
+                //color:white;
+                
+                & > label:nth-of-type(1){
+                    color: white;
+                }  
+                & > label:nth-of-type(2){
+                    color: #E2C913;
+                    margin-top: 5px;
+                } 
+            }
+        }
+    }
+}
+
+
+
+ .pub{
+    @include pfButton(100%, 35px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+    @include flexRow;
+    @include absoluteCenter;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: normal;
+    color:$gnBlanco;
+    margin-top: 30px;
+}
+
+
+
+
+
+.headerProducts{
+    @include flexRow;
+    width: 100%;
+    box-sizing: border-box;
+    border-bottom: 1px dashed #D5DEE2;
+    & > div{
+        @include flexRow;
+        box-sizing: border-box;
+        height: 20px;
+        align-items: center;
+        font-size: 12px;
+        color: #B7C3CE;
+    }
+    & > div:nth-of-type(1){
+        width: 8%;
+        justify-content: center;
+    }
+    & > div:nth-of-type(2){
+        width: 46%;
+    }
+    & > div:nth-of-type(3){
+        width: 17%;
+        justify-content: center;
+    }
+    & > div:nth-of-type(4){
+        width: 17%;
+        justify-content: center;
+    }
+    & > div:nth-of-type(5){
+        width: 6%;
+    }
+    & > div:nth-of-type(6){
+        width: 6%;
+    }
+}
+
+
+
+
+
+
+
+virtual-scroller, #scrollLoad {
+    display: block;
+    width: 100%;
+    height: calc(100vh - 450px);
+    min-height: 330px;
+  }
+
+  #inicio{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    position: absolute;
+    background-color: rgba(51,105,177,0.80);
+    border-radius: 50px; 
+    bottom: -15px;
+    right: 25px;
+    cursor: pointer;
+    & > img{
+        transform: rotate(-180deg);
+    }
+}
+
+  .container-loader{
+    @include flexRow;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    height: 65px;
+    //margin-bottom: 30px;
+    & > .loader {
+
+        $color-primary: $gnAzulBajo ;
+        $color-secondary: $verdeBoton ;
+        $color-darkAccent: $gnDorado ;
+        $color-lightAccent: $gnAzulMedio;
+        $background: #222222;
+        $duration: 1.5s;
+
+        display: block;
+        position: relative;
+        height: 20px;
+        width: 86px;
+        //width: 86px;
+        //margin-top: 64px;
+        .loading-square {
+          position: absolute;
+          height: 20px;
+          width: 20px;
+          top: 0;
+        }
+        .loading-square:nth-child(1) {
+          left: 0;
+          animation: square1 $duration linear forwards infinite;
+        }
+  
+        .loading-square:nth-child(2) {
+          left: 22px;
+          animation: square2 $duration linear forwards infinite;
+        }
+  
+        .loading-square:nth-child(3) {
+          left: 44px;
+          animation: square3 $duration linear forwards infinite;
+        }
+  
+        .loading-square:nth-child(4) {
+          left: 66px;
+          animation: square4 $duration linear forwards infinite;
+        }
+  
+        @keyframes square1 {
+          0% {
+            background-color: $color-primary;
+            transform: translate(0, 0);
+          }
+          9.09091% {
+            transform: translate(0, calc(-100% - 2px));
+            background-color: $color-primary;
+          }
+          18.18182% {
+            transform: translate(calc(100% + 2px), calc(-100% - 2px));
+            background-color: $color-secondary;
+          }
+          27.27273% {
+            transform: translate(calc(100% + 2px), 0);
+          }
+          100% {
+            background-color: $color-secondary;
+            transform: translate(calc(100% + 2px), 0);
+          }
+        }
+        @keyframes square2 {
+          0% {
+            background-color: $color-secondary;
+            transform: translate(0, 0);
+          }
+          18.18182% {
+            transform: translate(0, 0);
+          }
+          27.27273% {
+            transform: translate(0, calc(100% + 2px));
+            background-color: $color-secondary;
+          }
+          36.36364% {
+            transform: translate(calc(100% + 2px), calc(100% + 2px));
+            background-color: $color-darkAccent;
+          }
+          45.45455% {
+            transform: translate(calc(100% + 2px), 0);
+          }
+          100% {
+            background-color: $color-darkAccent;
+            transform: translate(calc(100% + 2px), 0);
+          }
+        }
+        @keyframes square3 {
+          0% {
+            background-color: $color-darkAccent;
+            transform: translate(0, 0);
+          }
+          36.36364% {
+            transform: translate(0, 0);
+          }
+          45.45455% {
+            transform: translate(0, calc(-100% - 2px));
+            background-color: $color-darkAccent;
+          }
+          54.54545% {
+            transform: translate(calc(100% + 2px), calc(-100% - 2px));
+            background-color: $color-lightAccent;
+          }
+          63.63636% {
+            transform: translate(calc(100% + 2px), 0);
+          }
+          100% {
+            background-color: $color-lightAccent;
+            transform: translate(calc(100% + 2px), 0);
+          }
+        }
+        @keyframes square4 {
+          0% {
+            transform: translate(0, 0);
+            background-color: $color-lightAccent;
+          }
+          54.54545% {
+            transform: translate(0, 0);
+          }
+          63.63636% {
+            transform: translate(0, calc(100% + 2px));
+            background-color: $color-lightAccent;
+          }
+          72.72727% {
+            background-color: $color-darkAccent;
+          }
+          81.81818% {
+            background-color: $color-secondary;
+          }
+          90.90909% {
+            transform: translate(calc(-300% - 6px), calc(100% + 2px));
+            background-color: $color-primary;
+          }
+          100% {
+            transform: translate(calc(-300% - 6px), 0);
+            background-color: $color-primary;
+          }
+        }
+      }
+}
+
+
+
+.modal{
+    @include flexColumn;
+    @include absoluteCenter;
+    justify-content: flex-start;
+    padding: 25px;
+    height: 450px;
+    font-size: 9pt;
+    box-sizing: border-box;
+    & > .title{
+      @include flexRow;
+      @include absoluteCenter;
+      justify-content: space-between;
+      width: 100%;
+      height: 30px;
+      color: $gnAzulBajo;
+      font-weight: 500;
+      font-size: 21px;
+      align-items: flex-start;
+      box-sizing: border-box;
+      & > p{
+        margin-top: 2px;
+      }
+      & > img{
+        cursor: pointer;
+      }
+    }
+    & > .header{
+        @include flexRow;
+        width: 100%;
+        height: 35px;
+        box-sizing: border-box;
+        margin-top: 20px;
+        margin-bottom: 35px;
+        & .img{
+            @include flexRow;
+            width: 38px;
+            height: 36px;
+            margin-right: 15px;
+            justify-content: center;
+            align-items: center;
+            & > img{
+                width: 38px;
+            height: 36px;
+            }
+        }
+        & > .label{
+            @include flexColumn;
+            width: calc(100% - 40px);
+            justify-content: space-around;
+            //border-bottom: 1px solid #98A9B4;;
+            & > label:nth-of-type(1){
+                font-size: 12px;
+                color: #98A9B4;
+            }
+            & > label:nth-of-type(2){
+                font-size: 14px;
+                color: #3369B1;
+                font-weight: 600;
+            }
+        }
+        }
+        & > .body{
+            @include flexRow;
+            box-sizing: border-box;
+            width: 100%;
+            & > form{
+                @include flexRowWrap;
+                box-sizing: border-box;
+                width: 100%;
+                justify-content: space-between;
+                & > .cForm{
+                    @include flexColumn;
+                    width: 50%;
+                    box-sizing: border-box;
+                    & > label{
+                        @include flexRow;
+                        font-size: 12px;
+                        color: #98A9B4;
+                        margin-bottom: 5px;
+                    }
+                    & > .fecha{
+  
+                    }
+                    & > .droplist{
+  
+                    }
+                    & > textarea{
+                        @include flexRow;
+                        width: 100%;
+                        height: 115px;
+                        box-sizing: border-box;
+                        outline: none;
+                        resize: none;
+                        border: 1px solid #98A9B4;
+                        font-size: 14px;
+                        color: #3369B1;
+                        padding:10px;
+                    }
+                }
+                & > .section{
+                  @include flexRow;
+                  box-sizing: border-box;
+                  width: calc(100% + 50px);
+                  height: 90px;
+                  margin: 25px -25px 0 -25px;
+                  padding: 30px 25px;
+                  background-color: #ECF0F3;
+                  align-items: flex-end;
+                  & > label{
+                    @include flexRow;
+                    font-size: 13px;
+                    color: #3B8EDE; 
+                    font-weight: 600;
+                }
+                  & > .cForm{
+                    @include flexColumn;
+                    width: 50%;
+                    box-sizing: border-box;
+                    & > label{
+                      @include flexRow;
+                      font-size: 12px;
+                      color: #98A9B4;
+                      margin-bottom: 5px;
+                  }
+                }
+                }
+            }
+        }
+  
+  
+        & > .footer{
+            @include flexRow;
+            width: 100%;
+            box-sizing: border-box;
+            height: 40px;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            & > .cancelar{
+                @include pfButton(145px, 30px, $gnAzulMedio, rgba(51,105,177,0.75), $gnAzulMedio, 0px);
+                @include flexRow;
+                @include absoluteCenter;
+                cursor: pointer;
+                font-size: 14px;
+                font-weight: normal;
+                color:$gnBlanco;
+                box-sizing: border-box;
+            }   
+            & > .guardar{
+                @include pfButton(145px, 30px, $gnDorado, rgba(226, 201, 19, 0.75), $gnDorado, 0px);
+                @include flexRow;
+                @include absoluteCenter;
+                cursor: pointer;
+                font-size: 14px;
+                font-weight: normal;
+                color:$gnBlanco;
+                box-sizing: border-box;
+            }
+            & > .guardarInactivo{
+                @include pfButton(145px, 30px, #D5DEE2, #e1e7e9, #D5DEE2, 0px);
+                @include flexRow;
+                @include absoluteCenter;
+                cursor: pointer;
+                font-size: 14px;
+                font-weight: normal;
+                color:$gnBlanco;
+                box-sizing: border-box;
+                pointer-events: none;
+            }
+        }
+    
+    }
+
+
+    input{
+        width: 100%;
+        border-right: none;
+        border-left: none;
+        border-top: none;
+        border-bottom: solid 0.75px $grisLinea;
+        outline: none;
+        display: inline-block;
+        font-size: 14px;
+        color:$gnAzulMedio;
+        background-color: transparent;
+        padding-bottom: 1px;
+    }
+
+
+    .tooltipFrac{
+        @include flexRow;
+        box-sizing: border-box;
+        width:180px;
+        height: 40px;
+        background-color: #222E43;
+        border:1px solid white;
+        position: absolute;
+        top: -50px;
+        padding: 5px;
+        text-align: center;
+        & > .triangulo-tooltip{
+            width: 0px;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #222E43;
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            margin:auto;
+        }
+        & > p{
+            font-size: 12px;
+            color:white;
+            line-height: 14px;
+            
+        }
+    }

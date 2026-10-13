@@ -1,0 +1,292 @@
+@import "../../../variables.scss";
+@import "../../../mixins.scss";
+@import "../../../colors.scss";
+
+#forecastNoticeView {
+  @include flexRowWrap;
+  width: calc(100vw - 110px);
+  min-width: 690px;
+  justify-content: center;
+  padding: 30px 25px 0;
+  & > div:nth-of-type(1) {
+    @include flexRow;
+    @include absoluteCenter;
+    width: 100%;
+    justify-content: space-between !important;
+    border-bottom: 0.5px solid $gnInactivo;
+    padding-bottom: 5px;
+
+    & > div:nth-of-type(1) {
+
+      & > div:nth-of-type(1) {
+        margin-bottom: 5px;
+        & > p:nth-of-type(1) {
+          font-weight: 900;
+          font-size: 22px;
+          color: $gnAzulBajo;
+        }
+
+      }
+
+      & > div:nth-of-type(2) {
+        & > p:nth-of-type(1) {
+          font-size: 15px;
+          & > strong:nth-of-type(1) {
+            font-weight: 500;
+            color: $gnGrisRata;
+          }
+
+          & > strong:nth-of-type(2) {
+            font-weight: bold;
+            color: $gnGrisRata;
+          }
+
+          & > strong:nth-of-type(3) {
+            font-weight: 500;
+            color: $gnGrisRata;
+          }
+
+          & > strong:nth-of-type(4) {
+            font-weight: 500;
+            color:  $verdeBoton;
+          }
+
+        }
+      }
+
+    }
+
+    & > div:nth-of-type(2) {
+      & > a:nth-of-type(1) {
+        @include flexRow;
+        @include absoluteCenter;
+        $textSize: ('base': 14px);
+        @include escaledFontFormat($textSize, 600, $gnBlanco);
+        @include pfButton(180px, 30px, $verdeBoton, rgba(55, 179, 74, 0.75), $verdeBoton, 0px);
+        cursor: pointer;
+        outline: none;
+      }
+    }
+  }
+
+  & > div:nth-of-type(2) {
+    @include flexRow;
+    width: 100%;
+    max-width: 1000px;
+    margin-top: 20px;
+    & > div:nth-of-type(1) {
+      @include flexRowWrap;
+      @include absoluteCenter;
+      width: 25%;
+      & > p:nth-of-type(1) {
+        width: 100%;
+        text-align: center;
+        font-weight: 900;
+        font-size: 22px;
+        color: $gnAzulMedio;
+        margin-bottom: 5px;
+      }
+      & > p:nth-of-type(2) {
+        width: 100%;
+        text-align: center;
+        font-weight: 100;
+        font-size: 14px;
+        color: $grisLinea;
+      }
+    }
+    & > div:nth-of-type(2) {
+      @include flexRowWrap;
+      @include absoluteCenter;
+      width: 25%;
+      & > p:nth-of-type(1) {
+        width: 100%;
+        text-align: center;
+        font-weight: 900;
+        font-size: 22px;
+        color: $gnAzulMedio;
+        margin-bottom: 5px;
+      }
+      & > p:nth-of-type(2) {
+        width: 100%;
+        text-align: center;
+        font-weight: 100;
+        font-size: 14px;
+        color: $grisLinea;
+      }
+    }
+    & > div:nth-of-type(3) {
+      @include flexRowWrap;
+      @include absoluteCenter;
+      width: 25%;
+      & > p:nth-of-type(1) {
+        width: 100%;
+        text-align: center;
+        font-weight: 900;
+        font-size: 22px;
+        color: $gnAzulMedio;
+        margin-bottom: 5px;
+      }
+      & > p:nth-of-type(2) {
+        width: 100%;
+        text-align: center;
+        font-weight: 100;
+        font-size: 14px;
+        color: $grisLinea;
+      }
+    }
+    & > div:nth-of-type(4) {
+      @include flexRowWrap;
+      @include absoluteCenter;
+      width: 25%;
+      & > p:nth-of-type(1) {
+        width: 100%;
+        text-align: center;
+        font-weight: 900;
+        font-size: 22px;
+        color: $gnAzulMedio;
+        margin-bottom: 5px;
+      }
+      & > p:nth-of-type(2) {
+        width: 100%;
+        text-align: center;
+        font-weight: 100;
+        font-size: 14px;
+        color: $grisLinea;
+      }
+    }
+
+  }
+
+  & > div:nth-of-type(3) {
+    @include flexRow;
+    width: 100%;
+    align-items: flex-end;
+    align-content: flex-end;
+    justify-content: space-between;
+    margin-top: 15px;
+    & > div:nth-of-type(1) {
+
+      & > p:nth-of-type(1) {
+        font-weight: 900;
+        font-size: 22px;
+        color: $gnAzulBajo;
+      }
+
+    }
+
+    & > div:nth-of-type(2) {
+      & > a:nth-of-type(1) {
+        @include flexRow;
+        @include absoluteCenter;
+        $textSize: ('base': 14px);
+        @include escaledFontFormat($textSize, 600, $gnBlanco);
+        @include pfButton(180px, 30px, $gnDorado, $gnDorado, $gnDorado, 0px);
+        cursor: pointer;
+        outline: none;
+      }
+
+    }
+  }
+
+  & > div:nth-of-type(4) {
+    @include flexRow;
+    width: 100%;
+    margin-top: 15px;
+    padding-bottom: 5px;
+    border-bottom: 0.5px solid $gnHeadreTable;
+
+    & > div:nth-of-type(1) {
+      @include flexRow;
+      width: 50px;
+      justify-content: flex-start;
+      & > p:nth-of-type(1) {
+        font-weight: 400;
+        font-size: 14px;
+        color: $grisLinea;
+      }
+    }
+    & > div:nth-of-type(2) {
+      @include flexRow;
+      width: calc(100% - 160px);
+      justify-content: flex-start;
+      & > p:nth-of-type(1) {
+        font-weight: 400;
+        font-size: 14px;
+        color: $grisLinea;
+      }
+    }
+    & > div:nth-of-type(3) {
+      @include flexRow;
+      width: 110px;
+      justify-content: flex-end;
+      & > p:nth-of-type(1) {
+        font-weight: 400;
+        font-size: 14px;
+        color: $grisLinea;
+      }
+    }
+  }
+
+  & > div:nth-of-type(5) {
+    @include flexRowWrap;
+    width: 100%;
+
+    & > div {
+      @include flexRow;
+      width: 100%;
+      min-height: 50px;
+      align-items: center;
+      align-content: center;
+      border-bottom: 0.5px solid $gnInactivo;
+
+      & > div:nth-of-type(1) {
+        @include flexRow;
+        width: 50px;
+        justify-content: flex-start;
+        & > p:nth-of-type(1) {
+          font-weight: 400;
+          font-size: 14px;
+          color: $gnAzulObscuro;
+        }
+      }
+
+      & > div:nth-of-type(2) {
+        @include flexRow;
+        width: calc(100% - 160px);
+        justify-content: flex-start;
+        & > p:nth-of-type(1) {
+          font-weight: 400;
+          font-size: 14px;
+          color: $gnAzulObscuro;
+        }
+      }
+
+      & > div:nth-of-type(3) {
+        @include flexRow;
+        width: 110px;
+        justify-content: flex-end;
+        & > p:nth-of-type(1) {
+          font-weight: 400;
+          font-size: 14px;
+          color: $gnAzulObscuro;
+        }
+      }
+
+
+    }
+  }
+
+  & > div:nth-of-type(6) {
+    @include flexRow;
+    width: 100%;
+    justify-content: flex-start;
+    margin-top: 10px;
+    & > p:nth-of-type(1) {
+      font-weight: 900;
+      font-size: 16px;
+      color: $gnAzulMedio;
+    }
+  }
+
+
+}

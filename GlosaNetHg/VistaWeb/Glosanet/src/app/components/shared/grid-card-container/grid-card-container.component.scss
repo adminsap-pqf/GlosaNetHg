@@ -1,0 +1,51 @@
+@import "../../../../mixins";
+@import "../../../../colors";
+@import "../../../../variables";
+
+:host {
+  @include flexRow;
+  @include absoluteCenter;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 10px 0;
+}
+
+.gridContainer {
+  @include flexRow;
+  @include absoluteCenter;
+  @include windowsScrollbars('none');
+  box-sizing: border-box;
+  //height: calc(100% - 35px);
+  //width: 690px;
+  width: 100%;
+  & > .grid {
+    @include flexRowWrap;
+    @include appleTouchFix;
+    //width: 690px;
+    width: 100%;
+    box-sizing: border-box;
+    & .cardContainer {
+      box-sizing: border-box;
+      width: 225px;
+      height: 225px;
+      margin: 0px 5px 10px 0px;
+    }
+
+  }
+}
+
+@media screen and (min-width: 1366px) {
+  .gridContainer {
+    //width: 1250px;
+    width: 100%;
+    & > .grid {
+      //width: 1250px;
+      width: 100%;
+      & .cardContainer {
+        width: 245px;
+      }
+    }
+  }
+}

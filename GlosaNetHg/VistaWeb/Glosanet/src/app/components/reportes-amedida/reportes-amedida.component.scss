@@ -1,0 +1,132 @@
+@import "../../../variables.scss";
+@import "../../../mixins.scss";
+@import "../../../colors.scss";
+
+.container{
+  @include flexColumn;
+  font-size: 9pt;
+  box-sizing: border-box;
+  @include absoluteCenter;
+  & > .head{
+    @include absoluteCenter;
+    width: 100%;
+    & > .row{
+      @include flexRow;
+      width:100%;
+      box-sizing: border-box;
+      & > .column{
+        @include flexRow;
+        width:100%;
+        box-sizing: border-box;
+        & > div{
+          box-sizing: border-box;
+          .btnAgregar{
+            @include flexRow;
+            $textSize: ('base': convertPts(12, 'px'));
+            @include escaledFontFormat($textSize, 600,$verdeBoton);
+            $colorHover:  rgba(6, 188, 82, 0.2);
+            @include pfButton(115px, 30px, $gnBlanco, $colorHover, $gnBlanco, 0px);
+            @include flexRow;
+            @include absoluteCenter;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+
+  #droplist1{
+    width: 65px;
+  }
+  #droplist2{
+    width: 150px;
+  }
+  #columnTitle{
+    width: 38%;
+    font-size: 1.7em;
+    & > div{
+      & > label{
+        @include flexRow;
+      }
+    }
+  }
+  #column1{
+    display:flex;
+    width: 62%;
+    font-size: 1.05em;
+    justify-content:flex-end;
+  }
+
+  & > .body{
+    @include flexColumn;
+    width: 100%;
+    min-width: 740px;
+    height: calc(100vh - 216px);
+    font-size: 9pt;
+    box-sizing: border-box;
+    & > p:nth-of-type(1){
+      color: $gnAzulMedio;
+      font-size: 18px;
+      font-weight: 500;
+      margin: 23px 20px;
+    }
+    & > div:nth-of-type(1){
+      //@include absoluteCenter;
+      overflow-x: scroll;
+      margin: 0px 20px;
+      & > div:nth-of-type(1){
+        @include flexRow;
+        border-bottom: 2px dashed $gnInactivo;
+        min-width: 2290px ;
+        & > p{
+          @include flexRow;
+          align-items: flex-end;
+          box-sizing: border-box;
+          font-size: 12px;
+          color: $grisLinea;
+          margin: 5px 10px;
+        }
+      }
+      & > div:nth-of-type(2){
+        overflow-y: scroll;
+        height: calc(100vh - 380px);
+        min-width: 2290px;
+        & > .rowTable{
+          @include flexRow;
+          height: 57px;
+          border-bottom: 2px dashed $gnInactivo;
+          & > p{
+            @include flexRow;
+            align-items: center;
+            box-sizing: border-box;
+            font-size: 10pt;
+            color: $gnGrisRata;
+            margin: 5px 10px;
+          }
+        }
+
+        & > .rowTable:hover{
+          background-color: $gnAzulFondo;
+          & > p{
+            font-weight: 600;
+          }
+        }
+      }
+    }
+    & > div:nth-of-type(2){
+      @include flexRowWrap;
+      @include absoluteCenter;
+      .btnMes{
+        @include flexRow;
+        $textSize: ('base': convertPts(12, 'px'));
+        @include escaledFontFormat($textSize, 600,$verdeBoton);
+        $colorHover:  rgba(6, 188, 82, 0.2);
+        @include pfButton(115px, 30px, $gnBlanco, $colorHover, $gnBlanco, 0px);
+        @include flexRow;
+        @include absoluteCenter;
+        cursor: pointer;
+      }
+    }
+  }
+
+}

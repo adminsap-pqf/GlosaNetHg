@@ -1,0 +1,158 @@
+<div class="container" >
+  <div class="title">
+    <div>
+      <div>
+        <img src="./assets/images/hover_registro.svg" alt="">
+        <div>Librería de Registros
+          <p>
+            <span>{{lst.length == 1 ? lst.length + " Trámite" : lst.length + " Trámites"}}</span>
+            <a (click)="irCatalogoProductos()">Catálogo de Productos</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <a (click)="irNuevoRegistro()">NUEVO REGISTRO</a>
+  </div>
+
+  <div class="filter-container">
+    <div class="wizard">
+      <!-- <gn-wizard #wizard [lstItems]="lstItems" [pWizard]="pWizard" [check]="false" [tabs]="true" (tabSelected)="tab($event)"></gn-wizard> -->
+      <gn-filtro-tiempo #wizard id="tiempo" [lstYears]="lstItems" (emitYear)="tab($event)"></gn-filtro-tiempo>
+    </div>
+  
+    <div class="filtros">
+      <div class="drop-filtros" [ngStyle]="{'padding':'0 8px 0 0'}">
+        <label >Filtrar:</label>
+        <div class="drop-container">
+          <gn-drop-list #drop (valueDropList)="dropFiltrar($event)" [items]="itemsFiltrar" [isSearch]="false" [isCategory]="true" [align]="'left'"
+          [itemSelect]="defaultFiltrar" [radio]="true" [fontSize]="'14px'"></gn-drop-list>
+        </div>
+      </div>
+      <div class="drop-filtros" [ngStyle]="{'padding':'0 8px'}">
+        <label >Registros:</label>
+        <div class="drop-container">
+          <gn-drop-list (valueDropList)="dropRegistros($event)" [items]="itemsRegistros" [isSearch]="false" [isCategory]="true" [align]="'left'"
+          [itemSelect]="defaultRegistros" [fontWeight]="'600'" [fontSize]="'14px'"></gn-drop-list>
+          </div>
+      </div>
+      <div class="drop-filtros" [ngStyle]="{'padding':'0 0 0 8px'}">
+          <label >Responsables:</label>
+          <div class="drop-container">
+            <gn-drop-list (valueDropList)="dropResponsables($event)" [items]="itemsResponsables" [isSearch]="true" [isCategory]="true" [align]="'left'"
+            [itemSelect]="defaultResponsables" [fontWeight]="'600'" [fontSize]="'14px'"></gn-drop-list>
+            </div>
+      </div>
+    </div>
+  </div>
+
+
+  
+
+  <div class="search">
+    <div class="searchBar">
+        <gn-search-bar [searchValue]="searchTerm" (searchTermChanged)="handleKeySearch($event)" [placeholder]="placeholder" [reset]="resetSearch"></gn-search-bar>
+    </div>
+
+    <a (click)="actualizar()">ACTUALIZAR</a>
+
+
+    <img *ngIf="cuadricula" (click)="cuadricula = true" src="./assets/images/vista_cuadricula_azul.svg" alt="">
+    <img *ngIf="!cuadricula" (click)="cuadricula = true" src="./assets/images/vista_cuadricula_gris.svg" alt="">
+    <img *ngIf="!cuadricula" (click)="cuadricula = false" src="./assets/images/vista_lista_azul.svg" alt="">
+    <img *ngIf="cuadricula" (click)="cuadricula = false" src="./assets/images/vista_lista_gris.svg" alt="">
+  </div>
+  <!-- <div class="options"> -->
+    <!-- <div class="dropList">
+      <label>Ordenar Por:</label>
+      <div class="drop">
+          <gn-drop-list (valueDropList)="dropListFiltro($event)" [items]="itemsFiltros" [isSearch]="false" [isCategory]="true" [align]="'left'"
+          [itemSelect]="defaultSelectedFiltros"></gn-drop-list>
+      </div>
+    </div> -->
+    
+  <!-- </div> -->
+
+  <!-- <div [ngStyle]="{'width':'100%', 'display':'flex', 'justify-content':'flex-end', 'height':'30px'}">
+    <label [ngStyle]="{'font-size': '12px', 'color': '#3369B1', 'font-weight':'600', 'display': 'flex', 'align-items': 'center'}">Actualización COFEPRIS {{today | dateFormatSlashFull}}</label>
+  </div> -->
+
+  <div class="body1" *ngIf="cuadricula">
+      <virtual-scroller #scroll [items]="buffer" (vsUpdate)="scrollItems = $event" (vsEnd)="fetchMore($event)">
+          <div class="item" *ngFor='let item of scrollItems; let i = index' (click)="monitorear(item.idRegistro)">
+              <div class="img">
+                  <img id="img1" src="./assets/images/gris_registro.svg" alt="">
+                  <img id="img2" src="./assets/images/hover_registro.svg" alt="">
+              </div>
+                  <div class="bodyItem" [ngStyle]="{'position':'relative'}">
+                      <p [ngStyle]="{'font-size':'14px'}"> <label [ngStyle]="{'font-weight':'700'}">{{item.producto.codigo}}&nbsp;</label>  {{item.producto.nombre}}</p>
+                      <p [ngStyle]="{'font-size':'13px'}"> <label>Etapa {{item.cerrados}}/{{item.numEventos}} {{item.eventoActual}} ·&nbsp;</label><label>{{item.numEventos == 1 ? item.numEventos + " Evento" : item.numEventos + " Eventos"}}</label>  </p>
+                      <label [ngStyle]="{'font-size':'12px'}" (mouseenter)="tooltipV[i] = true" (mouseleave)="tooltipV[i] = false">Ver Vigencia</label>
+                      <div class="tooltipVigencia" [style.opacity]="tooltipV[i] == true ? '1': '0'" [style.pointer-events]="'none'" [style.transition]="'0.5s'">
+                          <label>Vigencia de Folio</label>
+                          <label>{{ item.finicio | dateFormatSlash }} - {{ item.ffin | dateFormatSlash }}</label>
+                      </div>
+                </div>
+          </div>
+          <div *ngIf="loading"  class="container-loader" [style.height]="buffer.length == 0 ? '100%': null">
+              <div  class='loader'>
+                  <div class='loading-square'></div>
+                  <div class='loading-square'></div>
+                  <div class='loading-square'></div>
+                  <div class='loading-square'></div>
+              </div>
+          </div>
+      </virtual-scroller>
+  </div>
+
+
+  <div class="body2" *ngIf="!cuadricula" >
+      <virtual-scroller #scroll [items]="buffer" (vsUpdate)="scrollItems = $event" (vsEnd)="fetchMore($event)">
+          <div class="item" *ngFor='let item of scrollItems; let i = index' (click)="monitorear(item.idRegistro, item)">
+              <img *ngIf="item.estadoCofepris == 'Trámite disponible.' " id="flag" src="./assets/images/bandera_azul.svg" alt="">
+              <img *ngIf="item.estadoCofepris == 'Trámite en evaluación.' " id="flag" src="./assets/images/bandera_naranja.svg" alt="">
+              <img *ngIf="item.estadoCofepris == 'Trámite entregado.' || item.estadoCofepris == 'Entregado al cliente.'" id="flag" src="./assets/images/bandera_verde.svg" alt="">
+              <img *ngIf="item.estadoCofepris == 'Trámite No Encontrado'" id="flag" src="./assets/images/etiqueta_roja.svg" alt="">
+
+              <div class="img">
+                  <img id="img1" src="./assets/images/gris_registro.svg" alt="">
+                  <img id="img2" src="./assets/images/hover_registro.svg" alt="">
+                  <label >{{item.eventoActual}}</label>
+                  <label *ngIf="item.estadoCofepris !== undefined" [ngStyle]="{'font-size':'11px'}">COFEPRIS</label>
+              </div>
+              <div class="bodyItem">
+                  <div class="part1">
+                      <p> <!-- <label>FO-9876 ·&nbsp;</label> --><label># {{item.recordIndex}}  · </label> <label>{{item.producto.codigo}}</label> <label>{{item.producto.nombre}}</label> </p>
+                      <p> <label>Vigencia de Folio: {{ item.finicio | dateFormatSlash }} - {{ item.ffin | dateFormatSlash }} ·&nbsp;</label> <label>{{item.numEventos == 1 ? item.numEventos + " Evento" : item.numEventos + " Eventos"}}</label> </p>
+                  </div>
+                  <div class="part2">
+                      <p>Etapa {{item.cerrados}}/{{item.numEventos}}</p>
+                      <!-- <p [style.margin-top]="'5px'"></p> -->
+                      <p *ngIf="item.estadoCofepris !== undefined" [style.color]="item.estadoCofepris == 'Trámite disponible.' ? '#3B8EDE': item.estadoCofepris == 'Trámite en evaluación.' ? '#F7931E': item.estadoCofepris == 'Trámite entregado.' || item.estadoCofepris == 'Entregado al cliente.' ? '#37B34A': '#c1272d'">{{item.estadoCofepris !== undefinedc ? item.estadoCofepris : ''}}</p>
+                      <p class="registerDate">
+                        Registro: Última Actualización <span *ngIf="item.lastUpdateDate">{{item.lastUpdateDate | dateFormatNumberFull}}</span> <span *ngIf="!item.lastUpdateDate">No Disponible</span>
+                      </p>
+                      <p class="cofeprisDate" *ngIf="item.estadoCofepris !== undefined">
+                        COFEPRIS: Última Actualización <span *ngIf="item.fecha">{{item.fecha | dateFormatNumberFull}}</span> <span *ngIf="!item.fecha">No Disponible</span>
+                      </p>
+                  </div>
+              </div>
+          </div>
+          <div *ngIf="loading"  class="container-loader" [style.height]="buffer.length == 0 ? '100%': null">
+              <div  class='loader'>
+                  <div class='loading-square'></div>
+                  <div class='loading-square'></div>
+                  <div class='loading-square'></div>
+                  <div class='loading-square'></div>
+              </div>
+          </div>
+      </virtual-scroller>
+  </div>
+
+  <div id="inicio" (click)="scrollTo()">
+      <img src="./assets/images/flecha_blanca.svg" alt="">
+  </div>
+
+  <div class="foot">
+    <label>{{currentTotal == 1 ? "# " + currentTotal + " Trámite" : "# " + currentTotal + " Trámites"}}</label>
+  </div>
+</div>

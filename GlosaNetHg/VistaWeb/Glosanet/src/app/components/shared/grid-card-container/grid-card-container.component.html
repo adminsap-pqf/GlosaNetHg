@@ -1,0 +1,8 @@
+<div class='gridContainer'>
+  <div class='grid'>
+    <div class='cardContainer' *ngFor='let data of lstData; let i = index'>
+      <gn-card-datastage *ngIf="tipo" [data]="data" [idCliente]="idCliente" [rfc]="rfc"></gn-card-datastage>
+      <gn-card-catalogo *ngIf="!tipo" [data]="data" (reload)="reload($event)"></gn-card-catalogo>
+    </div>
+  </div>
+</div>

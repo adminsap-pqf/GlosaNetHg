@@ -1,0 +1,59 @@
+<div>
+  <div class="headerTable" [style.min-width]="minWidth != '' ?minWidth:''">
+    <p *ngFor="let item of lstCabeceras" [style.text-align]="item.align" [style.min-width]="item.width" > <span [innerHTML]="item.nombre | highlight: searchVar"></span> </p>
+  </div>
+  <div *ngIf="lstCabeceras != null" class="contentTable" [style.overflow-x]="scroll ? 'scroll' : ''" [style.height]="scroll?nota != '' ? 'calc(100vh - 530px)' : 'calc(100vh - 450px)' : '100%'" [style.min-width]="minWidth != '' ? minWidth : ''">
+    <div class="row"  *ngFor="let item of lstData">
+      <div *ngIf="lstCabeceras.length > 0" [style.width]="lstCabeceras[0].width">
+        <div [style.text-align]="lstCabeceras[0].align" *ngIf="lstCabeceras.length > 1"><p [innerHTML]="item.column1 | highlight: searchVar"></p></div>
+        <div [style.text-align]="lstCabeceras[0].align" *ngIf="lstCabeceras.length == 1 && item.column1 == undefined"><p [innerHTML]="item.column2 | highlight: searchVar"></p></div>
+      </div>
+      <div *ngIf="lstCabeceras.length > 1" [style.width]="lstCabeceras[1].width">
+        <div [style.text-align]="lstCabeceras[1].align" *ngIf="splitColumn(item.column2).length == 1"><p [innerHTML]="item.column2 | highlight: searchVar"></p></div>
+        <ng-container *ngIf="splitColumn(item.column2).length > 1">
+          <div [style.text-align]="lstCabeceras[1].align" [style.justify-content]="'flex-start'" [ngClass]="selectedOption === 2 ? 'customMargin' : ''" *ngFor="let item2 of splitColumn(item.column2)"><p [innerHTML]="item2 | highlight: searchVar"></p></div>
+        </ng-container>
+      </div>
+      <div *ngIf="lstCabeceras.length > 2" [style.width]="lstCabeceras[2].width">
+        <div [style.text-align]="lstCabeceras[2].align" *ngIf="splitColumn(item.column3).length == 1"><p [innerHTML]="item.column3 | highlight: searchVar"></p></div>
+        <ng-container *ngIf="splitColumn(item.column3).length > 1">
+          <div [style.text-align]="lstCabeceras[2].align"  [style.justify-content]="'flex-start'" *ngFor="let item3 of splitColumn(item.column3)"><p [innerHTML]="item3 | highlight: searchVar"></p></div>
+        </ng-container>
+      </div>
+      <div *ngIf="lstCabeceras.length > 3"  [style.width]="lstCabeceras[3].width">
+        <div [style.text-align]="lstCabeceras[3].align"><p [innerHTML]="item.column4 | highlight: searchVar"></p></div>
+      </div>
+
+      <div id="column5" *ngIf="lstCabeceras.length == 8"  [style.width]="lstCabeceras[4].width">
+        <div [style.text-align]="lstCabeceras[4].align"><p [innerHTML]="item.column5 | highlight: searchVar"></p></div>
+      </div>
+
+      <div id="column6" *ngIf="lstCabeceras.length == 8"  [style.width]="lstCabeceras[5].width">
+        <div [style.text-align]="lstCabeceras[5].align"><p [innerHTML]="item.column6 | highlight: searchVar"></p></div>
+      </div>
+
+      <div id="column7" *ngIf="lstCabeceras.length == 8"  [style.width]="lstCabeceras[6].width">
+        <div [style.text-align]="lstCabeceras[6].align"><p [innerHTML]="item.column7 | highlight: searchVar"></p></div>
+      </div>
+
+      <div id="column8" *ngIf="lstCabeceras.length == 8"  [style.width]="lstCabeceras[7].width">
+        <div [style.text-align]="lstCabeceras[7].align"><p [innerHTML]="item.column8 | highlight: searchVar"></p></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="textRow" *ngIf="lstCabeceras == null">
+    <div class="row" *ngFor="let item of lstData">
+      <p [style.margin-top]="(item.style == 'rowTextTitle' && item.renglon !== 1) ? '20px' : item.renglon == 1 ? '0px' : '10px'">
+        <label [ngStyle]="{'color':'#3369B1'}" [style.font-size]="item.orden == 2 ? '14px': '13px'" [style.font-weight]="(item.orden == 2  || item.orden == 3) ? '700' : '400'" [style.margin-right]="'5px'" [innerHTML]="item.column1 | highlight: searchVar">{{item.column1}}</label>
+        <span [innerHTML]="item.column2 | highlight: searchVar"></span>
+      </p>
+    </div>
+  </div>
+
+</div>
+<div *ngIf="nota != ''" class="nota">
+  <p [innerHTML]="nota | highlight: searchVar">
+    <span>Nota:</span>{{nota}}
+  </p>
+</div>

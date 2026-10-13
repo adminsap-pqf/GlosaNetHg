@@ -1,0 +1,135 @@
+@import "../../../../variables.scss";
+@import "../../../../mixins.scss";
+@import "../../../../colors.scss";
+
+:host {
+  font-size: $globalFont;
+  width: 100%;
+  & > div:nth-of-type(1){
+    width: 100%;
+    overflow-y: scroll;
+    .headerTable{
+      @include flexRow;
+      justify-content: space-between;
+      margin-top: 28px;
+      color:$gnHeadreTable;
+      font-size: 12px;
+
+      & > p{
+        padding: 0px 5px 5px 5px;
+        border-bottom: 2px dashed $gnInactivo;
+      }
+    }
+
+    .contentTable{
+      width: 100%;
+      & > .row{
+        @include flexRow;
+        font-size: 13px;
+        min-height: 30px;
+        justify-content: space-between;
+
+        & > div:nth-of-type(1), #column5{
+          @include flexColumn;
+          @include absoluteCenter;
+          white-space: pre-line;
+          padding: 8px 5px 8px 5px;
+          border-bottom: 2px dashed $gnInactivo;
+          color:$gnGrisRata;
+          & > div{
+            @include flexColumn;
+            justify-content: center;
+            width: 100%;
+            min-height: 30px;
+            line-height: 18px;
+          }
+        }
+        & > div:nth-of-type(2), #column6{
+          @include flexColumn;
+          @include absoluteCenter;
+          white-space: pre-line;
+          padding: 8px 5px 8px 5px;
+          border-bottom: 2px dashed $gnInactivo;
+          color:$gnAzulMedio;
+          & > div{
+            @include flexColumn;
+            justify-content: center;
+            width: 100%;
+            min-height: 30px;
+            line-height: 18px;
+          }
+        }
+        & > div:nth-of-type(3), #column7{
+          @include flexColumn;
+          @include absoluteCenter;
+          white-space: pre-line;
+          padding: 8px 5px 8px 5px;
+          border-bottom: 2px dashed $gnInactivo;
+          color:$gnGrisRata;
+          & > div{
+            @include flexColumn;
+            justify-content: center;
+            width: 100%;
+            min-height: 30px;
+            line-height: 18px;
+          }
+        }
+        & > div:nth-of-type(4), #column8{
+          @include flexColumn;
+          @include absoluteCenter;
+          white-space: pre-line;
+          padding: 8px 5px 8px 5px;
+          border-bottom: 2px dashed $gnInactivo;
+          color:$gnAzulMedio;
+          & > div{
+            @include flexColumn;
+            justify-content: center;
+            width: 100%;
+            min-height: 30px;
+            line-height: 18px;
+          }
+        }
+      }
+    }
+  }
+  .nota {
+    padding: 12px 0;
+    & > p{
+      white-space: pre-line;
+      font-size: 13px;
+      color: $gnGrisRata;
+      & > span{
+        font-size: 14px;
+        color: $gnAzulMedio;
+      }
+    }
+  }
+
+
+  #textRow{
+    //@include flexColumn;
+    width: 100%;
+    overflow-x: scroll;
+    height: calc(100vh - 430px);
+    & > .row{
+      @include flexColumn;
+      width: 100%;
+      & > p{
+        //@include flexRow;
+        //align-items: center;
+        width:100%;
+        font-size: 13px;
+        color:#818192;
+        line-height: 18px;
+        label{
+
+        }
+      }
+    }
+  }
+}
+
+.customMargin {
+  min-height: 0 !important;
+  margin-bottom: 12px !important;
+}

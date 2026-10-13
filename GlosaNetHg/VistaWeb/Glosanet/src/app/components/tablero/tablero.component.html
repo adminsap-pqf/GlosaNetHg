@@ -1,0 +1,1418 @@
+<div class="container">
+  
+   
+
+  <div class="row" [ngStyle]="{'height':'110px', 'align-items':'center', 'padding':'0 20px', 'box-sizing': 'border-box', 'justify-content': 'center'}">
+
+      <div id="titleTablero" [ngStyle]="{'height':'50px', 'display':'flex', 'align-items':'center', 'box-sizing':'border-box'}">
+          <img src="./assets/images/tablero_icono_nuevo_header.svg" alt="">
+          <label [ngStyle]="{'margin-left':'10px', 'color':'#3B8EDE', 'font-size':'21px', 'font-weight':'500'}"> Tableros</label>
+      </div>
+    
+    <div class="column" >
+      <div id="droplist">
+        <gn-drop-list (valueDropList)="dropList($event)" [items]="itemsDropList2" [isSearch]="true" [isCategory]="true" [align]="'left'"
+          [itemSelect]="defaultSelected"></gn-drop-list>
+      </div>
+    </div>
+    <div class="column" >
+      <div [ngStyle]="{'flex-direction':'row', 'display':'flex', 'align-items':'center', 'font-size':'13px'}">
+        <label [ngStyle]="{'width':'95px', 'color':'#818192', 'display':'flex','flex-direction':'column', 'justify-content':'flex-end', 'height':'20px'}">Ordenar desde: </label>
+        <div id="datepicker1">
+          <gn-date-picker [style.width]="'125px'"
+                          [(date)]="date"
+                          dateFormat="YYYYMMDD"
+                          [sizeInput]="'14px'"
+                          [lineColor]="invalidDates ? '#C1272D' : '#3369B1'"
+                          (dateChange)="handleValidDates()"
+                          (handleCalculateDate)="handleCalculateDate($event)"
+                          (onSelect)="handleDate($event, 'start')"
+                          (fecha)="getFechaImpl($event)"></gn-date-picker>
+        </div>
+
+      </div>
+    </div>
+    <div class="column" >
+      <div [ngStyle]="{'flex-direction':'row', 'display':'flex', 'align-items':'center', 'font-size':'13px'}">
+        <label [ngStyle]="{'width':'45px', 'color':'#818192', 'display':'flex','flex-direction':'column', 'justify-content':'flex-end', 'height':'20px'}">Hasta: </label>
+        <div id="datepicker2">
+          <gn-date-picker [(date)]="date2"
+                          dateFormat="YYYYMMDD"
+                          [sizeInput]="'14px'"
+                          [lineColor]="invalidDates ? '#C1272D' : '#3369B1'"
+                          (dateChange)="handleValidDates()"
+                          (handleCalculateDate)="handleCalculateDate($event)"
+                          (onSelect)="handleDate($event, 'end')"
+                          (fecha)="getFechaImpl($event)"></gn-date-picker>
+        </div>
+
+      </div>
+    </div>
+    <div class="column" [ngStyle]="{ 'display':'flex', 'justify-content':'flex-end'}" id="boton">
+      <div  [ngStyle]="{'display':'flex', 'justify-content':'flex-end'}">
+        <a class="apply" (click)="apply()">
+          <p>APLICAR</p>
+        </a>
+      </div>
+
+
+      <div id="boton" [ngStyle]="{'display':'flex', 'justify-content':'flex-end'}">
+        <a class="exp" (click)="pdfDownload()">
+          <p>EXPORTAR</p>
+        </a>
+      </div>
+    </div>
+
+    
+
+  </div>
+
+
+  <!-- ****************************************************************** Seccion 501 - Informacion General ****************************************************************** -->
+  <div  class="section" *ngIf="seccion == 0">
+    <!-- seccion 501 - Informacion General -->
+
+    <div class="row" id="section" [style.width]="resolutionPdf ? '2000px' : null">
+      <div [style.width]="resolutionPdf ? '750px' : '60%'" id="img1_501" class="column" [ngStyle]="{'justify-content':'center', 'height':'355px', 'position':'relative', 'background-color':'#F3FAFF'}">
+
+        <div id='doughnut1Div'[style.width]="resolutionPdf ? '300px' : null" [style.height]="resolutionPdf ? '250px' : null">
+
+          <div class="total" id="totalDoughnut1">
+            <label>Total:</label>
+            <label [ngClass]="total_OperacionesPeriodo > 9999 && total_OperacionesPeriodo < 100000 ? 'doughnut1Label2': total_OperacionesPeriodo > 99999 ? 'doughnut1Label3': 'doughnut1Label1'">{{ total_OperacionesPeriodo | acFormatNumber }}</label>
+            <label *ngIf="total_OperacionesPeriodo !== 1">Operaciones</label>
+            <label *ngIf="total_OperacionesPeriodo == 1">Operación</label>
+          </div>
+
+          <canvas id="doughnut1"></canvas>
+        </div>
+
+
+        <div class="legend" id="legendDoughnut1">
+          <div class="head">
+            <label>Operaciones Del Periodo</label>
+          </div>
+          <div class="body">
+            <div>
+              <span [style.background-color]="'#5792F3'"></span>
+              <label>Importaciones</label>
+              <label>{{importaciones_OperacionesPeriodo | acFormatNumber}}</label>
+            </div>
+            <div>
+              <span [style.background-color]="'#FEC42D'"></span>
+              <label>Exportaciones</label>
+              <label>{{exportaciones_OperacionesPeriodo | acFormatNumber}}</label>
+            </div>
+            <div>
+              <span [style.background-color]="'#DD4444'"></span>
+              <label>Rectificaciones</label>
+              <label>{{rectificaciones_OperacionesPeriodo | acFormatNumber}}</label>
+            </div>
+          </div>
+          <div class="foot">
+            <label>Total de operaciones: {{ total_OperacionesPeriodo | acFormatNumber }}</label>
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <div id="img2_501" class="column" [ngStyle]="{'width':'40%', 'background-color':'#222E42', 'box-sizing':'border-box', 'position':'relative'}" >
+        <label class="headerLine" [ngStyle]="{'top':'35px'}">Tipo De Cambio Del Periodo</label>
+        <div [ngStyle]="{'width':'99%', 'height':'200px', 'margin':'25px 5px 5px 5px'}" id="lineChart1Div">
+          <canvas id="lineChart1" width="100%"></canvas>
+
+
+          <div class="footerLine">
+            <label>{{ minimo_tipoCambioPeriodo| acFormatMoney }}</label>
+            <label>{{ promedio_tipoCambioPeriodo| acFormatMoney }}</label>
+            <label>{{ maximo_tipoCambioPeriodo| acFormatMoney }}</label>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+
+   
+    <div class="row" [style.width]="resolutionPdf ? '1000px' : null">
+      <div id="img3_501" class="column" [style.height]="resolutionPdf ? '500px' : '335px'" [ngStyle]="{'width':'100%', 'position':'relative', 'box-sizing':'border-box'}">
+        <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative','flex-direction': 'column-reverse' ,'display': 'flex'}"
+          id="barStackedChart1Div">
+          <label [ngStyle]="{'font-size':'1.4em', 'color':'#222E43','font-weight': '500','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Aduana</label>
+          <canvas id="barStackedChart1" width="100%"></canvas>
+          <div class="legendBar" [style.z-index]="resolutionPdf ? '0' : '-1'">
+            <div class="imp">
+              <span [style.background-color]="'#FDC340'"></span>
+              <label>Exportaciones</label>
+            </div>
+            <div class="exp">
+              <span [style.background-color]="'#5A95F0'"></span>
+              <label>Importaciones</label>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+          <gn-legends [items]="data1"></gn-legends>  
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="row" id="medioTransporte" [style.width]="resolutionPdf ? '2000px' : null">
+      
+
+      <div id="img4_501" class="column" [style.height]="resolutionPdf ? '500px' : '335px'" [ngStyle]="{'width':'50%', 'position':'relative','box-sizing':'border-box'}">
+        <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+          id="barStackedChart2Div">
+          <label [ngStyle]="{'font-size':'1.4em', 'color':'#222E43','font-weight': '500','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Medio De Transporte De Arribo</label>
+          <canvas id="barStackedChart2" width="95%"></canvas>
+          <div class="legendBar" [style.z-index]="resolutionPdf ? '0' : '-1'">
+            <div class="imp">
+              <span [style.background-color]="'#FDC340'"></span>
+              <label>Exportaciones</label>
+            </div>
+            <div class="exp">
+              <span [style.background-color]="'#5A95F0'"></span>
+              <label>Importaciones</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+            <gn-legends [items]="data2"></gn-legends>  
+          </div>
+
+      </div>
+
+      <div id="img5_501" class="column" [style.height]="resolutionPdf ? '500px' : '335px'" [ngStyle]="{'width':'50%', 'position':'relative','box-sizing':'border-box'}">
+        <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+          id="barStackedChart3Div">
+          <label [ngStyle]="{'font-size':'1.4em', 'color':'#222E43','font-weight': '500','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Aduana (Kg)</label>
+          <canvas id="barStackedChart3" width="95%"></canvas>
+          <div class="legendBar" [style.z-index]="resolutionPdf ? '0' : '-1'">
+            <div class="imp">
+              <span [style.background-color]="'#FDC340'"></span>
+              <label>Exportaciones</label>
+            </div>
+            <div class="exp">
+              <span [style.background-color]="'#5A95F0'"></span>
+              <label>Importaciones</label>
+            </div>
+          </div>
+
+        </div>
+            <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+                <gn-legends [items]="data3"></gn-legends>  
+              </div>
+      </div>
+    </div>
+
+
+
+    <div class="row" [style.width]="resolutionPdf ? '2000px' : null">
+      <div [style.width]="resolutionPdf ? '900px' :'50%'" id="img6_501" class="column" [style.height]="resolutionPdf ? '450px' : '335px'"  [ngStyle]="{'justify-content':'center','align-items':'center', 'position':'relative', 'background-color':'#F3FAFF'}">
+        <label [ngStyle]="{'position': 'absolute' , 'top': '30px', 'left': '20px', 'text-align':'center', 'font-size':'1.4em', 'color':'#222E43','font-weight': '500'}">Operaciones Por Tipo De Pedimento</label>
+        <div id="doughnut2Div" [style.width]="resolutionPdf ? '250px' : null" [style.height]="resolutionPdf ? '200px' : null">
+
+          <div class="total" id="totalDoughnut2">
+            <label>Total:</label>
+            <label [ngClass]="total_TipoPedimento > 9999 && total_TipoPedimento < 100000 ? 'doughnut2Label2': total_TipoPedimento > 99999 ? 'doughnut2Label3': 'doughnut2Label1'">{{total_TipoPedimento | acFormatNumber}}</label>
+            <label *ngIf="total_TipoPedimento !== 1">Operaciones</label>
+            <label *ngIf="total_TipoPedimento == 1">Operación</label>
+          </div>
+
+
+          <canvas id="doughnut2"></canvas>
+          <label [ngStyle]="{'position': 'absolute' , 'bottom': '-30px', 'left': '40px','width':'150px', 'text-align':'center', 'font-size':'1em', 'color':'#222E43','font-weight': '500'}">Pedimento Normal vs Pedimento De Rectificación</label>
+        </div>
+
+
+        <div id="barStackedChartVertical1Div">
+
+          <canvas id="barStackedChartVertical1" width="100%"></canvas>
+          <label id="label1barStackedChartVertical">
+            <span>Pedimento</span>
+            <br>
+            <span>Normal</span>
+          </label>
+          <label id="label2barStackedChartVertical">
+            <span>Pedimento de</span>
+            <br>
+            <span>Rectificación</span>
+          </label>
+        </div>
+
+        <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+            <gn-legends [items]="data10"></gn-legends>  
+          </div>
+
+      </div>
+
+
+      <div id="img7_501" class="column" [style.height]="resolutionPdf ? '500px' : '335px'" [ngStyle]="{'justify-content':'center','align-items':'center','width':'50%', 'position':'relative', 'background-color':'#222E42','box-sizing':'border-box'}">
+
+        <div [ngStyle]="{'width':'95%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex','margin-top':'15px'}"
+          id="barStackedChart4Div">
+          <label [ngStyle]="{'color':'#fff' , 'font-size':'1.4em', 'font-weight': '500', 'margin-bottom':'15px'}">Operaciones Por Clave De Pedimento</label>
+          <canvas id="barStackedChart4" width="100%"></canvas>
+
+        </div>
+
+        <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+            <gn-legends [items]="data4"></gn-legends>  
+          </div>
+      </div>
+
+
+    </div>
+
+    <div class="row" [style.width]="resolutionPdf ? '2000px' : null">
+      <div id="img8_501" class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'50%', 'position':'relative','box-sizing':'border-box'}">
+
+        <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+          id="barChart4Div">
+          <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Medio De Transporte De Salida</label>
+          <canvas id="barChart4" width="95%"></canvas>
+          <div class="legendBar" [ngStyle]="{'height':'30px'}" [style.z-index]="resolutionPdf ? '0' : '-1'">
+            <div class="exp">
+              <span [style.background-color]="'#5793F3'"></span>
+              <label>Operaciones</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+            <gn-legends [items]="data5"></gn-legends>  
+          </div>
+      </div>
+
+      <div id="img9_501" class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'50%', 'position':'relative','box-sizing':'border-box'}">
+        <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+          id="barChart5Div">
+          <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Medio De Transporte Arribo Y Salida</label>
+          <canvas id="barChart5" width="95%"></canvas>
+          <div class="legendBar" [ngStyle]="{'height':'30px'}" [style.z-index]="resolutionPdf ? '0' : '-1'">
+            <div class="exp">
+              <span [style.background-color]="'#E06188'"></span>
+              <label>Operaciones</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+            <gn-legends [items]="data6"></gn-legends>  
+          </div>
+      </div>
+    </div>
+
+
+    <div class="row" [style.width]="resolutionPdf ? '2500px' : null">
+
+      <div [style.width]="resolutionPdf ? '750px' : '60%'" id="img10_501" class="column" [ngStyle]="{'justify-content':'space-around', 'height':'335px', 'position':'relative', 'background-color':'#F3FAFF'}">
+
+        <div id="doughnut3Div" [style.width]="resolutionPdf ? '250px' : null" [style.height]="resolutionPdf ? '260px' : null">
+          <div class="total" id="totalDoughnut3">
+            <label>Total</label>
+            <label>{{total_IncrementablesYDeducibles | acFormatMoney}}</label>
+            <label>Importe</label>
+          </div>
+
+          <canvas id="doughnut3"></canvas>
+        </div>
+
+
+        <div class="legend" id="doughnut3Legend" [ngStyle]="{'height':'300px'}">
+          <div class="head">
+            <label>Importes De Operaciones</label>
+          </div>
+          <div class="body" [ngStyle]="{'height':'200px'}">
+            <div>
+              <span [style.background-color]="'#A667D0'"></span>
+              <label>Fletes</label>
+              <label>{{fletes | acFormatMoney}}</label>
+            </div>
+            <div>
+              <span [style.background-color]="'#EAE833'"></span>
+              <label>Seguros</label>
+              <label>{{seguros | acFormatMoney}}</label>
+            </div>
+            <div>
+              <span [style.background-color]="'#53DFA8'"></span>
+              <label>Embalajes</label>
+              <label>{{embalajes | acFormatMoney}}</label>
+            </div>
+            <div>
+              <span [style.background-color]="'#3FBEF0'"></span>
+              <label>Incrementables</label>
+              <label>{{incrementables | acFormatMoney}}</label>
+            </div>
+            <div>
+              <span [style.background-color]="'#EA0D3E'"></span>
+              <label>Deducibles</label>
+              <label>{{deducibles | acFormatMoney}}</label>
+            </div>
+          </div>
+          <div class="foot">
+            <label>Total de Importes: {{total_IncrementablesYDeducibles | acFormatMoney}}</label>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="img11_501" class="column" [style.height]="resolutionPdf ? '500px' : '335px'" [ngStyle]="{'width':'40%', 'position':'relative','box-sizing':'border-box','background-color':'#F3FAFF'}">
+        <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+          id="barChart1Div">
+          <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Destino De La Mercancía</label>
+          <canvas id="barChart1" width="95%"></canvas>
+          <div class="legendBar" [ngStyle]="{'height':'30px', 'bottom':'0'}" [style.z-index]="resolutionPdf ? '0' : '-1'">
+            <div class="exp">
+              <span [style.background-color]="'#5793F3'"></span>
+              <label>Operaciones</label>
+            </div>
+          </div>
+        </div>
+        <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+            <gn-legends [items]="data7"></gn-legends>  
+          </div>
+      </div>
+
+
+
+    </div>
+
+    <div class="row" [style.width]="resolutionPdf ? '2000px' : null">
+  
+      <div id="img12_501" class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'50%', 'position':'relative','box-sizing':'border-box'}">
+        <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+          id="barChart2Div">
+          <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Agente Aduanal</label>
+          <canvas id="barChart2" width="100%"></canvas>
+          <div class="legendBar" [ngStyle]="{'height':'30px'}" [style.z-index]="resolutionPdf ? '0' : '-1'">
+            <div class="exp">
+              <span [style.background-color]="'#E06188'"></span>
+              <label>Operaciones</label>
+            </div>
+          </div>
+        </div>
+        <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+            <gn-legends [items]="data8"></gn-legends>  
+          </div>
+      </div>
+
+      <div id="img13_501" class="column" [style.height]="resolutionPdf ? '500px' : '375px'"  [ngStyle]="{'width':'50%', 'position':'relative','box-sizing':'border-box'}">
+        <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+          id="barChart3Div">
+          <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Clave De Tipo De Pedimento</label>
+          <canvas id="barChart3" width="100%"></canvas>
+          <div class="legendBar" [ngStyle]="{'height':'30px'}" [style.z-index]="resolutionPdf ? '0' : '-1'">
+            <div class="exp">
+              <span [style.background-color]="'#5793F3'"></span>
+              <label>Operaciones</label>
+            </div>
+          </div>
+        </div>
+        <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+            <gn-legends [items]="data9"></gn-legends>  
+          </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ****************************************************************** Seccion 502 - Transporte Mercancias ****************************************************************** -->
+
+  <div id="section" class="section" *ngIf="seccion == 1">
+    <!-- Seccion 502 - Transporte Mercancias -->
+
+    <div  id="img1_502" [ngClass]="resolutionPdf ? 'row resY' : 'row'">
+      <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box','background-color':'#F3FAFF' , 'padding':'0 25px'}">
+        <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+          id="barChart4Div">
+          <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Aduana</label>
+          <canvas id="barChart4" width="100%"></canvas>
+          <div class="legendBar" [ngStyle]="{'height':'30px', 'bottom':'0'}">
+            <div class="exp">
+              <span [style.background-color]="'#5793F3'"></span>
+              <label>Operaciones</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+            <gn-legends [items]="data1_502"></gn-legends>  
+          </div>
+      </div>
+    </div>
+
+    <div id="img2_502" [ngClass]="resolutionPdf ? 'row resY' : 'row'">
+      <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box' , 'padding':'0 25px'}">
+        <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+          id="barChart5Div">
+          <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Agente Aduanal</label>
+          <canvas id="barChart5" width="100%"></canvas>
+          <div class="legendBar" [ngStyle]="{'height':'30px'}" [style.z-index]="resolutionPdf ? '0' : '-1'">
+            <div class="exp">
+              <span [style.background-color]="'#E06188'"></span>
+              <label>Operaciones</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+            <gn-legends [items]="data2_502"></gn-legends>  
+          </div>
+      </div>
+    </div>
+
+    <div id="img3_502" [ngClass]="resolutionPdf ? 'row resY' : 'row'">
+      <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box','background-color':'#F3FAFF', 'padding':'0 25px'}">
+        <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+          id="barChart6Div">
+          <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por País</label>
+          <canvas id="barChart6" width="100%"></canvas>
+          <div class="legendBar" [ngStyle]="{'height':'30px', 'bottom':'0'}" >
+            <div class="exp">
+              <span [style.background-color]="'#5793F3'"></span>
+              <label>Operaciones</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+            <gn-legends [items]="data3_502"></gn-legends>  
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ****************************************************************** Seccion 503 - Guias ****************************************************************** -->
+  <div id="section" class="section" *ngIf="seccion == 2">
+    <!-- Seccion 503 - Guias -->
+
+    <div id="img1_503" class="row" [style.width]="resolutionPdf ? '800px' : null">
+      <div class="column" [ngStyle]="{'justify-content':'center','width':'100%', 'height':'355px', 'position':'relative', 'background-color':'#F3FAFF', 'padding':'0 25px'}">
+
+        <div id='doughnut4Div'>
+
+          <div class="total" id="totalDoughnut4">
+            <label>Total:</label>
+            <label [ngClass]="total_GuiasPorTipo > 9999 && total_GuiasPorTipo < 100000 ? 'doughnut1Label2': total_GuiasPorTipo > 99999 ? 'doughnut1Label3': 'doughnut1Label1'">{{ total_GuiasPorTipo | acFormatNumber }}</label>
+            <label *ngIf="total_GuiasPorTipo !== 1">Operaciones</label>
+            <label *ngIf="total_GuiasPorTipo == 1">Operación</label>
+          </div>
+
+          <canvas id="doughnut4"></canvas>
+        </div>
+
+
+        <div class="legend" id="legendDoughnut4">
+          <div class="head">
+            <label>Operaciones Por Tipo De Guía</label>
+          </div>
+          <div class="body">
+            <div>
+              <span [style.background-color]="'#FEC42D'"></span>
+              <label>(M) Master</label>
+              <label>{{m_GuiasPorTipo | acFormatNumber}}</label>
+            </div>
+            <div>
+              <span [style.background-color]="'#DD4444'"></span>
+              <label>(H) House</label>
+              <label>{{h_GuiasPorTipo | acFormatNumber}}</label>
+            </div>
+          </div>
+          <div class="foot">
+            <label>Total de operaciones: {{ total_GuiasPorTipo | acFormatNumber }}</label>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div id="img2_503" [ngClass]="resolutionPdf ? 'row resY' : 'row'">
+      <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box', 'padding':'0 25px'}">
+        <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+          id="barChart7Div">
+          <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Guías Por Aduana</label>
+          <canvas id="barChart7" width="100%"></canvas>
+          <div class="legendBar" [ngStyle]="{'height':'30px'}" [style.z-index]="resolutionPdf ? '0' : '-1'">
+            <div class="exp">
+              <span [style.background-color]="'#E06188'"></span>
+              <label>Operaciones</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+          <gn-legends [items]="data1_503"></gn-legends>  
+        </div>
+      </div>
+    </div>
+
+    <div id="img3_503" [ngClass]="resolutionPdf ? 'row resY' : 'row'">
+      <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box','background-color':'#F3FAFF', 'padding':'0 25px'}">
+        <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+          id="barChart8Div">
+          <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Guías Por Agente Aduanal</label>
+          <canvas id="barChart8" width="100%"></canvas>
+          <div class="legendBar" [ngStyle]="{'height':'30px', 'bottom':'0'}">
+            <div class="exp">
+              <span [style.background-color]="'#5793F3'"></span>
+              <label>Operaciones</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+          <gn-legends [items]="data2_503"></gn-legends>  
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ****************************************************************** Seccion 504 - Contenedores ****************************************************************** -->
+
+  <div id="section" class="section" *ngIf="seccion == 3">
+    <!-- Seccion 504 - Contenedores -->
+    <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img1_504">
+      <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box','background-color':'#F3FAFF', 'padding':'0 25px'}">
+        <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+          id="barChart9Div">
+          <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Contenedores Por Aduana</label>
+          <canvas id="barChart9" width="100%"></canvas>
+          <div class="legendBar" [ngStyle]="{'height':'30px', 'bottom':'0'}">
+            <div class="exp">
+              <span [style.background-color]="'#5793F3'"></span>
+              <label>Contenedores</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+          <gn-legends [items]="data1_504"></gn-legends>  
+        </div>
+
+      </div>
+    </div>
+
+    <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img2_504" >
+      <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box', 'padding':'0 25px'}">
+        <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+          id="barChart10Div">
+          <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Tipo De Contenedor</label>
+          <canvas id="barChart10" width="100%"></canvas>
+          <div class="legendBar" [ngStyle]="{'height':'30px'}" [style.z-index]="resolutionPdf ? '0' : '-1'">
+            <div class="exp">
+              <span [style.background-color]="'#E06188'"></span>
+              <label>Operaciones</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+          <gn-legends [items]="data2_504"></gn-legends>  
+        </div>
+      </div>
+    </div>
+
+    <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img3_504">
+      <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box','background-color':'#F3FAFF', 'padding':'0 25px'}">
+        <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+          id="barChart11Div">
+          <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Agente Aduanal</label>
+          <canvas id="barChart11" width="100%"></canvas>
+          <div class="legendBar" [ngStyle]="{'height':'30px', 'bottom':'0'}">
+            <div class="exp">
+              <span [style.background-color]="'#5793F3'"></span>
+              <label>Operaciones</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+          <gn-legends [items]="data3_504"></gn-legends>  
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ****************************************************************** Seccion 505 - Facturas ****************************************************************** -->
+
+  <div id="section" class="section" *ngIf="seccion == 4">
+    <!-- Seccion 505 - Facturas -->
+    <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img1_505">
+      <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box','background-color':'#F3FAFF', 'padding':'0 25px'}">
+        <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+          id="barChart12Div">
+          <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por País De Facturación</label>
+          <canvas id="barChart12" width="100%"></canvas>
+          <div class="legendBar" [ngStyle]="{'height':'30px', 'bottom':'0'}">
+            <div class="exp">
+              <span [style.background-color]="'#5793F3'"></span>
+              <label>Operaciones</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+          <gn-legends [items]="data1_505"></gn-legends>  
+        </div>
+      </div>
+    </div>
+
+    <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img2_505">
+      <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box', 'padding':'0 25px'}">
+        <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+          id="barChart13Div">
+          <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Moneda De Facturación</label>
+          <canvas id="barChart13" width="100%"></canvas>
+          <div class="legendBar" [ngStyle]="{'height':'30px'}" [style.z-index]="resolutionPdf ? '0' : '-1'">
+            <div class="exp">
+              <span [style.background-color]="'#E06188'"></span>
+              <label>Operaciones</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+          <gn-legends [items]="data2_505"></gn-legends>  
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+
+  <!-- ****************************************************************** Seccion 506 - Fechas Pedimento ****************************************************************** -->
+
+  <div id="section" class="section" *ngIf="seccion == 5">
+    <!-- Seccion 506 - Fechas Pedimento -->
+    <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img1_506">
+      <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box','background-color':'#F3FAFF', 'padding':'0 25px'}">
+        <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+          id="barChart14Div">
+          <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Aduana</label>
+          <canvas id="barChart14" width="100%"></canvas>
+          <div class="legendBar" [ngStyle]="{'height':'30px', 'bottom':'0'}">
+            <div class="exp">
+              <span [style.background-color]="'#5793F3'"></span>
+              <label>Operaciones</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+          <gn-legends [items]="data1_506"></gn-legends>  
+        </div>
+      </div>
+    </div>
+
+    <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img2_506">
+      <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box', 'padding':'0 25px'}">
+        <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+          id="barChart15Div">
+          <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Agente Aduanal</label>
+          <canvas id="barChart15" width="100%"></canvas>
+          <div class="legendBar" [ngStyle]="{'height':'30px'}" [style.z-index]="resolutionPdf ? '0' : '-1'">
+            <div class="exp">
+              <span [style.background-color]="'#E06188'"></span>
+              <label>Operaciones</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+          <gn-legends [items]="data2_506"></gn-legends>  
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+
+  <!-- ****************************************************************** Seccion 507 - Casos Pedimento ****************************************************************** -->
+
+  <div id="section" class="section" *ngIf="seccion == 6">
+    <!-- Seccion 507 - Casos Pedimento -->
+    <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img1_507">
+      <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box','background-color':'#F3FAFF', 'padding':'0 25px'}">
+        <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+          id="barChart16Div">
+          <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Pedimentos Por Aduana</label>
+          <canvas id="barChart16" width="100%"></canvas>
+          <div class="legendBar" [ngStyle]="{'height':'30px', 'bottom':'0'}">
+            <div class="exp">
+              <span [style.background-color]="'#5793F3'"></span>
+              <label>Pedimentos</label>
+            </div>
+          </div>
+        </div>
+        <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+          <gn-legends [items]="data1_507"></gn-legends>  
+        </div>
+      </div>
+    </div>
+
+   <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img2_507">
+    <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box', 'padding':'0 25px'}">
+      <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+        id="barStackedChart5Div">
+        <label [ngStyle]="{'font-size':'1.4em', 'color':'#222E43','font-weight': '500','margin-bottom': '10px', 'padding': '0 20px'}">Pedimentos Por Clave De Caso</label>
+        <canvas id="barStackedChart5" width="100%"></canvas>
+        <div class="legendBar" [style.z-index]="resolutionPdf ? '0' : '-1'">
+          <div class="imp">
+            <span [style.background-color]="'#FDC340'"></span>
+            <label>Exportaciones</label>
+          </div>
+          <div class="exp">
+            <span [style.background-color]="'#5A95F0'"></span>
+            <label>Importaciones</label>
+          </div>
+        </div>
+      </div>
+      <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+        <gn-legends [items]="data2_507"></gn-legends>  
+      </div>
+    </div>
+   </div>
+
+  </div>
+
+  <!-- ****************************************************************** Seccion 509 - Tasas Pedimento ****************************************************************** -->
+
+  <div id="section" class="section" *ngIf="seccion == 7">
+    <!-- Seccion 509 - Tasas Pedimento -->
+    <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img1_509">
+      <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box','background-color':'#F3FAFF', 'padding':'0 25px'}">
+        <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+          id="barChart17Div">
+          <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Tipo De Tasa</label>
+          <canvas id="barChart17" width="100%"></canvas>
+          <div class="legendBar" [ngStyle]="{'height':'30px', 'bottom':'0'}">
+            <div class="exp">
+              <span [style.background-color]="'#5793F3'"></span>
+              <label>Operaciones</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+          <gn-legends [items]="data1_509"></gn-legends>  
+        </div>
+      </div>
+    </div>
+
+    <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img2_509" >
+      <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box', 'padding':'0 25px'}">
+        <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+          id="barChart18Div">
+          <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Aduana</label>
+          <canvas id="barChart18" width="100%"></canvas>
+          <div class="legendBar" [ngStyle]="{'height':'30px'}" [style.z-index]="resolutionPdf ? '0' : '-1'">
+            <div class="exp">
+              <span [style.background-color]="'#E06188'"></span>
+              <label>Operaciones</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+          <gn-legends [items]="data2_509"></gn-legends>  
+        </div>
+      </div>
+    </div>
+
+   <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img3_509">
+    <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box','background-color':'#F3FAFF', 'padding':'0 25px'}">
+      <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+        id="barStackedChart6Div">
+        <label [ngStyle]="{'font-size':'1.4em', 'color':'#222E43','font-weight': '500','margin-bottom': '10px', 'padding': '0 20px'}">Importe De Tasa Por Contribución </label>
+        <canvas id="barStackedChart6" width="100%"></canvas>
+        <div class="legendBar" [ngStyle]="{'bottom':'-15px'}">
+          <div class="imp">
+            <span [style.background-color]="'#FDC340'"></span>
+            <label>Exportaciones</label>
+          </div>
+          <div class="exp">
+            <span [style.background-color]="'#5A95F0'"></span>
+            <label>Importaciones</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+        <gn-legends [items]="data3_509"></gn-legends>  
+      </div>
+    </div>
+   </div>
+
+   <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img4_509">
+    <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box', 'padding':'0 25px'}">
+      <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+        id="barChart19Div">
+        <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Agente Aduanal </label>
+        <canvas id="barChart19" width="100%"></canvas>
+        <div class="legendBar" [ngStyle]="{'height':'30px'}" [style.z-index]="resolutionPdf ? '0' : '-1'">
+          <div class="exp">
+            <span [style.background-color]="'#5793F3'"></span>
+            <label>Operaciones</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+        <gn-legends [items]="data4_509"></gn-legends>  
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+   <!-- ****************************************************************** Seccion 510 - Contribuciones Pedimento ****************************************************************** -->
+
+  <div id="section" class="section" *ngIf="seccion == 8">
+    <!-- Seccion 510 - Contribuciones Pedimento -->
+    <div class="row" id="img1_510" [style.width]="resolutionPdf ? '800px' : null">
+      <div class="column" [ngStyle]="{'justify-content':'center','width':'100%', 'height':'355px', 'position':'relative', 'background-color':'#F3FAFF'}">
+
+        <div id='doughnut5Div'>
+
+          <div class="total" id="totalDoughnut5">
+            <label>Total:</label>
+            <label [ngClass]="total_510TipoPedimento > 9999 && total_510TipoPedimento < 100000 ? 'doughnut1Label2': total_510TipoPedimento > 99999 ? 'doughnut1Label3': 'doughnut1Label1'">{{ total_510TipoPedimento | acFormatNumber }}</label>
+            <label *ngIf="total_510TipoPedimento !== 1">Operaciones</label>
+            <label *ngIf="total_510TipoPedimento == 1">Operación</label>
+          </div>
+
+          <canvas id="doughnut5"></canvas>
+        </div>
+
+
+        <div class="legend" id="legendDoughnut5">
+          <div class="head">
+            <label>Operaciones por tipo de pedimento</label>
+          </div>
+          <div class="body">
+            <div>
+              <span [style.background-color]="'#FEC42D'"></span>
+              <label>(E) Exportaciones</label>
+              <label>{{e_510TipoPedimento | acFormatNumber}}</label>
+            </div>
+            <div>
+              <span [style.background-color]="'#DD4444'"></span>
+              <label>(I) Importaciones</label>
+              <label>{{i_510TipoPedimento | acFormatNumber}}</label>
+            </div>
+          </div>
+          <div class="foot">
+            <label>Total de operaciones: {{ total_510TipoPedimento | acFormatNumber }}</label>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img2_510">
+        <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box', 'padding':'0 25px'}">
+          <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+            id="barChart20Div">
+            <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Aduana </label>
+            <canvas id="barChart20" width="100%"></canvas>
+            <div class="legendBar" [ngStyle]="{'height':'30px'}" [style.z-index]="resolutionPdf ? '0' : '-1'">
+              <div class="exp">
+                <span [style.background-color]="'#5793F3'"></span>
+                <label>Operaciones</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+            <gn-legends [items]="data1_510"></gn-legends>  
+          </div>
+        </div>
+      </div>
+
+      <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img3_510">
+          <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box','background-color':'#F3FAFF', 'padding':'0 25px'}">
+            <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+              id="barChart21Div">
+              <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Contribución </label>
+              <canvas id="barChart21" width="100%"></canvas>
+              <div class="legendBar" [ngStyle]="{'height':'30px','bottom':'0'}">
+                <div class="exp">
+                  <span [style.background-color]="'#E06188'"></span>
+                  <label>Operaciones</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+              <gn-legends [items]="data2_510"></gn-legends>  
+            </div>
+          </div>
+        </div>
+
+        <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img4_510">
+            <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box', 'padding':'0 25px'}">
+              <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+                id="barChart22Div">
+                <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Clave de Contribución </label>
+                <canvas id="barChart22" width="100%"></canvas>
+                <div class="legendBar" [ngStyle]="{'height':'30px'}" [style.z-index]="resolutionPdf ? '0' : '-1'">
+                  <div class="exp">
+                    <span [style.background-color]="'#5793F3'"></span>
+                    <label>Operaciones</label>
+                  </div>
+                </div>
+              </div>
+              <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+                <gn-legends [items]="data3_510"></gn-legends>  
+              </div>
+            </div>
+          </div>
+
+          <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img5_510">
+              <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box','background-color':'#F3FAFF', 'padding':'0 25px'}">
+                <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+                  id="barChart23Div">
+                  <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Agente Aduanal </label>
+                  <canvas id="barChart23" width="100%"></canvas>
+                  <div class="legendBar" [ngStyle]="{'height':'30px', 'bottom':'0'}">
+                    <div class="exp">
+                      <span [style.background-color]="'#E06188'"></span>
+                      <label>Operaciones</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+                  <gn-legends [items]="data4_510"></gn-legends>  
+                </div>
+              </div>
+            </div>
+  </div>
+
+
+  <!-- ****************************************************************** Seccion 701 - Rectificaciones ****************************************************************** -->
+
+  <div id="section" class="section" *ngIf="seccion == 9">
+    <!-- Seccion 701 - Rectificaciones -->
+    
+      <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img1_701">
+          <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box','background-color':'#F3FAFF', 'padding':'0 25px'}">
+            <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+              id="barChart24Div">
+              <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Aduana </label>
+              <canvas id="barChart24" width="100%"></canvas>
+              <div class="legendBar" [ngStyle]="{'height':'30px', 'bottom':'0'}">
+                <div class="exp">
+                  <span [style.background-color]="'#5793F3'"></span>
+                  <label>Operaciones</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+              <gn-legends [items]="data1_701"></gn-legends>  
+            </div>
+          </div>
+        </div>
+
+        <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img2_701">
+            <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box', 'padding':'0 25px'}">
+              <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+                id="barChart25Div">
+                <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Agente Aduanal </label>
+                <canvas id="barChart25" width="100%"></canvas>
+                <div class="legendBar" [ngStyle]="{'height':'30px'}" [style.z-index]="resolutionPdf ? '0' : '-1'">
+                  <div class="exp">
+                    <span [style.background-color]="'#E06188'"></span>
+                    <label>Operaciones</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+                <gn-legends [items]="data2_701"></gn-legends>  
+              </div>
+            </div>
+          </div>
+
+          <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img3_701">
+              <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box','background-color':'#F3FAFF', 'padding':'0 25px'}">
+                <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+                  id="barChart26Div">
+                  <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Clave De Documento </label>
+                  <canvas id="barChart26" width="100%"></canvas>
+                  <div class="legendBar" [ngStyle]="{'height':'30px', 'bottom':'0'}">
+                    <div class="exp">
+                      <span [style.background-color]="'#5793F3'"></span>
+                      <label>Operaciones</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+                  <gn-legends [items]="data3_701"></gn-legends>  
+                </div>
+              </div>
+            </div>
+  </div>
+
+   <!-- ****************************************************************** Seccion 702 - Diferencias Contribuciones Pedimento ****************************************************************** -->
+
+   <div id="section" class="section" *ngIf="seccion == 10">
+    <!-- Seccion 702 - Diferencias Contribuciones Pedimento -->
+    
+      <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img1_702">
+          <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'"  [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box','background-color':'#F3FAFF', 'padding':'0 25px'}">
+            <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+              id="barChart27Div">
+              <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Aduana </label>
+              <canvas id="barChart27" width="100%"></canvas>
+              <div class="legendBar" [ngStyle]="{'height':'30px', 'bottom':'0'}">
+                <div class="exp">
+                  <span [style.background-color]="'#5793F3'"></span>
+                  <label>Operaciones</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+              <gn-legends [items]="data1_702"></gn-legends>  
+            </div>
+          </div>
+        </div>
+
+        <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img2_702">
+            <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'"  [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box', 'padding':'0 25px'}">
+              <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+                id="barChart28Div">
+                <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Agente Aduanal </label>
+                <canvas id="barChart28" width="100%"></canvas>
+                <div class="legendBar" [ngStyle]="{'height':'30px'}" [style.z-index]="resolutionPdf ? '0' : '-1'">
+                  <div class="exp">
+                    <span [style.background-color]="'#E06188'"></span>
+                    <label>Operaciones</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+                <gn-legends [items]="data2_702"></gn-legends>  
+              </div>
+            </div>
+          </div>
+
+          <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img3_702">
+              <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box','background-color':'#F3FAFF', 'padding':'0 25px'}">
+                <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+                  id="barChart29Div">
+                  <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Total Por Forma De Pago </label>
+                  <canvas id="barChart29" width="100%"></canvas>
+                  <div class="legendBar" [ngStyle]="{'height':'30px', 'bottom':'0'}">
+                    <div class="exp">
+                      <span [style.background-color]="'#2ABCF4'"></span>
+                      <label>Efectivo</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+                  <gn-legends [items]="data3_702"></gn-legends>  
+                </div>
+              </div>
+            </div>
+  </div>
+
+  <!-- ****************************************************************** Seccion 554 - Casos Partida ****************************************************************** -->
+
+  <div id="section" class="section" *ngIf="seccion == 11">
+    <!-- Seccion 554 - Casos Partida -->
+    
+      <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img1_554">
+          <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box','background-color':'#F3FAFF', 'padding':'0 25px'}">
+            <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+              id="barChart30Div">
+              <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Aduana </label>
+              <canvas id="barChart30" width="100%"></canvas>
+              <div class="legendBar" [ngStyle]="{'height':'30px', 'bottom':'0'}">
+                <div class="exp">
+                  <span [style.background-color]="'#5793F3'"></span>
+                  <label>Operaciones</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+              <gn-legends [items]="data1_554"></gn-legends>  
+            </div>
+          </div>
+        </div>
+
+        <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img2_554">
+            <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box', 'padding':'0 25px'}">
+              <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+                id="barChart31Div">
+                <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Agente Aduanal </label>
+                <canvas id="barChart31" width="100%"></canvas>
+                <div class="legendBar" [ngStyle]="{'height':'30px'}" [style.z-index]="resolutionPdf ? '0' : '-1'">
+                  <div class="exp">
+                    <span [style.background-color]="'#E06188'"></span>
+                    <label>Operaciones</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+                <gn-legends [items]="data2_554"></gn-legends>  
+              </div>
+            </div>
+          </div>
+
+          <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img3_554">
+            <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box','background-color':'#F3FAFF', 'padding':'0 25px'}">
+              <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+                id="barChart32Div">
+                <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Clave De Caso </label>
+                <canvas id="barChart32" width="100%"></canvas>
+                <div class="legendBar" [ngStyle]="{'height':'30px', 'bottom':'0'}">
+                  <div class="exp">
+                    <span [style.background-color]="'#5793F3'"></span>
+                    <label>Operaciones</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+                <gn-legends [items]="data3_554"></gn-legends>  
+              </div>
+            </div>
+          </div>
+
+          
+  </div>
+
+  <!-- ****************************************************************** Seccion 556 - Tasas Contribuciones Partida ****************************************************************** -->
+
+  <div id="section" class="section" *ngIf="seccion == 12">
+    <!-- Seccion 556 - Tasas Contribuciones Partida -->
+    
+        <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img1_556">
+            <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box','background-color':'#F3FAFF', 'padding':'0 25px'}">
+              <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+                id="barChart33Div">
+                <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Aduana </label>
+                <canvas id="barChart33" width="100%"></canvas>
+                <div class="legendBar" [ngStyle]="{'height':'30px', 'bottom':'0'}">
+                  <div class="exp">
+                    <span [style.background-color]="'#5793F3'"></span>
+                    <label>Operaciones</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+                <gn-legends [items]="data1_556"></gn-legends>  
+              </div>
+            </div>
+          </div>
+
+          <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img2_556">
+            <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box', 'padding':'0 25px'}">
+              <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+                id="barChart34Div">
+                <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Agente Aduanal </label>
+                <canvas id="barChart34" width="100%"></canvas>
+                <div class="legendBar" [ngStyle]="{'height':'30px'}" [style.z-index]="resolutionPdf ? '0' : '-1'">
+                  <div class="exp">
+                    <span [style.background-color]="'#E06188'"></span>
+                    <label>Operaciones</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+                <gn-legends [items]="data2_556"></gn-legends>  
+              </div>
+            </div>
+          </div>
+
+          <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img3_556">
+            <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box','background-color':'#F3FAFF', 'padding':'0 25px'}">
+              <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+                id="barChart35Div">
+                <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Contribución </label>
+                <canvas id="barChart35" width="100%"></canvas>
+                <div class="legendBar" [ngStyle]="{'height':'30px', 'bottom':'0'}">
+                  <div class="exp">
+                    <span [style.background-color]="'#5793F3'"></span>
+                    <label>Operaciones</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+                <gn-legends [items]="data3_556"></gn-legends>  
+              </div>
+            </div>
+          </div>
+
+          <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img4_556">
+            <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box', 'padding':'0 25px'}">
+              <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+                id="barChart36Div">
+                <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Tasa De Contribución </label>
+                <canvas id="barChart36" width="100%"></canvas>
+                <div class="legendBar" [style.z-index]="resolutionPdf ? '0' : '-1'">
+                  <div class="imp">
+                    <span [style.background-color]="'#A85FD6'"></span>
+                    <label>IGIE</label>
+                  </div>
+                  <div class="exp">
+                    <span [style.background-color]="'#72D34F'"></span>
+                    <label>IVA</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+                <gn-legends [items]="data4_556"></gn-legends>  
+              </div>
+            </div>
+          </div>
+
+           <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img5_556">
+            <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box','background-color':'#F3FAFF', 'padding':'0 25px'}">
+              <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+                id="barStackedChart8Div">
+                <label [ngStyle]="{'font-size':'1.4em', 'color':'#222E43','font-weight': '500','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Tipo De Tasa</label>
+                <canvas id="barStackedChart8" width="100%"></canvas>
+                <div class="legendBar" [ngStyle]="{'bottom':'0'}">
+                  <div class="imp">
+                    <span [style.background-color]="'#A85FD6'"></span>
+                    <label>IGIE</label>
+                  </div>
+                  <div class="exp">
+                    <span [style.background-color]="'#72D34F'"></span>
+                    <label>IVA</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+                <gn-legends [items]="data5_556"></gn-legends>  
+              </div>
+            </div>
+           </div>
+
+          
+  </div>
+
+
+  <!-- ****************************************************************** Seccion 557 - Contribuciones Partida ****************************************************************** -->
+
+  <div id="section" class="section" *ngIf="seccion == 13">
+    <!-- Seccion 557 - Contribuciones Partida -->
+    
+        <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img1_557">
+            <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box','background-color':'#F3FAFF', 'padding':'0 25px'}">
+              <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+                id="barChart37Div">
+                <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Aduana </label>
+                <canvas id="barChart37" width="100%"></canvas>
+                <div class="legendBar" [ngStyle]="{'height':'30px', 'bottom':'0'}">
+                  <div class="exp">
+                    <span [style.background-color]="'#5793F3'"></span>
+                    <label>Operaciones</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+                <gn-legends [items]="data1_557"></gn-legends>  
+              </div>
+            </div>
+          </div>
+
+          <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img2_557">
+            <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box', 'padding':'0 25px'}">
+              <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+                id="barChart38Div">
+                <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Agente Aduanal </label>
+                <canvas id="barChart38" width="100%"></canvas>
+                <div class="legendBar" [ngStyle]="{'height':'30px'}" [style.z-index]="resolutionPdf ? '0' : '-1'">
+                  <div class="exp">
+                    <span [style.background-color]="'#E06188'"></span>
+                    <label>Operaciones</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+                <gn-legends [items]="data2_557"></gn-legends>  
+              </div>
+            </div>
+          </div>
+
+          <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img3_557">
+            <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box','background-color':'#F3FAFF', 'padding':'0 25px'}">
+              <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+                id="barChart39Div">
+                <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Importe Por Tipo de Contribución </label>
+                <canvas id="barChart39" width="100%"></canvas>
+                <div class="legendBar" [ngStyle]="{'height':'30px', 'bottom':'0'}">
+                  <div class="exp">
+                    <span [style.background-color]="'#2ABCF4'"></span>
+                    <label>Efectivo</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+                <gn-legends [items]="data3_557"></gn-legends>  
+              </div>
+            </div>
+          </div>
+
+          <div [ngClass]="resolutionPdf ? 'row resY' : 'row'" id="img4_557">
+            <div class="column" [style.height]="resolutionPdf ? '500px' : '375px'" [ngStyle]="{'width':'100%', 'position':'relative','box-sizing':'border-box', 'padding':'0 25px'}">
+              <div [ngStyle]="{'width':'100%', 'height':'250px', 'position':'relative', 'flex-direction': 'column-reverse', 'display': 'flex'}"
+                id="barChart40Div">
+                <label [ngStyle]="{'font-size':'1.4em', 'font-weight': '500','color':'#222E43','margin-bottom': '10px', 'padding': '0 20px'}">Operaciones Por Forma De Pago </label>
+                <canvas id="barChart40" width="100%"></canvas>
+                <div class="legendBar" [style.z-index]="resolutionPdf ? '0' : '-1'">
+                  <div class="imp">
+                    <span [style.background-color]="'#A85FD6'"></span>
+                    <label>IGIE</label>
+                  </div>
+                  <div class="exp">
+                    <span [style.background-color]="'#72D34F'"></span>
+                    <label>IVA</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="legends" [style.width]="'100%'" [ngStyle]="{'margin-top':'50px'}" *ngIf="resolutionPdf">
+                <gn-legends [items]="data4_557"></gn-legends>  
+              </div>
+            </div>
+          </div>
+
+          
+          
+  </div>
+
+</div>

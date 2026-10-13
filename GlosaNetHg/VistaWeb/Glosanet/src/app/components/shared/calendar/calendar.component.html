@@ -1,0 +1,43 @@
+<div class="datepicker" [ngStyle]="{'font-family': fontFamily}">
+  <div class="datepicker__calendar">
+    <div class="head">
+      <label>{{currentMonth}}</label>
+    </div>
+    <div class="datepicker__calendar__content">
+      <div class="datepicker__calendar__labels">
+        <div class="datepicker__calendar__label" *ngFor="let day of dayNamesOrdered">
+          {{ day }}
+        </div>
+      </div>
+      <div [@calendarAnimation]="animate" class="datepicker__calendar__month">
+        <div id="{{ 'div' + i }}" *ngFor="let day of calendarDays; let i = index" class="datepicker__calendar__month__day" (click)="ocultarMostrar(i)">
+          <!-- <span  *ngIf="day != 0" [ngClass]="(i == 0 || i%7 == 0 || (i+1)%7 == 0 )?'gris':'negro'" > -->
+            <span *ngIf="day != 0" [ngClass]="colorDia(i)">
+              {{ day.getDate() }}
+            </span>
+            <div [ngClass]="estiloTooltip" *ngIf="lstTooltip[i] && day != 0 && tId != '' ">
+              <div class="triangulo">
+              </div>
+              <div class="triangulo2">
+              </div>
+              <div class="tooltipContainer">
+                <div>
+                  <p>ID #{{tId}}</p>
+                  <p>{{tFolio}}.zip</p>
+                  <p>{{tFechaInicio | dateFormatDot2}} - {{tFechaFin | dateFormatDot2}}</p>
+                </div>
+                <div>
+                  <p>Fecha Solicitud: {{tFechaSolicitud | dateFormatDot2}}</p>
+                  <p>Fecha Inclusión: {{tFechaInclusion | dateFormatDot2}}</p>
+                  <p>Valor Total:&nbsp;&nbsp;&nbsp;<span>{{tTotal | acFormatMoney}}</span></p>
+                </div>
+                <a class="btnDecarga" href="{{rutaGlosaDocs}}/{{idCliente}}/{{rfc}}/{{tFolio}}.zip">
+                  <p>DESCARGAR</p>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,167 @@
+<div class="container">
+  <div class="title">
+    <div>
+      <p>
+        <label>Aviso de Previsión 2018 </label>
+      </p>
+      <label>Fecha límite de entrega: </label>
+    </div>
+    <div>
+        <gn-wizard [lstItems]="lstItems" [pWizard]="pWizard" [check]="true" [tabs]="false"></gn-wizard>
+    </div>
+  </div>
+  <div>
+      <gn-wizard [lstItems]="lstItems" [pWizard]="pWizard" [check]="true" [tabs]="false"></gn-wizard>
+  </div>
+  <div class="body1">
+    <div class="search">
+      <div>
+        <label for="">Agregar Productos a la Previsión</label>
+      </div>
+      <div class="searchBar">
+        <form class="formF" autocomplete="off" [formGroup]="formF">
+          <div>
+            <div>
+              <div>
+                <label for="">Producto</label>
+                <gn-drop-list (valueDropList)="dropProducts($event)" [items]="arrayProductos" [isSearch]="true" [isCategory]="true" [align]="'left'"
+                  [itemSelect]="defaultSelected1" name="nombre"></gn-drop-list>
+              </div>
+            </div>
+            <div>
+              <div class="cForm1">
+                <label>Cantidad</label>
+                <input [ngStyle]="{'text-align':'left', 'border-bottom': '1px solid #3369B1'}" type="number" (keyup)="validarCantidad2Dossier = validarCantidad(cantidad1Dossier)" name="cantidad" formControlName="cantidad" (focus)="datosVacios()" (blur)="datosVacios()" min="0">
+              </div>
+              <div class="cForm2">
+                <label [ngStyle]="{'margin-bottom':'6px', 'width': '80px'}">Unidad</label>
+                <div class="droplist" [ngStyle]="{'width': '80px'}">
+                    <gn-drop-list (valueDropList)="dropList($event)" [items]="itemsDropList" [isSearch]="false" [isCategory]="true" [align]="'center'"
+                    [itemSelect]="unidadSelected" [fontSize]="'12px'" name="unidad"></gn-drop-list>
+                </div>
+              </div>
+              <div class="btnGlosa" (click)="agregarProductos(formF.value)" [style.pointer-events]="agregarPrevProduct ? 'auto':'none'" [style.background-color]="agregarPrevProduct ? '':'#D5DEE2'">
+                <a>Agregar</a>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="body2">
+    <label for="">Productos Previstos</label>
+  </div>
+  <div class="body">
+    <div>
+      <table class="table">
+        <thead>
+          <tr>
+          <th [ngStyle]="{'min-width':'10%', 'max-width':'10%', 'text-align':'center'}">#</th>
+          <th [ngStyle]="{'min-width':'50%', 'max-width':'50%', 'padding': '0 20px'}">Nombre</th>
+          <th [ngStyle]="{'min-width':'20%', 'max-width':'20%', 'text-align':'center'}">Cantidad</th>
+          <th [ngStyle]="{'min-width':'10%', 'max-width':'10%', 'text-align':'center'}"></th>
+          <th [ngStyle]="{'min-width':'10%', 'max-width':'10%', 'text-align':'center'}"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of arrayPrevisiones; let i = index" class="rowTable">
+          <td [ngStyle]="{'min-width':'10%', 'max-width':'10%', 'text-align':'center'}">{{i+1}}</td>
+          <td [ngStyle]="{'min-width':'50%', 'max-width':'50%', 'padding': '0 20px', 'text-transform': 'uppercase'}">{{item.nombre}}</td>
+          <td [ngStyle]="{'min-width':'20%', 'max-width':'20%', 'text-align':'center'}">{{item.cantidad +" "+ item.unidad}}</td>
+          <td [ngStyle]="{'min-width':'10%', 'max-width':'10%', 'text-align':'center'}">
+            <div (click)="actualizarDatos($event, 2, i, item)" [ngStyle]="{'cursor': 'pointer'}" onclick="document.getElementById('id01').style.display='block'">
+              <img src="./assets/images/editar.svg" alt="">
+            </div>
+          </td>
+          <td [ngStyle]="{'min-width':'10%', 'max-width':'10%', 'text-align':'center'}">
+            <div [ngStyle]="{'cursor': 'pointer'}" (click)="eliminarProducto(i)">
+                <img src="./assets/images/eliminar.svg" alt="">
+            </div>
+          </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="buttons">
+    <div>
+      <div>
+        <div class="btnGlosa" (click)="guardarPrevision()" onclick="document.getElementById('idConfirm').style.display='block'">
+          Guardar
+        </div>
+      </div>
+      <div>
+        <div class="btnGlosa" (click)="finalizarPrevision">
+          Publicar y Someter
+        </div>
+      </div>
+      <!-- <div>
+        <a class="btnCancelar" (click)="confirm(true, 1)">
+                    <p>ANTERIOR</p>
+            </a>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+<div id="id01" class="w3-modal">
+  <div [ngClass]="'w3-modal-content ' + classAnimation + ' w3-card-4'" [style.height]="'450px'">
+    <div class="modal">
+      <div>
+        <p>
+          <label *ngIf="typePopUp == 2">Editar Previsión</label>
+        </p>
+        <img (click)="closeModal()" src="./assets/images/cerrar_azul.svg" alt="" onclick="setTimeout(function(){document.getElementById('id01').style.display='none'}, 198)">
+      </div>
+      <div>
+        <gn-wizard [lstItems]="lstItems" (tabSelected)="tab($event)"></gn-wizard>
+      </div>
+      <div class="datosGenerales">
+        <form [formGroup]="dForm" autocomplete="off">
+            <div [ngStyle]="{'width':'100%'}">
+              <p class="titulo" *ngIf="typePopUp == 2">Producto </p>
+              <input type="text" formControlName="nombre" name="nombre" [attr.disabled]="isAvailable">
+            </div>
+            <div [ngStyle]="{'width':'280px'}">
+              <p class="titulo" *ngIf="typePopUp == 2">Cantidad </p>
+              <input type="text" formControlName="cantidad" name="cantidad" [style.border-bottom]="validCantidad == true ? '1px solid #98A9B4' : '1px solid #C1272D'" (focus)="validarForm()" (blur)="validarForm()" >
+            </div>
+            <div [ngStyle]="{'width':'150px'}">
+              <p class="titulo" *ngIf="typePopUp == 2">Unidad </p>
+              <gn-drop-list (valueDropList)="dropList($event)" [items]="itemsDropList" [isSearch]="false" [isCategory]="true" [align]="'center'" [ngStyle]="{'height':'20px'}"
+              [itemSelect]="modalSelect" name="unidad" [style.border-bottom]="dForm.controls.unidad.valid == true ? '1px solid #98A9B4' : '1px solid #C1272D'"></gn-drop-list>
+            </div>
+            <div>
+            </div>
+        </form>
+      </div>
+      <div>
+        <a *ngIf="typePopUp == 2" class="btnCancelar" (click)="closeModal()" onclick="setTimeout(function(){document.getElementById('id01').style.display='none'}, 198)">
+          <p>CANCELAR</p>
+        </a>
+        <a *ngIf="typePopUp == 2" [style.background-color]="datosGeneralesValid ? '':'#D5DEE2'" [style.pointer-events]="datosGeneralesValid ? 'auto':'none'" class="btnGuardar" (click)="actualizar(dForm.value)" onclick="setTimeout(function(){document.getElementById('id01').style.display='none'}, 198)">
+          <p>ACEPTAR</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="idConfirm" class="w3-modal">
+    <div [ngClass]="'w3-modal-content ' + classAnimation3 + ' w3-card-4'">
+      <div class="modalConfirm">
+        <div class="salir">
+          <img src="./assets/images/cerrar_azul.svg" alt="" onclick="setTimeout(function(){document.getElementById('idConfirm').style.display='none'}, 198)">
+        </div>
+        <div class="body">
+          <div class="img">
+            <img src="./assets/images/like.svg" alt="">
+          </div>
+          <div class="title">
+            <label>¡Has guardado <span>Exitosamente!</span></label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
